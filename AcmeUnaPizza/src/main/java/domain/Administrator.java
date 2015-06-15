@@ -45,11 +45,11 @@ public class Administrator extends DomainEntity{
 	
 	@Valid
 	@OneToMany(mappedBy="administrator")
-	public Collection<DiscussionMessages> getDiscussionMessages(){
+	public Collection<DiscussionMessage> getDiscussionMessages(){
 		return discussionMessages;
 	}
 	
-	public void setDiscussionMessages(DiscussionMessages discussionMessages){
+	public void setDiscussionMessages(Collection<DiscussionMessage> discussionMessages){
 		this.discussionMessages = discussionMessages;
 	}
 	
@@ -59,7 +59,7 @@ public class Administrator extends DomainEntity{
 		return purchaseOrders;
 	}
 	public void setRequests(Collection<PurchaseOrder> requests) {
-		this.purchaseOrders = purchaseOrder;
+		this.purchaseOrders = requests;
 	}
 	
 	
