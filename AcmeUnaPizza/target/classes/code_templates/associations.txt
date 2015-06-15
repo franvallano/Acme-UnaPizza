@@ -1,0 +1,58 @@
+#OneToOne ------------------------------------------
+import javax.persistence.OneToOne;
+
+private %entity% %role%;
+
+@OneToOne%options%
+public %entity% get%role%(){
+	return %role%;
+}
+public void set%role%(%entity% arg){
+	%role% = arg;
+}
+#OneToMany -----------------------------------------
+import javax.persistence.OneToMany;
+
+private Collection<%entity%> %role%;
+
+@OneToMany%options%
+public Collection<%entity%> get%role%(){
+	return %role%;
+}
+public void set%role%(Collection<%entity%> arg){
+	%role% = arg;
+}
+
+%role% = new HashSet<%entity>();
+
+import java.util.HashSet;
+#ManyToOne -----------------------------------------
+import javax.persistence.ManyToOne;
+
+private %entity% %role%;
+
+@ManyToOne%options%
+public %entity% get%role%(){
+	return %role%;
+}
+public void set%role%(%entity% arg){
+	%role% = arg;
+}
+#ManyToMany ----------------------------------------
+import javax.persistence.ManyToMany;
+
+private Collection<%entity%> %role%;
+
+@ManyToMany%options%
+public Collection<%entity%> get%role%(){
+	return %role%;
+}
+public void set%role%(Collection<%entity%> arg){
+	%role% = arg;
+}
+
+%role% = new HashSet<%entity>();
+
+import java.util.HashSet;
+#Generalization ------------------------------------
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
