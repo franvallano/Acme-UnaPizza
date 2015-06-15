@@ -24,8 +24,8 @@ import controllers.AbstractController;
 import domain.%entity%;
 
 @Controller
-@RequestMapping("/%entity_lowcase%")
-public class %entity%Controller extends AbstractController {
+@RequestMapping("/%request_mapping%")
+public class %name%Controller extends AbstractController {
 		
 	// Supporting services ----------------------------------------------------
 
@@ -34,7 +34,7 @@ public class %entity%Controller extends AbstractController {
 	
 	// Constructors -----------------------------------------------------------
 	
-	public %entity%Controller() {
+	public %name%Controller() {
 		super();
 	}
 	
@@ -42,7 +42,13 @@ public class %entity%Controller extends AbstractController {
 
 //	@RequestMapping("/list")
 //	public ModelAndView list() {
-//		
+//		ModelAndView res;
+//
+//		TODO: complete list method
+//
+//		res.addObject("requestURI", "/%request_mapping%/list.do");
+//
+//		return res;
 //	}
 	
 	// Creation ---------------------------------------------------------------
@@ -60,15 +66,53 @@ public class %entity%Controller extends AbstractController {
 //	}
 	
 //	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-//	public ModelAndView save(@Valid @ModelAttribute %entity% %entity_lowcase%, BindingResult bindingResult) {
+//	public ModelAndView save(@Valid @ModelAttribute %entity% entity, BindingResult bindingResult) {
+//		ModelAndView result;
 //		
+//		if (bindingResult.hasErrors()){
+//			result = createEditionModelAndView(entity, "details.edit.error");
+//			System.out.println(bindingResult);
+//		}
+//		else {
+//			try {
+//				%entity_lowcase%Service.save(entity);
+//				result = new ModelAndView("redirect:"); //TODO: completar redireccion en caso de exito (xej. redirect:/welcome.do)
+//			} catch (Throwable oops) {
+//				result = createEditionModelAndView(entity, "%entity_lowcase%.commit.error");
+//			}
+//		}
+//
+//		return result;
 //	}
 	
 //	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-//	public ModelAndView delete(@ModelAttribute %entity% %entity_lowcase%, BindingResult bindingResult) {
+//	public ModelAndView delete(@ModelAttribute %entity% entity, BindingResult bindingResult) {
+//		ModelAndView res;
 //		
+//		try{
+//			%entity_lowcase%Service.delete(entity);
+//			res = new ModelAndView("redirect:"); //TODO: completar redireccion en caso de exito (xej. redirect:/welcome.do)
+//		}catch(Throwable oops){
+//			res = createEditionModelAndView(entity, "%entity_lowcase%.commit.error");
+//		}
+//		
+//		return res;
 //	}
 	
 	// Ancillary methods ------------------------------------------------------	
+//	public ModelAndView createEditionModelAndView(%entity% entity){
+//		return createEditionModelAndView(entity, null);
+//	}
+	
+//	public ModelAndView createEditionModelAndView(%entity% entity, String message){
+//		ModelAndView res;
+//		
+//		res = new ModelAndView("%entity_lowcase%/edit");
+//		res.addObject("entity", entity);
+//		res.addObject("message", message);
+//		res.addObject("requestURI", /%entity_lowcase%/edit.do);	//TODO: revisar requestURI		
+//
+//		return res;
+//	}
 
 }

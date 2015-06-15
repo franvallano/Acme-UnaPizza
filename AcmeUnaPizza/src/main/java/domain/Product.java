@@ -1,5 +1,7 @@
 package domain;
 
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
+import org.hibernate.validator.constraints.SafeHtml;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -38,6 +40,7 @@ public class Product extends DomainEntity{
 
 	@NotBlank
 	@Column(unique=true)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return name;
 	}
@@ -47,6 +50,7 @@ public class Product extends DomainEntity{
 	}
 
 	@Size(min=10, max=250)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDescription() {
 		return description;
 	}

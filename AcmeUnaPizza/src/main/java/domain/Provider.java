@@ -1,5 +1,7 @@
 package domain;
 
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
+import org.hibernate.validator.constraints.SafeHtml;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
@@ -21,6 +23,7 @@ public class Provider extends DomainEntity{
 	
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return name;
 	}

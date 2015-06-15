@@ -29,6 +29,46 @@ public class %entity%Service {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
+//	public %entity% create(){
+//		%entity% newbye;
+//		
+//		newbye = new %entity%();
+//		
+//		return newbye;
+//	}
+
+//	public void save( %entity% entity ){
+//		checkModificationPreconditions( entity );
+//		
+//		this.%entity_lowcase%Repository.save( entity );
+//	}
+
+//	public void delete( %entity% entity ){
+//		Assert.isTrue( entity.getId()!=0 );
+//		Assert.isTrue( this.%entity_lowcase%Repository.exists(entity.getId() ));
+//		
+//		this.%entity_lowcase%Repository.delete( entity );
+//		
+//		Assert.isTrue( !this.%entity_lowcase%Repository.exists(entity.getId() ));
+//	}
+
+//	public %entity% findOne( int id ){
+//		Assert.isTrue( id != 0);
+//		
+//		%entity% res;
+//		
+//		res = this.%entity_lowcase%Repository.findOne( id );
+//		
+//		return res;
+//	}
+
+//	public Collection<%entity%> findAll(){
+//		Collection<%entity%> res;
+//		
+//		res = %entity_lowcase%Repository.findAll();
+//		
+//		return res;
+//	}
 
 	// Other business methods -------------------------------------------------
 
