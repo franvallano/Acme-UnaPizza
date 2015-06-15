@@ -83,7 +83,7 @@ public class Complaint extends DomainEntity {
 	// Relationships ----------------------------------------------------------
 	
 	private Administrator administrator;
-	private Collection<ComplaintMessage> complaintMessages;
+	private Collection<DiscussionMessage> complaintMessages;
 	private Customer customer;
 	
 	@Valid
@@ -97,10 +97,10 @@ public class Complaint extends DomainEntity {
 	
 	@Valid
 	@OneToMany(mappedBy="complaint")
-	public Collection<ComplaintMessage> getComplaintMessages() {
+	public Collection<DiscussionMessage> getComplaintMessages() {
 		return complaintMessages;
 	}
-	public void setComplaintMessages(Collection<ComplaintMessage> complaintMessages) {
+	public void setComplaintMessages(Collection<DiscussionMessage> complaintMessages) {
 		this.complaintMessages = complaintMessages;
 	}
 	
