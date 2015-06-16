@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,9 +40,8 @@ public class Staff extends DomainEntity{
 	
 	//Getters and setter ------------------------------------------------------------------------
 	
-	//HAY QUE PONER BIEN EL PATRON
 	@NotBlank
-	//@Pattern(regexp = )
+	@Pattern(regexp = "[0-9]{8}[A-Z]")
 	public String getDni() {
 		return dni;
 	}
@@ -52,6 +52,7 @@ public class Staff extends DomainEntity{
 	
 	//AÑADIR PATRON
 	@NotBlank
+	@Pattern(regexp = "[A-Z]{2}-[0-9]{10}")
 	public String getSsNumber() {
 		return ssNumber;
 	}
@@ -83,8 +84,9 @@ public class Staff extends DomainEntity{
 		this.contractEndDate = contractEndDate;
 	}
 
-	//AÑADIR PATRON
+	
 	@NotBlank
+	@Pattern(regexp = "[0-9]{20}")
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -94,7 +96,7 @@ public class Staff extends DomainEntity{
 	}
 
 	@NotBlank
-	//AÑADIR PATRON
+	@Pattern(regexp = "[0-9]{9}")
 	public String getPhone() {
 		return phone;
 	}
@@ -125,7 +127,6 @@ public class Staff extends DomainEntity{
 	}
 	
 	
-	@Override
 	public String toString() {
 		return "Staff [dni=" + dni + ", ssNumber=" + ssNumber + ", phone="
 				+ phone + ", address=" + address + "]";
