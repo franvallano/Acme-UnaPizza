@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -97,6 +98,10 @@ public class SalesOrder extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Product> products;
+	private Boss boss;
+	private Cook cook;
+	private DeliveryMan deliveryMan;
+	private Customer customer;
 
 	@Valid
 	@NotNull
@@ -108,5 +113,48 @@ public class SalesOrder extends DomainEntity{
 	public void setProducts(Collection<Product> products) {
 		this.products = products;
 	}
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional=false)
+	public Boss getBoss() {
+		return boss;
+	}
+
+	public void setBoss(Boss boss) {
+		this.boss = boss;
+	}
+
+	@Valid
+	@ManyToOne(optional=true)
+	public Cook getCook() {
+		return cook;
+	}
+
+	public void setCook(Cook cook) {
+		this.cook = cook;
+	}
+
+	@Valid
+	@ManyToOne(optional=true)
+	public DeliveryMan getDeliveryMan() {
+		return deliveryMan;
+	}
+
+	public void setDeliveryMan(DeliveryMan deliveryMan) {
+		this.deliveryMan = deliveryMan;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional=false)
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
 	
 }

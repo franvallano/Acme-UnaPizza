@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class DeliveryMan extends Staff {
 	//Attributes --------------------------------------------------------------------------------
-	private MotorBike motorbike;
+	private Motorbike motorbike;
 	private String drivingLicenseNumber;
 
 
@@ -28,12 +28,12 @@ public class DeliveryMan extends Staff {
 	}
 		
 	//Getters and setter ------------------------------------------------------------------------
-	
-	public MotorBike getMotorbike() {
+	@Valid
+	public Motorbike getMotorbike() {
 		return motorbike;
 	}
 	
-	public void setMotorbike(MotorBike motorbike) {
+	public void setMotorbike(Motorbike motorbike) {
 		this.motorbike = motorbike;
 	}
 
@@ -64,6 +64,7 @@ public class DeliveryMan extends Staff {
 	}
 	
 	@Valid
+	@NotNull
 	@OneToMany(mappedBy="deliveryMan")
 	public Collection<SalesOrder> getSalesOrder() {
 		return salesOrder;

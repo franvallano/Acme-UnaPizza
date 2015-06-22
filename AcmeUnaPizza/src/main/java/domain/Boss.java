@@ -15,33 +15,25 @@ import javax.validation.constraints.NotNull;
 public class Boss extends Staff{
 
 	// Constructors -----------------------------------------------------------
-	
-		public Boss() {
-			super();
-		}
-		
-		// Attributes -------------------------------------------------------------
-		
-		
-		
-		// Relationships ----------------------------------------------------------
-		
-		private Collection<SalesOrder> salesOrders;
 
-		@Valid
-		@NotNull
-		@OneToMany(mappedBy="boss")
-		public Collection<SalesOrder> getSalesOrders() {
-			return salesOrders;
-		}
-		public void setSalesOrders(Collection<SalesOrder> salesOrders) {
-			this.salesOrders = salesOrders;
-		}
-				
-		// toString ---------------------------------------------------------------
-		
-		@Override
-		public String toString() {
-			return "Boss [" + super.toString() + "]";
-		}
+	public Boss() {
+		super();
+	}
+
+	// Attributes -------------------------------------------------------------
+
+	// Relationships ----------------------------------------------------------
+
+	private Collection<SalesOrder> salesOrders;
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "boss")
+	public Collection<SalesOrder> getSalesOrders() {
+		return salesOrders;
+	}
+
+	public void setSalesOrders(Collection<SalesOrder> salesOrders) {
+		this.salesOrders = salesOrders;
+	}
 }
