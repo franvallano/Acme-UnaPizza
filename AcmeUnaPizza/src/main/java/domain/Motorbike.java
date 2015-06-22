@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
@@ -25,6 +26,7 @@ public class Motorbike {
 		//Getters and setter ------------------------------------------------------------------------
 		
 		@Min(1)
+		@Column(unique=true)
 		public Integer getNumber() {
 			return number;
 		}

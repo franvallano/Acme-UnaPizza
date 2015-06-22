@@ -62,7 +62,7 @@ public class Customer extends Actor {
 	}
 	
 	@NotBlank
-	@Pattern(regexp = "^standard$|^silver$|^gold$|^vip$")
+	@Pattern(regexp = "^STANDARD$|^SILVER$|^GOLD$|^VIP$")
 	public String getRange() {
 		return range;
 	}
