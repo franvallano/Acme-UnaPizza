@@ -7,6 +7,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 
 
@@ -29,6 +30,7 @@ public class Cook extends Staff{
 		private Collection<SalesOrder> salesOrders;
 
 		@Valid
+		@NotNull
 		@OneToMany(mappedBy="cook")
 		public Collection<SalesOrder> getSalesOrders() {
 			return salesOrders;

@@ -31,8 +31,6 @@ public class Administrator extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Complaint> complaints;
-	private Collection<PurchaseOrder> purchaseOrders;
-	private Collection<DiscussionMessage> discussionMessages;
 
 	@Valid
 	@OneToMany(mappedBy="administrator")
@@ -42,25 +40,4 @@ public class Administrator extends DomainEntity{
 	public void setComplaints(Collection<Complaint> complaints) {
 		this.complaints = complaints;
 	}
-	
-	@Valid
-	@OneToMany(mappedBy="administrator")
-	public Collection<DiscussionMessage> getDiscussionMessages(){
-		return discussionMessages;
-	}
-	
-	public void setDiscussionMessages(Collection<DiscussionMessage> discussionMessages){
-		this.discussionMessages = discussionMessages;
-	}
-	
-	@Valid
-	@OneToMany(mappedBy="administrator")
-	public Collection<PurchaseOrder> getRequests() {
-		return purchaseOrders;
-	}
-	public void setRequests(Collection<PurchaseOrder> requests) {
-		this.purchaseOrders = requests;
-	}
-	
-	
 }

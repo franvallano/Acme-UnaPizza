@@ -96,6 +96,7 @@ public class Complaint extends DomainEntity {
 	}
 	
 	@Valid
+	@NotNull
 	@OneToMany(mappedBy="complaint")
 	public Collection<DiscussionMessage> getComplaintMessages() {
 		return complaintMessages;
@@ -104,6 +105,7 @@ public class Complaint extends DomainEntity {
 		this.complaintMessages = complaintMessages;
 	}
 	
+	@NotNull
 	@Valid
 	@ManyToOne(optional=false)
 	public Customer getCustomer(){

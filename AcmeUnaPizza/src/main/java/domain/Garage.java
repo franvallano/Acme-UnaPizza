@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -48,6 +49,7 @@ public class Garage extends DomainEntity{
 	private Collection<DeliveryMan> deliveryMans;
 
 	@Valid
+	@NotNull
 	@OneToMany(mappedBy="garage")
 	public Collection<DeliveryMan> getDeliveryMans() {
 		return deliveryMans;
