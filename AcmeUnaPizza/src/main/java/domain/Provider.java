@@ -1,13 +1,18 @@
 package domain;
 
-import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
-import org.hibernate.validator.constraints.SafeHtml;
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -53,5 +58,19 @@ public class Provider extends DomainEntity{
 	}
 	
 	//Relationships -----------------------------------------------------------------------------
+	private Collection<Product> products;
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy="provider")
+	public Collection<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Collection<Product> products) {
+		this.products = products;
+	}
+	
+	
 	
 }

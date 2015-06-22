@@ -62,6 +62,7 @@ public class Repair extends DomainEntity{
 	private WorkShop workshop;
 
 	@Valid
+	@NotNull
 	@ManyToOne(optional=false)
 	public Staff getStaff() {
 		return staff;
@@ -72,6 +73,7 @@ public class Repair extends DomainEntity{
 	}
 
 	@Valid
+	@NotNull
 	@ManyToOne(optional=false)
 	public WorkShop getWorkshop() {
 		return workshop;

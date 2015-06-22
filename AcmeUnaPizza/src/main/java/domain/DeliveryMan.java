@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -15,16 +16,11 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class DeliveryMan extends Staff{
+public class DeliveryMan extends Staff {
 	//Attributes --------------------------------------------------------------------------------
 	private MotorBike motorbike;
 	private String drivingLicenseNumber;
 
-	@Override
-	public String toString() {
-		return "DeliveryMan [drivingLicenseNumber=" + drivingLicenseNumber
-				+ ", toString()=" + super.toString() + "]";
-	}
 
 	//Constructor -------------------------------------------------------------------------------
 	public DeliveryMan(){
@@ -57,6 +53,7 @@ public class DeliveryMan extends Staff{
 	private Collection<SalesOrder> salesOrder;
 
 	@Valid
+	@NotNull
 	@ManyToOne(optional = false)
 	public Garage getGarage() {
 		return garage;

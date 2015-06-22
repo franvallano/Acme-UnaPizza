@@ -86,6 +86,7 @@ public class Customer extends Actor {
 	
 	
 	@Valid
+	@NotNull
 	@OneToMany(mappedBy="customer")
 	public Collection<DiscussionMessage> getDiscussionMessage() {
 		return discussionMessages;
@@ -95,6 +96,7 @@ public class Customer extends Actor {
 	}
 	
 	@Valid
+	@NotNull
 	@OneToMany(mappedBy="customer")
 	public Collection<SalesOrder> getSalesOrder() {
 		return salesOrder;
@@ -104,11 +106,12 @@ public class Customer extends Actor {
 	}
 	
 	@Valid
+	@NotNull
 	@OneToMany(mappedBy="customer")
 	public Collection<Complaint> getComplaints() {
 		return complaints;
 	}
-	public void setLandmarks(Collection<Complaint> landmarks) {
+	public void setLandmarks(Collection<Complaint> complaints) {
 		this.complaints = complaints;
 	}
 	

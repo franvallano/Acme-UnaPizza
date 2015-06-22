@@ -61,6 +61,7 @@ public class DiscussionMessage extends DomainEntity{
 	private Complaint complaint;
 	private Customer customer;
 	
+	@NotNull
 	@Valid
 	@ManyToOne(optional=false)
 	public Administrator getAdministrator() {
@@ -70,6 +71,7 @@ public class DiscussionMessage extends DomainEntity{
 		this.administrator = administrator;
 	}
 	
+	@NotNull
 	@Valid
 	@ManyToOne(optional=false)
 	public Customer getCustomer() {
@@ -80,6 +82,7 @@ public class DiscussionMessage extends DomainEntity{
 	}
 	
 	@Valid
+	@NotNull
 	@ManyToOne(optional=false)
 	public Complaint getComplaint() {
 		return complaint;
