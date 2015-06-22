@@ -7,6 +7,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -22,17 +23,14 @@ public class Administrator extends DomainEntity{
 
 	
 	//Getters and setter ------------------------------------------------------------------------
-
-	@Override
-	public String toString() {
-		return "Administrator [" + super.toString() + "]";
-	}
 	
 	
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Complaint> complaints;
+	private Collection<PurchaseOrder> purchaseOrder;
 
 	@Valid
+	@NotNull
 	@OneToMany(mappedBy="administrator")
 	public Collection<Complaint> getComplaints() {
 		return complaints;
@@ -40,4 +38,16 @@ public class Administrator extends DomainEntity{
 	public void setComplaints(Collection<Complaint> complaints) {
 		this.complaints = complaints;
 	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy="administrator")
+	public Collection<PurchaseOrder> getPurchaseOrder() {
+		return purchaseOrder;
+	}
+	public void setPurchaseOrder(Collection<PurchaseOrder> purchaseOrder) {
+		this.purchaseOrder = purchaseOrder;
+	}
+	
+	
 }

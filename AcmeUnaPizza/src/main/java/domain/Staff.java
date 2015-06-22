@@ -138,6 +138,7 @@ public class Staff extends DomainEntity{
 	private Collection<Stuff> stuffs;
 
 	@Valid
+	@NotNull
 	@OneToMany(mappedBy="staff")
 	public Collection<Repair> getRepairs() {
 		return repairs;

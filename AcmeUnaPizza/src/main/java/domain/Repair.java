@@ -22,7 +22,7 @@ public class Repair extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
 	private Date moment;
-	private Double cost;
+	private double cost;
 	
 	//Constructor -------------------------------------------------------------------------------
 	public Repair(){
@@ -44,11 +44,11 @@ public class Repair extends DomainEntity{
 
 	@Min(0)
 	@Digits(integer=3, fraction=2)
-	public Double getCost() {
+	public double getCost() {
 		return cost;
 	}
 
-	public void setCost(Double cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 
@@ -59,7 +59,7 @@ public class Repair extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 	private Staff staff;
-	private WorkShop workshop;
+	private Workshop workshop;
 
 	@Valid
 	@NotNull
@@ -75,11 +75,11 @@ public class Repair extends DomainEntity{
 	@Valid
 	@NotNull
 	@ManyToOne(optional=false)
-	public WorkShop getWorkshop() {
+	public Workshop getWorkshop() {
 		return workshop;
 	}
 
-	public void setWorkshop(WorkShop workshop) {
+	public void setWorkshop(Workshop workshop) {
 		this.workshop = workshop;
 	}
 	
