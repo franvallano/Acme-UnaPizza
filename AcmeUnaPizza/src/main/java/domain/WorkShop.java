@@ -76,14 +76,6 @@ public class WorkShop extends DomainEntity{
 		this.contact = contact;
 	}
 
-	
-	@Override
-	public String toString() {
-		return "WorkShop [company=" + company + ", city=" + city + ", taxes="
-				+ taxes + ", phoneNumber=" + phoneNumber + ", contact="
-				+ contact + "]";
-	}
-
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Repair> repairs;
 	private Collection<Stuff> stuffs;

@@ -109,11 +109,4 @@ public class Complaint extends DomainEntity {
 	public void setCustomer(Customer customer){
 		this.customer = customer;
 	}
-	
-	// toString ---------------------------------------------------------------
-	@Override
-	public String toString() {
-		return "Complaint [title=" + title + ", creationMoment="
-				+ creationMoment + ", state=" + state + "]";
-	}
 }
