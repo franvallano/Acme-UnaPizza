@@ -21,12 +21,7 @@ public abstract class Actor extends DomainEntity{
 	private String name;
 	private String surname;
 	private String email;
-	
 
-	public Actor(){
-		super();
-	}
-	
 	@NotBlank
 	public String getName() {
 		return name;
@@ -77,3 +72,4 @@ public abstract class Actor extends DomainEntity{
 	}
 
 }
+

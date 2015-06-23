@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -29,11 +30,6 @@ public class PurchaseOrder extends DomainEntity{
 	private String referenceNumber;
 	private Double totalCost;
 	private Date creationMoment;
-	
-	//Constructor -------------------------------------------------------------------------------
-	public PurchaseOrder(){
-		super();
-	}
 	
 	//Getters and setter ------------------------------------------------------------------------
 	@Pattern(regexp="[A-Z]{3}-[0-9]{8}")
@@ -71,10 +67,11 @@ public class PurchaseOrder extends DomainEntity{
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Product> products;
 	private Administrator administrator;
+	private Collection<Offer> offers;
 
 	@NotNull
 	@Valid
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="purchaseOrder")
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Product> getProducts() {
 		return products;
 	}
@@ -93,6 +90,18 @@ public class PurchaseOrder extends DomainEntity{
 	public void setAdministrator(Administrator administrator) {
 		this.administrator = administrator;
 	}
+
+	@Valid
+	@NotNull
+	@ManyToMany
+	public Collection<Offer> getOffers() {
+		return offers;
+	}
+
+	public void setOffers(Collection<Offer> offers) {
+		this.offers = offers;
+	}
 	
 	
 }
+

@@ -15,36 +15,23 @@ import javax.validation.constraints.NotNull;
 @Access(AccessType.PROPERTY)
 public class Cook extends Staff{
 
-	// Constructors -----------------------------------------------------------
-	
-		public Cook() {
-			super();
-		}
-		
-		// Attributes -------------------------------------------------------------
-		
-		
-		
-		// Relationships ----------------------------------------------------------
-		
-		private Collection<SalesOrder> salesOrders;
+	// Attributes -------------------------------------------------------------
 
-		@Valid
-		@NotNull
-		@OneToMany(mappedBy="cook")
-		public Collection<SalesOrder> getSalesOrders() {
-			return salesOrders;
-		}
-		public void setSalesOrders(Collection<SalesOrder> salesOrders) {
-			this.salesOrders = salesOrders;
-		}
-				
-		// toString ---------------------------------------------------------------
-		
-		@Override
-		public String toString() {
-			return "Cook [" + super.toString() + "]";
-		}
+	// Relationships ----------------------------------------------------------
+
+	private Collection<SalesOrder> salesOrders;
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "cook")
+	public Collection<SalesOrder> getSalesOrders() {
+		return salesOrders;
+	}
+
+	public void setSalesOrders(Collection<SalesOrder> salesOrders) {
+		this.salesOrders = salesOrders;
+	}
+
 }
 
 

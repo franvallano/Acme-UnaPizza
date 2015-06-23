@@ -33,11 +33,6 @@ public class Staff extends DomainEntity{
 	private Date birthDate;
 	private String address;
 	
-	//Constructor -------------------------------------------------------------------------------
-	public Staff(){
-		super();
-	}
-	
 	//Getters and setter ------------------------------------------------------------------------
 	
 	@NotBlank
@@ -63,8 +58,8 @@ public class Staff extends DomainEntity{
 
 	@Past
 	@NotNull
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getContractStartDate() {
 		return contractStartDate;
 	}
@@ -74,8 +69,8 @@ public class Staff extends DomainEntity{
 	}
 
 	@Past
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getContractEndDate() {
 		return contractEndDate;
 	}
@@ -107,8 +102,8 @@ public class Staff extends DomainEntity{
 	
 	@Past
 	@NotNull
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -135,7 +130,6 @@ public class Staff extends DomainEntity{
 
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Repair> repairs;
-	private Collection<Stuff> stuffs;
 
 	@Valid
 	@NotNull
@@ -147,17 +141,6 @@ public class Staff extends DomainEntity{
 	public void setRepairs(Collection<Repair> repairs) {
 		this.repairs = repairs;
 	}
-	
-	//ESTA BIEN?
-	@Valid
-	@ManyToMany(cascade = CascadeType.ALL)
-	public Collection<Stuff> getStuffs() {
-		return stuffs;
-	}
 
-	public void setStuffs(Collection<Stuff> stuffs) {
-		this.stuffs = stuffs;
-	}
-	
-	
 }
+

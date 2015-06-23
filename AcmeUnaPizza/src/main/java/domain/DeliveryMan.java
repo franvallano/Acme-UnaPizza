@@ -21,12 +21,6 @@ public class DeliveryMan extends Staff {
 	private Motorbike motorbike;
 	private String drivingLicenseNumber;
 
-
-	//Constructor -------------------------------------------------------------------------------
-	public DeliveryMan(){
-		super();
-	}
-		
 	//Getters and setter ------------------------------------------------------------------------
 	@Valid
 	public Motorbike getMotorbike() {

@@ -23,17 +23,12 @@ public class Repair extends DomainEntity{
 	//Attributes --------------------------------------------------------------------------------
 	private Date moment;
 	private double cost;
-	
-	//Constructor -------------------------------------------------------------------------------
-	public Repair(){
-		super();
-	}
 
 	//Getters and setter ------------------------------------------------------------------------
 	@Past
 	@NotNull
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
 		return moment;
 	}
@@ -59,7 +54,7 @@ public class Repair extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 	private Staff staff;
-	private Workshop workshop;
+	private WorkShop workShop;
 
 	@Valid
 	@NotNull
@@ -74,13 +69,13 @@ public class Repair extends DomainEntity{
 
 	@Valid
 	@NotNull
-	@ManyToOne(optional=false)
-	public Workshop getWorkshop() {
-		return workshop;
+	@ManyToOne(optional = false)
+	public WorkShop getWorkShop() {
+		return workShop;
 	}
 
-	public void setWorkshop(Workshop workshop) {
-		this.workshop = workshop;
+	public void setWorkShop(WorkShop workShop) {
+		this.workShop = workShop;
 	}
 	
 	

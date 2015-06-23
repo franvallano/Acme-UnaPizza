@@ -1,15 +1,13 @@
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -24,12 +22,6 @@ public class Stuff extends DomainEntity{
 	private String status;
 	private String referenceCode;
 	private Integer powerConsumption;
-	
-
-	//Constructor -------------------------------------------------------------------------------
-	public Stuff(){
-		super();
-	}
 	
 	//Getters and setter ------------------------------------------------------------------------
 
@@ -77,38 +69,20 @@ public class Stuff extends DomainEntity{
 	}
 
 	
-
-
-	public String toString() {
-		return "Stuff [name=" + name + ", status=" + status
-				+ ", referenceCode=" + referenceCode + ", powerConsumption="
-				+ powerConsumption + "]";
-	}
-
-	
 	//Relationships -----------------------------------------------------------------------------
-	private Collection<Staff> staffs;
-	private Collection<WorkShop> workShops;
+	private WorkShop workShop;
 
 
 	@Valid
-	@ManyToMany
-	public Collection<Staff> getStaffs() {
-		return staffs;
-	}
-	public void setStaffs(Collection<Staff> staffs) {
-		this.staffs = staffs;
+	@NotNull
+	@ManyToOne(optional = true)
+	public WorkShop getWorkShop() {
+		return workShop;
 	}
 
-	@Valid
-	@ManyToMany(cascade = CascadeType.ALL)
-	public Collection<WorkShop> getWorkShops() {
-		return workShops;
+	public void setWorkShop(WorkShop workShop) {
+		this.workShop = workShop;
 	}
-	public void setWorkShops(Collection<WorkShop> workShops) {
-		this.workShops = workShops;
-	}
-	
 	
 	
 	

@@ -21,18 +21,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Customer extends Actor {
 	
-	// Constructors -----------------------------------------------------------
-	public Customer(){
-		super();
-	}
-	
 	// Attributes -------------------------------------------------------------
 	
 	private CreditCard creditCard;
 	private String phone;
 	private Date birthDate;
 	private String address;
-	private String range;
+	private String rangee;
 	
 	@NotBlank
 	public String getPhone() {
@@ -44,8 +39,8 @@ public class Customer extends Actor {
 	
 	@Past
 	@NotNull
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -63,14 +58,15 @@ public class Customer extends Actor {
 	
 	@NotBlank
 	@Pattern(regexp = "^STANDARD$|^SILVER$|^GOLD$|^VIP$")
-	public String getRange() {
-		return range;
+	public String getRangee() {
+		return rangee;
 	}
-	public void setRange(String range) {
-		this.range = range;
+	public void setRangee(String rangee) {
+		this.rangee = rangee;
 	}
 	
 	@Valid
+	@NotNull
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}
@@ -88,10 +84,10 @@ public class Customer extends Actor {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy="customer")
-	public Collection<DiscussionMessage> getDiscussionMessage() {
+	public Collection<DiscussionMessage> getDiscussionMessages() {
 		return discussionMessages;
 	}
-	public void setDiscussionMessage(Collection<DiscussionMessage> discussionMessages) {
+	public void setDiscussionMessages(Collection<DiscussionMessage> discussionMessages) {
 		this.discussionMessages = discussionMessages;
 	}
 	
@@ -111,7 +107,7 @@ public class Customer extends Actor {
 	public Collection<Complaint> getComplaints() {
 		return complaints;
 	}
-	public void setLandmarks(Collection<Complaint> complaints) {
+	public void setComplaints(Collection<Complaint> complaints) {
 		this.complaints = complaints;
 	}
 	

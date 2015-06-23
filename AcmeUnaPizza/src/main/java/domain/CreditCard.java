@@ -14,19 +14,14 @@ import org.hibernate.validator.constraints.Range;
 @Access(AccessType.PROPERTY)
 public class CreditCard {
 	
-	// Constructors -----------------------------------------------------------
-
-	public CreditCard() {
-	}
-	
 	// Attributes -------------------------------------------------------------
 	
 	private String holderName;
 	private String brandName;
 	private String number;
-	private Integer expirationMonth;
-	private Integer expirationYear;
-	private Integer CVV;
+	private int expirationMonth;
+	private int expirationYear;
+	private int CVV;
 	
 	
 	@NotBlank
@@ -45,8 +40,8 @@ public class CreditCard {
 		this.brandName = brandName;
 	}
 	
-	@CreditCardNumber
 	@NotBlank
+	@CreditCardNumber
 	public String getNumber() {
 		return number;
 	}
@@ -55,8 +50,7 @@ public class CreditCard {
 	}
 	
 	@Range(min=1,max=12)
-	@NotNull
-	public Integer getExpirationMonth() {
+	public int getExpirationMonth() {
 		return expirationMonth;
 	}
 	public void setExpirationMonth(Integer expirationMonth) {
@@ -64,8 +58,7 @@ public class CreditCard {
 	}
 	
 	@Min(2000)
-	@NotNull
-	public Integer getExpirationYear() {
+	public int getExpirationYear() {
 		return expirationYear;
 	}
 	public void setExpirationYear(Integer expirationYear) {
@@ -73,26 +66,11 @@ public class CreditCard {
 	}
 	
 	@Range(min=100,max=999)
-	@NotNull
-	public Integer getCVV() {
+	public int getCVV() {
 		return CVV;
 	}
 	public void setCVV(Integer CVV) {
 		this.CVV = CVV;
-	}
-	
-	// Relationships ----------------------------------------------------------
-	
-	
-	
-	// toString ---------------------------------------------------------------
-	
-	@Override
-	public String toString() {
-		return "CreditCard [holderName=" + holderName + ", brandName="
-				+ brandName + ", number=" + number + ", expirationMonth="
-				+ expirationMonth + ", expirationYear=" + expirationYear
-				+ ", CVV=" + CVV + "]";
 	}
 	
 }
