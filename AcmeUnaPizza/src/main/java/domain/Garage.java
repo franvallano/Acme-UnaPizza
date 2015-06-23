@@ -62,3 +62,4 @@ public class Garage extends DomainEntity{
 	
 	
 }
+

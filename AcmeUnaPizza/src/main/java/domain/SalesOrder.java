@@ -26,16 +26,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class SalesOrder extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
-	private String referenceNumber, state;
+	private String referenceNumber;
+	private String state;
 	private Note note;
-	private Date creationMoment, deliveredMoment;
-	private Double totalCost;
-	
-	
-	//Constructor -------------------------------------------------------------------------------
-	public SalesOrder(){
-		super();
-	}
+	private Date creationMoment;
+	private Date deliveredMoment;
+	private double totalCost;
 	
 	//Getters and setter ------------------------------------------------------------------------
 	@Column(unique=true)
@@ -88,7 +84,7 @@ public class SalesOrder extends DomainEntity{
 
 	@Min(0)
 	@Digits(integer=9, fraction=2)
-	public Double getTotalCost() {
+	public double getTotalCost() {
 		return totalCost;
 	}
 
@@ -105,7 +101,7 @@ public class SalesOrder extends DomainEntity{
 
 	@Valid
 	@NotNull
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="salesOrder")
+	@OneToMany(cascade = CascadeType.ALL)
 	public Collection<Product> getProducts() {
 		return products;
 	}
@@ -116,7 +112,7 @@ public class SalesOrder extends DomainEntity{
 
 	@Valid
 	@NotNull
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	public Boss getBoss() {
 		return boss;
 	}
@@ -158,3 +154,4 @@ public class SalesOrder extends DomainEntity{
 	
 	
 }
+

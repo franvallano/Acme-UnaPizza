@@ -21,14 +21,14 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 public class Product extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
-	private String type, name, description, code;
-	private Double stockPrice, salePrice;
-	private Integer actualStock, minStock;
-	
-	//Constructor -------------------------------------------------------------------------------
-	public Product(){
-		super();
-	}
+	private String type;
+	private String name;
+	private String description;
+	private String code;
+	private Double stockPrice;
+	private Double salePrice;
+	private Integer actualStock;
+	private Integer minStock;
 	
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
@@ -126,3 +126,4 @@ public class Product extends DomainEntity{
 	
 	
 }
+

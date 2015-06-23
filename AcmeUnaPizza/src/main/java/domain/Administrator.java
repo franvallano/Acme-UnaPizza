@@ -14,17 +14,9 @@ import javax.validation.constraints.NotNull;
 public class Administrator extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
-	
-	
-	//Constructor -------------------------------------------------------------------------------
-	public Administrator(){
-		super();
-	}
 
-	
 	//Getters and setter ------------------------------------------------------------------------
-	
-	
+
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Complaint> complaints;
 	private Collection<PurchaseOrder> purchaseOrder;

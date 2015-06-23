@@ -22,11 +22,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Complaint extends DomainEntity {
 	
-	// Constructors -----------------------------------------------------------
-	public Complaint() {
-		
-	}
-	
 	// Attributes -------------------------------------------------------------
 	
 	private String title;
@@ -87,7 +82,7 @@ public class Complaint extends DomainEntity {
 	private Customer customer;
 	
 	@Valid
-	@ManyToOne(optional=true)
+	@ManyToOne(optional = true)
 	public Administrator getAdministrator(){
 		return administrator;
 	}
@@ -107,7 +102,7 @@ public class Complaint extends DomainEntity {
 	
 	@NotNull
 	@Valid
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	public Customer getCustomer(){
 		return customer;
 	}

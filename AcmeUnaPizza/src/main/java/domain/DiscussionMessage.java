@@ -23,11 +23,6 @@ public class DiscussionMessage extends DomainEntity{
 	private String message;
 	private Date moment;
 	
-	//Constructor -------------------------------------------------------------------------------
-	public DiscussionMessage(){
-		super();
-	}
-	
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
 	public String getMessage() {
@@ -46,13 +41,6 @@ public class DiscussionMessage extends DomainEntity{
 	}
 	public void setMoment(Date moment) {
 		this.moment = moment;
-	}
-	
-	
-	@Override
-	public String toString() {
-		return "DiscussionMessage [message=" + message + ", moment=" + moment
-				+ "]";
 	}
 
 
@@ -92,3 +80,4 @@ public class DiscussionMessage extends DomainEntity{
 	}
 	
 }
+

@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -25,11 +26,6 @@ public class WorkShop extends DomainEntity{
 	private Double taxes;
 	private String phoneNumber;
 	private String contact;
-
-	//Constructor -------------------------------------------------------------------------------
-	public WorkShop(){
-		super();
-	}
 	
 	//Getters and setter ------------------------------------------------------------------------
 
@@ -104,6 +100,7 @@ public class WorkShop extends DomainEntity{
 	
 	//REVISAR
 	@Valid
+	@NotNull
 	@ManyToMany
 	public Collection<Stuff> getStuffs() {
 		return stuffs;

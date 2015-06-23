@@ -19,13 +19,10 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 public class Provider extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
-	private String name, phone, cif;
-	
-	//Constructor -------------------------------------------------------------------------------
-	public Provider(){
-		super();
-	}
-	
+	private String name;
+	private String phone;
+	private String cif;
+
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
 	@SafeHtml(whitelistType = WhiteListType.NONE)

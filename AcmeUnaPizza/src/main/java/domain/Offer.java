@@ -28,15 +28,10 @@ public class Offer extends DomainEntity{
 	private Date startDate;
 	private Date endDate;
 	private Integer discount;
-	private Boolean combinable;
-	private String range;
-	private String loop;
+	private boolean combinable;
+	private String rangee;
+	private String loopp;
 	
-	
-	//Constructor -------------------------------------------------------------------------------
-	public Offer(){
-		super();
-	}
 	
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
@@ -51,8 +46,8 @@ public class Offer extends DomainEntity{
 
 	@Past
 	@NotNull
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -61,8 +56,8 @@ public class Offer extends DomainEntity{
 	}
 
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -81,65 +76,32 @@ public class Offer extends DomainEntity{
 
 
 	@NotNull
-	public Boolean getCombinable() {
+	public boolean getCombinable() {
 		return combinable;
 	}
-	public void setCombinable(Boolean combinable) {
+	public void setCombinable(boolean combinable) {
 		this.combinable = combinable;
 	}
 
 
 	@NotBlank
 	@Pattern(regexp = "^STANDARD$|^SILVER$|^GOLD$|^VIP$")
-	public String getRange() {
-		return range;
+	public String getRangee() {
+		return rangee;
 	}
-	public void setRange(String range) {
-		this.range = range;
+	public void setRangee(String rangee) {
+		this.rangee = rangee;
 	}
 
 
 	//REVISAR
 	@Pattern(regexp = "[LMXJVSD]{1,7}")
-	public String getLoop() {
-		return loop;
+	public String getLoopp() {
+		return loopp;
 	}
-	public void setLoop(String loop) {
-		this.loop = loop;
-	}
-
-	@Override
-	public String toString() {
-		return "Offer [name=" + name + ", startDate=" + startDate
-				+ ", endDate=" + endDate + ", discount=" + discount
-				+ ", combinable=" + combinable + ", range=" + range + ", loop="
-				+ loop + "]";}
-	
-	//Relationships -----------------------------------------------------------------------------
-	private Collection<PurchaseOrder> purchasesOrders;
-	private Collection<Product> products;
-
-
-	@Valid
-	@ManyToMany
-	public Collection<PurchaseOrder> getPurchasesOrders() {
-		return purchasesOrders;
-	}
-	public void setPurchasesOrders(Collection<PurchaseOrder> purchasesOrders) {
-		this.purchasesOrders = purchasesOrders;
+	public void setLoopp(String loopp) {
+		this.loopp = loopp;
 	}
 
-	@Valid
-	@ManyToMany
-	public Collection<Product> getProducts() {
-		return products;
-	}
-	public void setProducts(Collection<Product> products) {
-		this.products = products;
-	}
-	
-	
-	
-	
 	
 }
