@@ -23,6 +23,7 @@ public class DeliveryMan extends Staff {
 
 	//Getters and setter ------------------------------------------------------------------------
 	@Valid
+	@NotNull
 	public Motorbike getMotorbike() {
 		return motorbike;
 	}
@@ -44,7 +45,7 @@ public class DeliveryMan extends Staff {
 		
 	//Relationships -----------------------------------------------------------------------------
 	private Garage garage;
-	private Collection<SalesOrder> salesOrder;
+	private Collection<SalesOrder> salesOrders;
 
 	@Valid
 	@NotNull
@@ -60,12 +61,12 @@ public class DeliveryMan extends Staff {
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy="deliveryMan")
-	public Collection<SalesOrder> getSalesOrder() {
-		return salesOrder;
+	public Collection<SalesOrder> getSalesOrders() {
+		return salesOrders;
 	}
 
-	public void setSalesOrder(Collection<SalesOrder> salesOrder) {
-		this.salesOrder = salesOrder;
+	public void setSalesOrders(Collection<SalesOrder> salesOrders) {
+		this.salesOrders = salesOrders;
 	}
 	
 	

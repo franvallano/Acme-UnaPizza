@@ -59,7 +59,7 @@ public class WorkShop extends DomainEntity{
 
 	
 	//REVISAR
-	@Pattern(regexp = "+[0-9]{2}-[0-9]{9}")
+	//@Pattern(regexp = "+[0-9]{2}-[0-9]{9}")
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -78,7 +78,6 @@ public class WorkShop extends DomainEntity{
 
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Repair> repairs;
-	private Collection<Stuff> stuffs;
 
 	@Valid
 	@OneToMany(mappedBy="workShop")
@@ -88,20 +87,5 @@ public class WorkShop extends DomainEntity{
 	public void setRepairs(Collection<Repair> repairs) {
 		this.repairs = repairs;
 	}
-
-	
-	//REVISAR
-	@Valid
-	@NotNull
-	@ManyToMany
-	public Collection<Stuff> getStuffs() {
-		return stuffs;
-	}
-	public void setStuffs(Collection<Stuff> stuffs) {
-		this.stuffs = stuffs;
-	}
-	
-	
-	
 	
 }
