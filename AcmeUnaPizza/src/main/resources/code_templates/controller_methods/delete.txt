@@ -1,0 +1,13 @@
+//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+//	public ModelAndView delete(@ModelAttribute %entity% entity, BindingResult bindingResult) {
+//		ModelAndView res;
+//		
+//		try{
+//			%entity_lowcase%Service.delete(entity);
+//			res = new ModelAndView("redirect:"); //TODO: completar redireccion en caso de exito
+//		}catch(Throwable oops){
+//			res = createEditionModelAndView(entity, "details.commit.error");
+//		}
+//		
+//		return res;
+//	}

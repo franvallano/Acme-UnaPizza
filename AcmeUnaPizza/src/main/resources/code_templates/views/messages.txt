@@ -1,0 +1,15 @@
+# messages.properties
+#
+# Copyright (C) 2014 Universidad de Sevilla
+# 
+# The use of this project is hereby constrained to the conditions of the 
+# TDG Licence, a copy of which you may download from 
+# http://www.tdg-seville.info/License.html
+
+details.save		= Save
+details.delete		= Delete
+details.cancel		= Cancel
+details.details		= Details
+details.createNew	= Create New
+details.edit.error	= There was an error, try again later
+details.details		= details

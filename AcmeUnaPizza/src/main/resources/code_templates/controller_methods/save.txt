@@ -1,0 +1,18 @@
+//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+//	public ModelAndView save(@Valid @ModelAttribute %entity% entity, BindingResult bindingResult) {
+//		ModelAndView result;
+//		
+//		if (bindingResult.hasErrors()){
+//			result = createEditionModelAndView(entity, "details.edition.error");
+//		}
+//		else {
+//			try {
+//				%entity_lowcase%Service.save(entity);
+//				result = new ModelAndView("redirect:"); //TODO: completar redireccion en caso de exito
+//			} catch (Throwable oops) {
+//				result = createEditionModelAndView(entity, "details.commit.error");
+//			}
+//		}
+//
+//		return result;
+//	}
