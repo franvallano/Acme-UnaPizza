@@ -179,3 +179,147 @@
 		
 	</form:form>
 </security:authorize>
+
+<security:authorize access="hasRole('BOSS')">
+	<form:form action="dashboard/boss/list.do" >
+		
+		<fieldset>
+			<b><spring:message code="dashboard.boss.totalOrders"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.boss.orderMoreExpensive"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.boss.orderMoreCheap"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.boss.avgOrders"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.boss.orderMoreSlow"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.boss.orderMoreFast"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.boss.drivingTimeByMotorbike"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+	</form:form>
+</security:authorize>
+
+<security:authorize access="hasRole('COOK')">
+	<form:form action="dashboard/cook/list.do" >
+		
+		<fieldset>
+			<b><spring:message code="dashboard.cook.totalOrders"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.cook.orderMoreExpensive"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.cook.orderMoreCheap"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.cook.avgOrders"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+	</form:form>
+</security:authorize>
+
+<security:authorize access="hasRole('DELIVERY_MAN')">
+	<form:form action="dashboard/deliveryMan/list.do" >
+		
+		<fieldset>
+			<b><spring:message code="dashboard.deliveryMan.totalOrders"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.deliveryMan.orderMoreExpensive"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.deliveryMan.orderMoreCheap"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.deliveryMan.avgOrders"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.deliveryMan.orderMoreSlow"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.deliveryMan.orderMoreFast"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.deliveryMan.drivingTimeByMotorbike"/></b>
+			<br/>
+
+		</fieldset>
+		<br/>
+
+	</form:form>
+</security:authorize>
