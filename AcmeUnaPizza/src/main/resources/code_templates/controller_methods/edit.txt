@@ -1,0 +1,4 @@
+//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+//	public ModelAndView edit(@RequestParam int %entity_lowcase%Id) {
+//	
+//	}

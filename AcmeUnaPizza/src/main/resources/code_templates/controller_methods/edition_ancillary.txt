@@ -1,0 +1,14 @@
+//	public ModelAndView createEditionModelAndView(%entity% entity){
+//		return createEditionModelAndView(entity, null);
+//	}
+	
+//	public ModelAndView createEditionModelAndView(%entity% entity, String message){
+//		ModelAndView res;
+//		
+//		res = new ModelAndView("%entity_lowcase%/edit");
+//		res.addObject("entity", entity);
+//		res.addObject("message", message);
+//		res.addObject("requestURI", /%entity_lowercase%/edit.do);	//TODO: revisar requestURI		
+//
+//		return res;
+//	}
