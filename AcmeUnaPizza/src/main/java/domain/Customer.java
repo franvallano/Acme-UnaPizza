@@ -77,28 +77,16 @@ public class Customer extends Actor {
 	// Relationships ----------------------------------------------------------
 	
 	private Collection<Complaint> complaints;
-	private Collection<DiscussionMessage> discussionMessages;
-	private Collection<SalesOrder> salesOrder;
-	
+	private Collection<SalesOrder> salesOrders;
 	
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy="customer")
-	public Collection<DiscussionMessage> getDiscussionMessages() {
-		return discussionMessages;
+	public Collection<SalesOrder> getSalesOrders() {
+		return salesOrders;
 	}
-	public void setDiscussionMessages(Collection<DiscussionMessage> discussionMessages) {
-		this.discussionMessages = discussionMessages;
-	}
-	
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy="customer")
-	public Collection<SalesOrder> getSalesOrder() {
-		return salesOrder;
-	}
-	public void setSalesOrder(Collection<SalesOrder> salesOrder) {
-		this.salesOrder = salesOrder;
+	public void setSalesOrders(Collection<SalesOrder> salesOrders) {
+		this.salesOrders = salesOrders;
 	}
 	
 	@Valid

@@ -21,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Staff extends DomainEntity{
+public class Staff extends Actor{
 
 	//Attributes --------------------------------------------------------------------------------
 	private String dni;
