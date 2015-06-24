@@ -14,6 +14,7 @@ import security.LoginService;
 import security.UserAccount;
 import utilities.PasswordCode;
 import domain.Administrator;
+import forms.RegistrationAdministratorForm;
 
 @Service
 @Transactional
@@ -115,6 +116,22 @@ public class AdministratorService {
 	 	
 	 	return administrator;
 	 }
+	
+	public Administrator convertToAdministrator(Administrator administrator,RegistrationAdministratorForm registrationAdminForm) {
+		Assert.notNull(registrationAdminForm);
+		Assert.notNull(administrator);
+
+		administrator.setName(registrationAdminForm.getName());
+		administrator.setSurname(registrationAdminForm.getSurname());
+		administrator.setEmail(registrationAdminForm.getEmail());
+
+		administrator.getUserAccount().setUsername(registrationAdminForm.getUsername());
+		
+		administrator.getUserAccount().setPassword(registrationAdminForm.getPassword());
+
+		return administrator;
+	}
+	
 	
 	// Ancillary methods ------------------------------------------------------
 
