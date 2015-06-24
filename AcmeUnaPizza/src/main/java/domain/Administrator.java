@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Administrator extends DomainEntity{
+public class Administrator extends Actor {
 
 	//Attributes --------------------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ public class Administrator extends DomainEntity{
 
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Complaint> complaints;
-	private Collection<PurchaseOrder> purchaseOrder;
+	private Collection<PurchaseOrder> purchaseOrders;
 
 	@Valid
 	@NotNull
@@ -34,11 +34,11 @@ public class Administrator extends DomainEntity{
 	@Valid
 	@NotNull
 	@OneToMany(mappedBy="administrator")
-	public Collection<PurchaseOrder> getPurchaseOrder() {
-		return purchaseOrder;
+	public Collection<PurchaseOrder> getPurchaseOrders() {
+		return purchaseOrders;
 	}
-	public void setPurchaseOrder(Collection<PurchaseOrder> purchaseOrder) {
-		this.purchaseOrder = purchaseOrder;
+	public void setPurchaseOrders(Collection<PurchaseOrder> purchaseOrders) {
+		this.purchaseOrders = purchaseOrders;
 	}
 	
 	
