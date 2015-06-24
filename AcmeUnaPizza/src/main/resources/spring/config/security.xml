@@ -48,6 +48,16 @@
 		<!-- DASHBOARD -->
 		<security:intercept-url pattern="/dashboard/customer/list.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/dashboard/boss/list.do" access="hasRole('BOSS')" /> 
+		<security:intercept-url pattern="/dashboard/deliveryMan/list.do" access="hasRole('DELIVERY_MAN')" /> 
+		<security:intercept-url pattern="/dashboard/cook/list.do" access="hasRole('COOK')" /> 
+		
+		<!-- REGISTER -->
+		<security:intercept-url pattern="/register/customer/register.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/register/administrator/register.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/register/boss/register.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/register/deliveryMan/register.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/register/cook/register.do" access="hasRole('ADMINISTRATOR')" /> 
 		
 		
 		<security:intercept-url pattern="/customer/action-2.do" access="hasRole('CUSTOMER')" /> 
