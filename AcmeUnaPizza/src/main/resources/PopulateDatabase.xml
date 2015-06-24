@@ -159,6 +159,22 @@
 		<property name="CVV" value="500" /> 
 	</bean>
 	
+	<!-- NOTE -->
+	<bean id="note1" class="domain.Note">
+		<property name="cause" value="cancelled" /> 
+		<property name="description" value="descriptionNote1" />
+	</bean>
+
+	<bean id="note2" class="domain.Note">
+		<property name="cause" value="other" /> 
+		<property name="description" value="descriptionNote2" />
+	</bean>	
+	
+	<bean id="note3" class="domain.Note">
+		<property name="cause" value="joke" /> 
+		<property name="description" value="descriptionNote3" />
+	</bean>
+	
 	<!-- MOTORBIKE -->
 	<bean id="motorbike1" class="domain.Motorbike">
 		<property name="number" value="1" /> 
@@ -263,7 +279,7 @@
 		</property>
 	</bean>
 	
-	<!--  USERS -->
+	<!--  USERS  -->
 	<!-- ADMIN -->
 	<bean id="admin1" class="domain.Administrator">
 		<property name="userAccount" ref="userAccount1"/>
@@ -543,7 +559,6 @@
 		<property name="rangee" value="VIP"/>
 	</bean>
 	
-	
 	<!-- PROVIDER -->
 	<bean id="provider1" class="domain.Provider">
 		<property name="name" value="Postres Ricos SL"/>
@@ -552,7 +567,8 @@
 		
 		<property name="products">
 			<list>
-				
+				<ref bean="product1" /> 
+				<ref bean="product2" /> 
 			</list>
 		</property>
 	</bean>
@@ -564,7 +580,8 @@
 		
 		<property name="products">
 			<list>
-				
+				<ref bean="product3" /> 
+				<ref bean="product4" /> 
 			</list>
 		</property>
 	</bean>
@@ -593,5 +610,128 @@
 		</property>
 	</bean>
 	
+	<!-- PURCHASEORDER -->
+	<bean id="purchaseOrder1" class="domain.PurchaseOrder">
+		<property name="referenceNumber" value="AAS-89465123"/>
+		<property name="totalCost" value="0"/>
+		<property name="creationMoment" value="2015/05/23 12:12"/>
+		<property name="administrator" ref="admin1" />
+		<property name="products">
+			<list>
+				
+			</list>
+		</property>
+		<property name="offers">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="purchaseOrder2" class="domain.PurchaseOrder">
+		<property name="referenceNumber" value="BBZ-12345689"/>
+		<property name="totalCost" value="0"/>
+		<property name="creationMoment" value="2015/05/12 14:12"/>
+		<property name="administrator" ref="admin2" />
+		<property name="products">
+			<list>
+				
+			</list>
+		</property>
+		<property name="offers">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- SALESORDER -->
+	<bean id="salesOrder1" class="domain.SalesOrder">
+		<property name="referenceNumber" value="HHJ-11114444"/>
+		<property name="totalCost" value="0"/>
+		<property name="creationMoment" value="2015/05/22 10:12"/>
+		<property name="state" value = "open"/>
+		<!-- <property name="deliveredMoment" value = "" />  -->
+		<!-- without notes  -->
+		<property name="customer" ref="customer1" />
+		<!-- without deliveryMan  -->
+		<property name="cook" ref="cook1" />
+		<property name="boss" ref="boss1" />
+		
+		<property name="products">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="salesOrder2" class="domain.SalesOrder">
+		<property name="referenceNumber" value="TTR-98745623"/>
+		<property name="totalCost" value="0"/>
+		<property name="creationMoment" value="2015/04/05 16:04"/>
+		<property name="state" value = "prepared"/>
+		<!-- <property name="deliveredMoment" value = "" /> -->
+		<!-- without notes  -->
+		<property name="customer" ref="customer2" />
+		<!-- without deliveryMan  -->
+		<property name="cook" ref="cook2" />
+		<property name="boss" ref="boss1" />
+		
+		<property name="products">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
+	<!-- PRODUCT -->
+	<bean id="product1" class="domain.Product">
+		<property name="type" value="pizza"/>
+		<property name="name" value="Barbacue"/>
+		<property name="description" value="Barbacue"/>
+		<property name="stockPrice" value="7.50"/>
+		<property name="salePrice" value="12"/>
+		<property name="actualStock" value="23"/>
+		<property name="minStock" value="6"/>
+		<property name="code" value="PZBBQ"/>		
+		<property name="provider" ref="provider1" />
+	</bean>
+	
+	<bean id="product2" class="domain.Product">
+		<property name="type" value="pizza"/>
+		<property name="name" value="4Cheese"/>
+		<property name="description" value="Four Cheese"/>
+		<property name="stockPrice" value="8"/>
+		<property name="salePrice" value="13"/>
+		<property name="actualStock" value="15"/>
+		<property name="minStock" value="6"/>
+		<property name="code" value="PZCHS"/>		
+		<property name="provider" ref="provider1" />
+	</bean>
+	
+	<bean id="product3" class="domain.Product">
+		<property name="type" value="drink"/>
+		<property name="name" value="coke"/>
+		<property name="description" value="Coke"/>
+		<property name="stockPrice" value="0.50"/>
+		<property name="salePrice" value="1.20"/>
+		<property name="actualStock" value="121"/>
+		<property name="minStock" value="20"/>
+		<property name="code" value="DKCOK"/>		
+		<property name="provider" ref="provider2" />
+	</bean>
+	
+	<bean id="product4" class="domain.Product">
+		<property name="type" value="drink"/>
+		<property name="name" value="Pepsi"/>
+		<property name="description" value="Pepsi"/>
+		<property name="stockPrice" value="0.30"/>
+		<property name="salePrice" value="1.00"/>
+		<property name="actualStock" value="86"/>
+		<property name="minStock" value="30"/>
+		<property name="code" value="DKPEP"/>		
+		<property name="provider" ref="provider2" />
+	</bean>
 	
 </beans>
