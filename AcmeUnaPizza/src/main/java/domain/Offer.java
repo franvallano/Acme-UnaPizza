@@ -28,7 +28,6 @@ public class Offer extends DomainEntity{
 	private Date startDate;
 	private Date endDate;
 	private Integer discount;
-	private boolean combinable;
 	private String rangee;
 	private String loopp;
 	
@@ -73,16 +72,6 @@ public class Offer extends DomainEntity{
 	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
-
-
-	@NotNull
-	public boolean getCombinable() {
-		return combinable;
-	}
-	public void setCombinable(boolean combinable) {
-		this.combinable = combinable;
-	}
-
 
 	@NotBlank
 	@Pattern(regexp = "^STANDARD$|^SILVER$|^GOLD$|^VIP$")

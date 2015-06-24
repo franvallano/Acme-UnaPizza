@@ -25,7 +25,7 @@ public class Provider extends DomainEntity{
 
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
+	//@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return name;
 	}

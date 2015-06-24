@@ -75,7 +75,7 @@ public class Stuff extends DomainEntity{
 
 	@Valid
 	@NotNull
-	@ManyToOne(optional = true)
+	@ManyToOne(optional = false)
 	public WorkShop getWorkShop() {
 		return workShop;
 	}

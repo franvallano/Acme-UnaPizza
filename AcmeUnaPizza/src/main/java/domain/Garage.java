@@ -20,11 +20,6 @@ public class Garage extends DomainEntity{
 	//Attributes --------------------------------------------------------------------------------
 	private String location;
 	private Integer size;
-
-	//Constructor -------------------------------------------------------------------------------
-	public Garage(){
-		super();
-	}
 	
 	//Getters and setter ------------------------------------------------------------------------
 

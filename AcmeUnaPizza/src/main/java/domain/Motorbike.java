@@ -16,7 +16,7 @@ public class Motorbike {
 
 	// Attributes
 	// --------------------------------------------------------------------------------
-	private Integer number;
+	private int number;
 	private Long drivingTime;
 	private String licensePlate;
 
@@ -25,11 +25,11 @@ public class Motorbike {
 
 	@Min(1)
 	@Column(unique = true)
-	public Integer getNumber() {
+	public int getNumber() {
 		return number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 
