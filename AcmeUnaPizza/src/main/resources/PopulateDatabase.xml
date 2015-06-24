@@ -567,8 +567,8 @@
 		
 		<property name="products">
 			<list>
-				<ref bean="product1" /> 
-				<ref bean="product2" /> 
+				<!-- <ref bean="product1" /> --> 
+				<!-- <ref bean="product2" /> -->
 			</list>
 		</property>
 	</bean>
@@ -580,8 +580,8 @@
 		
 		<property name="products">
 			<list>
-				<ref bean="product3" /> 
-				<ref bean="product4" /> 
+			<!--  <ref bean="product3" /> -->	 
+			<!--  <ref bean="product4" /> -->
 			</list>
 		</property>
 	</bean>
@@ -685,7 +685,9 @@
 		</property>
 	</bean>
 	
+
 	<!-- PRODUCT -->
+<!-- 
 	<bean id="product1" class="domain.Product">
 		<property name="type" value="pizza"/>
 		<property name="name" value="Barbacue"/>
@@ -697,7 +699,8 @@
 		<property name="code" value="PZBBQ"/>		
 		<property name="provider" ref="provider1" />
 	</bean>
-	
+-->
+<!-- 	
 	<bean id="product2" class="domain.Product">
 		<property name="type" value="pizza"/>
 		<property name="name" value="4Cheese"/>
@@ -709,7 +712,8 @@
 		<property name="code" value="PZCHS"/>		
 		<property name="provider" ref="provider1" />
 	</bean>
-	
+-->	
+<!-- 
 	<bean id="product3" class="domain.Product">
 		<property name="type" value="drink"/>
 		<property name="name" value="coke"/>
@@ -721,7 +725,8 @@
 		<property name="code" value="DKCOK"/>		
 		<property name="provider" ref="provider2" />
 	</bean>
-	
+ -->
+<!-- 	
 	<bean id="product4" class="domain.Product">
 		<property name="type" value="drink"/>
 		<property name="name" value="Pepsi"/>
@@ -733,5 +738,5 @@
 		<property name="code" value="DKPEP"/>		
 		<property name="provider" ref="provider2" />
 	</bean>
-	
+ -->
 </beans>
