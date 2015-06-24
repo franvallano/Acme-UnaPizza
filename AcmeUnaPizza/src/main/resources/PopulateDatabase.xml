@@ -139,5 +139,131 @@
 	</bean>
 	
 	<!-- Other domain beans come here -->	
+	<!-- DATATYPES -->
+	<!-- CREDIT CARD -->
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Jaime" /> 
+		<property name="brandName" value="Visa" /> 
+		<property name="number" value="5228926684479919" /> 
+		<property name="expirationMonth" value="11" /> 
+		<property name="expirationYear" value="2015" /> 
+		<property name="CVV" value="455" /> 
+	</bean>
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Francisco" /> 
+		<property name="brandName" value="MasterCard" /> 
+		<property name="number" value="5134980181517930" /> 
+		<property name="expirationMonth" value="8" /> 
+		<property name="expirationYear" value="2016" /> 
+		<property name="CVV" value="500" /> 
+	</bean>
+	
+	<!--  USERS -->
+	<!-- ADMIN -->
+	<bean id="admin1" class="domain.Administrator">
+		<property name="userAccount" ref="userAccount1"/>
+		<property name="name" value="admin1"/>
+		<property name="surname" value="suradmin1"/>
+		<property name="email" value="admin1@gmail.com"/>
+		<property name="complaints">
+			<list>
+				
+			</list>
+		</property>
+		<property name="purchaseOrders">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="admin2" class="domain.Administrator">
+		<property name="userAccount" ref="userAccount2"/>
+		<property name="name" value="admin2"/>
+		<property name="surname" value="suradmin2"/>
+		<property name="email" value="admin2@gmail.com"/>
+		<property name="complaints">
+			<list>
+				
+			</list>
+		</property>
+		<property name="purchaseOrders">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	<!--  CUSTOMER -->
+	<bean id="customer1" class="domain.Customer">
+		<property name="userAccount" ref="userAccount3"/>
+		<property name="name" value="customer1"/>
+		<property name="surname" value="surcustomer1"/>
+		<property name="email" value="customer1@gmail.com"/>
+		<property name="creditCard" ref="creditCard1" /> 
+		<property name="phone" value="661889666"/>
+		<property name="birthDate" value="1986/02/10 00:00"/>
+		<property name="address" value="Calle Lanjaron 13 (Sevilla)"/>
+		<property name="rangee" value="STANDARD"/>
+		
+		<property name="complaints">
+			<list>
+				
+			</list>
+		</property>
+		<property name="salesOrders">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="customer2" class="domain.Customer">
+		<property name="userAccount" ref="userAccount4"/>
+		<property name="name" value="customer2"/>
+		<property name="surname" value="surcustomer2"/>
+		<property name="email" value="customer2@gmail.com"/>
+		<property name="creditCard" ref="creditCard2" /> 
+		<property name="phone" value="631229611"/>
+		<property name="birthDate" value="1992/05/20 00:00"/>
+		<property name="address" value="Calle Bezoya 33 (Málaga)"/>
+		<property name="rangee" value="STANDARD"/>
+		
+		<property name="complaints">
+			<list>
+				
+			</list>
+		</property>
+		<property name="salesOrders">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
+	<!-- COOK -->
+	<bean id="cook1" class="domain.Cook">
+		<property name="userAccount" ref="userAccount9"/>
+		<property name="name" value="cook1"/>
+		<property name="surname" value="surcook1"/>
+		<property name="email" value="cook1@gmail.com"/>
+		<property name="dni" value="30237579P"/>
+		<property name="ssNumber" value="AB-1234567890"/>
+		<property name="phone" value="631229611"/>
+		<property name="contractStartDate" value="2015/02/10 00:00"/>
+		<property name="accountNumber" value="12345678901234567890"/>
+		<property name="birthDate" value="1990/06/23 00:00"/>
+		<property name="address" value="Calle Linda 33 (Madrid)"/>
+
+		<property name="salesOrders">
+			<list>
+				
+			</list>
+		</property>
+		<property name="repairs">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
 	
 </beans>
