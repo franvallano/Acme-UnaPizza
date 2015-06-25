@@ -25,7 +25,7 @@ public class Provider extends DomainEntity{
 
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
-	//@SafeHtml(whitelistType = WhiteListType.NONE)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getName() {
 		return name;
 	}
@@ -35,7 +35,8 @@ public class Provider extends DomainEntity{
 	}
 
 	@NotBlank
-	@Pattern(regexp="[0-9]{9}")
+	@Pattern(regexp = "(((\\+34)? ?(\\(0\\))? ?)|(0))( ?[0-9]{3,4}){3}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getPhone() {
 		return phone;
 	}
@@ -46,6 +47,7 @@ public class Provider extends DomainEntity{
 
 	@NotBlank
 	@Pattern(regexp="[A-Z][0-9]{8}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCif() {
 		return cif;
 	}

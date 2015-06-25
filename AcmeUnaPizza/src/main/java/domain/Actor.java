@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
@@ -10,6 +11,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 import security.UserAccount;
 
@@ -23,6 +26,7 @@ public abstract class Actor extends DomainEntity{
 	private String email;
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getName() {
 		return name;
 	}
@@ -32,6 +36,7 @@ public abstract class Actor extends DomainEntity{
 	}
 	
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getSurname() {
 		return surname;
 	}
@@ -42,6 +47,8 @@ public abstract class Actor extends DomainEntity{
 
 	@Email
 	@NotBlank
+	@Column(unique = true)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getEmail() {
 		return email;
 	}

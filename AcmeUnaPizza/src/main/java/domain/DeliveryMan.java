@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 
 @Entity
@@ -35,6 +37,7 @@ public class DeliveryMan extends Staff {
 	
 	@NotBlank
 	@Pattern(regexp = "[0-9]{8}[A-Z]")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDrivingLicenseNumber() {
 		return drivingLicenseNumber;
 	}

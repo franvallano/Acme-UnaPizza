@@ -651,7 +651,7 @@
 		<property name="referenceNumber" value="HHJ-11114444"/>
 		<property name="totalCost" value="0"/>
 		<property name="creationMoment" value="2015/05/22 10:12"/>
-		<property name="state" value = "open"/>
+		<property name="state" value = "OPEN"/>
 		<!-- <property name="deliveredMoment" value = "" />  -->
 		<!-- without notes  -->
 		<property name="customer" ref="customer1" />
@@ -670,7 +670,7 @@
 		<property name="referenceNumber" value="TTR-98745623"/>
 		<property name="totalCost" value="0"/>
 		<property name="creationMoment" value="2015/04/05 16:04"/>
-		<property name="state" value = "prepared"/>
+		<property name="state" value = "PREPARED"/>
 		<!-- <property name="deliveredMoment" value = "" /> -->
 		<!-- without notes  -->
 		<property name="customer" ref="customer2" />

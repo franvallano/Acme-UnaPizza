@@ -12,6 +12,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -27,6 +29,7 @@ public class Stuff extends DomainEntity{
 
 	@NotBlank
 	@Size(min = 5, max = 15)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getName() {
 		return name;
 	}
@@ -38,6 +41,7 @@ public class Stuff extends DomainEntity{
 
 	@NotBlank
 	@Pattern(regexp= "^OK$|^MALFUNCTION$|^REPAIRING$")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getStatus() {
 		return status;
 	}
@@ -50,6 +54,7 @@ public class Stuff extends DomainEntity{
 	@Column(unique=true)
 	@NotBlank
 	@Pattern(regexp="[a-zA-Z]{3}[0-9]{5}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getReferenceCode() {
 		return referenceCode;
 	}

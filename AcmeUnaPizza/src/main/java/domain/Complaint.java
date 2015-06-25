@@ -16,6 +16,8 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -31,6 +33,7 @@ public class Complaint extends DomainEntity {
 	private String state;
 	
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getTitle() {
 		return title;
 	}
@@ -50,6 +53,7 @@ public class Complaint extends DomainEntity {
 	}
 	
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDescription() {
 		return description;
 	}
@@ -57,7 +61,7 @@ public class Complaint extends DomainEntity {
 		this.description = description;
 	}
 	
-	
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getResult() {
 		return result;
 	}
@@ -66,7 +70,8 @@ public class Complaint extends DomainEntity {
 	}
 	
 	@NotBlank
-	@Pattern(regexp = "^open$|^cancelled$|^closed$")
+	@Pattern(regexp = "^OPEN$|^CANCELLED$|^CLOSED$")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getState() {
 		return state;
 	}
