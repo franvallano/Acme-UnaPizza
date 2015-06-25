@@ -84,7 +84,7 @@ public class XSSProtectionToolbox {
 	 * */
 	public void safeHtmlProtection(Boolean verbose){
 		List<String> susceptibleFields;
-		String annotationPattern = "@SafeHtml(whitelistType = WhiteListType.NONE)";
+		String annotationPattern = "@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)";
 		String[] necessaryImports = {"import org.hibernate.validator.constraints.SafeHtml;",
 									"import org.hibernate.validator.constraints.SafeHtml.WhiteListType;"};
 		
