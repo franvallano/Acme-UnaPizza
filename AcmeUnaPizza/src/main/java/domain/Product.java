@@ -25,14 +25,15 @@ public class Product extends DomainEntity{
 	private String name;
 	private String description;
 	private String code;
-	private Double stockPrice;
-	private Double salePrice;
-	private Integer actualStock;
-	private Integer minStock;
+	private double stockPrice;
+	private double salePrice;
+	private int actualStock;
+	private int minStock;
 	
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
-	@Pattern(regexp="^pizza$|^drink$|^complement$|^dessert$")
+	@Pattern(regexp="^PIZZA$|^DRINK$|^COMPLEMENT$|^DESSERT$")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getType() {
 		return type;
 	}
@@ -43,7 +44,7 @@ public class Product extends DomainEntity{
 
 	@NotBlank
 	@Column(unique=true)
-	@SafeHtml(whitelistType = WhiteListType.NONE)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getName() {
 		return name;
 	}
@@ -53,7 +54,7 @@ public class Product extends DomainEntity{
 	}
 
 	@Size(min=10, max=250)
-	@SafeHtml(whitelistType = WhiteListType.NONE)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDescription() {
 		return description;
 	}
@@ -64,6 +65,7 @@ public class Product extends DomainEntity{
 
 	@NotBlank
 	@Pattern(regexp="[a-zA-Z]{2,5}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCode() {
 		return code;
 	}
@@ -74,39 +76,39 @@ public class Product extends DomainEntity{
 
 	@Min(0)
 	@Digits(integer=9, fraction=2)
-	public Double getStockPrice() {
+	public double getStockPrice() {
 		return stockPrice;
 	}
 
-	public void setStockPrice(Double stockPrice) {
+	public void setStockPrice(double stockPrice) {
 		this.stockPrice = stockPrice;
 	}
 
 	@Min(0)
 	@Digits(integer=9, fraction=2)
-	public Double getSalePrice() {
+	public double getSalePrice() {
 		return salePrice;
 	}
 
-	public void setSalePrice(Double salePrice) {
+	public void setSalePrice(double salePrice) {
 		this.salePrice = salePrice;
 	}
 
 	@Min(0)
-	public Integer getActualStock() {
+	public int getActualStock() {
 		return actualStock;
 	}
 
-	public void setActualStock(Integer actualStock) {
+	public void setActualStock(int actualStock) {
 		this.actualStock = actualStock;
 	}
 
 	@Min(0)
-	public Integer getMinStock() {
+	public int getMinStock() {
 		return minStock;
 	}
 
-	public void setMinStock(Integer minStock) {
+	public void setMinStock(int minStock) {
 		this.minStock = minStock;
 	}
 	

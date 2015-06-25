@@ -8,6 +8,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 
 @Embeddable
@@ -44,6 +46,7 @@ public class Motorbike {
 
 	@NotBlank
 	@Pattern(regexp = "[0-9]{4}[A-Z]{3}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getLicensePlate() {
 		return licensePlate;
 	}

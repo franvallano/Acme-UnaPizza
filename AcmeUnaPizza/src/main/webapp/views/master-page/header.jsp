@@ -42,6 +42,39 @@
 			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
 		
+		<security:authorize access="hasRole('BOSS')">
+			<li><a class="fNiv"><spring:message	code="master.page.boss" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
+					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
+				</ul>
+			</li>
+			<li><a class="fNiv" href="dashboard/boss/list.do"><spring:message code="master.page.dashboard" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('COOK')">
+			<li><a class="fNiv"><spring:message	code="master.page.cook" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
+					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
+				</ul>
+			</li>
+			<li><a class="fNiv" href="dashboard/cook/list.do"><spring:message code="master.page.dashboard" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('DELIVERY_MAN')">
+			<li><a class="fNiv"><spring:message	code="master.page.deliveryMan" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
+					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
+				</ul>
+			</li>
+			<li><a class="fNiv" href="dashboard/deliveryMan/list.do"><spring:message code="master.page.dashboard" /></a></li>
+		</security:authorize>
+		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv"><spring:message code="master.page.register" /></a>

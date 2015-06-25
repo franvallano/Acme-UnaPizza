@@ -17,6 +17,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -35,6 +37,7 @@ public class Offer extends DomainEntity{
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getName() {
 		return name;
 	}
@@ -75,6 +78,7 @@ public class Offer extends DomainEntity{
 
 	@NotBlank
 	@Pattern(regexp = "^STANDARD$|^SILVER$|^GOLD$|^VIP$")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getRangee() {
 		return rangee;
 	}
@@ -85,6 +89,7 @@ public class Offer extends DomainEntity{
 
 	//REVISAR
 	@Pattern(regexp = "[LMXJVSD]{1,7}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getLoopp() {
 		return loopp;
 	}

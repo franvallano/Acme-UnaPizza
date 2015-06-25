@@ -17,6 +17,8 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -37,6 +39,7 @@ public class Staff extends Actor{
 	
 	@NotBlank
 	@Pattern(regexp = "[0-9]{8}[A-Z]")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDni() {
 		return dni;
 	}
@@ -45,9 +48,9 @@ public class Staff extends Actor{
 		this.dni = dni;
 	}
 	
-	//AÑADIR PATRON
 	@NotBlank
 	@Pattern(regexp = "[A-Z]{2}-[0-9]{10}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getSsNumber() {
 		return ssNumber;
 	}
@@ -82,6 +85,7 @@ public class Staff extends Actor{
 	
 	@NotBlank
 	@Pattern(regexp = "[0-9]{20}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -91,7 +95,8 @@ public class Staff extends Actor{
 	}
 
 	@NotBlank
-	@Pattern(regexp = "[0-9]{9}")
+	@Pattern(regexp = "(((\\+34)? ?(\\(0\\))? ?)|(0))( ?[0-9]{3,4}){3}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getPhone() {
 		return phone;
 	}
@@ -113,6 +118,7 @@ public class Staff extends Actor{
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getAddress() {
 		return address;
 	}

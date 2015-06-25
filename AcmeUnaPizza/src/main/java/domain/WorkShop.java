@@ -15,6 +15,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -31,6 +33,7 @@ public class WorkShop extends DomainEntity{
 
 	@NotBlank
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCompany() {
 		return company;
 	}
@@ -40,6 +43,7 @@ public class WorkShop extends DomainEntity{
 
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCity() {
 		return city;
 	}
@@ -58,8 +62,9 @@ public class WorkShop extends DomainEntity{
 	}
 
 	
-	//REVISAR
-	//@Pattern(regexp = "+[0-9]{2}-[0-9]{9}")
+	
+	@Pattern(regexp = "(((\\+34)? ?(\\(0\\))? ?)|(0))( ?[0-9]{3,4}){3}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -69,6 +74,7 @@ public class WorkShop extends DomainEntity{
 
 
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getContact() {
 		return contact;
 	}

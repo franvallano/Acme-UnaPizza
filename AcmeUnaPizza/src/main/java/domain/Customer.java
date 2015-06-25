@@ -15,6 +15,8 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -30,6 +32,8 @@ public class Customer extends Actor {
 	private String rangee;
 	
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
+	@Pattern(regexp = "(((\\+34)? ?(\\(0\\))? ?)|(0))( ?[0-9]{3,4}){3}")
 	public String getPhone() {
 		return phone;
 	}
@@ -40,7 +44,7 @@ public class Customer extends Actor {
 	@Past
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -49,6 +53,7 @@ public class Customer extends Actor {
 	}
 	
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getAddress() {
 		return address;
 	}
@@ -58,6 +63,7 @@ public class Customer extends Actor {
 	
 	@NotBlank
 	@Pattern(regexp = "^STANDARD$|^SILVER$|^GOLD$|^VIP$")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getRangee() {
 		return rangee;
 	}
@@ -66,7 +72,6 @@ public class Customer extends Actor {
 	}
 	
 	@Valid
-	@NotNull
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}

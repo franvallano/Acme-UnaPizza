@@ -19,6 +19,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -36,6 +39,7 @@ public class SalesOrder extends DomainEntity{
 	//Getters and setter ------------------------------------------------------------------------
 	@Column(unique=true)
 	@Pattern(regexp="[A-Z]{3}-[0-9]{8}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getReferenceNumber() {
 		return referenceNumber;
 	}
@@ -44,7 +48,9 @@ public class SalesOrder extends DomainEntity{
 		this.referenceNumber = referenceNumber;
 	}
 
-	@Pattern(regexp="^open$|^cooking$|^prepared$|^onitsway$|^delivered$|^undelivered$")
+	@NotBlank
+	@Pattern(regexp="^OPEN$|^COOKING$|^PREPARED$|^ONITSWAY$|^DELIVERED$|^UNDELIVERED$")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getState() {
 		return state;
 	}

@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -25,6 +27,7 @@ public class Garage extends DomainEntity{
 
 	@NotBlank
 	@Size(min = 10, max = 250)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getLocation() {
 		return location;
 	}

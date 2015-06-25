@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -12,8 +13,10 @@ import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import utilities.PasswordCode;
+import domain.Complaint;
 import domain.Customer;
+import domain.SalesOrder;
+import forms.CustomerForm;
 
 @Service
 @Transactional
@@ -40,17 +43,20 @@ public class CustomerService {
 		return newbye;
 	}
 
-	public void save( Customer customer ){
+	public void save(Customer customer, String rPass, Boolean agree){
+		String pass;
+		Md5PasswordEncoder encoder;
+		encoder = new Md5PasswordEncoder();
+		
 		Assert.notNull(customer);
+		Assert.isTrue(customer.getUserAccount().getPassword().equals(rPass));
+		Assert.isTrue(agree);
 		
-		if(customer.getId()==0){
-			String passwordCoded;
-			
-			passwordCoded = PasswordCode.encode(customer.getUserAccount().getPassword());
-			customer.getUserAccount().setPassword(passwordCoded);
-		}
+		pass = customer.getUserAccount().getPassword();
+		pass = encoder.encodePassword(pass, null);
+		customer.getUserAccount().setPassword(pass);
 		
-		this.customerRepository.save( customer );
+		customerRepository.save(customer);
 	}
 
 	public void delete( Customer entity ){
@@ -89,7 +95,7 @@ public class CustomerService {
 		Authority authority;
 		
 		authority = new Authority();
-		authority.setAuthority("CUSTOMER");
+		authority.setAuthority(Authority.CUSTOMER);
 		
 		authorities = new ArrayList<Authority>();
 		authorities.add(authority);
@@ -111,6 +117,54 @@ public class CustomerService {
 	 	
 	 	return customer;
 	 }
+	
+	//Metodo que recibe un objeto formulario y reconstruye un objeto de dominio
+	public Customer reconstruct(CustomerForm customerForm) {
+		Customer customer;
+		Collection<SalesOrder> salesOrders;
+		Collection<Complaint> complaints;
+		UserAccount userAccount;
+		Authority authority;
+		
+		customer = create();
+		userAccount = new UserAccount();
+
+		salesOrders = new ArrayList<SalesOrder>();
+		complaints = new ArrayList<Complaint>();
+		userAccount.setUsername(customerForm.getUsername());
+		userAccount.setPassword(customerForm.getPassword());
+		
+		authority = new Authority();
+
+		authority.setAuthority(Authority.CUSTOMER);
+		userAccount.addAuthority(authority);
+		
+		customer.setUserAccount(userAccount);
+		customer.setName(customerForm.getName());
+		customer.setSurname(customerForm.getSurname());
+		customer.setEmail(customerForm.getEmail());
+		customer.setCreditCard(null);
+		customer.setPhone(customerForm.getPhone());
+		customer.setBirthDate(customerForm.getBirthDate());
+		customer.setAddress(customerForm.getAddress());
+		customer.setSalesOrders(salesOrders);
+		customer.setComplaints(complaints);
+		customer.setRangee("STANDARD");
+		
+		return customer;
+	}
+	
+	public boolean rPassword(CustomerForm customerForm) {
+		boolean result;
+		String pass;
+		String rpass;
+		
+		pass = customerForm.getPassword();
+		rpass = customerForm.getRepeatedPass();
+		result = pass.equals(rpass);
+		
+		return result;
+	}
 	
 	// Ancillary methods ------------------------------------------------------
 

@@ -6,6 +6,8 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 
 @Embeddable
@@ -20,7 +22,8 @@ public class Note {
 	// Getters and setter
 	// ------------------------------------------------------------------------
 	@NotBlank
-	@Pattern(regexp = "^joke$|^cancelled$|^undelivered$|^other$")
+	@Pattern(regexp = "^JOKE$|^CANCELLED$|^UNDELIVERED$|^OTHER$")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCause() {
 		return cause;
 	}
@@ -30,6 +33,7 @@ public class Note {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDescription() {
 		return description;
 	}

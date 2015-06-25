@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Embeddable
 @Access(AccessType.PROPERTY)
@@ -19,12 +21,14 @@ public class CreditCard {
 	private String holderName;
 	private String brandName;
 	private String number;
-	private int expirationMonth;
-	private int expirationYear;
-	private int CVV;
+	/** NOTA: Son Integer en vez de int porque al NO ser obligatoria la tarjeta de credito, da error si la dejamos vacia **/
+	private Integer expirationMonth;
+	private Integer expirationYear;
+	private Integer CVV;
 	
 	
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getHolderName() {
 		return holderName;
 	}
@@ -33,6 +37,7 @@ public class CreditCard {
 	}
 	
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getBrandName() {
 		return brandName;
 	}
@@ -42,6 +47,7 @@ public class CreditCard {
 	
 	@NotBlank
 	@CreditCardNumber
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getNumber() {
 		return number;
 	}
@@ -50,7 +56,8 @@ public class CreditCard {
 	}
 	
 	@Range(min=1,max=12)
-	public int getExpirationMonth() {
+	@NotNull
+	public Integer getExpirationMonth() {
 		return expirationMonth;
 	}
 	public void setExpirationMonth(Integer expirationMonth) {
@@ -58,7 +65,8 @@ public class CreditCard {
 	}
 	
 	@Min(2000)
-	public int getExpirationYear() {
+	@NotNull
+	public Integer getExpirationYear() {
 		return expirationYear;
 	}
 	public void setExpirationYear(Integer expirationYear) {
@@ -66,7 +74,8 @@ public class CreditCard {
 	}
 	
 	@Range(min=100,max=999)
-	public int getCVV() {
+	@NotNull
+	public Integer getCVV() {
 		return CVV;
 	}
 	public void setCVV(Integer CVV) {
