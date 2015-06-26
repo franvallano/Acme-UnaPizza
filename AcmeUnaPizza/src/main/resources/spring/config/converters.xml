@@ -18,10 +18,63 @@
 	">
 
 	<util:list id="converters">
-		<!-- 
-			Add your own converters using entries of the following form: 
-			<bean class="converters.Class1ToClass2" /> 
-		-->
-	</util:list>
+		
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.ActorToStringConverter" />
+		
+		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.AdministratorToStringConverter" />
+		
+		<bean class="converters.StringToBossConverter" />
+		<bean class="converters.BossToStringConverter" />
+		
+		<bean class="converters.StringToComplaintConverter" />
+		<bean class="converters.ComplaintToStringConverter" />
+		
+		<bean class="converters.StringToGarageConverter" />
+		<bean class="converters.GarageToStringConverter" />
+		
+		<bean class="converters.StringToCookConverter" />
+		<bean class="converters.CookToStringConverter" />
+		
+		<bean class="converters.StringToCustomerConverter" />
+		<bean class="converters.CustomerToStringConverter" />
+		
+		<bean class="converters.StringToDeliveryManConverter" />
+		<bean class="converters.DeliveryManToStringConverter" />		
+		
+		<bean class="converters.StringToGarageConverter" />
+		<bean class="converters.GarageToStringConverter" />
+		
+		<bean class="converters.StringToOfferConverter" />
+		<bean class="converters.OfferToStringConverter" />
+		
+		<bean class="converters.StringToProviderConverter" />
+		<bean class="converters.ProviderToStringConverter" />
+		
+		<bean class="converters.StringToPurchaseOrderConverter" />
+		<bean class="converters.PurchaseOrderToStringConverter" />
+		
+		<bean class="converters.StringToRepairConverter" />
+		<bean class="converters.RepairToStringConverter" />
+		
+		<bean class="converters.StringToWorkShopConverter" />
+		<bean class="converters.WorkShopToStringConverter" />
+		
+		<bean class="converters.StringToStaffConverter" />
+		<bean class="converters.StaffToStringConverter" />
+		
+		<bean class="converters.StringToMotorbikeConverter" />
+		<bean class="converters.MotorbikeToStringConverter" />
 	
+		<bean class="converters.StringToDiscussionMessageConverter" />
+		<bean class="converters.DiscussionMessageToStringConverter" />
+	
+		<bean class="converters.StringToStuffConverter" />
+		<bean class="converters.StuffToStringConverter" />
+	
+		<bean class="converters.StringToSalesOrderConverter" />
+		<bean class="converters.SalesOrderToStringConverter" />
+	
+</util:list>
 </beans>
