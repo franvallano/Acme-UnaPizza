@@ -9,24 +9,24 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.StuffRepository;
-import domain.Stuff;
+import repositories.MotorbikeRepository;
+import domain.Motorbike;
 
 @Component
 @Transactional
-public class StringToStuffConverter implements Converter<String, Stuff> {
+public class StringToMotorbikeConverter implements Converter<String, Motorbike> {
 
 	@Autowired
-	StuffRepository stuffRepository;
+	MotorbikeRepository motorbikeRepository;
 
 	@Override
-	public Stuff convert(String text) {
-		Stuff result;
+	public Motorbike convert(String text) {
+		Motorbike result;
 		int id;
 
 		try {
 			id = Integer.valueOf(text);
-			result = stuffRepository.findOne(id);
+			result = motorbikeRepository.findOne(id);
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);
 		}

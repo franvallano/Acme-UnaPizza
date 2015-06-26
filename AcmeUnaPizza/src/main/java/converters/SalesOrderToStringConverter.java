@@ -8,14 +8,14 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Stuff;
+import domain.SalesOrder;
 
 @Component
 @Transactional
-public class StuffToStringConverter implements Converter<Stuff, String> {
+public class SalesOrderToStringConverter implements Converter<SalesOrder, String> {
 
 	@Override
-	public String convert(Stuff entity) {
+	public String convert(SalesOrder entity) {
 		String result;
 
 		if (entity == null)
