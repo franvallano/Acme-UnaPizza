@@ -136,7 +136,7 @@
 	<acme:submit name="save" code="register.save" />&nbsp; &nbsp; &nbsp; &nbsp; 
 	
 	<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-		onclick="javascript: window.location.replace('/AcmeUnaPizza/');" />
+		onclick="javascript: window.history.back();" />
 	
 </form:form>
 
