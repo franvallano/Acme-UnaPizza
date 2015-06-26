@@ -9,24 +9,24 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.StuffRepository;
-import domain.Stuff;
+import repositories.DiscussionMessageRepository;
+import domain.DiscussionMessage;
 
 @Component
 @Transactional
-public class StringToStuffConverter implements Converter<String, Stuff> {
+public class StringToDiscussionMessageConverter implements Converter<String, DiscussionMessage> {
 
 	@Autowired
-	StuffRepository stuffRepository;
+	DiscussionMessageRepository discussionmessageRepository;
 
 	@Override
-	public Stuff convert(String text) {
-		Stuff result;
+	public DiscussionMessage convert(String text) {
+		DiscussionMessage result;
 		int id;
 
 		try {
 			id = Integer.valueOf(text);
-			result = stuffRepository.findOne(id);
+			result = discussionmessageRepository.findOne(id);
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);
 		}
