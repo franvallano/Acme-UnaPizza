@@ -5,9 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,6 +38,7 @@ public class Staff extends Actor{
 	
 	@NotBlank
 	@Pattern(regexp = "[0-9]{8}[A-Z]")
+	@Column(unique = true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDni() {
 		return dni;
@@ -50,6 +50,7 @@ public class Staff extends Actor{
 	
 	@NotBlank
 	@Pattern(regexp = "[A-Z]{2}-[0-9]{10}")
+	@Column(unique = true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getSsNumber() {
 		return ssNumber;
@@ -85,6 +86,7 @@ public class Staff extends Actor{
 	
 	@NotBlank
 	@Pattern(regexp = "[0-9]{20}")
+	@Column(unique = true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getAccountNumber() {
 		return accountNumber;

@@ -3,8 +3,11 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -12,9 +15,9 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 
-@Embeddable
+@Entity
 @Access(AccessType.PROPERTY)
-public class Motorbike {
+public class Motorbike extends DomainEntity{
 
 	// Attributes
 	// --------------------------------------------------------------------------------
@@ -57,5 +60,18 @@ public class Motorbike {
 
 	// Relationships
 	// -----------------------------------------------------------------------------
+	private Garage garage;
 
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Garage getGarage() {
+		return garage;
+	}
+
+	public void setGarage(Garage garage) {
+		this.garage = garage;
+	}
+	
+	
 }

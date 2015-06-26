@@ -5,8 +5,8 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -20,21 +20,11 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 @Access(AccessType.PROPERTY)
 public class DeliveryMan extends Staff {
 	//Attributes --------------------------------------------------------------------------------
-	private Motorbike motorbike;
+	
 	private String drivingLicenseNumber;
 
 	//Getters and setter ------------------------------------------------------------------------
-	@Valid
-	@NotNull
-	public Motorbike getMotorbike() {
-		return motorbike;
-	}
-	
-	public void setMotorbike(Motorbike motorbike) {
-		this.motorbike = motorbike;
-	}
 
-	
 	@NotBlank
 	@Pattern(regexp = "[0-9]{8}[A-Z]")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
@@ -47,19 +37,8 @@ public class DeliveryMan extends Staff {
 	}
 		
 	//Relationships -----------------------------------------------------------------------------
-	private Garage garage;
 	private Collection<SalesOrder> salesOrders;
-
-	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
-	public Garage getGarage() {
-		return garage;
-	}
-
-	public void setGarage(Garage garage) {
-		this.garage = garage;
-	}
+	private Motorbike motorbike;
 	
 	@Valid
 	@NotNull
@@ -72,6 +51,14 @@ public class DeliveryMan extends Staff {
 		this.salesOrders = salesOrders;
 	}
 	
+	@Valid
+	@OneToOne(optional = true)
+	public Motorbike getMotorbike() {
+		return motorbike;
+	}
 	
+	public void setMotorbike(Motorbike motorbike) {
+		this.motorbike = motorbike;
+	}
 
 }

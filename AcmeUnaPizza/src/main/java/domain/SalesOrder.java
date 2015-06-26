@@ -104,10 +104,11 @@ public class SalesOrder extends DomainEntity{
 	private Cook cook;
 	private DeliveryMan deliveryMan;
 	private Customer customer;
+	private Offer offer;
 
 	@Valid
 	@NotNull
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	public Collection<Product> getProducts() {
 		return products;
 	}
@@ -149,7 +150,7 @@ public class SalesOrder extends DomainEntity{
 
 	@Valid
 	@NotNull
-	@ManyToOne(optional=false)
+	@ManyToOne(optional = false)
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -157,7 +158,20 @@ public class SalesOrder extends DomainEntity{
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
+
+	@Valid
+	@ManyToOne(optional = true)
+	public Offer getOffer() {
+		return offer;
+	}
+
+	public void setOffer(Offer offer) {
+		this.offer = offer;
+	}
+
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
 	
 }
 

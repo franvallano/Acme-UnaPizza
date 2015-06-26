@@ -44,19 +44,18 @@ public class Garage extends DomainEntity{
 	}
 	
 	//Relationships -----------------------------------------------------------------------------
-	private Collection<DeliveryMan> deliveryMans;
+	private Collection<Motorbike> motorbikes;
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy="garage")
-	public Collection<DeliveryMan> getDeliveryMans() {
-		return deliveryMans;
+	@OneToMany(mappedBy = "garage")
+	public Collection<Motorbike> getMotorbikes() {
+		return motorbikes;
+	}
+	public void setMotorbikes(Collection<Motorbike> motorbikes) {
+		this.motorbikes = motorbikes;
 	}
 
-	public void setDeliveryMans(Collection<DeliveryMan> deliveryMans) {
-		this.deliveryMans = deliveryMans;
-	}
-	
 	
 	
 }

@@ -70,11 +70,10 @@ public class PurchaseOrder extends DomainEntity{
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Product> products;
 	private Administrator administrator;
-	private Collection<Offer> offers;
 
 	@NotNull
 	@Valid
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	public Collection<Product> getProducts() {
 		return products;
 	}
@@ -93,18 +92,5 @@ public class PurchaseOrder extends DomainEntity{
 	public void setAdministrator(Administrator administrator) {
 		this.administrator = administrator;
 	}
-
-	@Valid
-	@NotNull
-	@ManyToMany
-	public Collection<Offer> getOffers() {
-		return offers;
-	}
-
-	public void setOffers(Collection<Offer> offers) {
-		this.offers = offers;
-	}
-	
-	
 }
 
