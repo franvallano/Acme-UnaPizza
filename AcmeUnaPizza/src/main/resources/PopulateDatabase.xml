@@ -175,28 +175,39 @@
 		<property name="description" value="descriptionNote3" />
 	</bean>
 	
+	<!-- GARAGE -->
+	<bean id="garage1" class="domain.Garage">
+		<property name="location" value="Calle Los Garajes de la Luciérnaga 64" /> 
+		<property name="size" value="10" /> 
+		<property name="motorbikes">
+			<list>
+				<ref bean="motorbike1"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="garage2" class="domain.Garage">
+		<property name="location" value="Calle Los Garajes de la Micronesia 14" /> 
+		<property name="size" value="1" /> 
+		<property name="motorbikes">
+			<list>
+				<ref bean="motorbike2"/>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- MOTORBIKE -->
 	<bean id="motorbike1" class="domain.Motorbike">
 		<property name="number" value="1" /> 
 		<property name="drivingTime" value="0" /> 
 		<property name="licensePlate" value="1234ABC" />
+		<property name="garage" ref="garage1"/>
 	</bean>
 	
 	<bean id="motorbike2" class="domain.Motorbike">
 		<property name="number" value="2" /> 
 		<property name="drivingTime" value="0" /> 
 		<property name="licensePlate" value="5647DFG" />
-	</bean>
-	
-	<!-- OTHERS -->
-	<bean id="garage1" class="domain.Garage">
-		<property name="location" value="Calle Los Garajes de la Luciérnaga 64" /> 
-		<property name="size" value="10" /> 
-		<property name="deliveryMans">
-			<list>
-				<ref bean="deliveryman1"/>
-			</list>
-		</property>
+		<property name="garage" ref="garage2"/>
 	</bean>
 	
 	<!-- WORKSHOP -->
@@ -268,17 +279,7 @@
 		<property name="powerConsumption" value="600"/>
 		<property name="workShop" ref="workshop2"/>
 	</bean>
-	
-	<bean id="garage2" class="domain.Garage">
-		<property name="location" value="Calle Los Garajes de la Micronesia 14" /> 
-		<property name="size" value="1" /> 
-		<property name="deliveryMans">
-			<list>
-				<ref bean="deliveryman2"/>
-			</list>
-		</property>
-	</bean>
-	
+
 	<!--  USERS  -->
 	<!-- ADMIN -->
 	<bean id="admin1" class="domain.Administrator">
@@ -493,9 +494,8 @@
 		<property name="accountNumber" value="12345678000045678919"/>
 		<property name="birthDate" value="1990/01/23 00:00"/>
 		<property name="address" value="Calle Guantánamo 132 (Sevilla)"/>
-		<property name="motorbike" ref="motorbike1"/>
 		<property name="drivingLicenseNumber" value="12345678Z"/>
-		<property name="garage" ref="garage1"/>
+		<property name="motorbike" ref="motorbike1"/>
 
 		<property name="salesOrders">
 			<list>
@@ -521,9 +521,8 @@
 		<property name="accountNumber" value="12345678000045670000"/>
 		<property name="birthDate" value="1994/04/13 00:00"/>
 		<property name="address" value="Calle Flores 11 (Sevilla)"/>
-		<property name="motorbike" ref="motorbike2"/>
 		<property name="drivingLicenseNumber" value="12300078W"/>
-		<property name="garage" ref="garage2"/>
+		<property name="motorbike" ref="motorbike2"/>
 
 		<property name="salesOrders">
 			<list>
@@ -621,11 +620,6 @@
 				
 			</list>
 		</property>
-		<property name="offers">
-			<list>
-				
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="purchaseOrder2" class="domain.PurchaseOrder">
@@ -634,11 +628,6 @@
 		<property name="creationMoment" value="2015/05/12 14:12"/>
 		<property name="administrator" ref="admin2" />
 		<property name="products">
-			<list>
-				
-			</list>
-		</property>
-		<property name="offers">
 			<list>
 				
 			</list>
