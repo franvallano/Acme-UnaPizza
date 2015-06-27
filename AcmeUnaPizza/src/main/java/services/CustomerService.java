@@ -166,6 +166,26 @@ public class CustomerService {
 		return result;
 	}
 	
+	public Collection<Customer> findCustomerMoreComplaints() {
+		Collection<Customer> result;
+		
+		result = customerRepository.findCustomerMoreComplaints();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Customer> findCustomerMoreOrders() {
+		Collection<Customer> result;
+		
+		result = customerRepository.findCustomerMoreOrders();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }
