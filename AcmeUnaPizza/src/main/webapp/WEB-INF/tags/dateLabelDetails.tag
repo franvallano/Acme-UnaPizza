@@ -25,10 +25,21 @@
 
 <%@ attribute name="code" required="true"%>
 <%@ attribute name="value" required="true" type="java.util.Date"%>
+<%@ attribute name="time" required="false"%>
 
 <%-- Definition --%>
 
 <spring:message code="${code}"/>:
-<fmt:formatDate value="${value}" pattern="dd/MM/yyyy HH:mm"/> 
+
+<jstl:choose>
+	<jstl:when test="${time == null || time == true}">
+		<fmt:formatDate value="${value}" pattern="dd/MM/yyyy HH:mm"/> 
+	</jstl:when>
+	
+	<jstl:when test="${time == false}">
+		<fmt:formatDate value="${value}" pattern="dd/MM/yyyy"/> 
+	</jstl:when>
+</jstl:choose>
+
 <br/>
 
