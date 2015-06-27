@@ -22,7 +22,7 @@ public class Note {
 	// Getters and setter
 	// ------------------------------------------------------------------------
 	@NotBlank
-	@Pattern(regexp = "^JOKE$|^CANCELLED$|^UNDELIVERED$|^OTHER$")
+	@Pattern(regexp = "^JOKE$|^CANCELLED$|^OTHER$")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCause() {
 		return cause;

@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -33,7 +34,7 @@ public class SalesOrder extends DomainEntity{
 	private String state;
 	private Note note;
 	private Date creationMoment;
-	private Date deliveredMoment;
+	private Integer drivingTime;
 	private double totalCost;
 	
 	//Getters and setter ------------------------------------------------------------------------
@@ -79,15 +80,6 @@ public class SalesOrder extends DomainEntity{
 		this.creationMoment = creationMoment;
 	}
 
-	@Past
-	public Date getDeliveredMoment() {
-		return deliveredMoment;
-	}
-
-	public void setDeliveredMoment(Date deliveredMoment) {
-		this.deliveredMoment = deliveredMoment;
-	}
-
 	@Min(0)
 	@Digits(integer=9, fraction=2)
 	public double getTotalCost() {
@@ -98,6 +90,18 @@ public class SalesOrder extends DomainEntity{
 		this.totalCost = totalCost;
 	}
 	
+	
+	@Min(0)
+	public Integer getDrivingTime() {
+		return drivingTime;
+	}
+
+	public void setDrivingTime(Integer drivingTime) {
+		this.drivingTime = drivingTime;
+	}
+
+
+
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Product> products;
 	private Boss boss;
@@ -108,7 +112,7 @@ public class SalesOrder extends DomainEntity{
 
 	@Valid
 	@NotNull
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	public Collection<Product> getProducts() {
 		return products;
 	}
