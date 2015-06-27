@@ -25,6 +25,7 @@
 
 <%@ attribute name="code" required="true"%>
 <%@ attribute name="value" required="true"%>
+<%@ attribute name="eurCurrency" required="false"%>
 <%@ attribute name="percentage" required="false"%>
 
 <%-- Definition --%>
@@ -34,6 +35,10 @@
 
 <jstl:if test="${percentage == true}">
 	<jstl:out value="%" /> 
+</jstl:if>
+
+<jstl:if test="${eurCurrency == true}">
+	<jstl:out value=" Euros" /> 
 </jstl:if>
 
 <br/>
