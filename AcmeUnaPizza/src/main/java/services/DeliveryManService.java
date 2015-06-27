@@ -15,6 +15,7 @@ import security.UserAccount;
 import utilities.PasswordCode;
 import domain.DeliveryMan;
 import domain.Garage;
+import domain.Motorbike;
 
 @Service
 @Transactional
@@ -40,7 +41,7 @@ public class DeliveryManService {
 		
 		newbye = new DeliveryMan();
 		newbye.setUserAccount(createUserAccount());
-		newbye.setGarage(new Garage());
+		newbye.setMotorbike(new Motorbike());
 		
 		return newbye;
 	}
@@ -116,7 +117,17 @@ public class DeliveryManService {
 	 	Assert.notNull(deliveryMan);
 	 	
 	 	return deliveryMan;
-	 }
+	}
+	
+	public Collection<DeliveryMan> findDeliveryManMoreOrders() {
+		Collection<DeliveryMan> result;
+		
+		result = deliveryManRepository.findDeliveryManMoreOrders();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
 	
 	// Ancillary methods ------------------------------------------------------
 

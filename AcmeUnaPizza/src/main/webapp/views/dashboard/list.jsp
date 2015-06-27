@@ -23,30 +23,40 @@
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<form:form action="dashboard/administrator/list.do" >
 		
-		<fieldset>
-			<b><spring:message code="dashboard.administrator.moneyInvestedProducts"/></b>
-			<br/>
-
+		<fieldset>	
+			<b><spring:message code="dashboard.administrator.investedMoneyProducts"/></b>
+			<br/><br/>
+			<acme:labelDetails code="dashboard.total" value="${investedMoney}" eurCurrency="true"/>
 		</fieldset>
-		<br/>
+		<br/><br/>
 		
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.customerMoreComplaints"/></b>
 			<br/>
+			<jstl:forEach var="customer" items="${customerMoreComplaints}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="name" value="${customer.name}" />
+				<acme:labelDetails code="surname" value="${customer.surname}" />
+				<acme:labelDetails code="email" value="${customer.email}" />
+				<acme:dateLabelDetails code="birthDate" value="${customer.birthDate}" time="false" />
+				<acme:labelDetails code="range" value="${customer.rangee}" />
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>
 		
 		<fieldset>
-			<b><spring:message code="dashboard.administrator.moneyEarned"/></b>
-			<br/>
+			<b><spring:message code="dashboard.administrator.salesMoney"/></b>
+			<br/><br/>
+			<acme:labelDetails code="dashboard.total" value="${salesMoney}" eurCurrency="true"/>
 
 		</fieldset>
 		<br/>
 		
 		<fieldset>
-			<b><spring:message code="dashboard.administrator.netMoneyEarned"/></b>
-			<br/>
+			<b><spring:message code="dashboard.administrator.netSalesMoney"/></b>
+			<br/><br/>
+			<acme:labelDetails code="dashboard.total" value="${netSalesMoney}" eurCurrency="true"/>
 
 		</fieldset>
 		<br/>
@@ -54,7 +64,14 @@
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.customerMoreOrders"/></b>
 			<br/>
-
+			<jstl:forEach var="customer" items="${customerMoreOrders}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="name" value="${customer.name}" />
+				<acme:labelDetails code="surname" value="${customer.surname}" />
+				<acme:labelDetails code="email" value="${customer.email}" />
+				<acme:dateLabelDetails code="birthDate" value="${customer.birthDate}" time="false" />
+				<acme:labelDetails code="range" value="${customer.rangee}" />
+			</jstl:forEach>
 		</fieldset>
 		<br/>
 		
@@ -67,7 +84,8 @@
 		
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.avgOrders"/></b>
-			<br/>
+			<br/><br/>
+			<acme:labelDetails code="dashboard.average" value="${avgOrders}" eurCurrency="true"/>
 
 		</fieldset>
 		<br/>
@@ -75,6 +93,15 @@
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.deliveryManMoreOrders"/></b>
 			<br/>
+			<jstl:forEach var="deliveryMan" items="${deliveryManMoreOrders}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dni" value="${deliveryMan.dni}" />
+				<acme:labelDetails code="name" value="${deliveryMan.name}" />
+				<acme:labelDetails code="surname" value="${deliveryMan.surname}" />
+				<acme:labelDetails code="email" value="${deliveryMan.email}" />
+				<acme:dateLabelDetails code="birthDate" value="${deliveryMan.birthDate}" time="false" />
+				<acme:dateLabelDetails code="contractStartDate" value="${deliveryMan.contractStartDate}" time="false" />
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>

@@ -51,7 +51,7 @@ public class ComplaintService {
 		result.setCreationMoment(creationMoment);
 		result.setState("open");
 		result.setCustomer(customerService.findByPrincipal());
-		result.setComplaintMessages(discussionMessages);
+		result.setDiscussionMessages(discussionMessages);
 		result.setAdministrator(null);
 		
 		return result;
