@@ -71,9 +71,9 @@ public class PurchaseOrder extends DomainEntity{
 	private Collection<Product> products;
 	private Administrator administrator;
 
-	@NotNull
 	@Valid
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@NotNull
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 	public Collection<Product> getProducts() {
 		return products;
 	}

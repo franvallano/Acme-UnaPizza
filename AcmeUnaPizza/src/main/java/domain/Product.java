@@ -66,6 +66,7 @@ public class Product extends DomainEntity{
 	@NotBlank
 	@Pattern(regexp="[a-zA-Z]{2,5}")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
+	@Column(unique = true)
 	public String getCode() {
 		return code;
 	}

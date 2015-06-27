@@ -20,6 +20,7 @@ public class Administrator extends Actor {
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Complaint> complaints;
 	private Collection<PurchaseOrder> purchaseOrders;
+	private Collection<DiscussionMessage> discussionMessages;
 
 	@Valid
 	@NotNull
@@ -39,6 +40,17 @@ public class Administrator extends Actor {
 	}
 	public void setPurchaseOrders(Collection<PurchaseOrder> purchaseOrders) {
 		this.purchaseOrders = purchaseOrders;
+	}
+	
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy="administrator")
+	public Collection<DiscussionMessage> getDiscussionMessages() {
+		return discussionMessages;
+	}
+	public void setDiscussionMessages(
+			Collection<DiscussionMessage> discussionMessages) {
+		this.discussionMessages = discussionMessages;
 	}
 	
 	
