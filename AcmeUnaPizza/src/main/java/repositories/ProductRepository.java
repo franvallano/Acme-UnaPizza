@@ -16,14 +16,34 @@ import domain.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer>{
 	
 	// Pizza más vendida.
-	@Query("select p from Product p where p.type = 'PIZZA'")
+	@Query("select pro from SalesOrder sales join sales.products pro where pro.type = 'PIZZA' group by pro.name having count(sales) >= ALL(select count(so) from SalesOrder so join so.products p where p.type='PIZZA' group by p.name)")
 	Collection<Product> findMoreSoldPizza();
 	
-	//Pizza menos vendida.
-	// select sO.products from SalesOrder sO
-	// select p.name from Product p, SalesOrder sO where p.type = 'PIZZA' GROUP BY (sO);
-	// select sO.products.size from SalesOrder sO join sO.products prods where prods.typee = 'PIZZA' GROUP BY (sO);
-	// select prods.type, count(prods.type) from SalesOrder sO join sO.products prods GROUP BY (sO) HAVING prods.type = 'PIZZA';
-	@Query("select p from Product p where p.type = 'PIZZA'")
+	// Pizza menos vendida.
+	@Query("select pro from SalesOrder sales join sales.products pro where pro.type = 'PIZZA' group by pro.name having count(sales) <= ALL(select count(so) from SalesOrder so join so.products p where p.type='PIZZA' group by p.name)")
 	Collection<Product> findLessSoldPizza();
+	
+	// Complemento más vendido.
+	@Query("select pro from SalesOrder sales join sales.products pro where pro.type = 'COMPLEMENT' group by pro.name having count(sales) >= ALL(select count(so) from SalesOrder so join so.products p where p.type='COMPLEMENT' group by p.name)")
+	Collection<Product> findMoreSoldComplement();
+		
+	// Complemento menos vendido.
+	@Query("select pro from SalesOrder sales join sales.products pro where pro.type = 'COMPLEMENT' group by pro.name having count(sales) <= ALL(select count(so) from SalesOrder so join so.products p where p.type='COMPLEMENT' group by p.name)")
+	Collection<Product> findLessSoldComplement();
+	
+	// Postre más vendido.
+	@Query("select pro from SalesOrder sales join sales.products pro where pro.type = 'DESSERT' group by pro.name having count(sales) >= ALL(select count(so) from SalesOrder so join so.products p where p.type='DESSERT' group by p.name)")
+	Collection<Product> findMoreSoldDessert();
+			
+	// Postre menos vendido.
+	@Query("select pro from SalesOrder sales join sales.products pro where pro.type = 'DESSERT' group by pro.name having count(sales) <= ALL(select count(so) from SalesOrder so join so.products p where p.type='DESSERT' group by p.name)")
+	Collection<Product> findLessSoldDessert();
+	
+	// Bebida más vendida.
+	@Query("select pro from SalesOrder sales join sales.products pro where pro.type = 'DRINK' group by pro.name having count(sales) >= ALL(select count(so) from SalesOrder so join so.products p where p.type='DRINK' group by p.name)")
+	Collection<Product> findMoreSoldDrink();
+				
+	// Bebida menos vendida.
+	@Query("select pro from SalesOrder sales join sales.products pro where pro.type = 'DRINK' group by pro.name having count(sales) <= ALL(select count(so) from SalesOrder so join so.products p where p.type='DRINK' group by p.name)")
+	Collection<Product> findLessSoldDrink();
 }

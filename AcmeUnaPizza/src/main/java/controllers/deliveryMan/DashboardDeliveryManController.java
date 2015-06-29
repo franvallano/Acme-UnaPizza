@@ -30,23 +30,23 @@ public class DashboardDeliveryManController {
 		ModelAndView result;
 		
 		Integer totalSalesOrdersByStaff;
-		Double moreExpensiveSalesOrderStaff;
-		Double lessExpensiveSalesOrderStaff;
+		Double moreExpensiveSalesOrderByStaff;
+		Double lessExpensiveSalesOrderByStaff;
 		Double avgSalesOrderByStaff;
 		Collection<SalesOrder> salesOrderMinDrivingTime;
 		Collection<SalesOrder> salesOrderMaxDrivingTime;
 		
 		totalSalesOrdersByStaff = salesOrderService.findTotalSalesOrderByStaffOrAll();
-		moreExpensiveSalesOrderStaff = salesOrderService.findMoreExpensiveSalesOrderByStaffOrAll();
-		lessExpensiveSalesOrderStaff = salesOrderService.findLessExpensiveSalesOrderByStaffOrAll();
+		moreExpensiveSalesOrderByStaff = salesOrderService.findMoreExpensiveSalesOrderByStaffOrAll();
+		lessExpensiveSalesOrderByStaff = salesOrderService.findLessExpensiveSalesOrderByStaffOrAll();
 		avgSalesOrderByStaff = salesOrderService.findAvgSalesOrderByStaffOrAll();
 		salesOrderMinDrivingTime = salesOrderService.findSalesOrderWithMinDrinvingTime();
 		salesOrderMaxDrivingTime = salesOrderService.findSalesOrderWithMaxDrinvingTime();
 		
 		result = new ModelAndView("dashboard/list");
 		result.addObject("totalSalesOrdersByStaff", totalSalesOrdersByStaff);
-		result.addObject("moreExpensiveSalesOrderStaff", moreExpensiveSalesOrderStaff);
-		result.addObject("lessExpensiveSalesOrderStaff", lessExpensiveSalesOrderStaff);
+		result.addObject("moreExpensiveSalesOrderByStaff", moreExpensiveSalesOrderByStaff);
+		result.addObject("lessExpensiveSalesOrderByStaff", lessExpensiveSalesOrderByStaff);
 		result.addObject("avgSalesOrderByStaff", avgSalesOrderByStaff);
 		result.addObject("salesOrderMaxDrivingTime",salesOrderMaxDrivingTime);
 		result.addObject("salesOrderMinDrivingTime",salesOrderMinDrivingTime);

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.MotorbikeService;
 import services.SalesOrderService;
+import domain.Motorbike;
 import domain.SalesOrder;
 
 
@@ -18,6 +20,10 @@ public class DashboardBossController {
 	//Services--------------------------------------------------------
 	@Autowired
 	private SalesOrderService salesOrderService;
+	
+	@Autowired 
+	private MotorbikeService motorbikeService;
+
 	//Constructor------------------------------------------------------
 	public DashboardBossController(){
 		super();
@@ -34,6 +40,7 @@ public class DashboardBossController {
 		Double avgSalesOrder;
 		Collection<SalesOrder> salesOrderMinDrivingTime;
 		Collection<SalesOrder> salesOrderMaxDrivingTime;
+		Collection<Motorbike> drivingTimeByMotorbike;
 		
 		totalSalesOrder = salesOrderService.findTotalSalesOrder();
 		totalMoreExpensiveSalesOrder = salesOrderService.findMoreExpensiveSalesOrder();
@@ -41,14 +48,17 @@ public class DashboardBossController {
 		avgSalesOrder = salesOrderService.findAvgOrders();
 		salesOrderMinDrivingTime = salesOrderService.findSalesOrderWithMinDrinvingTime();
 		salesOrderMaxDrivingTime = salesOrderService.findSalesOrderWithMaxDrinvingTime();
+		drivingTimeByMotorbike = motorbikeService.findAllMotorbikesOrderedByDrivingTime();
+		
 		
 		result = new ModelAndView("dashboard/list");
 		result.addObject("totalSalesOrder", totalSalesOrder);
 		result.addObject("totalMoreExpensiveSalesOrder", totalMoreExpensiveSalesOrder);
 		result.addObject("totalLessExpensiveSalesOrder", totalLessExpensiveSalesOrder);
 		result.addObject("avgSalesOrder", avgSalesOrder);
-		result.addObject("salesOrderMaxDrivingTime",salesOrderMaxDrivingTime);
-		result.addObject("salesOrderMinDrivingTime",salesOrderMinDrivingTime);
+		result.addObject("salesOrderMaxDrivingTime", salesOrderMaxDrivingTime);
+		result.addObject("salesOrderMinDrivingTime", salesOrderMinDrivingTime);
+		result.addObject("drivingTimeByMotorbike", drivingTimeByMotorbike);
 		
 		return result;
 	}

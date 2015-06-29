@@ -131,7 +131,16 @@
 		
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.pizzaMoreSold"/></b>
-			<br/><br/>
+			<br/>
+			<jstl:forEach var="product" items="${moreSoldPizza}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dashboard.product.type" value="${product.type}" />
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.description" value="${product.description}" />
+				<acme:labelDetails code="dashboard.product.stockPrice" value="${product.stockPrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
+			</jstl:forEach>
 			
 		</fieldset>
 		<br/>
@@ -139,6 +148,15 @@
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.pizzaLessSold"/></b>
 			<br/>
+			<jstl:forEach var="product" items="${lessSoldPizza}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dashboard.product.type" value="${product.type}" />
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.description" value="${product.description}" />
+				<acme:labelDetails code="dashboard.product.stockPrice" value="${product.stockPrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>
@@ -146,6 +164,15 @@
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.drinkMoreSold"/></b>
 			<br/>
+			<jstl:forEach var="product" items="${moreSoldDrink}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dashboard.product.type" value="${product.type}" />
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.description" value="${product.description}" />
+				<acme:labelDetails code="dashboard.product.stockPrice" value="${product.stockPrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>
@@ -153,6 +180,15 @@
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.drinkLessSold"/></b>
 			<br/>
+			<jstl:forEach var="product" items="${lessSoldDrink}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dashboard.product.type" value="${product.type}" />
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.description" value="${product.description}" />
+				<acme:labelDetails code="dashboard.product.stockPrice" value="${product.stockPrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>
@@ -160,6 +196,15 @@
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.complementMoreSold"/></b>
 			<br/>
+			<jstl:forEach var="product" items="${moreSoldDessert}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dashboard.product.type" value="${product.type}" />
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.description" value="${product.description}" />
+				<acme:labelDetails code="dashboard.product.stockPrice" value="${product.stockPrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>
@@ -167,6 +212,15 @@
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.complementLessSold"/></b>
 			<br/>
+			<jstl:forEach var="product" items="${lessSoldComplement}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dashboard.product.type" value="${product.type}" />
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.description" value="${product.description}" />
+				<acme:labelDetails code="dashboard.product.stockPrice" value="${product.stockPrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>
@@ -174,6 +228,15 @@
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.dessertMoreSold"/></b>
 			<br/>
+			<jstl:forEach var="product" items="${moreSoldDessert}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dashboard.product.type" value="${product.type}" />
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.description" value="${product.description}" />
+				<acme:labelDetails code="dashboard.product.stockPrice" value="${product.stockPrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>
@@ -181,6 +244,15 @@
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.dessertLessSold"/></b>
 			<br/>
+			<jstl:forEach var="product" items="${lessSoldDessert}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dashboard.product.type" value="${product.type}" />
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.description" value="${product.description}" />
+				<acme:labelDetails code="dashboard.product.stockPrice" value="${product.stockPrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>
@@ -268,7 +340,7 @@
 		
 		<fieldset>
 			<b><spring:message code="dashboard.boss.orderMoreSlow"/></b>
-			<br/><br/>
+			<br/>
 			
 			<jstl:forEach var="salesOrder" items="${salesOrderMaxDrivingTime}" varStatus="rowIndex">
 				<br/>
@@ -283,7 +355,7 @@
 		
 		<fieldset>
 			<b><spring:message code="dashboard.boss.orderMoreFast"/></b>
-			<br/><br/>
+			<br/>
 			
 			<jstl:forEach var="salesOrder" items="${salesOrderMinDrivingTime}" varStatus="rowIndex">
 				<br/>
@@ -299,6 +371,12 @@
 		<fieldset>
 			<b><spring:message code="dashboard.boss.drivingTimeByMotorbike"/></b>
 			<br/>
+			<jstl:forEach var="motorbike" items="${drivingTimeByMotorbike}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dashboard.motorbike.number" value="${motorbike.number}" />
+				<acme:labelDetails code="dashboard.motorbike.licensePlate" value="${motorbike.licensePlate}" />
+				<acme:labelDetails code="dashboard.motorbike.drivingTime" value="${motorbike.drivingTime}" timeMinutes="true"/>
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>
@@ -380,13 +458,12 @@
 		
 		<fieldset>
 			<b><spring:message code="dashboard.boss.orderMoreSlow"/></b>
-			<br/><br/>
+			<br/>
 			
 			<jstl:forEach var="salesOrder" items="${salesOrderMaxDrivingTime}" varStatus="rowIndex">
-				<br/>
 				<acme:labelDetails code="referenceNumber" value="${salesOrder.referenceNumber}" />
 				<acme:labelDetails code="state" value="${salesOrder.state}" />
-				<acme:labelDetails code="drivingTime" value="${salesOrder.drivingTime}" />
+				<acme:labelDetails code="drivingTime" value="${salesOrder.drivingTime}" timeMinutes="true"/>
 				<acme:dateLabelDetails code="creationMoment" value="${salesOrder.creationMoment}" time="false" />
 			</jstl:forEach>
 
@@ -395,25 +472,18 @@
 		
 		<fieldset>
 			<b><spring:message code="dashboard.boss.orderMoreFast"/></b>
-			<br/><br/>
+			<br/>
 			
 			<jstl:forEach var="salesOrder" items="${salesOrderMinDrivingTime}" varStatus="rowIndex">
-				<br/>
 				<acme:labelDetails code="referenceNumber" value="${salesOrder.referenceNumber}" />
 				<acme:labelDetails code="state" value="${salesOrder.state}" />
-				<acme:labelDetails code="drivingTime" value="${salesOrder.drivingTime}" />
+				<acme:labelDetails code="drivingTime" value="${salesOrder.drivingTime}"  timeMinutes="true"/>
 				<acme:dateLabelDetails code="creationMoment" value="${salesOrder.creationMoment}" time="false" />
 			</jstl:forEach>
 			
 		</fieldset>
 		<br/>
-		
-		<fieldset>
-			<b><spring:message code="dashboard.deliveryMan.drivingTimeByMotorbike"/></b>
-			<br/>
 
-		</fieldset>
-		<br/>
 
 	</form:form>
 </security:authorize>
