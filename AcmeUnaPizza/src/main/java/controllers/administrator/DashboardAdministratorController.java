@@ -12,12 +12,14 @@ import services.AdministratorService;
 import services.CookService;
 import services.CustomerService;
 import services.DeliveryManService;
+import services.ProductService;
 import services.PurchaseOrderService;
 import services.RepairService;
 import services.SalesOrderService;
 import domain.Cook;
 import domain.Customer;
 import domain.DeliveryMan;
+import domain.Product;
 import domain.PurchaseOrder;
 
 
@@ -46,6 +48,10 @@ public class DashboardAdministratorController {
 	@Autowired
 	private SalesOrderService salesOrderService;
 	
+	@Autowired
+	private ProductService productService;
+	
+	
 	//Constructor------------------------------------------------------
 	public DashboardAdministratorController(){
 		super();
@@ -68,6 +74,14 @@ public class DashboardAdministratorController {
 		Collection<Cook> cookMoreOrders;
 		Double totalMoneyUndeliveredOrders;
 		Collection<PurchaseOrder> totalPurcharseOrders;
+		Collection<Product> moreSoldPizza;
+		Collection<Product> lessSoldPizza;
+		Collection<Product> moreSoldComplement;
+		Collection<Product> lessSoldComplement;
+		Collection<Product> moreSoldDrink;
+		Collection<Product> lessSoldDrink;
+		Collection<Product> moreSoldDessert;
+		Collection<Product> lessSoldDessert;
 		
 		investedMoney = purchaseOrderService.findInvestedMoney();
 		customerMoreComplaints = customerService.findCustomerMoreComplaints();
@@ -82,6 +96,15 @@ public class DashboardAdministratorController {
 		totalMoneyUndeliveredOrders = salesOrderService.findTotalMoneyUndeliveredOrders();
 		totalPurcharseOrders = purchaseOrderService.findAll();
 		
+		moreSoldPizza = productService.findMoreSoldPizza();
+		lessSoldPizza = productService.findLessSoldPizza();
+		moreSoldComplement = productService.findMoreSoldComplement();
+		lessSoldComplement = productService.findLessSoldComplement();
+		moreSoldDrink = productService.findMoreSoldDrink();
+		lessSoldDrink = productService.findLessSoldDrink();
+		moreSoldDessert = productService.findMoreSoldDessert();
+		lessSoldDessert = productService.findLessSoldDessert();
+		
 		result = new ModelAndView("dashboard/list");
 		result.addObject("investedMoney", investedMoney);
 		result.addObject("customerMoreComplaints", customerMoreComplaints);
@@ -94,6 +117,14 @@ public class DashboardAdministratorController {
 		result.addObject("cookMoreOrders", cookMoreOrders);
 		result.addObject("totalMoneyUndeliveredOrders", totalMoneyUndeliveredOrders);
 		result.addObject("totalPurcharseOrders", totalPurcharseOrders);
+		result.addObject("moreSoldPizza", moreSoldPizza);
+		result.addObject("lessSoldPizza", lessSoldPizza);
+		result.addObject("moreSoldComplement", moreSoldComplement);
+		result.addObject("lessSoldComplement", lessSoldComplement);
+		result.addObject("moreSoldDrink", moreSoldDrink);
+		result.addObject("lessSoldDrink", lessSoldDrink);
+		result.addObject("moreSoldDessert", moreSoldDessert);
+		result.addObject("lessSoldDessert", lessSoldDessert);
 		
 		return result;
 	}

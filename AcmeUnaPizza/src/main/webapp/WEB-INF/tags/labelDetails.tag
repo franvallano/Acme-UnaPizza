@@ -26,6 +26,7 @@
 <%@ attribute name="code" required="true"%>
 <%@ attribute name="value" required="true"%>
 <%@ attribute name="eurCurrency" required="false"%>
+<%@ attribute name="timeMinutes" required="false"%>
 <%@ attribute name="percentage" required="false"%>
 
 <%-- Definition --%>
@@ -38,7 +39,11 @@
 </jstl:if>
 
 <jstl:if test="${eurCurrency == true}">
-	<jstl:out value=" Euros" /> 
+	<jstl:out value="E" /> 
+</jstl:if>
+
+<jstl:if test="${timeMinutes == true}">
+	<jstl:out value=" min" /> 
 </jstl:if>
 
 <br/>

@@ -4,13 +4,19 @@
 */
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Motorbike;
+import domain.Product;
 
 @Repository
 public interface MotorbikeRepository extends JpaRepository<Motorbike, Integer>{
 	
-
+	// Postre más vendido.
+	@Query("select m from Motorbike m ORDER BY m.drivingTime DESC")
+	Collection<Motorbike> findAllMotorbikesOrderedByDrivingTime();
 }
