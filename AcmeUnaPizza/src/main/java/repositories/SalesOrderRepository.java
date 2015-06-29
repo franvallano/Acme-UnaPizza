@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Customer;
 import domain.SalesOrder;
 
 @Repository
@@ -71,4 +72,12 @@ public interface SalesOrderRepository extends JpaRepository<SalesOrder, Integer>
 	// Importe medio de los pedidos por cook
 	@Query("select AVG(sO.totalCost) from SalesOrder sO where sO.cook.id = ?1")
 	Double findAvgSalesOrderByCook(int cookId);
+	
+	//Pedido que más se ha tardado en repartir
+	@Query("select sO from SalesOrder sO where sO.drivingTime=(select max(s.drivingTime) from SalesOrder s)")
+	Collection<SalesOrder> findSalesOrderMaxDrivingTime();
+	
+	//Pedido que menos se ha tardado en repartir
+	@Query("select sO from SalesOrder sO where sO.drivingTime=(select min(s.drivingTime) from SalesOrder s where s.drivingTime>0)")
+	Collection<SalesOrder> findSalesOrderMinDrinvingTime();
 }
