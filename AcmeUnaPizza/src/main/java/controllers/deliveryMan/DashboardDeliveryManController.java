@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.SalesOrderService;
+
 
 @Controller
 @RequestMapping("/dashboard/deliveryMan")
 public class DashboardDeliveryManController {
 	//Services--------------------------------------------------------
-	
+	@Autowired
+	private SalesOrderService salesOrderService;
 	//Constructor------------------------------------------------------
 	public DashboardDeliveryManController(){
 		super();
@@ -24,7 +27,21 @@ public class DashboardDeliveryManController {
 	public ModelAndView listDashboardAdmin(){
 		ModelAndView result;
 		
+		Integer totalSalesOrdersByStaff;
+		Double moreExpensiveSalesOrderStaff;
+		Double lessExpensiveSalesOrderStaff;
+		Double avgSalesOrderByStaff;
+		
+		totalSalesOrdersByStaff = salesOrderService.findTotalSalesOrderByStaffOrAll();
+		moreExpensiveSalesOrderStaff = salesOrderService.findMoreExpensiveSalesOrderByStaffOrAll();
+		lessExpensiveSalesOrderStaff = salesOrderService.findLessExpensiveSalesOrderByStaffOrAll();
+		avgSalesOrderByStaff = salesOrderService.findAvgSalesOrderByStaffOrAll();
+		
 		result = new ModelAndView("dashboard/list");
+		result.addObject("totalSalesOrdersByStaff", totalSalesOrdersByStaff);
+		result.addObject("moreExpensiveSalesOrderStaff", moreExpensiveSalesOrderStaff);
+		result.addObject("lessExpensiveSalesOrderStaff", lessExpensiveSalesOrderStaff);
+		result.addObject("avgSalesOrderByStaff", avgSalesOrderByStaff);
 		
 		return result;
 	}

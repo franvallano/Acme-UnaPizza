@@ -11,5 +11,7 @@ import domain.PurchaseOrder;
 public interface PurchaseOrderRepository
 	extends JpaRepository<PurchaseOrder, Integer> {
 	
-	
+	//Dinero invertido en productos.
+	@Query("select SUM(totalCost) from PurchaseOrder pO")
+	Double findInvestedMoney();
 }

@@ -29,6 +29,9 @@ public class AdministratorService {
 	@Autowired
 	private ActorService actorService;
 	
+	@Autowired
+	private SalesOrderService salesOrderService;
+	
 	// Constructor ------------------------------------------------------------
 	public AdministratorService(){
 		super();
@@ -132,35 +135,7 @@ public class AdministratorService {
 		return administrator;
 	}
 	
-	public Double findInvestedMoney() {
-		Double result;
-		
-		result = administratorRepository.findInvestedMoney();
-		
-		Assert.notNull(result);
-		
-		return result;
-	}
 	
-	public Double findSalesMoney() {
-		Double result;
-		
-		result = administratorRepository.findSalesMoney();
-		
-		Assert.notNull(result);
-		
-		return result;
-	}
-	
-	public Double findAvgOrders() {
-		Double result;
-		
-		result = administratorRepository.findAvgOrders();
-		
-		Assert.notNull(result);
-		
-		return result;
-	}
 	
 	// Ancillary methods ------------------------------------------------------
 
