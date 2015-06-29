@@ -11,6 +11,6 @@ import domain.Repair;
 public interface RepairRepository
 	extends JpaRepository<Repair, Integer> {
 	
-	@Query("select SUM(cost) from Repair")
+	@Query("select SUM(r.cost) from Repair r")
 	Double findTotalCostRepairs();
 }

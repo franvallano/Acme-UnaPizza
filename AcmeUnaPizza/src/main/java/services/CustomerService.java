@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -186,6 +187,38 @@ public class CustomerService {
 		return result;
 	}
 	
+	public Collection<Customer> findCustomerMoreMoneySpent() {
+		Collection<Customer> result;
+		
+		result = customerRepository.findCustomerMoreMoneySpent();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Integer findTotalNumberOrders() {
+		Integer result;
+		Customer customer;
+		
+		customer = findByPrincipal();
+		
+		result = customerRepository.findTotalNumberOrders(customer.getId());
+		
+		return result;
+	}
+	
+	public Collection<Date> findDateLastOrder() {
+		Collection<Date> result;
+		Customer customer;
+		
+		customer = findByPrincipal();
+		
+		result = customerRepository.findDateLastOrder(customer.getId());
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
-
+	
 }

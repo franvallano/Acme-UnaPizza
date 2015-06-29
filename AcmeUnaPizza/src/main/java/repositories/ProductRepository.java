@@ -4,7 +4,10 @@
 */
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Product;
@@ -12,5 +15,15 @@ import domain.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>{
 	
-
+	// Pizza más vendida.
+	@Query("select p from Product p where p.type = 'PIZZA'")
+	Collection<Product> findMoreSoldPizza();
+	
+	//Pizza menos vendida.
+	// select sO.products from SalesOrder sO
+	// select p.name from Product p, SalesOrder sO where p.type = 'PIZZA' GROUP BY (sO);
+	// select sO.products.size from SalesOrder sO join sO.products prods where prods.typee = 'PIZZA' GROUP BY (sO);
+	// select prods.type, count(prods.type) from SalesOrder sO join sO.products prods GROUP BY (sO) HAVING prods.type = 'PIZZA';
+	@Query("select p from Product p where p.type = 'PIZZA'")
+	Collection<Product> findLessSoldPizza();
 }

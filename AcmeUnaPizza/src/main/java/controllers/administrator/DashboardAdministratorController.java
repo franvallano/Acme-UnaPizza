@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
+import services.CookService;
 import services.CustomerService;
 import services.DeliveryManService;
+import services.PurchaseOrderService;
 import services.RepairService;
+import services.SalesOrderService;
+import domain.Cook;
 import domain.Customer;
 import domain.DeliveryMan;
+import domain.PurchaseOrder;
 
 
 @Controller
@@ -31,6 +36,15 @@ public class DashboardAdministratorController {
 	
 	@Autowired
 	private RepairService repairService;
+	
+	@Autowired
+	private CookService cookService;
+	
+	@Autowired
+	private PurchaseOrderService purchaseOrderService;
+	
+	@Autowired
+	private SalesOrderService salesOrderService;
 	
 	//Constructor------------------------------------------------------
 	public DashboardAdministratorController(){
@@ -50,15 +64,23 @@ public class DashboardAdministratorController {
 		Collection<Customer> customerMoreOrders;
 		Double avgOrders;
 		Collection<DeliveryMan> deliveryManMoreOrders;
+		Collection<Customer> customerMoreMoneySpent;
+		Collection<Cook> cookMoreOrders;
+		Double totalMoneyUndeliveredOrders;
+		Collection<PurchaseOrder> totalPurcharseOrders;
 		
-		investedMoney = administratorService.findInvestedMoney();
+		investedMoney = purchaseOrderService.findInvestedMoney();
 		customerMoreComplaints = customerService.findCustomerMoreComplaints();
-		salesMoney = administratorService.findSalesMoney();
+		salesMoney = salesOrderService.findSalesMoney();
 		totalCostRepairs = repairService.findTotalCostRepairs();
 		netSalesMoney = salesMoney - investedMoney - totalCostRepairs;
 		customerMoreOrders = customerService.findCustomerMoreOrders();
-		avgOrders = administratorService.findAvgOrders();
+		avgOrders = salesOrderService.findAvgOrders();
 		deliveryManMoreOrders = deliveryManService.findDeliveryManMoreOrders();
+		customerMoreMoneySpent = customerService.findCustomerMoreMoneySpent();
+		cookMoreOrders = cookService.findCookMoreOrders();
+		totalMoneyUndeliveredOrders = salesOrderService.findTotalMoneyUndeliveredOrders();
+		totalPurcharseOrders = purchaseOrderService.findAll();
 		
 		result = new ModelAndView("dashboard/list");
 		result.addObject("investedMoney", investedMoney);
@@ -68,6 +90,10 @@ public class DashboardAdministratorController {
 		result.addObject("customerMoreOrders", customerMoreOrders);
 		result.addObject("avgOrders", avgOrders);
 		result.addObject("deliveryManMoreOrders", deliveryManMoreOrders);
+		result.addObject("customerMoreMoneySpent", customerMoreMoneySpent);
+		result.addObject("cookMoreOrders", cookMoreOrders);
+		result.addObject("totalMoneyUndeliveredOrders", totalMoneyUndeliveredOrders);
+		result.addObject("totalPurcharseOrders", totalPurcharseOrders);
 		
 		return result;
 	}

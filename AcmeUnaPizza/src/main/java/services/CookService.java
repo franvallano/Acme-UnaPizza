@@ -116,6 +116,18 @@ public class CookService {
 	 	return cook;
 	 }
 	
+	public Collection<Cook> findCookMoreOrders() {
+		Collection<Cook> result;
+		
+		result = cookRepository.findCookMoreOrders();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

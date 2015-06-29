@@ -10,7 +10,7 @@ import domain.Repair;
 
 @Component
 @Transactional
-public class StringtoRepairConverter implements Converter<String, Repair> {
+public class StringToRepairConverter implements Converter<String, Repair> {
 
 	@Autowired
 	RepairRepository repairRepository;
