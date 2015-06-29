@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.SalesOrderService;
+import domain.SalesOrder;
 
 
 @Controller
@@ -31,17 +32,23 @@ public class DashboardBossController {
 		Double totalMoreExpensiveSalesOrder;
 		Double totalLessExpensiveSalesOrder;
 		Double avgSalesOrder;
+		Collection<SalesOrder> salesOrderMinDrivingTime;
+		Collection<SalesOrder> salesOrderMaxDrivingTime;
 		
 		totalSalesOrder = salesOrderService.findTotalSalesOrder();
 		totalMoreExpensiveSalesOrder = salesOrderService.findMoreExpensiveSalesOrder();
 		totalLessExpensiveSalesOrder = salesOrderService.findLessExpensiveSalesOrder();
 		avgSalesOrder = salesOrderService.findAvgOrders();
+		salesOrderMinDrivingTime = salesOrderService.findSalesOrderWithMinDrinvingTime();
+		salesOrderMaxDrivingTime = salesOrderService.findSalesOrderWithMaxDrinvingTime();
 		
 		result = new ModelAndView("dashboard/list");
 		result.addObject("totalSalesOrder", totalSalesOrder);
 		result.addObject("totalMoreExpensiveSalesOrder", totalMoreExpensiveSalesOrder);
 		result.addObject("totalLessExpensiveSalesOrder", totalLessExpensiveSalesOrder);
 		result.addObject("avgSalesOrder", avgSalesOrder);
+		result.addObject("salesOrderMaxDrivingTime",salesOrderMaxDrivingTime);
+		result.addObject("salesOrderMinDrivingTime",salesOrderMinDrivingTime);
 		
 		return result;
 	}

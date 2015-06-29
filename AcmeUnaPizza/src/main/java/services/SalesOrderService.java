@@ -183,6 +183,26 @@ public class SalesOrderService {
 		return res;
 	}
 	
+	public Collection<SalesOrder> findSalesOrderWithMinDrinvingTime(){
+		Collection<SalesOrder> s;
+		
+		s = salesOrderRepository.findSalesOrderMinDrinvingTime();
+		
+		Assert.notNull(s);
+		
+		return s;
+	}
+	
+	public Collection<SalesOrder> findSalesOrderWithMaxDrinvingTime(){
+		Collection<SalesOrder> s;
+		
+		s = salesOrderRepository.findSalesOrderMaxDrivingTime();
+		
+		Assert.notNull(s);
+		
+		return s;
+	}
+	
 	
 	// Ancillary methods ------------------------------------------------------
 
