@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles_es.xml
+ * tiles.xml
  *
  * Copyright (C) 2013 Universidad de Sevilla
  * 
@@ -13,12 +13,12 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-      
+       
 <tiles-definitions>
-
-	<definition name="customer/list" extends="master.page">	
-		<put-attribute name="title" value="Listar Clientes" />
-		<put-attribute name="body" value="/views/customer/list.jsp" />
+	
+	<definition name="boss/list" extends="master.page">	
+		<put-attribute name="title" value="List Bosses" />
+		<put-attribute name="body" value="/views/boss/list.jsp" />
 	</definition>
 	
 </tiles-definitions>
