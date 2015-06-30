@@ -15,10 +15,10 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
       
 <tiles-definitions>
-
-	<definition name="customer/list" extends="master.page">	
-		<put-attribute name="title" value="Listar Clientes" />
-		<put-attribute name="body" value="/views/customer/list.jsp" />
-	</definition>
 	
+	<definition name="boss/list" extends="master.page">	
+		<put-attribute name="title" value="Listar Encargados" />
+		<put-attribute name="body" value="/views/boss/list.jsp" />
+	</definition>
+		
 </tiles-definitions>

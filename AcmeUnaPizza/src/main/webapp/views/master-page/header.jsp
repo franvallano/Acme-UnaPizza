@@ -22,54 +22,45 @@
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
-				<ul>
+				<!-- <ul>
 					<li class="arrow"></li>
 					<li><a href="administrator/register.do"><spring:message code="master.page.registerAdministrator" /></a></li>
-				</ul>
+				</ul>  -->
 			</li>
 			<li><a class="fNiv" href="dashboard/administrator/list.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.administrator.usersManagement" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="users/administrator/listAdministrators.do"><spring:message code="master.page.administrator.administratorManagement" /></a></li>
+					<li><a href="users/administrator/listBosses.do"><spring:message code="master.page.administrator.bossManagement" /></a></li>
+					<li><a href="users/administrator/listDeliveryMen.do"><spring:message code="master.page.administrator.deliveryManManagement" /></a></li>
+					<li><a href="users/administrator/listCooks.do"><spring:message code="master.page.administrator.cookManagement" /></a></li>
+					<li><a href="users/administrator/listCustomers.do"><spring:message code="master.page.administrator.customerManagement" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CUSTOMER')">
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
 			</li>
 			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BOSS')">
 			<li><a class="fNiv"><spring:message	code="master.page.boss" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
 			</li>
 			<li><a class="fNiv" href="dashboard/boss/list.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('COOK')">
 			<li><a class="fNiv"><spring:message	code="master.page.cook" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
+				
 			</li>
 			<li><a class="fNiv" href="dashboard/cook/list.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('DELIVERY_MAN')">
 			<li><a class="fNiv"><spring:message	code="master.page.deliveryMan" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
 			</li>
 			<li><a class="fNiv" href="dashboard/deliveryMan/list.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
@@ -89,10 +80,7 @@
 			        (<security:authentication property="principal.username" />)
 				</a>
 				<ul>
-					<li class="arrow"></li>
-					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
+					<li class="arrow"></li>				
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

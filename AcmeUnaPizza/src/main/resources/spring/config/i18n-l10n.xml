@@ -29,6 +29,11 @@
 		<value>/views/dashboard/messages</value>
 		<value>/views/register/messages</value>
 		<value>/views/complaint/messages</value>
+		<value>/views/boss/messages</value>
+		<value>/views/deliveryMan/messages</value>
+		<value>/views/cook/messages</value>
+		<value>/views/staff/messages</value>
+		
 	</util:list>
 
 </beans>
