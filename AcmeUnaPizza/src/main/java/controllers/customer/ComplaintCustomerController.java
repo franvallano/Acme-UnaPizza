@@ -76,12 +76,12 @@ public class ComplaintCustomerController extends AbstractController {
 		return result;
 	}
 	
-	protected ModelAndView createModelAndView(Complaint complaint, String message) {
+	protected ModelAndView createModelAndView(Complaint complaint, String msg) {
 		ModelAndView result;
 		
 		result = new ModelAndView("complaint/create");
 		result.addObject("complaint", complaint);
-		result.addObject("message", message);
+		result.addObject("message", msg);
 		
 		return result;
 	}

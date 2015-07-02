@@ -22,10 +22,10 @@
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
-				<!-- <ul>
+				<ul>
 					<li class="arrow"></li>
-					<li><a href="administrator/register.do"><spring:message code="master.page.registerAdministrator" /></a></li>
-				</ul>  -->
+					<li><a href="complaint/administrator/listAvailables.do"><spring:message code="master.page.administrator.complaint" /></a></li>
+				</ul> 
 			</li>
 			<li><a class="fNiv" href="dashboard/administrator/list.do"><spring:message code="master.page.dashboard" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.usersManagement" /></a>
@@ -36,14 +36,18 @@
 					<li><a href="users/administrator/listDeliveryMen.do"><spring:message code="master.page.administrator.deliveryManManagement" /></a></li>
 					<li><a href="users/administrator/listCooks.do"><spring:message code="master.page.administrator.cookManagement" /></a></li>
 					<li><a href="users/administrator/listCustomers.do"><spring:message code="master.page.administrator.customerManagement" /></a></li>
-				</ul>
+					</ul>
 			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CUSTOMER')">
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+				<ul>
+					<li><a href="complaint/actor/list.do"><spring:message code="master.page.complaint" /></a></li>
+				</ul>
 			</li>
-			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BOSS')">

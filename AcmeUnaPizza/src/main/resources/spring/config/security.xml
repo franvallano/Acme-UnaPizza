@@ -41,8 +41,15 @@
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
-
+		
 		<security:intercept-url pattern="/administrator/register.do" access="hasRole('ADMINISTRATOR')" /> 
+		
+		<!-- COMPLAINT -->
+		<security:intercept-url pattern="/complaint/actor/list.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/complaint/customer/create.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/complaint/actor/view.do" access="hasAnyRole('CUSTOMER', 'ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/complaint/administrator/listAvailables.do" access="hasRole('ADMINISTRATOR')" />
+		
 		
 		<!-- DASHBOARD -->
 		<security:intercept-url pattern="/dashboard/customer/list.do" access="hasRole('CUSTOMER')" /> 
