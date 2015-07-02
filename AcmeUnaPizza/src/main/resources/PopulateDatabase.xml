@@ -200,6 +200,20 @@
 		<property name="licensePlate" value="5647DFG" />
 		<property name="garage" ref="garage2" />
 	</bean>
+	
+	<bean id="motorbike3" class="domain.Motorbike">
+		<property name="number" value="3" />
+		<property name="drivingTime" value="0" />
+		<property name="licensePlate" value="5647FFG" />
+		<property name="garage" ref="garage2" />
+	</bean>
+	
+	<bean id="motorbike4" class="domain.Motorbike">
+		<property name="number" value="4" />
+		<property name="drivingTime" value="0" />
+		<property name="licensePlate" value="5647DZZ" />
+		<property name="garage" ref="garage2" />
+	</bean>
 
 	<!-- WORKSHOP -->
 	<bean id="workshop1" class="domain.WorkShop">
