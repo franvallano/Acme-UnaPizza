@@ -16,6 +16,7 @@ import services.ProductService;
 import services.PurchaseOrderService;
 import services.RepairService;
 import services.SalesOrderService;
+import controllers.AbstractController;
 import domain.Cook;
 import domain.Customer;
 import domain.DeliveryMan;
@@ -25,7 +26,7 @@ import domain.PurchaseOrder;
 
 @Controller
 @RequestMapping("/dashboard/administrator")
-public class DashboardAdministratorController {
+public class DashboardAdministratorController extends AbstractController{
 	//Services--------------------------------------------------------
 	@Autowired
 	private AdministratorService administratorService;

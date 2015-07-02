@@ -78,6 +78,8 @@ public class DiscussionMessageService {
 		
 		res = this.discussionMessageRepository.findOne( id );
 		
+		Assert.notNull(res);
+		
 		return res;
  }
 

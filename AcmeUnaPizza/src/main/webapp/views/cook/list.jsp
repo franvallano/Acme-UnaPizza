@@ -36,3 +36,6 @@
 		</security:authorize>
 	
 	</display:table>
+	
+	<input type="button" name="new" value="<spring:message code="new" />" 
+		onclick="javascript: window.location.replace('register/staff/register.do');" />

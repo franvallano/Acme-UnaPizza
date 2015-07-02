@@ -3,6 +3,7 @@ package controllers.customer;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,7 +54,13 @@ public class RegisterCustomerController extends AbstractController{
 				customerService.save(customer, repeatedPass, customerForm.isAgree());
 				result = new ModelAndView("redirect:/welcome/index.do");
 			}catch (Throwable oops){
-				result = createEditModelAndView(customerForm, "commit.error");
+				
+				
+				if(oops instanceof DataIntegrityViolationException)
+					result = createEditModelAndView(customerForm, "commit.duplicatedUser");
+				else
+					result = createEditModelAndView(customerForm, "commit.error");
+				
 				duplicate = customerService.rPassword(customerForm);
 				result.addObject("duplicate", duplicate);
 				result.addObject("agree", customerForm.isAgree());
@@ -71,7 +78,6 @@ public class RegisterCustomerController extends AbstractController{
 		
 		result = createEditModelAndView(customerForm, null);
 		result.addObject("checkBoxCreditCard", customerForm.isCheckBoxCreditCard());
-		System.out.println(customerForm.isCheckBoxCreditCard());
 		
 		return result;
 	}
@@ -81,9 +87,12 @@ public class RegisterCustomerController extends AbstractController{
 		
 		result = new ModelAndView("register/register");
 		result.addObject("customerForm", customerForm);
+		// Se añade esta linea de abajo porque el modelAttribute es una variable y no una cadena,
+		// si fuese modelAttribute="customerForm" con la linea de arriba seria suficiente
 		result.addObject("userForm", "customerForm");
 		result.addObject("message", message);
 		result.addObject("url", "register/customer/register.do");
+
 		
 		return result;
 	}

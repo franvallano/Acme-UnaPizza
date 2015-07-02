@@ -17,7 +17,7 @@
 <tiles-definitions>
 	
 	<definition name="register/register" extends="master.page">	
-		<put-attribute name="title" value="Register New Customer" />
+		<put-attribute name="title" value="New Register" />
 		<put-attribute name="body" value="/views/register/register.jsp" />
 	</definition>
 

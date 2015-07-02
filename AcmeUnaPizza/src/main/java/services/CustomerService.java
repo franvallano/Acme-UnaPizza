@@ -77,6 +77,8 @@ public class CustomerService {
 		
 		res = this.customerRepository.findOne( id );
 		
+		Assert.notNull(res);
+		
 		return res;
  }
 
@@ -121,26 +123,19 @@ public class CustomerService {
 	
 	//Metodo que recibe un objeto formulario y reconstruye un objeto de dominio
 	public Customer reconstruct(CustomerForm customerForm) {
+		Assert.notNull(customerForm);
 		Customer customer;
 		Collection<SalesOrder> salesOrders;
 		Collection<Complaint> complaints;
-		UserAccount userAccount;
-		Authority authority;
 		
 		customer = create();
-		userAccount = new UserAccount();
 
 		salesOrders = new ArrayList<SalesOrder>();
 		complaints = new ArrayList<Complaint>();
-		userAccount.setUsername(customerForm.getUsername());
-		userAccount.setPassword(customerForm.getPassword());
 		
-		authority = new Authority();
-
-		authority.setAuthority(Authority.CUSTOMER);
-		userAccount.addAuthority(authority);
+		customer.getUserAccount().setUsername(customerForm.getUsername());
+		customer.getUserAccount().setPassword(customerForm.getPassword());
 		
-		customer.setUserAccount(userAccount);
 		customer.setName(customerForm.getName());
 		customer.setSurname(customerForm.getSurname());
 		customer.setEmail(customerForm.getEmail());

@@ -74,6 +74,8 @@ public class BossService {
 		
 		res = this.bossRepository.findOne( id );
 		
+		Assert.notNull(res);
+		
 		return res;
 	}
 

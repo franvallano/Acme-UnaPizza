@@ -38,6 +38,8 @@ public class ActorService {
 		Actor result;
 		 
 		result = actorRepository.findOne(actorId);
+		
+		Assert.notNull(result);
 		 
 		return result;
 	}

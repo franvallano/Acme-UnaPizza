@@ -74,6 +74,8 @@ public class CookService {
 		
 		res = this.cookRepository.findOne( id );
 		
+		Assert.notNull(res);
+		
 		return res;
 	}
 

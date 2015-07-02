@@ -14,10 +14,10 @@ import controllers.AbstractController;
 
 import services.AdministratorService;
 import domain.Administrator;
-import forms.RegistrationAdministratorForm;
+import forms.AdministratorForm;
 
 @Controller
-@RequestMapping("/administrator/administrator")
+@RequestMapping("/register/administrator")
 public class RegisterAdministratorController extends AbstractController{
 	
 	// Services ---------------------------------------------------------------
@@ -39,50 +39,48 @@ public class RegisterAdministratorController extends AbstractController{
 	
 	// Register ---------------------------------------------------------------
 
-	@RequestMapping(value = "/registerAdministrator", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView registerAdministrator() {
 		ModelAndView result;
-		RegistrationAdministratorForm registrationAdministratorForm;
+		AdministratorForm administratorForm;
 		
-		registrationAdministratorForm = new RegistrationAdministratorForm();
+		administratorForm = new AdministratorForm();
 
-		result = createEditModelAndView(registrationAdministratorForm);
-		result.addObject("action", "administrator/administrator/registerAdministrator.do");
+		result = createEditModelAndView(administratorForm);
+		result.addObject("action", "register/administrator/register.do");
 
 		return result;
 	}
 
-	@RequestMapping(value = "/registerAdministrator", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveAdministrator(@Valid RegistrationAdministratorForm registrationAdministratorForm,
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveAdministrator(@Valid AdministratorForm administratorForm,
 			BindingResult binding) {
 		ModelAndView result;
+		String repeatedPass;
+		boolean duplicate;
 		Administrator administrator;
+		
+		repeatedPass = administratorForm.getRepeatedPass();
 
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(registrationAdministratorForm);
-			result.addObject("action", "administrator/administrator/registerAdministrator.do");
+			result = createEditModelAndView(administratorForm);
 		} else { 
 			try {
 				
-				administrator = administratorService.create();
-				administrator = (Administrator) administratorService.convertToAdministrator(administrator, registrationAdministratorForm);
-				administratorService.save(administrator);
+				administrator = administratorService.reconstruct(administratorForm);
+				administratorService.save(administrator, repeatedPass);
 				
-				result = new ModelAndView("redirect:/");
+				result = new ModelAndView("redirect:/welcome/index.do");
 				
-			} catch(IllegalArgumentException exp){
+			} catch (Throwable oops) {
 				
-				result = createEditModelAndView(registrationAdministratorForm,"administrator.passDuplicate");
-				result.addObject("action", "administrator/administrator/registerAdministrator.do");
-			}
-			catch (Throwable oops) {
-				if(oops instanceof DataIntegrityViolationException){
-					result = createEditModelAndView(registrationAdministratorForm, "administrator.duplicatedUser");
-					result.addObject("action", "administrator/administrator/registerAdministrator.do");
-				}else{
-					result = createEditModelAndView(registrationAdministratorForm, "administrator.commit.error");
-					result.addObject("action", "administrator/administrator/registerAdministrator.do");
-				}
+				if(oops instanceof DataIntegrityViolationException)
+					result = createEditModelAndView(administratorForm, "commit.duplicatedUser");
+				else
+					result = createEditModelAndView(administratorForm, "commit.error");
+				
+				duplicate = administratorService.rPassword(administratorForm);
+				result.addObject("duplicate", duplicate);
 			}
 		}
 
@@ -93,22 +91,22 @@ public class RegisterAdministratorController extends AbstractController{
 	
 	// Ancillary methods ------------------------------------------------------
 	
-	protected ModelAndView createEditModelAndView(
-			RegistrationAdministratorForm registrationAdministratorForm) {
+	protected ModelAndView createEditModelAndView(AdministratorForm administratorForm) {
 		ModelAndView result;
 
-		result = createEditModelAndView(registrationAdministratorForm, null);
+		result = createEditModelAndView(administratorForm, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(
-			RegistrationAdministratorForm registrationAdministratorForm, String message) {
+	protected ModelAndView createEditModelAndView(AdministratorForm administratorForm, String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/register");
-		result.addObject("RegistrationAdministratorForm", registrationAdministratorForm);
+		result = new ModelAndView("register/register");
+		result.addObject("administratorForm", administratorForm);
+		result.addObject("userForm", "administratorForm");
 		result.addObject("message", message);
+		result.addObject("isAdministrator", true);
 
 		return result;
 	}

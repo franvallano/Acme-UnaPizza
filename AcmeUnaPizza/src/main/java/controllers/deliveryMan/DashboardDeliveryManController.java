@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.SalesOrder;
-
 import services.SalesOrderService;
+import controllers.AbstractController;
+import domain.SalesOrder;
 
 
 @Controller
 @RequestMapping("/dashboard/deliveryMan")
-public class DashboardDeliveryManController {
+public class DashboardDeliveryManController extends AbstractController {
 	//Services--------------------------------------------------------
 	@Autowired
 	private SalesOrderService salesOrderService;

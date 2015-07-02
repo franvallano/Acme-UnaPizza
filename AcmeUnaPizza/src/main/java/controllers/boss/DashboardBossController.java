@@ -10,13 +10,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.MotorbikeService;
 import services.SalesOrderService;
+import controllers.AbstractController;
 import domain.Motorbike;
 import domain.SalesOrder;
 
 
 @Controller
 @RequestMapping("/dashboard/boss")
-public class DashboardBossController {
+public class DashboardBossController extends AbstractController {
 	//Services--------------------------------------------------------
 	@Autowired
 	private SalesOrderService salesOrderService;
