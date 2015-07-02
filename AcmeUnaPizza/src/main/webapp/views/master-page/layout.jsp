@@ -68,6 +68,10 @@
 	<div>
 		<tiles:insertAttribute name="footer" />
 	</div>
-
+	
+	<div id="cookies_warning">
+		<spring:message code="master.page.cookies" /> [<a id="cookie_link" href="law/info.do"><spring:message code="master.page.cookies.link" /></a>]
+	</div>
+	
 </body>
 </html>

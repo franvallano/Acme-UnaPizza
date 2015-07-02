@@ -25,6 +25,8 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="complaint/administrator/listAvailables.do"><spring:message code="master.page.administrator.complaint" /></a></li>
+					<li><a href="garage/administrator/list.do"><spring:message code="master.page.administrator.garage" /></a></li>
+					<li><a href="motorbike/administrator/list.do"><spring:message code="master.page.administrator.motorbike" /></a></li>					
 				</ul> 
 			</li>
 			<li><a class="fNiv" href="dashboard/administrator/list.do"><spring:message code="master.page.dashboard" /></a></li>

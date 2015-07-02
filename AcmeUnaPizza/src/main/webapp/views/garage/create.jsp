@@ -1,4 +1,4 @@
- <%@page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,11 +9,19 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
-<jsp:useBean id="date" class="java.util.Date" />
 
-<hr />
+<form:form action="garage/administrator/create.do" modelAttribute="garage">
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> AcmeUnaPizza Co., Inc.</b>
-<br />
+	<form:hidden path="id" />
+	<form:hidden path="version" />
 
-<b><a href="law/terms.do"><spring:message code="footer.terms" /></a></b>
+	<acme:textbox code="garage.location" path="location"/>
+	
+	<acme:textbox code="garage.size" path="size"/>
+	
+	<acme:submit name="save" code="garage.save"/>
+	
+	<acme:cancel url="garage/administrator/list.do" code="garage.cancel"/>
+	<br />
+	
+</form:form>

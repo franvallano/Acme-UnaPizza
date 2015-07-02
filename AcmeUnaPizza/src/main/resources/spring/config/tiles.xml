@@ -28,6 +28,11 @@
 		<value>/views/deliveryMan/tiles.xml</value>
 		<value>/views/cook/tiles.xml</value>
 		<value>/views/staff/tiles.xml</value>
+		<value>/views/motorbike/tiles.xml</value>
+		<value>/views/garage/tiles.xml</value>
+		<value>/views/terms/tiles.xml</value>
+		<value>/views/cookies/tiles.xml</value>
+		
 	</util:list>
 
 </beans>

@@ -7,6 +7,41 @@
  * http://www.tdg-seville.info/License.html
  * 
  */
+#space {
+	height: 75px;
+}
+
+#cookies_warning {
+	display: block;
+	position: fixed;
+	bottom: 0;
+	z-index: 100000;
+	margin: 0 0 0 -10px;
+	padding: 0 0 0 25px;
+	width: 100%;
+	line-height: 35px;
+	color: #FFF;
+	background-color: #333;
+	background-color: rgba(50, 50, 50, 0.75);
+}
+
+#cookie_table {
+	width: 500px;
+	margin: 0 auto; 
+	background-color: #EEE;
+	border: 1px solid #2681DC;
+    border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#cookie_link {
+	color: red;
+	font-weight: bold;
+}
+
+.mini_title {
+	font-weight: bold;
+}
 
 .error {
 	color: red;

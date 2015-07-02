@@ -33,6 +33,10 @@
 		<value>/views/deliveryMan/messages</value>
 		<value>/views/cook/messages</value>
 		<value>/views/staff/messages</value>
+		<value>/views/motorbike/messages</value>
+		<value>/views/garage/messages</value>
+		<value>/views/terms/messages</value>
+		<value>/views/cookies/messages</value>
 		
 	</util:list>
 
