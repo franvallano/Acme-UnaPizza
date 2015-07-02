@@ -44,6 +44,14 @@ public class MotorbikeService {
 		
 		return result;
 	}
+	
+	public Collection<Motorbike> findFreeMotorbikes() {
+		Collection<Motorbike> result;
+		
+		
+		
+		return null;
+	}
 	// Ancillary methods ------------------------------------------------------
 
 }
