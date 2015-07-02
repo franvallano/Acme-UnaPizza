@@ -108,7 +108,7 @@ public class ComplaintService {
 	public Collection<Complaint> findByPrincipal() {
 		Collection<Complaint> result;
 		
-		Assert.isTrue(actorService.isAdministrator() || actorService.isCustomer());
+		//Assert.isTrue(actorService.isAdministrator() || actorService.isCustomer());
 		
 		result = complaintRepository.findByPrincipalId(actorService.findByPrincipal().getId());
 		
@@ -149,6 +149,17 @@ public class ComplaintService {
 		Assert.isTrue(complaint.getState().equals("open"));
 		
 		complaint.setState("closed");
+	}
+	
+	public Complaint findOneIfOwner(int complaintId) {
+		Complaint result;
+		
+		result = findOne(complaintId);
+		
+		Assert.isTrue(actorService.findByPrincipal().getId() == result.getCustomer().getId()  
+				|| (actorService.isAdministrator() && result.getAdministrator() == null || actorService.findByPrincipal().getId() == result.getAdministrator().getId()));
+		
+		return result;
 	}
 	
 	// Ancillary methods ------------------------------------------------------

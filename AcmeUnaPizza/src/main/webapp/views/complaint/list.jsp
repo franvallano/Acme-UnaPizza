@@ -34,7 +34,7 @@
 			<spring:message code="complaint.view" />
 		</a>
 	</display:column>
-	
+	<!-- 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<jstl:choose>
 			<jstl:when test="${requestURI == 'complaint/administrator/listAvailables.do'}">
@@ -68,11 +68,11 @@
 		</jstl:if>
 		
 	</security:authorize>
-	
+	-->
 </display:table>
 
 <div>
-	<security:authorize access="hasAnyRole('CUSTOMER')">
+	<security:authorize access="hasRole('CUSTOMER')">
 		<a href="complaint/customer/create.do">
 			<spring:message	code="complaint.create" />
 		</a>
