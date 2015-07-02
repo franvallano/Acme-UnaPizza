@@ -37,101 +37,154 @@
 </script>
 
 <form:form action="${url}" modelAttribute="${userForm}" >
-	
-	<acme:textbox code="register.username" path="username"/>
-	<br/>
-	
-	<acme:password code="register.password" path="password"/>
-	<br/>
-	
-	<acme:password code="register.rpassword" path="repeatedPass"/>
-	<jstl:if test="${duplicate == false}">
-		<font color="red">
-			<b><spring:message code="register.duplicate" /></b>
-		</font>
-	</jstl:if>
-	<br/>
-	
-	<acme:textbox code="register.name" path="name"/>
-	<br/>
-	
-	<acme:textbox code="register.surname" path="surname"/>
-	<br/>
-	
-	<acme:textbox code="register.email" path="email"/>
-	<br/>
-	
-	<acme:textbox code="register.phone" path="phone"/>
-	<br/>
-	
-	<acme:textbox code="register.address" path="address"/>
-	<br/>
-	
-	<acme:textbox code="register.birthDate" path="birthDate"/>
-	<br/>
-	
-	<spring:message code="useCreditCard" />
 
-	<jstl:choose>
-		<jstl:when test="${checkBoxCreditCard == null || checkBoxCreditCard == true}">
-			<form:checkbox id="checkBoxCreditCard" path="checkBoxCreditCard" onclick="checkCreditCard()"/> 
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<acme:textbox code="register.username" path="username"/>
+		<br/>
+		
+		<acme:password code="register.password" path="password"/>
+		<br/>
+		
+		<acme:password code="register.rpassword" path="repeatedPass"/>
+		<jstl:if test="${duplicate == false}">
+			<font color="red">
+				<b><spring:message code="register.duplicate" /></b>
+			</font>
+		</jstl:if>
+		<br/>
+		
+		<acme:textbox code="register.name" path="name"/>
+		<br/>
+		
+		<acme:textbox code="register.surname" path="surname"/>
+		<br/>
+		
+		<acme:textbox code="register.email" path="email"/>
+		<br/>
+		
+		<jstl:if test="${isAdministrator == false || isAdministrator == null}">
+			<acme:textbox code="staff.dni" path="dni"/>
+			<br/>
 			
-		</jstl:when>
-		<jstl:when test="${checkBoxCreditCard == false}">
-			<form:checkbox id="checkBoxCreditCard" path="checkBoxCreditCard" onclick="checkCreditCard()"/> 
+			<acme:textbox code="staff.ssNumber" path="ssNumber"/>
+			<br/>
 			
-		</jstl:when>
-	</jstl:choose>
-	
-	
+			<acme:textbox code="staff.accountNumber" path="accountNumber"/>
+			<br/>
+			
+			<acme:textbox code="staff.phone" path="phone"/>
+			<br/>
+			
+			<acme:textbox code="staff.address" path="address"/>
+			<br/>
+			
+			<acme:textbox code="staff.birthDate" path="birthDate"/>
+			<br/>
+			
+			<jstl:if test="${isDeliveryMan == true}">
+				<acme:textbox code="staff.drivingLicenseNumber" path="drivingLicenseNumber"/>
+				<br/>
+			</jstl:if>
 
-	<br/>
+		</jstl:if>
+	</security:authorize>
 	
-	<div class="showCreditCard">
-		<fieldset id="enableCreditCard">
-		<legend><h3><spring:message code="creditCard" /></h3></legend>
-			<acme:textbox code="register.holdername" path="creditCard.holderName"/>
-			<br/>
-			
-			<acme:textbox code="register.brandname" path="creditCard.brandName"/>
-			<br/>
-			
-			<acme:textbox code="register.number" path="creditCard.number"/>
-			<br/>
-			
-			<acme:textbox code="register.expirationmonth" path="creditCard.expirationMonth"/>
-			<br/>
-			
-			<acme:textbox code="register.expirationyear" path="creditCard.expirationYear"/>
-			<br/>
-			
-			<acme:textbox code="register.cvvcode" path="creditCard.CVV"/>
-			<br/>
-			
-		</fieldset>
-	</div>
-	<br/>
-	<fieldset>
-			<div>
-			<h3><b><spring:message code="conditions" /></b></h3>
-			<spring:message code="conditionsText" />
-			<br/>
-			
-			<h3><b><spring:message code="delete" /></b></h3>
-			<spring:message code="deleteText" />
-			<br/>
-			
+	<security:authorize access="isAnonymous()">
+		<acme:textbox code="register.username" path="username"/>
+		<br/>
+		
+		<acme:password code="register.password" path="password"/>
+		<br/>
+		
+		<acme:password code="register.rpassword" path="repeatedPass"/>
+		<jstl:if test="${duplicate == false}">
+			<font color="red">
+				<b><spring:message code="register.duplicate" /></b>
+			</font>
+		</jstl:if>
+		<br/>
+		
+		<acme:textbox code="register.name" path="name"/>
+		<br/>
+		
+		<acme:textbox code="register.surname" path="surname"/>
+		<br/>
+		
+		<acme:textbox code="register.email" path="email"/>
+		<br/>
+		
+		<acme:textbox code="register.phone" path="phone"/>
+		<br/>
+		
+		<acme:textbox code="register.address" path="address"/>
+		<br/>
+		
+		<acme:textbox code="register.birthDate" path="birthDate"/>
+		<br/>
+		
+		<spring:message code="useCreditCard" />
+	
+		<jstl:choose>
+			<jstl:when test="${checkBoxCreditCard == null || checkBoxCreditCard == true}">
+				<form:checkbox id="checkBoxCreditCard" path="checkBoxCreditCard" onclick="checkCreditCard()"/> 
+				
+			</jstl:when>
+			<jstl:when test="${checkBoxCreditCard == false}">
+				<form:checkbox id="checkBoxCreditCard" path="checkBoxCreditCard" onclick="checkCreditCard()"/> 
+				
+			</jstl:when>
+		</jstl:choose>
+		
+		
+	
+		<br/>
+		
+		<div class="showCreditCard">
+			<fieldset id="enableCreditCard">
+			<legend><h3><spring:message code="creditCard" /></h3></legend>
+				<acme:textbox code="register.holdername" path="creditCard.holderName"/>
+				<br/>
+				
+				<acme:textbox code="register.brandname" path="creditCard.brandName"/>
+				<br/>
+				
+				<acme:textbox code="register.number" path="creditCard.number"/>
+				<br/>
+				
+				<acme:textbox code="register.expirationmonth" path="creditCard.expirationMonth"/>
+				<br/>
+				
+				<acme:textbox code="register.expirationyear" path="creditCard.expirationYear"/>
+				<br/>
+				
+				<acme:textbox code="register.cvvcode" path="creditCard.CVV"/>
+				<br/>
+				
+			</fieldset>
 		</div>
-	</fieldset>
-	
-			
-	<spring:message code="check" />
-	<form:checkbox path="agree"/> 
-	<jstl:if test="${agree == false}">
-		<font color="red">
-			<b><spring:message code="register.disagree" /></b>
-		</font>
-	</jstl:if><br /><br />
+		<br/>
+		<fieldset>
+				<div>
+				<h3><b><spring:message code="conditions" /></b></h3>
+				<spring:message code="conditionsText" />
+				<br/>
+				
+				<h3><b><spring:message code="delete" /></b></h3>
+				<spring:message code="deleteText" />
+				<br/>
+				
+			</div>
+		</fieldset>
+		
+				
+		<spring:message code="check" />
+		<form:checkbox path="agree"/> 
+		<jstl:if test="${agree == false}">
+			<font color="red">
+				<b><spring:message code="register.disagree" /></b>
+			</font>
+		</jstl:if><br /><br />
+	</security:authorize>
 	
 	<acme:submit name="save" code="register.save" />&nbsp; &nbsp; &nbsp; &nbsp; 
 	

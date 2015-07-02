@@ -2,6 +2,7 @@ package forms;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -72,6 +73,7 @@ public class CustomerForm {
 	
 	@SafeHtml(whitelistType=WhiteListType.SIMPLE_TEXT)
 	@NotBlank
+	@Size(min=5, max=32)
 	public String getRepeatedPass() {
 		return repeatedPass;
 	}

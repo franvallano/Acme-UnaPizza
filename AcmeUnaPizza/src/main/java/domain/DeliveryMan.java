@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -27,6 +28,7 @@ public class DeliveryMan extends Staff {
 
 	@NotBlank
 	@Pattern(regexp = "[0-9]{8}[A-Z]")
+	@Column(unique = true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDrivingLicenseNumber() {
 		return drivingLicenseNumber;

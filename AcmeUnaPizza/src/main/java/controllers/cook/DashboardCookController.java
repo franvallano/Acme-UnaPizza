@@ -8,11 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.PurchaseOrderService;
 import services.SalesOrderService;
+import controllers.AbstractController;
 
 
 @Controller
 @RequestMapping("/dashboard/cook")
-public class DashboardCookController {
+public class DashboardCookController extends AbstractController {
 	//Services--------------------------------------------------------
 	@Autowired
 	private SalesOrderService salesOrderService;

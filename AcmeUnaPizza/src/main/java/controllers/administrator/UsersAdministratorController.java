@@ -9,24 +9,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.Authority;
 import services.AdministratorService;
 import services.BossService;
 import services.CookService;
 import services.CustomerService;
 import services.DeliveryManService;
 import services.StaffService;
+import controllers.AbstractController;
 import domain.Administrator;
 import domain.Boss;
 import domain.Cook;
 import domain.Customer;
 import domain.DeliveryMan;
 import domain.Staff;
+import forms.AdministratorForm;
 
 
 @Controller
 @RequestMapping("/users/administrator")
-public class UsersAdministratorController {
+public class UsersAdministratorController extends AbstractController {
 	//Services--------------------------------------------------------
 	@Autowired
 	private AdministratorService administratorService;
@@ -69,14 +70,14 @@ public class UsersAdministratorController {
 	public ModelAndView listBosses(){
 		ModelAndView result;
 
-		Collection<Boss> bosses;
+		Collection<Boss> staffs;
 		
-		bosses = bossService.findAll();
+		staffs = bossService.findAll();
 		
-		result = new ModelAndView("boss/list");
-		result.addObject("bosses", bosses);
+		result = new ModelAndView("staff/list");
+		result.addObject("staffs", staffs);
 		result.addObject("requestURI", "users/administrator/listBosses.do");
-
+		result.addObject("staffType", "Boss");
 		
 		return result;
 	}
@@ -85,14 +86,14 @@ public class UsersAdministratorController {
 	public ModelAndView listDeliveryMen(){
 		ModelAndView result;
 
-		Collection<DeliveryMan> deliveryMen;
+		Collection<DeliveryMan> staffs;
 		
-		deliveryMen = deliveryManService.findAll();
+		staffs = deliveryManService.findAll();
 		
-		result = new ModelAndView("deliveryMan/list");
-		result.addObject("deliveryMen", deliveryMen);
+		result = new ModelAndView("staff/list");
+		result.addObject("staffs", staffs);
 		result.addObject("requestURI", "users/administrator/listDeliveryMen.do");
-
+		result.addObject("staffType", "DeliveryMan");
 		
 		return result;
 	}
@@ -101,14 +102,14 @@ public class UsersAdministratorController {
 	public ModelAndView listCooks(){
 		ModelAndView result;
 
-		Collection<Cook> cooks;
+		Collection<Cook> staffs;
 		
-		cooks = cookService.findAll();
+		staffs = cookService.findAll();
 		
-		result = new ModelAndView("cook/list");
-		result.addObject("cooks", cooks);
+		result = new ModelAndView("staff/list");
+		result.addObject("staffs", staffs);
 		result.addObject("requestURI", "users/administrator/listCooks.do");
-
+		result.addObject("staffType", "Cook");
 		
 		return result;
 	}
@@ -136,12 +137,11 @@ public class UsersAdministratorController {
 		
 		administrator = administratorService.findOne(administratorId);
 		
-		result = new ModelAndView("administrator/details");
+		result = new ModelAndView("administrator/edit");
 		result.addObject("administrator", administrator);
-		
+		result.addObject("details", true);
 		
 		return result;
-		
 	}
 	
 	@RequestMapping(value = "/staff/detailsStaff", method = RequestMethod.GET)
@@ -151,17 +151,66 @@ public class UsersAdministratorController {
 		
 		staff = staffService.findOne(staffId);
 		
-		boolean isDeliveryMan = false;
+		String staffType = "";
 		
 		if(staff.getClass().equals(DeliveryMan.class))
-			isDeliveryMan = true;
+			staffType = "deliveryMan";
 		
-		result = new ModelAndView("staff/details");
+		result = new ModelAndView("staff/edit");
 		result.addObject("staff", staff);
-		result.addObject("isDeliveryMan", isDeliveryMan);
+		result.addObject("staffType", staffType);
+		result.addObject("details", true);
 		
+		return result;
+	}
+	
+	@RequestMapping(value = "/customer/detailsCustomer", method = RequestMethod.GET)
+	public ModelAndView detailsCustomer(@RequestParam int customerId){
+		ModelAndView result;
+		Customer customer;
+		
+		customer = customerService.findOne(customerId);
+		
+		result = new ModelAndView("customer/edit");
+		result.addObject("customer", customer);
+		result.addObject("details", true);
 		
 		return result;
 		
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int administratorId) {
+		ModelAndView result;
+		Administrator administrator;
+		AdministratorForm administratorForm;
+
+		administrator = administratorService.findOne(administratorId);
+		
+		administratorForm = administratorService.desreconstruct(administrator);
+		
+		result = createEditModelAndView(administratorForm);
+		
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndView(AdministratorForm administratorForm){
+		ModelAndView result;
+		
+		result = createEditModelAndView(administratorForm, null);
+		
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndView(AdministratorForm administratorForm, String message){
+		ModelAndView result;
+
+		result = new ModelAndView("administrator/edit");
+		result.addObject("edit", true);
+		result.addObject("message", message);
+		result.addObject("administratorForm", administratorForm);
+		result.addObject("url","users/administrator/edit.do");
+		
+		return result;
 	}
 }

@@ -26,20 +26,8 @@
 			<spring:message code="customer.email" var="emailHeader" />
 			<display:column property="email" title="${emailHeader}" sortable="true" />
 			
-			<spring:message code="customer.phone" var="phoneHeader" />
-			<display:column property="phone" title="${phoneHeader}" sortable="true" />
-			
-			<spring:message code="customer.address" var="addressHeader" />
-			<display:column property="address" title="${addressHeader}" sortable="true" />
-			
-			<spring:message code="customer.birthDate" var="birthDateHeader" />
-			<display:column property="birthDate" title="${birthDateHeader}" format="{0,date,dd/MM/yyyy }"/>
-			
-			<spring:message code="customer.range" var="rangeHeader" />
-			<display:column property="rangee" title="${rangeHeader}" sortable="true" />
-			
 			<display:column>
-				<a href="users/administrator/customer/details.do?bossesId=${customersRow.id}" ><spring:message code="details"/></a>
+				<a href="users/administrator/customer/detailsCustomer.do?customerId=${customersRow.id}" ><spring:message code="details"/></a>
 			</display:column>
 
 		</security:authorize>

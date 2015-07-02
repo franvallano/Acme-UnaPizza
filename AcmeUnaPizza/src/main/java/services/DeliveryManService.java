@@ -77,6 +77,8 @@ public class DeliveryManService {
 		
 		res = this.deliveryManRepository.findOne( id );
 		
+		Assert.notNull(res);
+		
 		return res;
 	}
 

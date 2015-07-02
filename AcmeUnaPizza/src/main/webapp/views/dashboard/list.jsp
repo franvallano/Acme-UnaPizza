@@ -294,7 +294,7 @@
 		<fieldset>
 			<b><spring:message code="dashboard.customer.dateLastOrder"/></b>
 			<br/><br/>
-			<acme:dateLabelDetails code="creationMoment" value="${dateLastOrder}"/>
+			<acme:dateLabelDetails code="date" value="${dateLastOrder}"/>
 
 		</fieldset>
 		<br/>

@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CustomerService;
+import controllers.AbstractController;
 
 
 @Controller
 @RequestMapping("/dashboard/customer")
-public class DashboardCustomerController {
+public class DashboardCustomerController extends AbstractController{
 	//Services--------------------------------------------------------
 	@Autowired 
 	private CustomerService customerService;

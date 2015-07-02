@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -14,7 +15,12 @@ import security.LoginService;
 import security.UserAccount;
 import utilities.PasswordCode;
 import domain.Administrator;
-import forms.RegistrationAdministratorForm;
+import domain.Complaint;
+import domain.DiscussionMessage;
+import domain.PurchaseOrder;
+import domain.SalesOrder;
+import forms.AdministratorForm;
+import forms.CustomerForm;
 
 @Service
 @Transactional
@@ -41,24 +47,27 @@ public class AdministratorService {
 	public Administrator create(){
 		Administrator newbye;
 		
+		findByPrincipal();
+		
 		newbye = new Administrator();
 		newbye.setUserAccount(createUserAccount());
 		
 		return newbye;
 	}
 
-	public void save( Administrator administrator ){
-		Assert.notNull( administrator );
-		Assert.isTrue(actorService.isAdministrator());
+	public void save(Administrator administrator, String rPass){
+		String pass;
+		Md5PasswordEncoder encoder;
+		encoder = new Md5PasswordEncoder();
 		
-		if(administrator.getId()==0){
-			String passwordCoded;
-			
-			passwordCoded = PasswordCode.encode(administrator.getUserAccount().getPassword());
-			administrator.getUserAccount().setPassword(passwordCoded);
-		}
+		Assert.notNull(administrator);
+		Assert.isTrue(administrator.getUserAccount().getPassword().equals(rPass));
 		
-		this.administratorRepository.save( administrator );
+		pass = administrator.getUserAccount().getPassword();
+		pass = encoder.encodePassword(pass, null);
+		administrator.getUserAccount().setPassword(pass);
+		
+		administratorRepository.save(administrator);
 	}
 
 	public void delete( Administrator entity ){
@@ -72,11 +81,11 @@ public class AdministratorService {
 	}
 	
 	public Administrator findOne( int id ){
-		Assert.isTrue( id != 0);
-		
 		Administrator res;
 		
 		res = this.administratorRepository.findOne( id );
+		
+		Assert.notNull(res);
 		
 		return res;
 	}
@@ -97,7 +106,7 @@ public class AdministratorService {
 		Authority authority;
 		
 		authority = new Authority();
-		authority.setAuthority("ADMINISTRATOR");
+		authority.setAuthority(Authority.ADMINISTRATOR);
 		
 		authorities = new ArrayList<Authority>();
 		authorities.add(authority);
@@ -118,24 +127,66 @@ public class AdministratorService {
 	 	Assert.notNull(administrator);
 	 	
 	 	return administrator;
-	 }
+	}
 	
-	public Administrator convertToAdministrator(Administrator administrator,RegistrationAdministratorForm registrationAdminForm) {
-		Assert.notNull(registrationAdminForm);
-		Assert.notNull(administrator);
-
-		administrator.setName(registrationAdminForm.getName());
-		administrator.setSurname(registrationAdminForm.getSurname());
-		administrator.setEmail(registrationAdminForm.getEmail());
-
-		administrator.getUserAccount().setUsername(registrationAdminForm.getUsername());
+	//Metodo que recibe un objeto formulario y reconstruye un objeto de dominio
+	public Administrator reconstruct(AdministratorForm administratorForm) {
+		Assert.notNull(administratorForm);
+		Administrator administrator;
+		Collection<DiscussionMessage> discussionMessages;
+		Collection<PurchaseOrder> purchaseOrders;
+		Collection<Complaint> complaints;
 		
-		administrator.getUserAccount().setPassword(registrationAdminForm.getPassword());
-
+		administrator = create();
+		
+		discussionMessages = new ArrayList<DiscussionMessage>();
+		purchaseOrders = new ArrayList<PurchaseOrder>();
+		complaints = new ArrayList<Complaint>();
+		
+		administrator.getUserAccount().setUsername(administratorForm.getUsername());
+		administrator.getUserAccount().setPassword(administratorForm.getPassword());
+		
+		administrator.setName(administratorForm.getName());
+		administrator.setSurname(administratorForm.getSurname());
+		administrator.setEmail(administratorForm.getEmail());
+		
+		administrator.setDiscussionMessages(discussionMessages);
+		administrator.setPurchaseOrders(purchaseOrders);
+		administrator.setComplaints(complaints);
+		
 		return administrator;
+		
+	}
+	
+	public AdministratorForm desreconstruct(Administrator administrator){
+		Assert.notNull(administrator);
+		
+		AdministratorForm administratorForm = new AdministratorForm();
+		
+		if(administrator.getId() != 0) {
+			administratorForm.setUsername(administrator.getUserAccount().getUsername());
+			administratorForm.setPassword(administrator.getUserAccount().getPassword());
+			administratorForm.setRepeatedPass(administrator.getUserAccount().getPassword());
+			administratorForm.setName(administrator.getName());
+			administratorForm.setSurname(administrator.getSurname());
+			administratorForm.setEmail(administrator.getEmail());
+		}
+		
+		return administratorForm;
 	}
 	
 	
+	public boolean rPassword(AdministratorForm administratorForm) {
+		boolean result;
+		String pass;
+		String rpass;
+		
+		pass = administratorForm.getPassword();
+		rpass = administratorForm.getRepeatedPass();
+		result = pass.equals(rpass);
+		
+		return result;
+	}
 	
 	// Ancillary methods ------------------------------------------------------
 

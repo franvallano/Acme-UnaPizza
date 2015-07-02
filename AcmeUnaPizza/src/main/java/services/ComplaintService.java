@@ -80,6 +80,8 @@ public class ComplaintService {
 		
 		res = this.complaintRepository.findOne( id );
 		
+		Assert.notNull(res);
+		
 		return res;
  }
 
