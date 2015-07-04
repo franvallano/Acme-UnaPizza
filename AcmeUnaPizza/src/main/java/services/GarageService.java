@@ -44,20 +44,14 @@ public class GarageService {
 		return newbye;
 	}
 
-	public void save( Garage entity ){
-		Assert.notNull(entity);
+	public void save(Garage garage){
+		Assert.notNull(garage);
 		
-		this.garageRepository.save( entity );
-	}
-
-//HAY QUE ARREGLAR METODO ELIMINAR SI TIENE RELACION CON ALGUNA MOTO
-	public void delete( Garage entity ){
-		Assert.isTrue( entity.getId()!=0 );
-		Assert.isTrue( this.garageRepository.exists(entity.getId() ));
+		Integer totalMotos = garage.getMotorbikes().size();
 		
-		this.garageRepository.delete( entity );
-	
-		Assert.isTrue( !this.garageRepository.exists(entity.getId() ));
+		Assert.isTrue(garage.getSize() >= totalMotos);
+		
+		this.garageRepository.save(garage);
 	}
 
 	public Garage findOne( int id ){
@@ -66,6 +60,8 @@ public class GarageService {
 		Garage res;
 		
 		res = this.garageRepository.findOne( id );
+		
+		Assert.notNull(res);
 		
 		return res;
 	}
@@ -76,6 +72,14 @@ public class GarageService {
 		res = garageRepository.findAll();
 		
 		return res;
+	}
+	
+	public Collection<Garage> findFreeGarages() {
+		Collection<Garage> result;
+		
+		result = garageRepository.findFreeGarages();
+		
+		return result;
 	}
 
 	// Other business methods -------------------------------------------------

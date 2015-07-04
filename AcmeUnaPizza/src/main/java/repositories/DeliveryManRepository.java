@@ -20,4 +20,7 @@ public interface DeliveryManRepository
 	//Delivery Man que más pedidos han repartido.
 	@Query("select dm from DeliveryMan dm where dm.salesOrders.size = (select max(delm.salesOrders.size) from DeliveryMan delm)")
 	Collection<DeliveryMan> findDeliveryManMoreOrders();
+	
+	@Query("select dM from DeliveryMan dM where dM.motorbike.id = ?1")
+	DeliveryMan findDeliveryManByMotorbike(int motorbikeId);
 }

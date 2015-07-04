@@ -131,6 +131,14 @@ public class DeliveryManService {
 		return result;
 	}
 	
+	public DeliveryMan findDeliveryManByMotorbike(int motorbikeId) {
+		DeliveryMan result;
+		
+		result = deliveryManRepository.findDeliveryManByMotorbike(motorbikeId);
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }
