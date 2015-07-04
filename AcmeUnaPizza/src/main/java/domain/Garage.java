@@ -21,7 +21,7 @@ public class Garage extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
 	private String location;
-	private Integer size;
+	private int size;
 	
 	//Getters and setter ------------------------------------------------------------------------
 
@@ -35,11 +35,11 @@ public class Garage extends DomainEntity{
 		this.location = location;
 	}
 
-	@Min(0)
-	public Integer getSize() {
+	@Min(1)
+	public int getSize() {
 		return size;
 	}
-	public void setSize(Integer size) {
+	public void setSize(int size) {
 		this.size = size;
 	}
 	

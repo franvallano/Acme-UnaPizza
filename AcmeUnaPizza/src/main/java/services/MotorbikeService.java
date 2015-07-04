@@ -36,11 +36,16 @@ public class MotorbikeService {
 		return newbye;
 	}
 
-	public void save( Motorbike entity ){
-		Assert.notNull(entity);
-		//COGER GARAGE Y RESTARLE UNO
-		this.motorbikeRepository.save( entity );
+	public void save(Motorbike motorbike){
+		Assert.notNull(motorbike);
+		
+		Garage garage;
+		
+		
+
+		this.motorbikeRepository.save(motorbike);
 	}
+
 
 //HAY QUE ARREGLAR METODO ELIMINAR SI TIENE RELACION CON ALGUN DELIVERY MAN
 	public void delete( Motorbike entity ){
@@ -60,6 +65,8 @@ public class MotorbikeService {
 		
 		res = this.motorbikeRepository.findOne( id );
 		
+		Assert.notNull(res);
+		
 		return res;
 	}
 
@@ -77,6 +84,16 @@ public class MotorbikeService {
 		Collection<Motorbike> result;
 		
 		result = motorbikeRepository.findAllMotorbikesOrderedByDrivingTime();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Integer findTotalMotorbikesByGarage(int garageId) {
+		Integer result;
+		
+		result = motorbikeRepository.findTotalMotorbikesByGarage(garageId);
 		
 		Assert.notNull(result);
 		

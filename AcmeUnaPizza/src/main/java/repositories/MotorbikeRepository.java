@@ -18,13 +18,9 @@ public interface MotorbikeRepository extends JpaRepository<Motorbike, Integer>{
 	@Query("select m from Motorbike m ORDER BY m.drivingTime DESC")
 	Collection<Motorbike> findAllMotorbikesOrderedByDrivingTime();
 	
-	//@Query("select m from Motorbike m where ")
-	
-	// select m.number, dM.name from Motorbike m, DeliveryMan dM where dM.motorbike is null GROUP BY m.number;
-	// select dM.name, dM.motorbike from DeliveryMan dM where dM.motorbike is not null;
-	// @Query("select con from Auditor a join a.contracts con where a.id=?1 and con not in (select con from Auditor a join a.auditRecords r join r.contract con where a.id=?1)")
-	// select m.number from Motorbike m where m not in (select d.motorbike from DeliveryMan d where d.motorbike.id is not null); 
-	@Query("select m.number from Motorbike m where m not in (select d.motorbike from DeliveryMan d where d.motorbike is not null)")
+	@Query("select m from Motorbike m where m not in (select d.motorbike from DeliveryMan d where d.motorbike is not null)")
 	Collection<Motorbike> findFreeMotorbikes();
 			
+	@Query("select count(m) from Motorbike m where m.garage.id = ?1")
+	Integer findTotalMotorbikesByGarage(int garageId);
 }

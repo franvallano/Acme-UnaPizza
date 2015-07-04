@@ -178,10 +178,30 @@
 	</bean>
 	<bean id="garage2" class="domain.Garage">
 		<property name="location" value="Calle Los Garajes de la Micronesia 14" />
-		<property name="size" value="1" />
+		<property name="size" value="3" />
 		<property name="motorbikes">
 			<list>
 				<ref bean="motorbike2" />
+				<ref bean="motorbike3" />
+				<ref bean="motorbike4" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="garage3" class="domain.Garage">
+		<property name="location" value="Calle Los Garajes de la Aurora Boreal 33" />
+		<property name="size" value="2" />
+		<property name="motorbikes">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="garage4" class="domain.Garage">
+		<property name="location" value="Calle Los Garajes de la Cefalea Mutante 99" />
+		<property name="size" value="5" />
+		<property name="motorbikes">
+			<list>
 			</list>
 		</property>
 	</bean>

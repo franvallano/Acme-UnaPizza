@@ -10,24 +10,35 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="garages" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
+<display:table name="garages" pagesize="5" class="displaytag" requestURI="${requestURI}" id="garagesRow">
 	
-	<spring:message code="garage.location" var="locationHeader" />
-	<display:column property="location" title="${locationHeader}" />
+	<security:authorize access="hasRole('ADMINISTRATOR')">
 	
-	<display:column>
-			<a href="garage/administrator/delete.do?garageId=${row.id}">
-				<spring:message code="garage.delete" />
-			</a>
-	</display:column>
-	
+		<spring:message code="garage.location" var="locationHeader" />
+		<display:column property="location" title="${locationHeader}" />
+		
+		<spring:message code="garage.size" var="sizeHeader" />
+		<display:column property="size" title="${sizeHeader}" />
+		
+		<display:column>
+				<a href="garage/administrator/details.do?garageId=${garagesRow.id}">
+					<spring:message code="garage.details" />
+				</a>
+		</display:column>
+		
+		<display:column>
+				<a href="garage/administrator/edit.do?garageId=${garagesRow.id}">
+					<spring:message code="garage.edit" />
+				</a>
+		</display:column>
+		
+	</security:authorize>
+		
 </display:table>
 
-<security:authorize access="hasRole('ADMINISTRATOR')">
-	<div>
-		<a href="garage/administrator/create.do">
-			<spring:message	code="garage.create" />
-		</a>
-	</div>
+	<input type="button" name="new" value="<spring:message code="new" />" 
+		onclick="javascript: window.location.replace('garage/administrator/create.do');" />
 	
-</security:authorize>
+
+
+
