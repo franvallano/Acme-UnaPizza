@@ -3,6 +3,7 @@ package services;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -93,6 +94,46 @@ public class ProductService {
 		Collection<Product> result;
 		
 		result = productRepository.findLessSoldDessert();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Product> findStockMinPizzas() {
+		Collection<Product> result;
+		
+		result = productRepository.findStockMinPizzas();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Product> findStockMinComplements() {
+		Collection<Product> result;
+		
+		result = productRepository.findStockMinComplements();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Product> findStockMinDesserts() {
+		Collection<Product> result;
+		
+		result = productRepository.findStockMinDesserts();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Product> findStockMinDrinks() {
+		Collection<Product> result;
+		
+		result = productRepository.findStockMinDrinks();
 		
 		Assert.notNull(result);
 		

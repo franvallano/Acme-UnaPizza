@@ -60,6 +60,7 @@
 		<!-- DASHBOARD -->
 		<security:intercept-url pattern="/dashboard/customer/list.do" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/dashboard/administrator/ordersSuggestion.do" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/dashboard/boss/list.do" access="hasRole('BOSS')" /> 
 		<security:intercept-url pattern="/dashboard/deliveryMan/list.do" access="hasRole('DELIVERY_MAN')" /> 
 		<security:intercept-url pattern="/dashboard/cook/list.do" access="hasRole('COOK')" /> 

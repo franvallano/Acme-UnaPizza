@@ -21,14 +21,13 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
-	<form:form action="dashboard/administrator/list.do" >
-		
+	<jstl:if test="${dashboard == true}">
 		<fieldset>	
 			<b><spring:message code="dashboard.administrator.investedMoneyProducts"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${investedMoney}" eurCurrency="true"/>
 		</fieldset>
-		<br/><br/>
+		<br/>
 		
 		<fieldset>
 			<b><spring:message code="dashboard.administrator.customerMoreComplaints"/></b>
@@ -276,12 +275,65 @@
 			<acme:labelDetails code="dashboard.total" value="${totalMoneyUndeliveredOrders}" eurCurrency="true"/>
 		</fieldset>
 		<br/>
+		
+	</jstl:if>
+	<jstl:if test="${dashboard == false}">
+		<fieldset>
+			<b><spring:message code="dashboard.ordersSuggestion.pizzas"/></b>
+			<br/>
+			<jstl:forEach var="product" items="${stockMinPizzas}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
+				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
+			</jstl:forEach>
 
-	</form:form>
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.ordersSuggestion.complements"/></b>
+			<br/>
+			<jstl:forEach var="product" items="${stockMinComplements}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
+				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
+			</jstl:forEach>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.ordersSuggestion.desserts"/></b>
+			<br/>
+			<jstl:forEach var="product" items="${stockMinDesserts}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
+				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
+			</jstl:forEach>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.ordersSuggestion.drinks"/></b>
+			<br/>
+			<jstl:forEach var="product" items="${stockMinDrinks}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="name" value="${product.name}" />
+				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
+				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
+			</jstl:forEach>
+
+		</fieldset>
+		<br/>
+	</jstl:if>
+
 </security:authorize>
 
 <security:authorize access="hasRole('CUSTOMER')">
-	<form:form action="dashboard/customer/list.do" >
 		
 		<fieldset>
 			<b><spring:message code="dashboard.customer.totalOrders"/></b>
@@ -299,12 +351,9 @@
 		</fieldset>
 		<br/>
 
-		
-	</form:form>
 </security:authorize>
 
 <security:authorize access="hasRole('BOSS')">
-	<form:form action="dashboard/boss/list.do" >
 		
 		<fieldset>
 			<b><spring:message code="dashboard.boss.totalOrders"/></b>
@@ -381,11 +430,9 @@
 		</fieldset>
 		<br/>
 		
-	</form:form>
 </security:authorize>
 
 <security:authorize access="hasRole('COOK')">
-	<form:form action="dashboard/cook/list.do" >
 		
 		<fieldset>
 			<b><spring:message code="dashboard.cook.totalOrders"/></b>
@@ -418,11 +465,9 @@
 		</fieldset>
 		<br/>
 		
-	</form:form>
 </security:authorize>
 
 <security:authorize access="hasRole('DELIVERY_MAN')">
-	<form:form action="dashboard/deliveryMan/list.do" >
 		
 		<fieldset>
 			<b><spring:message code="dashboard.deliveryMan.totalOrders"/></b>
@@ -484,6 +529,4 @@
 		</fieldset>
 		<br/>
 
-
-	</form:form>
 </security:authorize>

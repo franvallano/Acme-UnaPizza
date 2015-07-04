@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.MotorbikeRepository;
+import domain.DeliveryMan;
 import domain.Garage;
 import domain.Motorbike;
 
@@ -20,6 +21,10 @@ public class MotorbikeService {
 	private MotorbikeRepository motorbikeRepository;
 
 	// Ancillary services -----------------------------------------------------
+	@Autowired
+	private AdministratorService administratorService;
+	@Autowired
+	private DeliveryManService deliveryManService;
 	
 	@Autowired
 	private GarageService garageService;
@@ -30,8 +35,15 @@ public class MotorbikeService {
 	}
 	public Motorbike create(){
 		Motorbike newbye;
+		Garage garage;
+		
+		administratorService.findByPrincipal();
 		
 		newbye = new Motorbike();
+		garage = new Garage();
+		
+		newbye.setGarage(garage);
+		newbye.setDrivingTime(0L);
 		
 		return newbye;
 	}
@@ -47,14 +59,22 @@ public class MotorbikeService {
 	}
 
 
-//HAY QUE ARREGLAR METODO ELIMINAR SI TIENE RELACION CON ALGUN DELIVERY MAN
-	public void delete( Motorbike entity ){
-		Assert.isTrue( entity.getId()!=0 );
-		Assert.isTrue( this.motorbikeRepository.exists(entity.getId() ));
+
+	public void delete(Motorbike motorbike){
+		Assert.notNull(motorbike);
+		Assert.isTrue(motorbike.getId() != 0);
 		
-		this.motorbikeRepository.delete( entity );
-	
-		Assert.isTrue( !this.motorbikeRepository.exists(entity.getId() ));
+		DeliveryMan deliveryMan;
+		
+		// Comprobamos si tiene algun DeliveryMan asociado
+		deliveryMan = deliveryManService.findDeliveryManByMotorbike(motorbike.getId());
+		
+		if(deliveryMan != null) {
+			deliveryMan.setMotorbike(null);
+			deliveryManService.save(deliveryMan);
+		}
+		
+		motorbikeRepository.delete(motorbike);
 	}
 
 	

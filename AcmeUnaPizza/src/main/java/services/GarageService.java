@@ -26,6 +26,8 @@ public class GarageService {
 	private GarageRepository garageRepository;
 
 	// Ancillary services -----------------------------------------------------
+	@Autowired
+	private AdministratorService administratorService;
 
 	// Constructor ------------------------------------------------------------
 	public GarageService(){
@@ -36,6 +38,8 @@ public class GarageService {
 	public Garage create(){
 		Garage newbye;
 		Collection<Motorbike> motos = new ArrayList<Motorbike>();
+		
+		administratorService.findByPrincipal();
 		
 		newbye = new Garage();
 		

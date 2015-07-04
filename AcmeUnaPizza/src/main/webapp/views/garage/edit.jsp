@@ -20,6 +20,9 @@
 				<acme:labelDetails code="garage.size" value="${garage.size}"/>
 				<acme:labelDetails code="totalMotorbikes" value="${totalMotorbikesByGarage}"/>
 			</fieldset>
+			<br />
+			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				onclick="javascript: window.location.replace('garage/administrator/list.do');" />
 		</jstl:if>
 		
 		<jstl:if test="${edit == true}">
@@ -38,12 +41,10 @@
 				<br />
 				
 				<acme:submit name="save" code="garage.save"/>
+				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+					onclick="javascript: window.location.replace('garage/administrator/list.do');" />
 			</form:form>
 			
 		</jstl:if>
 	</security:authorize>
 	
-	<br />
-	<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-		onclick="javascript: window.location.replace('garage/administrator/list.do');" />
-	<br />

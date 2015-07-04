@@ -10,31 +10,39 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<script>
+
+	function submitDelete(){
+		var form = document.getElementById("idFormDelete");
+		
+		var res = confirm('<spring:message code="motorbike.confirm.delete" />');
+		
+		if(res) {
+			form.submit();
+		}
+	}
+
+</script>
+
 <display:table name="motorbikes" pagesize="5" class="displaytag" requestURI="${requestURI}" id="motorbikesRow">
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 	
 			<spring:message code="motorbike.number" var="numberHeader" />
-			<display:column property="number" title="${numberHeader}" />
+			<display:column property="number" title="${numberHeader}" sortable="true"/>
 			
 			<spring:message code="motorbike.drivingTime" var="drivingTimeHeader" />
-			<display:column property="drivingTime" title="${drivingTimeHeader}" />
+			<display:column property="drivingTime" title="${drivingTimeHeader}" sortable="true"/>
 			
 			<spring:message code="motorbike.licensePlate" var="licensePlateHeader" />
-			<display:column property="licensePlate" title="${licensePlateHeader}" />
+			<display:column property="licensePlate" title="${licensePlateHeader}" sortable="true"/>
 			
 			<spring:message code="motorbike.garage" var="garageHeader" />
-			<display:column property="garage.location" title="${garageHeader}" />
+			<display:column property="garage.location" title="${garageHeader}" sortable="true"/>
 			
 			<display:column>
 					<a href="motorbike/administrator/edit.do?motorbikeId=${motorbikesRow.id}">
 						<spring:message code="motorbike.edit" />
-					</a>
-			</display:column>
-			
-			<display:column>
-					<a href="motorbike/administrator/delete.do?motorbikeId=${motorbikesRow.id}">
-						<spring:message code="motorbike.delete" />
 					</a>
 			</display:column>
 			

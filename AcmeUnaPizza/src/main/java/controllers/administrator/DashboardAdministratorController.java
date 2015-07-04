@@ -127,6 +127,34 @@ public class DashboardAdministratorController extends AbstractController{
 		result.addObject("moreSoldDessert", moreSoldDessert);
 		result.addObject("lessSoldDessert", lessSoldDessert);
 		
+		result.addObject("dashboard", true);
+		
 		return result;
 	}
+	
+	//Listing----------------------------------------------------------
+	@RequestMapping(value = "/ordersSuggestion", method = RequestMethod.GET)
+	public ModelAndView listOrdersSuggestionAdmin() {
+		ModelAndView result;
+
+		Collection<Product> stockMinPizzas;
+		Collection<Product> stockMinComplements;
+		Collection<Product> stockMinDesserts;
+		Collection<Product> stockMinDrinks;
+		
+		stockMinPizzas = productService.findStockMinPizzas();
+		stockMinComplements = productService.findStockMinComplements();
+		stockMinDesserts = productService.findStockMinDesserts();
+		stockMinDrinks = productService.findStockMinDrinks();
+		
+		result = new ModelAndView("dashboard/list");
+		result.addObject("stockMinPizzas", stockMinPizzas);
+		result.addObject("stockMinComplements", stockMinComplements);
+		result.addObject("stockMinDesserts", stockMinDesserts);
+		result.addObject("stockMinDrinks", stockMinDrinks);
+		result.addObject("dashboard", false);
+		
+		return result;
+	}
+		
 }
