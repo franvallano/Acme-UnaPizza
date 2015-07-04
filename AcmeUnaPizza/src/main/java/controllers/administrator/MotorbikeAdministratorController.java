@@ -39,6 +39,24 @@ public class MotorbikeAdministratorController extends AbstractController {
 		super();
 	}
 	
+	// Creation ----------------------------------------------------------------
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		Motorbike motorbike;
+		Collection<Garage> availableGarages;
+		
+		motorbike = motorbikeService.create();
+		availableGarages = garageService.findFreeGarages();
+
+		result = createEditModelAndView(motorbike);
+		result.addObject("register", true);
+		result.addObject("availableGarages", availableGarages);
+
+		return result;
+	}
+	
 	// Listing ----------------------------------------------------------------
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -113,6 +131,33 @@ public class MotorbikeAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Motorbike motorbike, BindingResult binding) {
 		ModelAndView result;
+		Collection<Garage> availableGarages;
+		
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(motorbike);
+			result.addObject("edit", true);
+			result.addObject("register", true);
+			availableGarages = garageService.findFreeGarages();
+			result.addObject("availableGarages", availableGarages);
+		} else {
+			try {
+				motorbikeService.save(motorbike);
+				result = new ModelAndView("redirect:/motorbike/administrator/list.do");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(motorbike, "motorbike.commit.errorLicensePlate");
+				result.addObject("edit", true);
+				result.addObject("register", true);
+				availableGarages = garageService.findFreeGarages();
+				result.addObject("availableGarages", availableGarages);
+			}
+		}
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
+	public ModelAndView update(@Valid Motorbike motorbike, BindingResult binding) {
+		ModelAndView result;
 		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(motorbike);
@@ -145,7 +190,6 @@ public class MotorbikeAdministratorController extends AbstractController {
 		res.addObject("motorbike", motorbike);
 		res.addObject("message", message);
 		res.addObject("requestURI", "motorbike/administrator/edit.do");	
-		res.addObject("requestGarageURI", "garage/administrator/changeGarage.do");		
 		res.addObject("edit", true);
 	
 		return res;
@@ -170,6 +214,25 @@ public class MotorbikeAdministratorController extends AbstractController {
 			}
 		}
 		
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(@Valid Motorbike motorbike, BindingResult binding){
+		ModelAndView result;
+		
+		if(binding.hasErrors()){
+			result = createEditModelAndView(motorbike);
+			result.addObject("edit", true);
+		}else{
+			try{
+				motorbikeService.delete(motorbike);
+				result = new ModelAndView("redirect:/motorbike/administrator/list.do");
+			}catch (Throwable oops){
+				result = createEditModelAndView(motorbike, "commit.error");
+				result.addObject("edit", true);
+			}
+		}
 		return result;
 	}
 	

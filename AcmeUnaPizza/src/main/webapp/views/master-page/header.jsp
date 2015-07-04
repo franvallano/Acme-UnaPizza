@@ -40,6 +40,7 @@
 					<li><a href="users/administrator/listCustomers.do"><spring:message code="master.page.administrator.customerManagement" /></a></li>
 					</ul>
 			</li>
+			<li><a class="fNiv" href="dashboard/administrator/ordersSuggestion.do"><spring:message code="master.page.dashboard.ordersSuggestion" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CUSTOMER')">

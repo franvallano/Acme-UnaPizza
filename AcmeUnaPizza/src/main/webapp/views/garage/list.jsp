@@ -15,10 +15,14 @@
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 	
 		<spring:message code="garage.location" var="locationHeader" />
-		<display:column property="location" title="${locationHeader}" />
+		<display:column property="location" title="${locationHeader}" sortable="true"/>
 		
 		<spring:message code="garage.size" var="sizeHeader" />
-		<display:column property="size" title="${sizeHeader}" />
+		<display:column property="size" title="${sizeHeader}" sortable="true"/>
+		
+		<spring:message code="garage.freeParkings" var="freeParkingsHeader" />
+		<display:column value="${freeParkings[garagesRow_rowNum-1]}" title="${freeParkingsHeader}" sortable="true"/>
+
 		
 		<display:column>
 				<a href="garage/administrator/details.do?garageId=${garagesRow.id}">

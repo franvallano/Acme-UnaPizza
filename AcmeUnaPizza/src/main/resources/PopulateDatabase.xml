@@ -169,7 +169,7 @@
 	<!-- GARAGE -->
 	<bean id="garage1" class="domain.Garage">
 		<property name="location" value="Calle Los Garajes de la Luciérnaga 64" />
-		<property name="size" value="10" />
+		<property name="size" value="2" />
 		<property name="motorbikes">
 			<list>
 				<ref bean="motorbike1" />
@@ -190,7 +190,7 @@
 	
 	<bean id="garage3" class="domain.Garage">
 		<property name="location" value="Calle Los Garajes de la Aurora Boreal 33" />
-		<property name="size" value="2" />
+		<property name="size" value="10" />
 		<property name="motorbikes">
 			<list>
 			</list>
@@ -199,7 +199,7 @@
 	
 	<bean id="garage4" class="domain.Garage">
 		<property name="location" value="Calle Los Garajes de la Cefalea Mutante 99" />
-		<property name="size" value="5" />
+		<property name="size" value="20" />
 		<property name="motorbikes">
 			<list>
 			</list>
@@ -731,7 +731,7 @@
 		<property name="description" value="Salsa barbacoa, carne, pollo y bacon" />
 		<property name="stockPrice" value="7.50" />
 		<property name="salePrice" value="12" />
-		<property name="actualStock" value="20" />
+		<property name="actualStock" value="6" />
 		<property name="minStock" value="6" />
 		<property name="code" value="PZBBQ" />
 		<property name="provider" ref="provider3" />
@@ -755,7 +755,7 @@
 		<property name="description" value="Alitas picantes con salsa barbacoa" />
 		<property name="stockPrice" value="1.50" />
 		<property name="salePrice" value="4" />
-		<property name="actualStock" value="30" />
+		<property name="actualStock" value="10" />
 		<property name="minStock" value="10" />
 		<property name="code" value="CMALT" />
 		<property name="provider" ref="provider4" />
@@ -780,7 +780,7 @@
 		<property name="description" value="Helado de fresa marca Kalisse" />
 		<property name="stockPrice" value="2.50" />
 		<property name="salePrice" value="5" />
-		<property name="actualStock" value="30" />
+		<property name="actualStock" value="8" />
 		<property name="minStock" value="10" />
 		<property name="code" value="DEHEF" />
 		<property name="provider" ref="provider1" />
@@ -804,7 +804,7 @@
 		<property name="description" value="Lata de CocaCola de 33cl" />
 		<property name="stockPrice" value="0.50" />
 		<property name="salePrice" value="1.5" />
-		<property name="actualStock" value="60" />
+		<property name="actualStock" value="15" />
 		<property name="minStock" value="20" />
 		<property name="code" value="DRCOC" />
 		<property name="provider" ref="provider2" />

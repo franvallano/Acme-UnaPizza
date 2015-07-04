@@ -1,5 +1,6 @@
 package controllers.administrator;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -40,14 +41,22 @@ public class GarageAdministratorController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Garage> garages;
+		Collection<Integer> freeParkings;
 		String uri;
 		
 		garages = garageService.findAll();
+		freeParkings = new ArrayList<Integer>();
+		
+		for(Garage garage : garages)
+			freeParkings.add(garage.getSize() - garage.getMotorbikes().size());
+		
+		
 		
 		uri = "garage/administrator/list.do";
 		result = new ModelAndView("garage/list");
 		result.addObject("requestURI", uri);
 		result.addObject("garages", garages);
+		result.addObject("freeParkings", freeParkings);
 		
 		return result;
 	}

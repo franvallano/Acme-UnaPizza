@@ -46,18 +46,13 @@ public class DeliveryManService {
 		return newbye;
 	}
 
-	public void save( DeliveryMan deliveryMan ){
-		Assert.notNull( deliveryMan );
-		Assert.isTrue(actorService.isDeliveryMan());
+	public void save(DeliveryMan deliveryMan){
+		Assert.notNull(deliveryMan);
+		// Lo comento porque lo usaremos para borrar una moto ya que el registro y la edicion se hace
+		// desde un Form
+		//Assert.isTrue(actorService.isDeliveryMan());
 		
-		if(deliveryMan.getId()==0){
-			String passwordCoded;
-			
-			passwordCoded = PasswordCode.encode(deliveryMan.getUserAccount().getPassword());
-			deliveryMan.getUserAccount().setPassword(passwordCoded);
-		}
-		
-		this.deliveryManRepository.save( deliveryMan );
+		deliveryManRepository.save(deliveryMan);
 	}
 
 	public void delete( DeliveryMan entity ){

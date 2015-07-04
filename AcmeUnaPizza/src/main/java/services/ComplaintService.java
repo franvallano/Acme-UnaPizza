@@ -49,7 +49,7 @@ public class ComplaintService {
 		creationMoment = new Date(milisecond);
 		
 		result.setCreationMoment(creationMoment);
-		result.setState("open");
+		result.setState("OPEN");
 		result.setCustomer(customerService.findByPrincipal());
 		result.setDiscussionMessages(discussionMessages);
 		result.setAdministrator(null);
