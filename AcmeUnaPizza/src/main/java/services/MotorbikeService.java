@@ -50,10 +50,6 @@ public class MotorbikeService {
 
 	public void save(Motorbike motorbike){
 		Assert.notNull(motorbike);
-		
-		Garage garage;
-		
-		
 
 		this.motorbikeRepository.save(motorbike);
 	}
@@ -123,7 +119,9 @@ public class MotorbikeService {
 	public Collection<Motorbike> findFreeMotorbikes() {
 		Collection<Motorbike> result;
 		
+		result = motorbikeRepository.findFreeMotorbikes();
 		
+		Assert.notNull(result);
 		
 		return null;
 	}

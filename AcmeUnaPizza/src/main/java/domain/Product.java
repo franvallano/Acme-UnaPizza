@@ -53,7 +53,6 @@ public class Product extends DomainEntity{
 		this.name = name;
 	}
 
-	@Size(min=10, max=250)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDescription() {
 		return description;

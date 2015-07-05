@@ -30,7 +30,7 @@
 			<display:column property="dni" title="${dniHeader}" sortable="true" />
 			
 			<display:column>
-				<a href="users/administrator/staff/detailsStaff.do?staffId=${bossesRow.id}" ><spring:message code="details"/></a>
+				<a href="user/administrator/staff/detailsStaff.do?staffId=${bossesRow.id}" ><spring:message code="details"/></a>
 			</display:column>
 
 		</security:authorize>

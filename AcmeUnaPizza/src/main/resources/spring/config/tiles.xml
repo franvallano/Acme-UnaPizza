@@ -32,6 +32,7 @@
 		<value>/views/garage/tiles.xml</value>
 		<value>/views/terms/tiles.xml</value>
 		<value>/views/cookies/tiles.xml</value>
+		<value>/views/product/tiles.xml</value>
 		
 	</util:list>
 

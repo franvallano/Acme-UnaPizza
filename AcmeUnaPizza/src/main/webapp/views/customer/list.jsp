@@ -27,7 +27,7 @@
 			<display:column property="email" title="${emailHeader}" sortable="true" />
 			
 			<display:column>
-				<a href="users/administrator/customer/detailsCustomer.do?customerId=${customersRow.id}" ><spring:message code="details"/></a>
+				<a href="user/administrator/customer/detailsCustomer.do?customerId=${customersRow.id}" ><spring:message code="details"/></a>
 			</display:column>
 
 		</security:authorize>

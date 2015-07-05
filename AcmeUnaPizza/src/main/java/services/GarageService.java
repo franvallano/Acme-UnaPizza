@@ -37,11 +37,13 @@ public class GarageService {
 	// Simple CRUD methods ----------------------------------------------------
 	public Garage create(){
 		Garage newbye;
-		Collection<Motorbike> motos = new ArrayList<Motorbike>();
+		Collection<Motorbike> motos;
 		
 		administratorService.findByPrincipal();
 		
 		newbye = new Garage();
+		
+		motos = new ArrayList<Motorbike>();
 		
 		newbye.setMotorbikes(motos);
 		

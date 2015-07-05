@@ -17,7 +17,7 @@
 <tiles-definitions>
 
 	<definition name="dashboard/list" extends="master.page">	
-		<put-attribute name="title" value="Mi Panel de Control" />
+		<put-attribute name="title" value="Mis Datos" />
 		<put-attribute name="body" value="/views/dashboard/list.jsp" />
 	</definition>
 

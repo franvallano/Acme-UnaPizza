@@ -26,7 +26,7 @@ import forms.AdministratorForm;
 
 
 @Controller
-@RequestMapping("/users/administrator")
+@RequestMapping("/user/administrator")
 public class UsersAdministratorController extends AbstractController {
 	//Services--------------------------------------------------------
 	@Autowired
@@ -60,7 +60,7 @@ public class UsersAdministratorController extends AbstractController {
 		
 		result = new ModelAndView("administrator/list");
 		result.addObject("administrators", administrators);
-		result.addObject("requestURI", "users/administrator/listAdministrators.do");
+		result.addObject("requestURI", "user/administrator/listAdministrators.do");
 		result.addObject("adminId", administrator.getId());
 		
 		return result;
@@ -76,7 +76,7 @@ public class UsersAdministratorController extends AbstractController {
 		
 		result = new ModelAndView("staff/list");
 		result.addObject("staffs", staffs);
-		result.addObject("requestURI", "users/administrator/listBosses.do");
+		result.addObject("requestURI", "user/administrator/listBosses.do");
 		result.addObject("staffType", "Boss");
 		
 		return result;
@@ -92,7 +92,7 @@ public class UsersAdministratorController extends AbstractController {
 		
 		result = new ModelAndView("staff/list");
 		result.addObject("staffs", staffs);
-		result.addObject("requestURI", "users/administrator/listDeliveryMen.do");
+		result.addObject("requestURI", "user/administrator/listDeliveryMen.do");
 		result.addObject("staffType", "DeliveryMan");
 		
 		return result;
@@ -108,7 +108,7 @@ public class UsersAdministratorController extends AbstractController {
 		
 		result = new ModelAndView("staff/list");
 		result.addObject("staffs", staffs);
-		result.addObject("requestURI", "users/administrator/listCooks.do");
+		result.addObject("requestURI", "user/administrator/listCooks.do");
 		result.addObject("staffType", "Cook");
 		
 		return result;
@@ -124,7 +124,7 @@ public class UsersAdministratorController extends AbstractController {
 		
 		result = new ModelAndView("customer/list");
 		result.addObject("customers", customers);
-		result.addObject("requestURI", "users/administrator/listCustomers.do");
+		result.addObject("requestURI", "user/administrator/listCustomers.do");
 
 		
 		return result;
@@ -209,7 +209,7 @@ public class UsersAdministratorController extends AbstractController {
 		result.addObject("edit", true);
 		result.addObject("message", message);
 		result.addObject("administratorForm", administratorForm);
-		result.addObject("url","users/administrator/edit.do");
+		result.addObject("url","user/administrator/edit.do");
 		
 		return result;
 	}
