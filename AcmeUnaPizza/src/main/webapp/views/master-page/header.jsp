@@ -20,6 +20,7 @@
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
+		<li><a class="fNiv" href="welcome/index.do"><spring:message code="master.page.index" /></a></li>
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
@@ -56,6 +57,15 @@
 					<li><a href="product/administrator/listComplements.do"><spring:message code="master.page.administrator.productsComplements" /></a></li>
 					<li><a href="product/administrator/listDesserts.do"><spring:message code="master.page.administrator.productsDesserts" /></a></li>
 					<li><a href="product/administrator/listDrinks.do"><spring:message code="master.page.administrator.productsDrinks" /></a></li>
+				</ul>
+			</li>
+			
+			
+			<li><a class="fNiv"><spring:message	code="master.page.administrator.offers" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="offer/administrator/list.do"><spring:message code="master.page.administrator.offers.list" /></a></li>
+					<li><a href="offer/administrator/listCurrentOffers.do"><spring:message code="master.page.administrator.offers.listCurrentOffers" /></a></li>
 				</ul>
 			</li>
 			

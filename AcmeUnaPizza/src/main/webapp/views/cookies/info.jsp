@@ -41,3 +41,6 @@ info.jsp
 		</td>
 	</tr>
 </table>
+
+<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+		onclick="javascript: window.history.back();" />

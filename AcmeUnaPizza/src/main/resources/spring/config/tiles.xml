@@ -33,6 +33,7 @@
 		<value>/views/terms/tiles.xml</value>
 		<value>/views/cookies/tiles.xml</value>
 		<value>/views/product/tiles.xml</value>
+		<value>/views/offer/tiles.xml</value>
 		
 	</util:list>
 
