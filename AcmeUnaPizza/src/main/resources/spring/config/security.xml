@@ -78,6 +78,9 @@
 		
 		<!-- PRODUCTS -->
 		<security:intercept-url pattern="/product/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
+		
+		<!-- OFFERS -->
+		<security:intercept-url pattern="/offer/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

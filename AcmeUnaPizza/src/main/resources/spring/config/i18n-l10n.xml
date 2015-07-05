@@ -38,6 +38,7 @@
 		<value>/views/terms/messages</value>
 		<value>/views/cookies/messages</value>
 		<value>/views/product/messages</value>
+		<value>/views/offer/messages</value>
 		
 	</util:list>
 
