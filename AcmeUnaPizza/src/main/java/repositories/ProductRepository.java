@@ -62,4 +62,16 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 	// Bebidas en stock minimo
 	@Query("select p from Product p where p.type = 'DRINK' AND (p.actualStock <= p.minStock)")
 	Collection<Product> findStockMinDrinks();
+	
+	@Query("select p from Product p where p.type = 'PIZZA'")
+	Collection<Product> findAllPizzas();
+	
+	@Query("select p from Product p where p.type = 'COMPLEMENT'")
+	Collection<Product> findAllComplements();
+	
+	@Query("select p from Product p where p.type = 'DESSERT'")
+	Collection<Product> findAllDesserts();
+	
+	@Query("select p from Product p where p.type = 'DRINK'")
+	Collection<Product> findAllDrinks();
 }

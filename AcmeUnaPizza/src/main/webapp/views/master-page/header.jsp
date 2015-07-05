@@ -29,18 +29,36 @@
 					<li><a href="motorbike/administrator/list.do"><spring:message code="master.page.administrator.motorbike" /></a></li>					
 				</ul> 
 			</li>
-			<li><a class="fNiv" href="dashboard/administrator/list.do"><spring:message code="master.page.dashboard" /></a></li>
+			
+			<li><a class="fNiv"><spring:message	code="master.page.dashboard" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="dashboard/administrator/list.do"><spring:message code="master.page.dashboard" /></a></li>
+					<li><a href="dashboard/administrator/ordersSuggestion.do"><spring:message code="master.page.dashboard.ordersSuggestion" /></a></li>
+				</ul>
+			</li>
+			
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.usersManagement" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="users/administrator/listAdministrators.do"><spring:message code="master.page.administrator.administratorManagement" /></a></li>
-					<li><a href="users/administrator/listBosses.do"><spring:message code="master.page.administrator.bossManagement" /></a></li>
-					<li><a href="users/administrator/listDeliveryMen.do"><spring:message code="master.page.administrator.deliveryManManagement" /></a></li>
-					<li><a href="users/administrator/listCooks.do"><spring:message code="master.page.administrator.cookManagement" /></a></li>
-					<li><a href="users/administrator/listCustomers.do"><spring:message code="master.page.administrator.customerManagement" /></a></li>
+					<li><a href="user/administrator/listAdministrators.do"><spring:message code="master.page.administrator.administratorManagement" /></a></li>
+					<li><a href="user/administrator/listBosses.do"><spring:message code="master.page.administrator.bossManagement" /></a></li>
+					<li><a href="user/administrator/listDeliveryMen.do"><spring:message code="master.page.administrator.deliveryManManagement" /></a></li>
+					<li><a href="user/administrator/listCooks.do"><spring:message code="master.page.administrator.cookManagement" /></a></li>
+					<li><a href="user/administrator/listCustomers.do"><spring:message code="master.page.administrator.customerManagement" /></a></li>
 					</ul>
 			</li>
-			<li><a class="fNiv" href="dashboard/administrator/ordersSuggestion.do"><spring:message code="master.page.dashboard.ordersSuggestion" /></a></li>
+			
+			<li><a class="fNiv"><spring:message	code="master.page.administrator.products" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="product/administrator/listPizzas.do"><spring:message code="master.page.administrator.productsPizzas" /></a></li>
+					<li><a href="product/administrator/listComplements.do"><spring:message code="master.page.administrator.productsComplements" /></a></li>
+					<li><a href="product/administrator/listDesserts.do"><spring:message code="master.page.administrator.productsDesserts" /></a></li>
+					<li><a href="product/administrator/listDrinks.do"><spring:message code="master.page.administrator.productsDrinks" /></a></li>
+				</ul>
+			</li>
+			
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CUSTOMER')">
