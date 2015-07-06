@@ -5,12 +5,16 @@
 
 package services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.WorkShopRepository;
+import domain.Repair;
 import domain.WorkShop;
 
 @Service
@@ -29,19 +33,22 @@ public class WorkShopService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-//	public WorkShop create(){
-//		WorkShop newbye;
-//		
-//		newbye = new WorkShop();
-//		
-//		return newbye;
-//	}
+	public WorkShop create(){
+		WorkShop newbye;
+		Collection<Repair> repairs = new ArrayList<Repair> ();
+		
+		
+		newbye = new WorkShop();
+		newbye.setRepairs(repairs);
+		
+		return newbye;
+	}
 
-//	public void save( WorkShop entity ){
-//		checkModificationPreconditions( entity );
-//		
-//		this.workshopRepository.save( entity );
-//	}
+	public void save( WorkShop entity ){
+		Assert.notNull( entity );
+		
+		this.workshopRepository.save( entity );
+	}
 
 //	public void delete( WorkShop entity ){
 //		Assert.isTrue( entity.getId()!=0 );
@@ -52,23 +59,23 @@ public class WorkShopService {
 //		Assert.isTrue( !this.workshopRepository.exists(entity.getId() ));
 //	}
 
-//	public WorkShop findOne( int id ){
-//		Assert.isTrue( id != 0);
-//		
-//		WorkShop res;
-//		
-//		res = this.workshopRepository.findOne( id );
-//		
-//		return res;
-//	}
+	public WorkShop findOne( int id ){
+		Assert.isTrue( id != 0);
+		
+		WorkShop res;
+		
+		res = this.workshopRepository.findOne( id );
+		
+		return res;
+	}
 
-//	public Collection<WorkShop> findAll(){
-//		Collection<WorkShop> res;
-//		
-//		res = workshopRepository.findAll();
-//		
-//		return res;
-//	}
+	public Collection<WorkShop> findAll(){
+		Collection<WorkShop> res;
+		
+		res = workshopRepository.findAll();
+		
+		return res;
+	}
 
 	// Other business methods -------------------------------------------------
 
