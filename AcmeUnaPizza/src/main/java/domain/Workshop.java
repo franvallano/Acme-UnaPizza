@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
@@ -19,83 +20,78 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Workshop extends DomainEntity {
+public class WorkShop extends DomainEntity{
+
 	//Attributes --------------------------------------------------------------------------------
 	private String company;
 	private String city;
 	private Double taxes;
 	private String phoneNumber;
 	private String contact;
-		
-	//Constructor -------------------------------------------------------------------------------
-	public Workshop(){
-		super();
-	}
-
+	
 	//Getters and setter ------------------------------------------------------------------------
+
 	@NotBlank
-	@Size(min=10, max=250)
-	@SafeHtml(whitelistType = WhiteListType.NONE)
+	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCompany() {
 		return company;
 	}
-
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	
+
+
 	@NotBlank
-	@SafeHtml(whitelistType = WhiteListType.NONE)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCity() {
 		return city;
 	}
-
 	public void setCity(String city) {
 		this.city = city;
 	}
 
+
+	@Digits(fraction = 3, integer = 2)
 	@Min(0)
-	@Digits(integer=3, fraction=2)
 	public Double getTaxes() {
 		return taxes;
 	}
-
 	public void setTaxes(Double taxes) {
 		this.taxes = taxes;
 	}
+
 	
-	@Pattern(regexp = "[0-9]{9}")
+	
+	@Pattern(regexp = "(((\\+34)? ?(\\(0\\))? ?)|(0))( ?[0-9]{3,4}){3}")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
-	@SafeHtml(whitelistType = WhiteListType.NONE)
-	@Size(min=10, max=250)
+
+	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getContact() {
 		return contact;
 	}
-
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-	
+
 	//Relationships -----------------------------------------------------------------------------
 	private Collection<Repair> repairs;
 
 	@Valid
-	@NotNull
-	@OneToMany(mappedBy="workshop")
+	@OneToMany(mappedBy="workShop")
 	public Collection<Repair> getRepairs() {
 		return repairs;
 	}
-
 	public void setRepairs(Collection<Repair> repairs) {
 		this.repairs = repairs;
 	}
-	
 	
 }
