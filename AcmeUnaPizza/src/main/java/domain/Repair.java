@@ -55,6 +55,18 @@ public class Repair extends DomainEntity{
 	//Relationships -----------------------------------------------------------------------------
 	private Staff staff;
 	private WorkShop workShop;
+	private Stuff stuff;
+	
+	@NotNull
+	@Valid
+	@ManyToOne(optional=false)
+	public Stuff getStuff() {
+		return stuff;
+	}
+
+	public void setStuff(Stuff stuff) {
+		this.stuff = stuff;
+	}
 
 	@Valid
 	@NotNull

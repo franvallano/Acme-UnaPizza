@@ -1,10 +1,13 @@
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -76,7 +79,7 @@ public class Stuff extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 	private WorkShop workShop;
-
+	private Collection<Repair> repairs;
 
 	@Valid
 	@NotNull
@@ -87,6 +90,17 @@ public class Stuff extends DomainEntity{
 
 	public void setWorkShop(WorkShop workShop) {
 		this.workShop = workShop;
+	}
+
+	@NotNull
+	@Valid
+	@OneToMany(mappedBy="stuff")
+	public Collection<Repair> getRepairs() {
+		return repairs;
+	}
+
+	public void setRepairs(Collection<Repair> repairs) {
+		this.repairs = repairs;
 	}
 	
 	
