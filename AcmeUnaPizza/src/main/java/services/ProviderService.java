@@ -41,7 +41,8 @@ public class ProviderService {
 
 	public void save(Provider provider){
 		Assert.notNull(provider);
-
+		administratorService.findByPrincipal();
+		
 		this.providerRepository.save(provider);
 	}
 

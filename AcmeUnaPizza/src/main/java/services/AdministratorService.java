@@ -62,6 +62,7 @@ public class AdministratorService {
 		
 		Assert.notNull(administrator);
 		Assert.isTrue(administrator.getUserAccount().getPassword().equals(rPass));
+		findByPrincipal();
 		
 		pass = administrator.getUserAccount().getPassword();
 		pass = encoder.encodePassword(pass, null);

@@ -272,6 +272,12 @@
 		<property name="referenceCode" value="ZXC12345" />
 		<property name="powerConsumption" value="5500" />
 		<property name="workShop" ref="workshop1" />
+		<property name="repairs">
+			<list>
+				<ref bean="repair1" />
+				<ref bean="repair3" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="stuff2" class="domain.Stuff">
@@ -280,6 +286,11 @@
 		<property name="referenceCode" value="ZTC12005" />
 		<property name="powerConsumption" value="2500" />
 		<property name="workShop" ref="workshop1" />
+		<property name="repairs">
+			<list>
+				<ref bean="repair2" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="stuff3" class="domain.Stuff">
@@ -288,6 +299,10 @@
 		<property name="referenceCode" value="ZZC19905" />
 		<property name="powerConsumption" value="2800" />
 		<property name="workShop" ref="workshop1" />
+		<property name="repairs">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="stuff4" class="domain.Stuff">
@@ -296,6 +311,10 @@
 		<property name="referenceCode" value="AAC16605" />
 		<property name="powerConsumption" value="100" />
 		<property name="workShop" ref="workshop2" />
+		<property name="repairs">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="stuff5" class="domain.Stuff">
@@ -304,6 +323,10 @@
 		<property name="referenceCode" value="WWW99905" />
 		<property name="powerConsumption" value="600" />
 		<property name="workShop" ref="workshop2" />
+		<property name="repairs">
+			<list>
+			</list>
+		</property>
 	</bean>
 
 	<!-- ADMIN -->
@@ -651,20 +674,25 @@
 		<property name="startDate" value="2015/06/13 00:00" />
 		<property name="discount" value="20" />
 		<property name="rangee" value="STANDARD" />
+		<property name="loopp" value="LMXJVSD" />
 	</bean>
 
 	<bean id="offer2" class="domain.Offer">
 		<property name="name" value="30% Descuento" />
 		<property name="startDate" value="2015/06/13 00:00" />
+		<property name="endDate" value="2016/06/13 23:59:59" />
 		<property name="discount" value="30" />
 		<property name="rangee" value="SILVER" />
+		<property name="loopp" value="LMXJV" />
 	</bean>
 
 	<bean id="offer3" class="domain.Offer">
 		<property name="name" value="50% Descuento" />
-		<property name="startDate" value="2015/06/13 00:00" />
+		<property name="startDate" value="2015/06/12 00:00" />
+		<property name="endDate" value="2015/07/07 16:48:59" />
 		<property name="discount" value="50" />
 		<property name="rangee" value="VIP" />
+		<property name="loopp" value="SD" />
 	</bean>
 
 	<!-- PROVIDER -->
@@ -1033,6 +1061,7 @@
 		<property name="cost" value="20.50" />
 		<property name="staff" ref="boss1" />
 		<property name="workShop" ref="workshop1" />
+		<property name="stuff" ref="stuff1" />
 	</bean>
 
 	<bean id="repair2" class="domain.Repair">
@@ -1040,13 +1069,15 @@
 		<property name="cost" value="30.50" />
 		<property name="staff" ref="cook1" />
 		<property name="workShop" ref="workshop2" />
+		<property name="stuff" ref="stuff2" />
 	</bean>
 
 	<bean id="repair3" class="domain.Repair">
-		<property name="moment" value="2015/06/12 16:30" />
+		<property name="moment" value="2015/06/28 16:30" />
 		<property name="cost" value="50.50" />
 		<property name="staff" ref="boss2" />
 		<property name="workShop" ref="workshop1" />
+		<property name="stuff" ref="stuff1" />
 	</bean>
 
 </beans>

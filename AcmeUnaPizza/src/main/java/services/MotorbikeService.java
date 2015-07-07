@@ -50,6 +50,7 @@ public class MotorbikeService {
 
 	public void save(Motorbike motorbike){
 		Assert.notNull(motorbike);
+		administratorService.findByPrincipal();
 
 		this.motorbikeRepository.save(motorbike);
 	}

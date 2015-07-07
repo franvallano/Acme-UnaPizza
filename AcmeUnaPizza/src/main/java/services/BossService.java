@@ -24,9 +24,11 @@ public class BossService {
 	private BossRepository bossRepository;
 
 	// Ancillary services -----------------------------------------------------
-
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private AdministratorService administratorService;
 	
 	// Constructor ------------------------------------------------------------
 	public BossService(){
@@ -37,6 +39,8 @@ public class BossService {
 	public Boss create(){
 		Boss newbye;
 		
+		administratorService.findByPrincipal();
+		
 		newbye = new Boss();
 		newbye.setUserAccount(createUserAccount());
 		
@@ -44,8 +48,9 @@ public class BossService {
 	}
 
 	public void save( Boss boss ){
-		Assert.notNull( boss );
+		Assert.notNull(boss);
 		Assert.isTrue(actorService.isBoss());
+		administratorService.findByPrincipal();
 		
 		if(boss.getId()==0){
 			String passwordCoded;

@@ -24,6 +24,8 @@ public class CookService {
 	private CookRepository cookRepository;
 
 	// Ancillary services -----------------------------------------------------
+	@Autowired
+	private AdministratorService administratorService;
 
 	@Autowired
 	private ActorService actorService;
@@ -37,6 +39,8 @@ public class CookService {
 	public Cook create(){
 		Cook newbye;
 		
+		administratorService.findByPrincipal();
+		
 		newbye = new Cook();
 		newbye.setUserAccount(createUserAccount());
 		
@@ -46,6 +50,7 @@ public class CookService {
 	public void save( Cook cook ){
 		Assert.notNull( cook );
 		Assert.isTrue(actorService.isCook());
+		administratorService.findByPrincipal();
 		
 		if(cook.getId()==0){
 			String passwordCoded;

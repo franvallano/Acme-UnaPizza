@@ -24,6 +24,8 @@ public class DeliveryManService {
 	// Managed repository -----------------------------------------------------
 	@Autowired
 	private DeliveryManRepository deliveryManRepository;
+	@Autowired
+	private AdministratorService administratorService;
 
 	// Ancillary services -----------------------------------------------------
 
@@ -39,6 +41,8 @@ public class DeliveryManService {
 	public DeliveryMan create(){
 		DeliveryMan newbye;
 		
+		administratorService.findByPrincipal();
+		
 		newbye = new DeliveryMan();
 		newbye.setUserAccount(createUserAccount());
 		newbye.setMotorbike(new Motorbike());
@@ -51,6 +55,7 @@ public class DeliveryManService {
 		// Lo comento porque lo usaremos para borrar una moto ya que el registro y la edicion se hace
 		// desde un Form
 		//Assert.isTrue(actorService.isDeliveryMan());
+		administratorService.findByPrincipal();
 		
 		deliveryManRepository.save(deliveryMan);
 	}

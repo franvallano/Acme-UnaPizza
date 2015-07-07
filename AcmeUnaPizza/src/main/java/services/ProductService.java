@@ -48,6 +48,7 @@ public class ProductService {
 	
 	public void save(Product product){
 		Assert.notNull(product);
+		administratorService.findByPrincipal();
 		
 		Assert.isTrue(product.getSalePrice() >= product.getStockPrice());
 		

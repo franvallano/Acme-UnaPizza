@@ -276,6 +276,19 @@
 		</fieldset>
 		<br/>
 		
+		<fieldset>
+			<b><spring:message code="dashboard.stuff.stuffMoreRepaired"/></b>
+			<br/>
+			<jstl:forEach var="stuff" items="${stuffMoreRepaired}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="dashboard.stuff.name" value="${stuff.name}" />
+				<acme:labelDetails code="dashboard.stuff.status" value="${stuff.status}"/>
+				<acme:labelDetails code="dashboard.stuff.referenceCode" value="${stuff.referenceCode}"/>
+				<acme:labelDetails code="dashboard.stuff.powerConsumption" value="${stuff.powerConsumption}"/>
+			</jstl:forEach>
+
+		</fieldset>
+		
 	</jstl:if>
 	<jstl:if test="${dashboard == false}">
 		<fieldset>
@@ -328,6 +341,8 @@
 			</jstl:forEach>
 
 		</fieldset>
+		<br/>
+		
 		<br/>
 	</jstl:if>
 

@@ -29,7 +29,7 @@ public class Offer extends DomainEntity{
 	private String name;
 	private Date startDate;
 	private Date endDate;
-	private Integer discount;
+	private int discount;
 	private String rangee;
 	private String loopp;
 	
@@ -46,10 +46,9 @@ public class Offer extends DomainEntity{
 	}
 
 
-	@Past
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -59,7 +58,7 @@ public class Offer extends DomainEntity{
 
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -69,7 +68,7 @@ public class Offer extends DomainEntity{
 
 
 	@Range(min = 0,max = 100)
-	public Integer getDiscount() {
+	public int getDiscount() {
 		return discount;
 	}
 	public void setDiscount(Integer discount) {
@@ -86,8 +85,7 @@ public class Offer extends DomainEntity{
 		this.rangee = rangee;
 	}
 
-
-	//REVISAR
+	@NotNull
 	@Pattern(regexp = "[LMXJVSD]{1,7}")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getLoopp() {
