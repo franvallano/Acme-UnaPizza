@@ -16,12 +16,14 @@ import services.ProductService;
 import services.PurchaseOrderService;
 import services.RepairService;
 import services.SalesOrderService;
+import services.StuffService;
 import controllers.AbstractController;
 import domain.Cook;
 import domain.Customer;
 import domain.DeliveryMan;
 import domain.Product;
 import domain.PurchaseOrder;
+import domain.Stuff;
 
 
 @Controller
@@ -51,6 +53,9 @@ public class DashboardAdministratorController extends AbstractController{
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private StuffService stuffService;
 	
 	
 	//Constructor------------------------------------------------------
@@ -83,6 +88,7 @@ public class DashboardAdministratorController extends AbstractController{
 		Collection<Product> lessSoldDrink;
 		Collection<Product> moreSoldDessert;
 		Collection<Product> lessSoldDessert;
+		Collection<Stuff> stuffMoreRepaired;
 		
 		investedMoney = purchaseOrderService.findInvestedMoney();
 		customerMoreComplaints = customerService.findCustomerMoreComplaints();
@@ -106,6 +112,8 @@ public class DashboardAdministratorController extends AbstractController{
 		moreSoldDessert = productService.findMoreSoldDessert();
 		lessSoldDessert = productService.findLessSoldDessert();
 		
+		stuffMoreRepaired = stuffService.findStuffMoreRepaired();
+		
 		result = new ModelAndView("dashboard/list");
 		result.addObject("investedMoney", investedMoney);
 		result.addObject("customerMoreComplaints", customerMoreComplaints);
@@ -126,6 +134,7 @@ public class DashboardAdministratorController extends AbstractController{
 		result.addObject("lessSoldDrink", lessSoldDrink);
 		result.addObject("moreSoldDessert", moreSoldDessert);
 		result.addObject("lessSoldDessert", lessSoldDessert);
+		result.addObject("stuffMoreRepaired", stuffMoreRepaired);
 		
 		result.addObject("dashboard", true);
 		

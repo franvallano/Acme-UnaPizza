@@ -16,20 +16,48 @@
 
 		<jstl:if test="${details == true}">
 			<fieldset>
-				<acme:labelDetails code="product.type" value="${product.type}"/>
-				<acme:labelDetails code="product.code" value="${product.code}"/>
-				<acme:labelDetails code="product.name" value="${product.name}"/>
-				<acme:labelDetails code="product.description" value="${product.description}"/>
-				<acme:labelDetails code="product.stockPrice" value="${product.stockPrice}" eurCurrency="true"/>
-				<acme:labelDetails code="product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
-				<acme:labelDetails code="product.actualStock" value="${product.actualStock}"/>
-				<acme:labelDetails code="product.minStock" value="${product.minStock}"/>
-				<acme:labelDetails code="product.provider" value="${product.provider.name}"/>
+				<acme:labelDetails code="offer.name" value="${offer.name}"/>
+				<acme:labelDetails code="offer.discount" value="${offer.discount}" percentage="true"/>
+				<acme:dateLabelDetails code="offer.startDate" value="${offer.startDate}"/>
+				<acme:dateLabelDetails code="offer.endDate" value="${offer.endDate}"/>
 			</fieldset>
 			
 			<br />
 			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-					onclick="javascript: window.location.replace('product/administrator/${backURI}');" />
+				onclick="javascript: window.history.back();" />
+		</jstl:if>
+		
+		<jstl:if test="${register == true && edit == true}">
+			<form:form action="${requestURI}" modelAttribute="offer">
+			
+				<form:hidden path="id" />
+				<form:hidden path="version" />
+				
+				<acme:textbox code="offer.name" path="name"/>
+				<br />
+				<acme:textbox code="offer.discount" path="discount"/>
+				<br />
+				<acme:textbox code="offer.startDate" path="startDate"/>
+				<br />
+				<acme:textbox code="offer.endDate" path="endDate"/>
+				<br />
+				
+				<spring:message code="offer.range" />
+				<form:select path="rangee">
+					<form:options items="${ranges}" />
+				</form:select>
+				<br /><br />
+				
+				<spring:message code="offer.loop" />
+				<form:checkboxes items="${days}" path="loopp" checked="true" />
+
+				<br /><br />
+					
+				<acme:submit name="save" code="offer.save"/>
+				
+				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				onclick="javascript: window.history.back();" />
+			</form:form>
 		</jstl:if>
 		
 	</security:authorize>

@@ -52,6 +52,7 @@ public class GarageService {
 
 	public void save(Garage garage){
 		Assert.notNull(garage);
+		administratorService.findByPrincipal();
 		
 		Integer totalMotos = garage.getMotorbikes().size();
 		

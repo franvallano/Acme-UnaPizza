@@ -77,6 +77,7 @@ public class StaffService {
 		
 		Assert.notNull(staff);
 		Assert.isTrue(staff.getUserAccount().getPassword().equals(rPass));
+		administratorService.findByPrincipal();
 		
 		pass = staff.getUserAccount().getPassword();
 		pass = encoder.encodePassword(pass, null);
