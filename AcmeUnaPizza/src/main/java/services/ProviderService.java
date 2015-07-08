@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ProviderRepository;
-import domain.Garage;
-import domain.Motorbike;
+import domain.Product;
 import domain.Provider;
 
 @Service
@@ -31,27 +31,30 @@ public class ProviderService {
 	
 	public Provider create(){
 		Provider provider;
+		Collection<Product> products = new ArrayList<Product>();
 		
 		administratorService.findByPrincipal();
 		
 		provider = new Provider();
+		provider.setProducts(products);
 		
 		return provider;
 	}
 
 	public void save(Provider provider){
 		Assert.notNull(provider);
+		
 		administratorService.findByPrincipal();
 		
 		this.providerRepository.save(provider);
 	}
 
-	public Provider findOne( int id ){
-		Assert.isTrue( id != 0);
+	public Provider findOne(int id){
+		Assert.isTrue(id != 0);
 		
 		Provider res;
 		
-		res = this.providerRepository.findOne( id );
+		res = this.providerRepository.findOne(id);
 		
 		Assert.notNull(res);
 		
