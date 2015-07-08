@@ -8,8 +8,8 @@
 		<put-attribute name="body" value="/views/workshop/list.jsp" />
 	</definition>
 	
-	<definition name="motorbike/edit" extends="master.page">	
-		<put-attribute name="title" value="Taller" />
+	<definition name="workshop/edit" extends="master.page">	
+		<put-attribute name="title" value="Workshop" />
 		<put-attribute name="body" value="/views/workshop/edit.jsp" />
 	</definition>
 </tiles-definitions>

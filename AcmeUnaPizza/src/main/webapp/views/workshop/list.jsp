@@ -10,47 +10,33 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<script>
-
-	function submitDelete(){
-		var form = document.getElementById("idFormDelete");
-		
-		var res = confirm('<spring:message code="workshop.confirm.delete" />');
-		
-		if(res) {
-			form.submit();
-		}
-	}
-
-</script>
-
 <display:table name="workshops" pagesize="5" class="displaytag" requestURI="${requestURI}" id="workshopsRow">
 
-	<security:authorize access="hasAnyRole('ADMINISTRATOR', 'STAFF')">
+	<security:authorize access="hasRole('BOSS')">
 	
-			<spring:message code="motorbike.company" var="companyHeader" />
+			<spring:message code="workshop.company" var="companyHeader" />
 			<display:column property="company" title="${companyHeader}" sortable="true"/>
 			
-			<spring:message code="motorbike.city" var="cityHeader" />
+			<spring:message code="workshop.city" var="cityHeader" />
 			<display:column property="city" title="${cityHeader}" sortable="true"/>
 			
-			<spring:message code="motorbike.taxes" var="taxesHeader" />
+			<spring:message code="workshop.taxes" var="taxesHeader" />
 			<display:column property="taxes" title="${taxesHeader}" sortable="true"/>
 			
-			<spring:message code="motorbike.phoneNumber" var="phoneNumberHeader" />
+			<spring:message code="workshop.phoneNumber" var="phoneNumberHeader" />
 			<display:column property="phoneNumber" title="${phoneNumberHeader}" sortable="true"/>
 			
-			<spring:message code="motorbike.contac" var="contactHeader" />
+			<spring:message code="workshop.contact" var="contactHeader" />
 			<display:column property="contact" title="${contactHeader}" sortable="true"/>
 			
 			<display:column>
-					<a href="workshop/staff/edit.do?workshopId=${workshopsRow.id}">
+					<a href="workshop/boss/edit.do?workshopId=${workshopsRow.id}">
 						<spring:message code="workshop.edit" />
 					</a>
 			</display:column>
 			
 			<display:column>
-					<a href="workshop/staff/details.do?workshopId=${workshopsRow.id}">
+					<a href="workshop/boss/details.do?workshopId=${workshopsRow.id}">
 						<spring:message code="workshop.details" />
 					</a>
 			</display:column>
@@ -60,5 +46,5 @@
 	</display:table>
 
 <input type="button" name="new" value="<spring:message code="workshop.new" />" 
-		onclick="javascript: window.location.replace('workshop/staff/create.do');" />
+		onclick="javascript: window.location.replace('workshop/boss/create.do');" />
 

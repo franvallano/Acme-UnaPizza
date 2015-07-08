@@ -1,4 +1,4 @@
-package controllers.staff;
+package controllers.boss;
 
 import java.util.Collection;
 
@@ -16,8 +16,8 @@ import controllers.AbstractController;
 import domain.WorkShop;
 
 @Controller
-@RequestMapping("/workshop/staff")
-public class WorkShopStaffController extends AbstractController {
+@RequestMapping("/workshop/boss")
+public class WorkShopBossController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 	
@@ -26,7 +26,7 @@ public class WorkShopStaffController extends AbstractController {
 	
 	// Constructors -----------------------------------------------------------
 	
-	public WorkShopStaffController() {
+	public WorkShopBossController() {
 		super();
 	}
 	
@@ -55,7 +55,7 @@ public class WorkShopStaffController extends AbstractController {
 		
 		workshops = workshopService.findAll();
 		
-		uri = "workshop/staff/list.do";
+		uri = "workshop/boss/list.do";
 		result = new ModelAndView("workshop/list");
 		result.addObject("requestURI", uri);
 		result.addObject("workshops", workshops);
@@ -87,7 +87,6 @@ public class WorkShopStaffController extends AbstractController {
 		workshop = workshopService.findOne(workshopId);
 		
 		result = createEditModelAndView(workshop);
-		result.addObject("requestURI", "workshop/staff/edit.do");
 		result.addObject("edit", true);
 
 		
@@ -105,7 +104,7 @@ public class WorkShopStaffController extends AbstractController {
 		} else {
 			try {
 				workshopService.save(workshop);
-				result = new ModelAndView("redirect:/workshop/staff/list.do");
+				result = new ModelAndView("redirect:/workshop/boss/list.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(workshop, "commit.error");
 				result.addObject("edit", true);
@@ -126,7 +125,7 @@ public class WorkShopStaffController extends AbstractController {
 		} else {
 			try {
 				workshopService.save(workshop);
-				result = new ModelAndView("redirect:/workshop/staff/list.do");
+				result = new ModelAndView("redirect:/workshop/boss/list.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(workshop, "commit.error");
 				result.addObject("edit", true);
@@ -150,7 +149,7 @@ public class WorkShopStaffController extends AbstractController {
 		res = new ModelAndView("workshop/edit");
 		res.addObject("workshop", workshop);
 		res.addObject("message", message);
-		res.addObject("requestURI", "workshop/staff/edit.do");	
+		res.addObject("requestURI", "workshop/boss/edit.do");	
 		res.addObject("edit", true);
 	
 		return res;
@@ -167,7 +166,7 @@ public class WorkShopStaffController extends AbstractController {
 		}else{
 			try{
 				workshopService.delete(workshop);
-				result = new ModelAndView("redirect:/workshop/staff/list.do");
+				result = new ModelAndView("redirect:/workshop/boss/list.do");
 			}catch (Throwable oops){
 				result = createEditModelAndView(workshop, "commit.error");
 				result.addObject("edit", true);
