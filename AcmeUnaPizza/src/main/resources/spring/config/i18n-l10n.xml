@@ -39,7 +39,7 @@
 		<value>/views/cookies/messages</value>
 		<value>/views/product/messages</value>
 		<value>/views/offer/messages</value>
-<value>/views/workshop/messages</value>
+		<value>/views/workshop/messages</value>
 		
 	</util:list>
 

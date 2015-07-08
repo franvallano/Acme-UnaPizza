@@ -27,7 +27,7 @@ public class WorkShopService {
 
 	// Ancillary services -----------------------------------------------------
 	@Autowired
-	private AdministratorService administratorService;
+	private BossService bossService;
 
 	// Constructor ------------------------------------------------------------
 	public WorkShopService(){
@@ -39,8 +39,6 @@ public class WorkShopService {
 		WorkShop newbye;
 		Collection<Repair> repairs = new ArrayList<Repair> ();
 		
-		administratorService.findByPrincipal();
-		
 		newbye = new WorkShop();
 		newbye.setRepairs(repairs);
 		
@@ -49,8 +47,6 @@ public class WorkShopService {
 
 	public void save( WorkShop entity ){
 		Assert.notNull( entity );
-		
-		administratorService.findByPrincipal();
 		
 		this.workshopRepository.save( entity );
 	}
