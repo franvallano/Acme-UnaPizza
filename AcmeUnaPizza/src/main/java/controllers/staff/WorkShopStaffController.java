@@ -70,7 +70,7 @@ public class WorkShopStaffController extends AbstractController {
 		
 		workshop = workshopService.findOne(workshopId);
 		
-		result = new ModelAndView("motorbike/edit");
+		result = new ModelAndView("workshop/edit");
 		result.addObject("workshop", workshop);
 		result.addObject("details", true);
 		
@@ -107,7 +107,7 @@ public class WorkShopStaffController extends AbstractController {
 				workshopService.save(workshop);
 				result = new ModelAndView("redirect:/workshop/staff/list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(workshop, "workshop.commit.error");
+				result = createEditModelAndView(workshop, "commit.error");
 				result.addObject("edit", true);
 				result.addObject("register", true);
 			}
@@ -128,7 +128,7 @@ public class WorkShopStaffController extends AbstractController {
 				workshopService.save(workshop);
 				result = new ModelAndView("redirect:/workshop/staff/list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(workshop, "workshop.commit.error");
+				result = createEditModelAndView(workshop, "commit.error");
 				result.addObject("edit", true);
 			}
 		}
