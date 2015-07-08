@@ -39,6 +39,8 @@ public class WorkShopService {
 		WorkShop newbye;
 		Collection<Repair> repairs = new ArrayList<Repair> ();
 		
+		bossService.findByPrincipal();
+		
 		newbye = new WorkShop();
 		newbye.setRepairs(repairs);
 		
@@ -47,6 +49,8 @@ public class WorkShopService {
 
 	public void save( WorkShop entity ){
 		Assert.notNull( entity );
+		
+		bossService.findByPrincipal();
 		
 		this.workshopRepository.save( entity );
 	}

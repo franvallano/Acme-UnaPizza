@@ -1,4 +1,4 @@
-package controllers.boss;
+package controllers.administrator;
 
 import java.util.Collection;
 
@@ -11,22 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import services.WorkShopService;
+import services.ProviderService;
 import controllers.AbstractController;
-import domain.WorkShop;
+import domain.Provider;
 
 @Controller
-@RequestMapping("/workshop/boss")
-public class WorkShopBossController extends AbstractController {
+@RequestMapping("/provider/administrator")
+public class ProviderAdministratorController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 	
 	@Autowired
-	private WorkShopService workshopService;
+	private ProviderService providerService;
 	
 	// Constructors -----------------------------------------------------------
 	
-	public WorkShopBossController() {
+	public ProviderAdministratorController() {
 		super();
 	}
 	
@@ -35,11 +35,11 @@ public class WorkShopBossController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		WorkShop workshop;
+		Provider provider;
 		
-		workshop = workshopService.create();
+		provider = providerService.create();
 
-		result = createEditModelAndView(workshop);
+		result = createEditModelAndView(provider);
 		result.addObject("register", true);
 
 		return result;
@@ -50,28 +50,28 @@ public class WorkShopBossController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<WorkShop> workshops;
+		Collection<Provider> providers;
 		String uri;
 		
-		workshops = workshopService.findAll();
+		providers = providerService.findAll();
 		
-		uri = "workshop/boss/list.do";
-		result = new ModelAndView("workshop/list");
+		uri = "provider/administrator/list.do";
+		result = new ModelAndView("provider/list");
 		result.addObject("requestURI", uri);
-		result.addObject("workshops", workshops);
+		result.addObject("providers", providers);
 		
 		return result;
 	}
 	
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
-	public ModelAndView details(@RequestParam int workshopId) {
+	public ModelAndView details(@RequestParam int providerId) {
 		ModelAndView result;
-		WorkShop workshop;
+		Provider provider;
 		
-		workshop = workshopService.findOne(workshopId);
+		provider = providerService.findOne(providerId);
 		
-		result = new ModelAndView("workshop/edit");
-		result.addObject("workshop", workshop);
+		result = new ModelAndView("provider/edit");
+		result.addObject("provider", provider);
 		result.addObject("details", true);
 		
 		return result;
@@ -80,13 +80,13 @@ public class WorkShopBossController extends AbstractController {
 	
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int workshopId) {
+	public ModelAndView edit(@RequestParam int providerId) {
 		ModelAndView result;
-		WorkShop workshop;
+		Provider provider;
 		
-		workshop = workshopService.findOne(workshopId);
+		provider = providerService.findOne(providerId);
 		
-		result = createEditModelAndView(workshop);
+		result = createEditModelAndView(provider);
 		result.addObject("edit", true);
 
 		
@@ -94,19 +94,19 @@ public class WorkShopBossController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid WorkShop workshop, BindingResult binding) {
+	public ModelAndView save(@Valid Provider provider, BindingResult binding) {
 		ModelAndView result;
 		
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(workshop);
+			result = createEditModelAndView(provider);
 			result.addObject("edit", true);
 			result.addObject("register", true);
 		} else {
 			try {
-				workshopService.save(workshop);
-				result = new ModelAndView("redirect:/workshop/boss/list.do");
+				providerService.save(provider);
+				result = new ModelAndView("redirect:/provider/administrator/list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(workshop, "commit.error");
+				result = createEditModelAndView(provider, "commit.error");
 				result.addObject("edit", true);
 				result.addObject("register", true);
 			}
@@ -116,18 +116,18 @@ public class WorkShopBossController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
-	public ModelAndView update(@Valid WorkShop workshop, BindingResult binding) {
+	public ModelAndView update(@Valid Provider provider, BindingResult binding) {
 		ModelAndView result;
 		
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(workshop);
+			result = createEditModelAndView(provider);
 			result.addObject("edit", true);
 		} else {
 			try {
-				workshopService.save(workshop);
-				result = new ModelAndView("redirect:/workshop/boss/list.do");
+				providerService.save(provider);
+				result = new ModelAndView("redirect:/provider/administrator/list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(workshop, "commit.error");
+				result = createEditModelAndView(provider, "commit.error");
 				result.addObject("edit", true);
 			}
 		}
@@ -135,21 +135,21 @@ public class WorkShopBossController extends AbstractController {
 		return result;
 	}
 	
-	public ModelAndView createEditModelAndView(WorkShop workshop){
+	public ModelAndView createEditModelAndView(Provider provider){
 		ModelAndView result;
 		
-		result = createEditModelAndView(workshop, null);
+		result = createEditModelAndView(provider, null);
 		
 		return result;
 	}
 
-	public ModelAndView createEditModelAndView(WorkShop workshop, String message){
+	public ModelAndView createEditModelAndView(Provider provider, String message){
 		ModelAndView res;
 		
-		res = new ModelAndView("workshop/edit");
-		res.addObject("workshop", workshop);
+		res = new ModelAndView("provider/edit");
+		res.addObject("provider", provider);
 		res.addObject("message", message);
-		res.addObject("requestURI", "workshop/boss/edit.do");	
+		res.addObject("requestURI", "provider/administrator/edit.do");	
 		res.addObject("edit", true);
 	
 		return res;

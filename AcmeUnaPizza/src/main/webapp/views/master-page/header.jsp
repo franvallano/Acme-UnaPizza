@@ -28,6 +28,7 @@
 					<li><a href="complaint/administrator/listAvailables.do"><spring:message code="master.page.administrator.complaint" /></a></li>
 					<li><a href="garage/administrator/list.do"><spring:message code="master.page.administrator.garage" /></a></li>
 					<li><a href="motorbike/administrator/list.do"><spring:message code="master.page.administrator.motorbike" /></a></li>					
+					<li><a href="provider/administrator/list.do"><spring:message code="master.page.administrator.provider" /></a></li>
 				</ul> 
 			</li>
 			

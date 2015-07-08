@@ -35,6 +35,7 @@
 		<value>/views/product/tiles.xml</value>
 		<value>/views/offer/tiles.xml</value>
 		<value>/views/workshop/tiles.xml</value>
+		<value>/views/provider/tiles.xml</value>
 		
 	</util:list>
 
