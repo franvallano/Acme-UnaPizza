@@ -15,7 +15,7 @@
 	function submitDelete(){
 		var form = document.getElementById("idFormDelete");
 		
-		var res = confirm('<spring:message code="motorbike.confirm.delete" />');
+		var res = confirm('<spring:message code="workshop.confirm.delete" />');
 		
 		if(res) {
 			form.submit();
