@@ -29,7 +29,7 @@
 			
 			<br />
 			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-					onclick="javascript: window.location.replace('product/administrator/${backURI}');" />
+				onclick="javascript: window.history.back();" />
 		</jstl:if>
 		
 		<jstl:if test="${register == true && edit == true}">
@@ -38,8 +38,11 @@
 				<form:hidden path="id" />
 				<form:hidden path="version" />
 				
-				<acme:textbox code="product.type" path="type" readonly="true"/>
-				<br />
+				<spring:message code="product.type" />
+				<form:select path="type">
+					<form:options items="${productsType}"/>
+				</form:select>
+				<br /><br />
 				<acme:textbox code="product.code" path="code"/>
 				<br />
 				<acme:textbox code="product.name" path="name"/>
@@ -75,8 +78,12 @@
 				<form:hidden path="id" />
 				<form:hidden path="version" />
 			
-				<acme:textbox code="product.type" path="type" readonly="true"/>
-				<br />
+				<spring:message code="product.type" />
+				<form:select path="type">
+					<form:options items="${productsType}"/>
+				</form:select>
+				<br /><br />
+
 				<acme:textbox code="product.code" path="code"/>
 				<br />
 				<acme:textbox code="product.name" path="name"/>

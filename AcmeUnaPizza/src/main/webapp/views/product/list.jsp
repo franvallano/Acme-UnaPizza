@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="products" pagesize="5" class="displaytag" requestURI="${requestURI}" id="productsRow">
+<display:table name="products" pagesize="10" class="displaytag" requestURI="${requestURI}" id="productsRow">
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
@@ -38,10 +38,11 @@
 	</security:authorize>
 		
 </display:table>
-
-	<input type="button" name="new" value="<spring:message code="new" />" 
-		onclick="javascript: window.location.replace('product/administrator/create.do?productType=${products[0].type}');" />
 	
+	<jstl:if test="${findAll != null && findAll == true}">
+		<input type="button" name="new" value="<spring:message code="new" />" 
+			onclick="javascript: window.location.replace('product/administrator/create.do?productType=${products[0].type}');" />
+	</jstl:if>
 
 
 

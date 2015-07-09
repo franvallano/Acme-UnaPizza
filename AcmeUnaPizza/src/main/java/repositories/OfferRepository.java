@@ -11,6 +11,6 @@ import domain.Offer;
 @Repository
 public interface OfferRepository extends JpaRepository<Offer, Integer>{
 	
-	@Query("select o from Offer o where o.endDate is null OR o.endDate >= CURRENT_TIMESTAMP")
+	@Query("select o from Offer o where o.startDate <= CURRENT_TIMESTAMP AND (o.endDate is null OR o.endDate >= CURRENT_TIMESTAMP)")
 	Collection<Offer> findCurrentOffers();
 }

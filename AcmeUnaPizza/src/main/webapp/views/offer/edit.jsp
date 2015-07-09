@@ -10,8 +10,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-
-
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
 		<jstl:if test="${details == true}">
@@ -20,6 +18,8 @@
 				<acme:labelDetails code="offer.discount" value="${offer.discount}" percentage="true"/>
 				<acme:dateLabelDetails code="offer.startDate" value="${offer.startDate}"/>
 				<acme:dateLabelDetails code="offer.endDate" value="${offer.endDate}"/>
+				<acme:labelDetails code="offer.range" value="${offer.rangee}"/>
+				<acme:labelDetails code="offer.loop" value="${offer.loopp}"/>
 			</fieldset>
 			
 			<br />
@@ -28,10 +28,8 @@
 		</jstl:if>
 		
 		<jstl:if test="${register == true && edit == true}">
-			<form:form action="${requestURI}" modelAttribute="offer">
-			
-				<form:hidden path="id" />
-				<form:hidden path="version" />
+			<form:form action="${requestURI}" modelAttribute="offerForm">
+				<form:hidden path="id"/>
 				
 				<acme:textbox code="offer.name" path="name"/>
 				<br />
@@ -42,18 +40,75 @@
 				<acme:textbox code="offer.endDate" path="endDate"/>
 				<br />
 				
+				<spring:message code="offer.loop" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				<spring:message code="check.monday" />
+				<form:checkbox id="checkMonday" path="monday"/> 
+				<spring:message code="check.tuesday" />
+				<form:checkbox path="tuesday"/> 
+				<spring:message code="check.wednesday" />
+				<form:checkbox path="wednesday"/> 
+				<spring:message code="check.thursday" />
+				<form:checkbox path="thursday"/> 
+				<spring:message code="check.friday" />
+				<form:checkbox path="friday"/> 
+				<spring:message code="check.saturday" />
+				<form:checkbox path="saturday"/> 
+				<spring:message code="check.sunday" />
+				<form:checkbox path="sunday"/> 
+				<br /><br />
+				
 				<spring:message code="offer.range" />
 				<form:select path="rangee">
 					<form:options items="${ranges}" />
 				</form:select>
 				<br /><br />
-				
-				<spring:message code="offer.loop" />
-				<form:checkboxes items="${days}" path="loopp" checked="true" />
-
-				<br /><br />
 					
 				<acme:submit name="save" code="offer.save"/>
+				
+				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				onclick="javascript: window.history.back();" />
+			</form:form>
+		</jstl:if>
+		
+		<jstl:if test="${edit == true && register == null}">
+			<form:form action="${requestURI}" modelAttribute="offerForm">
+				<form:hidden path="id" value="${offer.id}"/>
+			
+				<acme:textbox code="offer.name" path="name"/>
+				<br />
+				<acme:textbox code="offer.discount" path="discount"/>
+				<br />
+				<acme:textbox code="offer.startDate" path="startDate"/>
+				<br />
+				<acme:textbox code="offer.endDate" path="endDate"/>
+				<br />
+				
+				<spring:message code="offer.loop" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+				<spring:message code="check.monday" />
+				<form:checkbox id="checkMonday" path="monday"/> 
+				<spring:message code="check.tuesday" />
+				<form:checkbox path="tuesday"/> 
+				<spring:message code="check.wednesday" />
+				<form:checkbox path="wednesday"/> 
+				<spring:message code="check.thursday" />
+				<form:checkbox path="thursday"/> 
+				<spring:message code="check.friday" />
+				<form:checkbox path="friday"/> 
+				<spring:message code="check.saturday" />
+				<form:checkbox path="saturday"/> 
+				<spring:message code="check.sunday" />
+				<form:checkbox path="sunday"/> 
+				<br /><br />
+				
+				<spring:message code="offer.range" />
+				<form:select path="rangee">
+					<form:options items="${ranges}" />
+				</form:select>
+				<br /><br />
+					
+				<acme:submit name="update" code="offer.save" />
 				
 				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
 				onclick="javascript: window.history.back();" />

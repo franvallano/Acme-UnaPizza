@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 	<display:table name="administrators" id="administratorsRow" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">
+	pagesize="10" class="displaytag">
 	
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 		

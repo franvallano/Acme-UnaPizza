@@ -10,15 +10,15 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="offers" pagesize="5" class="displaytag" requestURI="${requestURI}" id="offersRow">
+<display:table name="offers" pagesize="10" class="displaytag" requestURI="${requestURI}" id="offersRow">
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
 		<spring:message code="offer.name" var="nameHeader" />
 		<display:column property="name" title="${nameHeader}" sortable="true"/>
 		
-		<spring:message code="offer.discount" var="discountHeader" />
-		<display:column property="discount" title="${discountHeader}" sortable="true"/>
+		<spring:message code="offer.discountPerc" var="discountPercHeader" />
+		<display:column property="discount" title="${discountPercHeader}" sortable="true"/>
 
 		<display:column>
 				<a href="offer/administrator/details.do?offerId=${offersRow.id}">
