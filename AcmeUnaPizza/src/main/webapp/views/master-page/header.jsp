@@ -71,6 +71,14 @@
 				</ul>
 			</li>
 			
+			<li><a class="fNiv"><spring:message	code="master.page.administrator.purchaseOrders" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="purchaseOrder/administrator/list.do"><spring:message code="master.page.administrator.purchaseOrders.list" /></a></li>
+					<li><a href="purchaseOrder/administrator/create.do"><spring:message code="master.page.administrator.purchaseOrders.new" /></a></li>
+				</ul>
+			</li>
+			
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CUSTOMER')">
