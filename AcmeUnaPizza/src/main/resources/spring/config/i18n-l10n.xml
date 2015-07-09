@@ -41,6 +41,7 @@
 		<value>/views/offer/messages</value>
 		<value>/views/workshop/messages</value>
 		<value>/views/provider/messages</value>
+		<value>/views/repair/messages</value>	
 		
 	</util:list>
 
