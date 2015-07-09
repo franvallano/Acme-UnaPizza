@@ -27,8 +27,8 @@
 					<li class="arrow"></li>
 					<li><a href="complaint/administrator/listAvailables.do"><spring:message code="master.page.administrator.complaint" /></a></li>
 					<li><a href="garage/administrator/list.do"><spring:message code="master.page.administrator.garage" /></a></li>
-					<li><a href="motorbike/administrator/list.do"><spring:message code="master.page.administrator.motorbike" /></a></li>					
-					<li><a href="provider/administrator/list.do"><spring:message code="master.page.administrator.provider" /></a></li>
+					<li><a href="motorbike/administrator/list.do"><spring:message code="master.page.administrator.motorbike" /></a></li>		
+					<li><a href="provider/administrator/list.do"><spring:message code="master.page.administrator.provider" /></a></li>			
 				</ul> 
 			</li>
 			
@@ -58,6 +58,7 @@
 					<li><a href="product/administrator/listComplements.do"><spring:message code="master.page.administrator.productsComplements" /></a></li>
 					<li><a href="product/administrator/listDesserts.do"><spring:message code="master.page.administrator.productsDesserts" /></a></li>
 					<li><a href="product/administrator/listDrinks.do"><spring:message code="master.page.administrator.productsDrinks" /></a></li>
+					<li><a href="product/administrator/listAll.do"><spring:message code="master.page.administrator.productsAll" /></a></li>
 				</ul>
 			</li>
 			
@@ -84,9 +85,6 @@
 		
 		<security:authorize access="hasRole('BOSS')">
 			<li><a class="fNiv"><spring:message	code="master.page.boss" /></a>
-				<ul>
-					<li><a href="workshop/boss/list.do"><spring:message code="master.page.boss.workshop" /></a></li>
-				</ul>
 			</li>
 			<li><a class="fNiv" href="dashboard/boss/list.do"><spring:message code="master.page.dashboard" /></a></li>
 		</security:authorize>
