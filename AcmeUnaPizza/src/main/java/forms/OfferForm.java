@@ -16,12 +16,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class OfferForm {
 	// Attributes -----------------------------------------------------
+	private Integer id;
 	private String name;
 	private Date startDate;
 	private Date endDate;
 	private int discount;
-	private String range;
-	private String loop;
+	private String rangee;
 	private boolean monday;
 	private boolean tuesday;
 	private boolean wednesday;
@@ -31,6 +31,14 @@ public class OfferForm {
 	private boolean sunday;
 	private boolean allDays;
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	@NotBlank
 	@Size(min = 5, max = 32)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
@@ -74,23 +82,12 @@ public class OfferForm {
 	@NotBlank
 	@Pattern(regexp = "^STANDARD$|^SILVER$|^GOLD$|^VIP$")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
-	public String getRange() {
-		return range;
+	public String getRangee() {
+		return rangee;
 	}
 	
-	public void setRange(String range) {
-		this.range = range;
-	}
-	
-	@NotNull
-	@Pattern(regexp = "[LMXJVSD]{1,7}")
-	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
-	public String getLoop() {
-		return loop;
-	}
-	
-	public void setLoop(String loop) {
-		this.loop = loop;
+	public void setRangee(String rangee) {
+		this.rangee = rangee;
 	}
 	
 	public boolean isMonday() {

@@ -24,7 +24,7 @@
 
 </script>
 
-<display:table name="motorbikes" pagesize="5" class="displaytag" requestURI="${requestURI}" id="motorbikesRow">
+<display:table name="motorbikes" pagesize="10" class="displaytag" requestURI="${requestURI}" id="motorbikesRow">
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 	

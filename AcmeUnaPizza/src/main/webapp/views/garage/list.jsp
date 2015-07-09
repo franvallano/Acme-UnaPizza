@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="garages" pagesize="5" class="displaytag" requestURI="${requestURI}" id="garagesRow">
+<display:table name="garages" pagesize="10" class="displaytag" requestURI="${requestURI}" id="garagesRow">
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 	

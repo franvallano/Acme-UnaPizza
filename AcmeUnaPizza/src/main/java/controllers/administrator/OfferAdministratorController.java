@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -16,10 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.OfferService;
 import controllers.AbstractController;
-import domain.Garage;
-import domain.Motorbike;
+import domain.Customer;
 import domain.Offer;
 import domain.Product;
+import domain.Provider;
+import forms.CustomerForm;
+import forms.OfferForm;
 
 
 @Controller
@@ -38,32 +41,29 @@ public class OfferAdministratorController extends AbstractController{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Offer offer;
+		OfferForm offerForm;
 		Collection<String> ranges;
-		Collection<String> days;
 
 		ranges = new ArrayList<String>();
-		days = new ArrayList<String>();
+		offerForm = new OfferForm();
 		
-		offer = offerService.create();
 		ranges.add("STANDARD");
 		ranges.add("SILVER");
 		ranges.add("GOLD");
 		ranges.add("VIP");
 		
-		days.add("L");
-		days.add("M");
-		days.add("X");
-		days.add("J");
-		days.add("V");
-		days.add("S");
-		days.add("D");
+		// Todos los dias activados por defecto
+		offerForm.setMonday(true);
+		offerForm.setTuesday(true);
+		offerForm.setWednesday(true);
+		offerForm.setThursday(true);
+		offerForm.setFriday(true);
+		offerForm.setSaturday(true);
+		offerForm.setSunday(true);
 
-		result = createEditModelAndView(offer);
+		result = createEditModelAndView(offerForm);
 		result.addObject("register", true);
-		result.addObject("offer", offer);
 		result.addObject("ranges", ranges);
-		result.addObject("days", days);
 
 		return result;
 	}
@@ -79,6 +79,7 @@ public class OfferAdministratorController extends AbstractController{
 		
 		result = new ModelAndView("offer/list");
 		result.addObject("offers", offers);
+		result.addObject("requestURI", "offer/administrator/list.do");
 		
 		return result;
 	}
@@ -94,6 +95,7 @@ public class OfferAdministratorController extends AbstractController{
 		
 		result = new ModelAndView("offer/list");
 		result.addObject("offers", offers);
+		result.addObject("requestURI", "offer/administrator/list.do");
 		
 		return result;
 	}
@@ -112,83 +114,106 @@ public class OfferAdministratorController extends AbstractController{
 		return result;
 	}
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Offer offer, BindingResult binding) {
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int offerId) {
 		ModelAndView result;
-		Collection<String> ranges;
-		Collection<String> days;
+		Offer offer;
+		OfferForm offerForm;
 		
-		ranges = new ArrayList<String>();
-		days = new ArrayList<String>();
+		offer = offerService.findOne(offerId);
 		
-		Assert.notNull(offer);
+		offerForm = offerService.desreconstruct(offer);
 		
+		Assert.notNull(offerForm);
 		
-		if (binding.hasErrors()) {
-			result = createEditModelAndView(offer);
-			
-			ranges.add("STANDARD");
-			ranges.add("SILVER");
-			ranges.add("GOLD");
-			ranges.add("VIP");
-			
-			days.add("L");
-			days.add("M");
-			days.add("X");
-			days.add("J");
-			days.add("V");
-			days.add("S");
-			days.add("D");
-			
-			result.addObject("edit", true);
-			result.addObject("register", true);
-			result.addObject("ranges", ranges);
-			result.addObject("days", days);
-		} else {
-			try {
-				offerService.save(offer);
-				result = new ModelAndView("redirect:/offer/administrator/list.do");
-			} catch (Throwable oops) {
-				result = createEditModelAndView(offer, "offer.commit.errorDate");
-				ranges.add("STANDARD");
-				ranges.add("SILVER");
-				ranges.add("GOLD");
-				ranges.add("VIP");
-				
-				days.add("L");
-				days.add("M");
-				days.add("X");
-				days.add("J");
-				days.add("V");
-				days.add("S");
-				days.add("D");
-				
-				result.addObject("edit", true);
-				result.addObject("register", true);
-				result.addObject("ranges", ranges);
-				result.addObject("days", days);
-			}
-		}
+		result = createEditModelAndView(offerForm);
+		
+		result.addObject("edit", true);
 
 		return result;
 	}
 	
-	public ModelAndView createEditModelAndView(Offer offer){
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid OfferForm offerForm, BindingResult binding){
+		ModelAndView result;
+		Offer offer;
+
+		if(binding.hasErrors()){
+			result = createEditModelAndView(offerForm);
+			result.addObject("edit", true);
+			result.addObject("register", true);
+		}else{
+			try{
+				offer = offerService.reconstruct(offerForm);
+				offerService.save(offer);
+				result = new ModelAndView("redirect:/offer/administrator/list.do");
+			}catch (Throwable oops){
+				result = createEditModelAndView(offerForm, "offer.commit.errorDateDays");
+				result.addObject("edit", true);
+				result.addObject("register", true);
+			}
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
+	public ModelAndView update(@Valid OfferForm offerForm, BindingResult binding){
+		ModelAndView result;
+		Offer offer;
+
+		if(binding.hasErrors()){
+			result = createEditModelAndView(offerForm);
+			result.addObject("edit", true);
+			result.addObject("register", true);
+		}else{
+			try{
+				offer = offerService.reconstruct(offerForm);
+				offerService.save(offer);
+				result = new ModelAndView("redirect:/offer/administrator/list.do");
+			}catch (Throwable oops){
+				result = createEditModelAndView(offerForm, "offer.commit.errorDateDays");
+				result.addObject("edit", true);
+				result.addObject("register", true);
+			}
+		}
+		
+		return result;
+	}
+	
+	
+	public ModelAndView createEditModelAndView(OfferForm offerForm){
 		ModelAndView result;
 		
-		result = createEditModelAndView(offer, null);
+		result = createEditModelAndView(offerForm, null);
+		result.addObject("checkMonday", offerForm.isMonday());
+		result.addObject("checkTuesday", offerForm.isTuesday());
+		result.addObject("checkWednesday", offerForm.isWednesday());
+		result.addObject("checkThursday", offerForm.isThursday());
+		result.addObject("checkFriday", offerForm.isFriday());
+		result.addObject("checkSaturday", offerForm.isSaturday());
+		result.addObject("checkSunday", offerForm.isSunday());
 		
 		return result;
 	}
 
-	public ModelAndView createEditModelAndView(Offer offer, String message){
+	public ModelAndView createEditModelAndView(OfferForm offerForm, String message){
 		ModelAndView res;
+		Collection<String> ranges;
+		
+		ranges = new ArrayList<String>();
+		
+		ranges.add("STANDARD");
+		ranges.add("SILVER");
+		ranges.add("GOLD");
+		ranges.add("VIP");
 		
 		res = new ModelAndView("offer/edit");
-		res.addObject("offer", offer);
+		res.addObject("offerForm", offerForm);
 		res.addObject("message", message);
 		res.addObject("requestURI", "offer/administrator/edit.do");	
 		res.addObject("edit", true);
+		res.addObject("ranges", ranges);
 	
 		return res;
 	}

@@ -54,6 +54,16 @@ public class ProductService {
 		
 		this.productRepository.save(product);
 	}
+	
+	public Collection<Product> findAll() {
+		Collection<Product> result;
+		
+		result = productRepository.findAll();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
 
 	public Collection<Product> findMoreSoldPizza() {
 		Collection<Product> result;
