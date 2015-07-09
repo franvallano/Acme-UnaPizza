@@ -10,7 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -20,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -34,6 +34,7 @@ public class PurchaseOrder extends DomainEntity{
 	private Date creationMoment;
 	
 	//Getters and setter ------------------------------------------------------------------------
+	@NotBlank
 	@Pattern(regexp="[A-Z]{3}-[0-9]{8}")
 	@Column(unique=true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)

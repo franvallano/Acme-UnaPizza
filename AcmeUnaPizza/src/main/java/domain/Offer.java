@@ -85,7 +85,7 @@ public class Offer extends DomainEntity{
 		this.rangee = rangee;
 	}
 
-	@NotNull
+	@NotBlank
 	@Pattern(regexp = "[LMXJVSD]{1,7}")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getLoopp() {

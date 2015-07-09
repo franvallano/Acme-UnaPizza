@@ -38,6 +38,7 @@ public class SalesOrder extends DomainEntity{
 	private double totalCost;
 	
 	//Getters and setter ------------------------------------------------------------------------
+	@NotBlank
 	@Column(unique=true)
 	@Pattern(regexp="[A-Z]{3}-[0-9]{8}")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
