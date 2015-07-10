@@ -25,7 +25,7 @@ public class WorkShop extends DomainEntity{
 	//Attributes --------------------------------------------------------------------------------
 	private String company;
 	private String city;
-	private Double taxes;
+	private double taxes;
 	private String phoneNumber;
 	private String contact;
 	
@@ -54,14 +54,12 @@ public class WorkShop extends DomainEntity{
 
 	@Digits(fraction = 3, integer = 2)
 	@Min(0)
-	public Double getTaxes() {
+	public double getTaxes() {
 		return taxes;
 	}
-	public void setTaxes(Double taxes) {
+	public void setTaxes(double taxes) {
 		this.taxes = taxes;
 	}
-
-	
 	
 	@Pattern(regexp = "(((\\+34)? ?(\\(0\\))? ?)|(0))( ?[0-9]{3,4}){3}")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)

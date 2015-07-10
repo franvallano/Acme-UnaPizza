@@ -37,29 +37,7 @@
 					onclick="javascript: window.location.replace('provider/administrator/list.do');" />
 		</jstl:if>
 		
-		<jstl:if test="${register == true && edit == true}">
-			<form:form action="${requestURI}" modelAttribute="provider">
-			
-					<form:hidden path="id" />
-					<form:hidden path="version" />
-					<form:hidden path="products" />
-				
-					<acme:textbox code="provider.name" path="name"/>
-					<br />
-					<acme:textbox code="provider.phone" path="phone"/>
-					<br />
-					<acme:textbox code="provider.cif" path="cif"/>
-					<br />					
-							
-					<br /><br />
-				<acme:submit name="update" code="provider.save"/>&nbsp;
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-					onclick="javascript: window.location.replace('provider/administrator/list.do');" />
-			</form:form>
-		</jstl:if>
-		
-		
-		<jstl:if test="${edit == true && register == null}">
+		<jstl:if test="${edit == true}">
 			<form:form action="${requestURI}" modelAttribute="provider">
 
 					<form:hidden path="id" />
@@ -71,11 +49,9 @@
 					<acme:textbox code="provider.phone" path="phone"/>
 					<br />
 					<acme:textbox code="provider.cif" path="cif"/>
-					<br />	
-			
-				<br />
-				
-				<acme:submit name="update" code="provider.save"/>&nbsp;
+					<br />					
+
+				<acme:submit name="save" code="provider.save"/>&nbsp;
 				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('provider/administrator/list.do');" />
 			</form:form>

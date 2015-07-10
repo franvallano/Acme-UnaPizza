@@ -30,6 +30,8 @@ public class PurchaseOrderService {
 		
 		result = purchaseOrderRepository.findAll();
 		
+		Assert.notNull(result);
+		
 		return result;
 	}
 	

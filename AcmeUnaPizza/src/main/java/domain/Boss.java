@@ -21,6 +21,7 @@ public class Boss extends Staff{
 
 	private Collection<SalesOrder> salesOrders;
 	private Collection<Stuff> stuffs;
+	private Collection<Repair> repairs;
 
 	@Valid
 	@NotNull
@@ -42,6 +43,17 @@ public class Boss extends Staff{
 
 	public void setStuffs(Collection<Stuff> stuffs) {
 		this.stuffs = stuffs;
+	}
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "staff")
+	public Collection<Repair> getRepairs() {
+		return repairs;
+	}
+
+	public void setRepairs(Collection<Repair> repairs) {
+		this.repairs = repairs;
 	}
 	
 	

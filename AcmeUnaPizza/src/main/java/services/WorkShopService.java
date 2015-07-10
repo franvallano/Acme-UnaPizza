@@ -71,6 +71,8 @@ public class WorkShopService {
 		
 		res = this.workshopRepository.findOne( id );
 		
+		Assert.notNull(res);
+		
 		return res;
 	}
 

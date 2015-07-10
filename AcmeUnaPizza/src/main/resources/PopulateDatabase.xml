@@ -187,7 +187,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="garage3" class="domain.Garage">
 		<property name="location" value="Calle Los Garajes de la Aurora Boreal 33" />
 		<property name="size" value="10" />
@@ -196,7 +196,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="garage4" class="domain.Garage">
 		<property name="location" value="Calle Los Garajes de la Cefalea Mutante 99" />
 		<property name="size" value="20" />
@@ -220,14 +220,14 @@
 		<property name="licensePlate" value="5647DFG" />
 		<property name="garage" ref="garage2" />
 	</bean>
-	
+
 	<bean id="motorbike3" class="domain.Motorbike">
 		<property name="number" value="3" />
 		<property name="drivingTime" value="0" />
 		<property name="licensePlate" value="5647FFG" />
 		<property name="garage" ref="garage2" />
 	</bean>
-	
+
 	<bean id="motorbike4" class="domain.Motorbike">
 		<property name="number" value="4" />
 		<property name="drivingTime" value="0" />
@@ -502,11 +502,6 @@
 				<ref bean="salesOrder4" />
 			</list>
 		</property>
-		<property name="repairs">
-			<list>
-
-			</list>
-		</property>
 	</bean>
 
 	<bean id="cook2" class="domain.Cook">
@@ -528,11 +523,6 @@
 				<ref bean="salesOrder6" />
 				<ref bean="salesOrder7" />
 				<ref bean="salesOrder8" />
-			</list>
-		</property>
-		<property name="repairs">
-			<list>
-
 			</list>
 		</property>
 	</bean>
@@ -561,7 +551,8 @@
 		</property>
 		<property name="repairs">
 			<list>
-
+				<ref bean="repair1" />
+				<ref bean="repair2" />
 			</list>
 		</property>
 		<property name="stuffs">
@@ -597,7 +588,7 @@
 		</property>
 		<property name="repairs">
 			<list>
-
+				<ref bean="repair3" />
 			</list>
 		</property>
 		<property name="stuffs">
@@ -633,11 +624,6 @@
 				<ref bean="salesOrder6" />
 			</list>
 		</property>
-		<property name="repairs">
-			<list>
-
-			</list>
-		</property>
 	</bean>
 
 	<bean id="deliveryman2" class="domain.DeliveryMan">
@@ -659,11 +645,6 @@
 			<list>
 				<ref bean="salesOrder7" />
 				<ref bean="salesOrder8" />
-			</list>
-		</property>
-		<property name="repairs">
-			<list>
-
 			</list>
 		</property>
 	</bean>
@@ -689,7 +670,7 @@
 	<bean id="offer3" class="domain.Offer">
 		<property name="name" value="50% Descuento" />
 		<property name="startDate" value="2015/06/12 00:00" />
-		<property name="endDate" value="2015/07/07 16:48:59" />
+		<property name="endDate" value="2015/07/07 23:59:59" />
 		<property name="discount" value="50" />
 		<property name="rangee" value="VIP" />
 		<property name="loopp" value="SD" />
@@ -1067,7 +1048,7 @@
 	<bean id="repair2" class="domain.Repair">
 		<property name="moment" value="2015/06/16 17:00" />
 		<property name="cost" value="30.50" />
-		<property name="staff" ref="cook1" />
+		<property name="staff" ref="boss1" />
 		<property name="workShop" ref="workshop2" />
 		<property name="stuff" ref="stuff2" />
 	</bean>

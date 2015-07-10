@@ -46,11 +46,6 @@ public class Repair extends DomainEntity{
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
-
-	@Override
-	public String toString() {
-		return "Repair [moment=" + moment + ", cost=" + cost + "]";
-	}
 	
 	//Relationships -----------------------------------------------------------------------------
 	private Staff staff;

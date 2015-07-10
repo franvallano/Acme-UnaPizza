@@ -52,6 +52,9 @@
 		<bean class="converters.StringToProviderConverter" />
 		<bean class="converters.ProviderToStringConverter" />
 		
+		<bean class="converters.StringToProductConverter" />
+		<bean class="converters.ProductToStringConverter" />
+		
 		<bean class="converters.StringToPurchaseOrderConverter" />
 		<bean class="converters.PurchaseOrderToStringConverter" />
 		

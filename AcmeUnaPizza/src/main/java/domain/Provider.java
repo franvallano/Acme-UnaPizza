@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -47,6 +48,7 @@ public class Provider extends DomainEntity{
 
 	@NotBlank
 	@Pattern(regexp="[A-Z][0-9]{8}")
+	@Column(unique = true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCif() {
 		return cif;
