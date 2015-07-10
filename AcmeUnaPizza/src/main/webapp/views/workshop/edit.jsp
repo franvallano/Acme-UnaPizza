@@ -18,15 +18,15 @@
 			<fieldset>
 				<acme:labelDetails code="workshop.company" value="${workshop.company}"/>
 				<acme:labelDetails code="workshop.phoneNumber" value="${workshop.phoneNumber}"/>
-				<acme:labelDetails code="workshop.taxes" value="${workshop.taxes}"/>
+				<acme:labelDetails code="workshop.taxes" value="${workshop.taxes}" eurCurrency="true"/>
 				<acme:labelDetails code="workshop.city" value="${workshop.city}"/>
 				<acme:labelDetails code="workshop.contact" value="${workshop.contact}"/>
 				<br/>
 				<fieldset>
 					<legend><h3><spring:message code="workshop.repairs" /></h3></legend>
 					<jstl:forEach var="repair" items="${workshop.repairs}" varStatus="rowIndex">
-						<acme:labelDetails code="workshop.repair.cost" value="${repair.cost}" />
-						<acme:labelDetails code="workshop.repair.moment" value="${repair.moment}" />
+						<acme:labelDetails code="workshop.repair.cost" value="${repair.cost}" eurCurrency="true" />
+						<acme:dateLabelDetails code="workshop.repair.moment" value="${repair.moment}" />
 						<br/>
 					</jstl:forEach>
 				</fieldset>
@@ -37,34 +37,7 @@
 					onclick="javascript: window.location.replace('workshop/boss/list.do');" />
 		</jstl:if>
 		
-		<jstl:if test="${register == true && edit == true}">
-			<form:form action="${requestURI}" modelAttribute="workshop">
-			
-					<form:hidden path="id" />
-					<form:hidden path="version" />
-					<form:hidden path="repairs" />
-				
-					<acme:textbox code="workshop.company" path="company"/>
-					<br />
-					<acme:textbox code="workshop.city" path="city"/>
-					<br />
-					<acme:textbox code="workshop.taxes" path="taxes"/>
-					<br />
-					<acme:textbox code="workshop.phoneNumber" path="phoneNumber"/>
-					<br />
-					<acme:textbox code="workshop.contact" path="contact"/>
-					<br />
-					
-							
-					<br /><br />
-				<acme:submit name="update" code="workshop.save"/>&nbsp;
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-					onclick="javascript: window.location.replace('workshop/boss/list.do');" />
-			</form:form>
-		</jstl:if>
-		
-		
-		<jstl:if test="${edit == true && register == null}">
+		<jstl:if test="${edit == true}">
 			<form:form action="${requestURI}" modelAttribute="workshop">
 
 					<form:hidden path="id" />
@@ -84,7 +57,7 @@
 			
 				<br />
 				
-				<acme:submit name="update" code="workshop.save"/>&nbsp;
+				<acme:submit name="save" code="workshop.save"/>&nbsp;
 				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('workshop/boss/list.do');" />
 			</form:form>

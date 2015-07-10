@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import services.ProviderService;
 import controllers.AbstractController;
+import domain.Product;
 import domain.Provider;
 
 @Controller
@@ -40,7 +42,7 @@ public class ProviderAdministratorController extends AbstractController {
 		provider = providerService.create();
 
 		result = createEditModelAndView(provider);
-		result.addObject("register", true);
+		result.addObject("edit", true);
 
 		return result;
 	}
@@ -99,41 +101,18 @@ public class ProviderAdministratorController extends AbstractController {
 		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(provider);
-			result.addObject("edit", true);
-			result.addObject("register", true);
 		} else {
 			try {
 				providerService.save(provider);
 				result = new ModelAndView("redirect:/provider/administrator/list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(provider, "commit.error");
-				result.addObject("edit", true);
-				result.addObject("register", true);
+				result = createEditModelAndView(provider, "provider.commit.error");
 			}
 		}
 
 		return result;
 	}
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
-	public ModelAndView update(@Valid Provider provider, BindingResult binding) {
-		ModelAndView result;
-		
-		if (binding.hasErrors()) {
-			result = createEditModelAndView(provider);
-			result.addObject("edit", true);
-		} else {
-			try {
-				providerService.save(provider);
-				result = new ModelAndView("redirect:/provider/administrator/list.do");
-			} catch (Throwable oops) {
-				result = createEditModelAndView(provider, "commit.error");
-				result.addObject("edit", true);
-			}
-		}
-
-		return result;
-	}
 	
 	public ModelAndView createEditModelAndView(Provider provider){
 		ModelAndView result;

@@ -31,11 +31,14 @@ public class ProviderService {
 	
 	public Provider create(){
 		Provider provider;
-		Collection<Product> products = new ArrayList<Product>();
+		Collection<Product> products;
 		
 		administratorService.findByPrincipal();
 		
 		provider = new Provider();
+		
+		products = new ArrayList<Product>();
+		
 		provider.setProducts(products);
 		
 		return provider;

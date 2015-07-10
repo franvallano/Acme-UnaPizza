@@ -213,7 +213,6 @@ public class StaffService {
 			contractStartDate = new Date(milliseconds - 1);
 			deliveryMan.setContractStartDate(contractStartDate);
 			deliveryMan.setMotorbike(staffForm.getMotorbike());
-			deliveryMan.setRepairs(repairs);	
 			deliveryMan.setSalesOrders(salesOrders);
 			
 			return deliveryMan;
@@ -242,7 +241,6 @@ public class StaffService {
 			milliseconds = System.currentTimeMillis();
 			contractStartDate = new Date(milliseconds - 1);
 			cook.setContractStartDate(contractStartDate);
-			cook.setRepairs(repairs);	
 			cook.setSalesOrders(salesOrders);
 			
 			return cook;

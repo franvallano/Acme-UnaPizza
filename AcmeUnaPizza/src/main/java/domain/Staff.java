@@ -128,27 +128,5 @@ public class Staff extends Actor{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
-	public String toString() {
-		return "Staff [dni=" + dni + ", ssNumber=" + ssNumber + ", phone="
-				+ phone + ", address=" + address + "]";
-	}
-
-
-	//Relationships -----------------------------------------------------------------------------
-	private Collection<Repair> repairs;
-
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy="staff")
-	public Collection<Repair> getRepairs() {
-		return repairs;
-	}
-
-	public void setRepairs(Collection<Repair> repairs) {
-		this.repairs = repairs;
-	}
-
 }
 

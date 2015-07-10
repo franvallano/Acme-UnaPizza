@@ -42,10 +42,6 @@ public class Note {
 		this.description = description;
 	}
 
-	public String toString() {
-		return "Note [cause=" + cause + ", description=" + description + "]";
-	}
-
 	// Relationships
 	// -----------------------------------------------------------------------------
 
