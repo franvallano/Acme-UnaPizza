@@ -28,6 +28,7 @@
 <%@ attribute name="eurCurrency" required="false"%>
 <%@ attribute name="timeMinutes" required="false"%>
 <%@ attribute name="percentage" required="false"%>
+<%@ attribute name="noLineBreaks" required="false"%>
 
 <%-- Definition --%>
 
@@ -46,5 +47,9 @@
 	<jstl:out value=" min" /> 
 </jstl:if>
 
-<br/>
+<jstl:if test="${noLineBreaks == null}">
+	<br/>
+</jstl:if>
+
+
 

@@ -79,7 +79,7 @@ public class DashboardAdministratorController extends AbstractController{
 		Collection<Customer> customerMoreMoneySpent;
 		Collection<Cook> cookMoreOrders;
 		Double totalMoneyUndeliveredOrders;
-		Collection<PurchaseOrder> totalPurcharseOrders;
+		Collection<PurchaseOrder> purchaseOrdersMoreExpensive;
 		Collection<Product> moreSoldPizza;
 		Collection<Product> lessSoldPizza;
 		Collection<Product> moreSoldComplement;
@@ -101,7 +101,7 @@ public class DashboardAdministratorController extends AbstractController{
 		customerMoreMoneySpent = customerService.findCustomerMoreMoneySpent();
 		cookMoreOrders = cookService.findCookMoreOrders();
 		totalMoneyUndeliveredOrders = salesOrderService.findTotalMoneyUndeliveredOrders();
-		totalPurcharseOrders = purchaseOrderService.findAll();
+		purchaseOrdersMoreExpensive = purchaseOrderService.findPurchaseOrdersMoreExpensive();
 		
 		moreSoldPizza = productService.findMoreSoldPizza();
 		lessSoldPizza = productService.findLessSoldPizza();
@@ -125,7 +125,7 @@ public class DashboardAdministratorController extends AbstractController{
 		result.addObject("customerMoreMoneySpent", customerMoreMoneySpent);
 		result.addObject("cookMoreOrders", cookMoreOrders);
 		result.addObject("totalMoneyUndeliveredOrders", totalMoneyUndeliveredOrders);
-		result.addObject("totalPurcharseOrders", totalPurcharseOrders);
+		result.addObject("purchaseOrdersMoreExpensive", purchaseOrdersMoreExpensive);
 		result.addObject("moreSoldPizza", moreSoldPizza);
 		result.addObject("lessSoldPizza", lessSoldPizza);
 		result.addObject("moreSoldComplement", moreSoldComplement);

@@ -165,7 +165,6 @@ public class OfferAdministratorController extends AbstractController{
 		if(binding.hasErrors()){
 			result = createEditModelAndView(offerForm);
 			result.addObject("edit", true);
-			result.addObject("register", true);
 		}else{
 			try{
 				offer = offerService.reconstruct(offerForm);
@@ -174,7 +173,6 @@ public class OfferAdministratorController extends AbstractController{
 			}catch (Throwable oops){
 				result = createEditModelAndView(offerForm, "offer.commit.errorDateDays");
 				result.addObject("edit", true);
-				result.addObject("register", true);
 			}
 		}
 		

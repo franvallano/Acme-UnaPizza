@@ -30,7 +30,7 @@ public class PurchaseOrder extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
 	private String referenceNumber;
-	private Double totalCost;
+	private double totalCost;
 	private Date creationMoment;
 	
 	//Getters and setter ------------------------------------------------------------------------
@@ -48,11 +48,11 @@ public class PurchaseOrder extends DomainEntity{
 
 	@Min(0)
 	@Digits(integer=9, fraction=2)
-	public Double getTotalCost() {
+	public double getTotalCost() {
 		return totalCost;
 	}
 
-	public void setTotalCost(Double totalCost) {
+	public void setTotalCost(double totalCost) {
 		this.totalCost = totalCost;
 	}
 

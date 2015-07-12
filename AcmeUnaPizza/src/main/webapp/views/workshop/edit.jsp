@@ -38,7 +38,7 @@
 		</jstl:if>
 		
 		<jstl:if test="${edit == true}">
-			<form:form action="${requestURI}" modelAttribute="workshop">
+			<form:form action="${requestURI}" modelAttribute="workShop">
 
 					<form:hidden path="id" />
 					<form:hidden path="version" />

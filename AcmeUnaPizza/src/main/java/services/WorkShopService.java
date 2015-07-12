@@ -37,11 +37,13 @@ public class WorkShopService {
 	// Simple CRUD methods ----------------------------------------------------
 	public WorkShop create(){
 		WorkShop newbye;
-		Collection<Repair> repairs = new ArrayList<Repair> ();
+		Collection<Repair> repairs;
 		
 		bossService.findByPrincipal();
 		
 		newbye = new WorkShop();
+		repairs = new ArrayList<Repair>();
+		
 		newbye.setRepairs(repairs);
 		
 		return newbye;

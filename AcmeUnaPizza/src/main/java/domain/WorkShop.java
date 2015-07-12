@@ -61,6 +61,7 @@ public class WorkShop extends DomainEntity{
 		this.taxes = taxes;
 	}
 	
+	@NotBlank
 	@Pattern(regexp = "(((\\+34)? ?(\\(0\\))? ?)|(0))( ?[0-9]{3,4}){3}")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getPhoneNumber() {
@@ -71,7 +72,6 @@ public class WorkShop extends DomainEntity{
 	}
 
 
-	@Size(min = 5, max = 32)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getContact() {
 		return contact;

@@ -93,6 +93,9 @@
 		
 		<!-- PURCHASE ORDER -->
 		<security:intercept-url pattern="/purchaseOrder/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
+		
+		<!-- SALES ORDER -->
+		<security:intercept-url pattern="/salesOrder/customer/**" access="hasRole('CUSTOMER')" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

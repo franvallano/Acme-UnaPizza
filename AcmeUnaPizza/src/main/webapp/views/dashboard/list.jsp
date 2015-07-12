@@ -30,21 +30,6 @@
 		<br/>
 		
 		<fieldset>
-			<b><spring:message code="dashboard.administrator.customerMoreComplaints"/></b>
-			<br/>
-			<jstl:forEach var="customer" items="${customerMoreComplaints}" varStatus="rowIndex">
-				<br/>
-				<acme:labelDetails code="name" value="${customer.name}" />
-				<acme:labelDetails code="surname" value="${customer.surname}" />
-				<acme:labelDetails code="email" value="${customer.email}" />
-				<acme:dateLabelDetails code="birthDate" value="${customer.birthDate}" time="false" />
-				<acme:labelDetails code="range" value="${customer.rangee}" />
-			</jstl:forEach>
-
-		</fieldset>
-		<br/>
-		
-		<fieldset>
 			<b><spring:message code="dashboard.administrator.salesMoney"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${salesMoney}" eurCurrency="true"/>
@@ -56,6 +41,21 @@
 			<b><spring:message code="dashboard.administrator.netSalesMoney"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${netSalesMoney}" eurCurrency="true"/>
+
+		</fieldset>
+		<br/>
+		
+		<fieldset>
+			<b><spring:message code="dashboard.administrator.customerMoreComplaints"/></b>
+			<br/>
+			<jstl:forEach var="customer" items="${customerMoreComplaints}" varStatus="rowIndex">
+				<br/>
+				<acme:labelDetails code="name" value="${customer.name}" />
+				<acme:labelDetails code="surname" value="${customer.surname}" />
+				<acme:labelDetails code="email" value="${customer.email}" />
+				<acme:dateLabelDetails code="birthDate" value="${customer.birthDate}" time="false" />
+				<acme:labelDetails code="range" value="${customer.rangee}" />
+			</jstl:forEach>
 
 		</fieldset>
 		<br/>
@@ -257,9 +257,9 @@
 		<br/>
 		
 		<fieldset>
-			<b><spring:message code="dashboard.administrator.purchasesOrder"/></b>
+			<b><spring:message code="dashboard.administrator.purchaseOrdersMoreExpensive"/></b>
 			<br/>
-			<jstl:forEach var="purchaseOrder" items="${totalPurcharseOrders}" varStatus="rowIndex">
+			<jstl:forEach var="purchaseOrder" items="${purchaseOrdersMoreExpensive}" varStatus="rowIndex">
 				<br/>
 				<acme:labelDetails code="dashboard.purchaseOrder.referenceNumber" value="${purchaseOrder.referenceNumber}" />
 				<acme:labelDetails code="totalCost" value="${purchaseOrder.totalCost}" eurCurrency="true"/>

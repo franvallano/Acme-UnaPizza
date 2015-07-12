@@ -74,4 +74,16 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 	
 	@Query("select p from Product p where p.type = 'DRINK'")
 	Collection<Product> findAllDrinks();
+	
+	@Query("select p.id from Product p where p.type = 'PIZZA'")
+	Collection<Integer> findAllIdsPizzas();
+	
+	@Query("select p.id from Product p where p.type = 'COMPLEMENT'")
+	Collection<Integer> findAllIdsComplements();
+	
+	@Query("select p.id from Product p where p.type = 'DESSERT'")
+	Collection<Integer> findAllIdsDesserts();
+	
+	@Query("select p.id from Product p where p.type = 'DRINK'")
+	Collection<Integer> findAllIdsDrinks();
 }

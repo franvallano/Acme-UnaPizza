@@ -43,6 +43,7 @@
 		<value>/views/purchaseOrder/messages</value>
 		<value>/views/provider/messages</value>
 		<value>/views/repair/messages</value>	
+		<value>/views/salesOrder/messages</value>	
 		
 	</util:list>
 

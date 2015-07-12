@@ -22,6 +22,12 @@
 		
 		<spring:message code="product.description" var="descriptionHeader" />
 		<display:column property="description" title="${descriptionHeader}" sortable="true"/>
+		
+		<spring:message code="product.actualStock" var="actualStockHeader" />
+		<display:column property="actualStock" title="${actualStockHeader}" sortable="true"/>
+		
+		<spring:message code="product.minStock" var="minStockHeader" />
+		<display:column property="minStock" title="${minStockHeader}" sortable="true"/>
 
 		<display:column>
 				<a href="product/administrator/details.do?productId=${productsRow.id}">
