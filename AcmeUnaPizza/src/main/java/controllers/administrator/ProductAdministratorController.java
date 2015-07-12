@@ -242,7 +242,7 @@ public class ProductAdministratorController extends AbstractController{
 		return result;
 	}
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = {"update", "hola}"})
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
 	public ModelAndView update(@Valid Product product, BindingResult binding) {
 		ModelAndView result;
 		Collection<Provider> availableProviders;

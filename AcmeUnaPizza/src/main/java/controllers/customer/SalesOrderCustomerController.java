@@ -1,4 +1,4 @@
-package controllers.administrator;
+package controllers.customer;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,8 +23,8 @@ import forms.PurchaseOrderForm;
 
 
 @Controller
-@RequestMapping("/purchaseOrder/administrator")
-public class PurchaseOrderAdministratorController extends AbstractController{
+@RequestMapping("/salesOrder/customer")
+public class SalesOrderCustomerController extends AbstractController{
 	//Services--------------------------------------------------------
 	@Autowired
 	private PurchaseOrderService purchaseOrderService;
@@ -32,7 +32,7 @@ public class PurchaseOrderAdministratorController extends AbstractController{
 	private ProductService productService;
 	
 	//Constructor------------------------------------------------------
-	public PurchaseOrderAdministratorController(){
+	public SalesOrderCustomerController(){
 		super();
 	}
 	

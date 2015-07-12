@@ -6,11 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.Valid;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -74,7 +74,6 @@ public class Product extends DomainEntity{
 		this.code = code;
 	}
 
-	@Min(0)
 	@Digits(integer=9, fraction=2)
 	public double getStockPrice() {
 		return stockPrice;
@@ -84,7 +83,6 @@ public class Product extends DomainEntity{
 		this.stockPrice = stockPrice;
 	}
 
-	@Min(0)
 	@Digits(integer=9, fraction=2)
 	public double getSalePrice() {
 		return salePrice;

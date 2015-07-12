@@ -1,19 +1,16 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Garage;
-import domain.Motorbike;
+import repositories.ProductRepository;
 import domain.Product;
 import domain.Provider;
-
-import repositories.ProductRepository;
 
 @Service
 @Transactional
@@ -50,6 +47,7 @@ public class ProductService {
 		Assert.notNull(product);
 		administratorService.findByPrincipal();
 		
+		Assert.isTrue(product.getSalePrice() > 0.0 && product.getStockPrice() > 0.0);
 		Assert.isTrue(product.getSalePrice() >= product.getStockPrice());
 		
 		this.productRepository.save(product);
@@ -230,6 +228,45 @@ public class ProductService {
 		return res;
 	}
 	
+	public Collection<Integer> findAllIdsPizzas() {
+		Collection<Integer> result;
+		
+		result = productRepository.findAllIdsPizzas();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Integer> findAllIdsComplements() {
+		Collection<Integer> result;
+		
+		result = productRepository.findAllIdsComplements();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Integer> findAllIdsDesserts() {
+		Collection<Integer> result;
+		
+		result = productRepository.findAllIdsDesserts();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Integer> findAllIdsDrinks() {
+		Collection<Integer> result;
+		
+		result = productRepository.findAllIdsDrinks();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
 	// Ancillary methods ------------------------------------------------------
 
 }

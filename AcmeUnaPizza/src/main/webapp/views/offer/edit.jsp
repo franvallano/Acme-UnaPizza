@@ -73,7 +73,7 @@
 		
 		<jstl:if test="${edit == true && register == null}">
 			<form:form action="${requestURI}" modelAttribute="offerForm">
-				<form:hidden path="id" value="${offer.id}"/>
+				<form:hidden path="id"/>
 			
 				<acme:textbox code="offer.name" path="name"/>
 				<br />

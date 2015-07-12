@@ -87,7 +87,12 @@
 					<li><a href="complaint/actor/list.do"><spring:message code="master.page.complaint" /></a></li>
 				</ul>
 			</li>
-			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a>
+			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.customer.salesOrders" /></a>
+				<ul>
+					<li><a href="salesOrder/customer/list.do"><spring:message code="master.page.customer.salesOrders.list" /></a></li>
+					<li><a href="salesOrder/customer/create.do"><spring:message code="master.page.customer.salesOrders.create" /></a></li>
+				</ul>
 			</li>
 		</security:authorize>
 		

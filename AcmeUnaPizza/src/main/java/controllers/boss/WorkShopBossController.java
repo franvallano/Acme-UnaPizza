@@ -35,11 +35,11 @@ public class WorkShopBossController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		WorkShop workshop;
+		WorkShop workShop;
 		
-		workshop = workshopService.create();
+		workShop = workshopService.create();
 
-		result = createEditModelAndView(workshop);
+		result = createEditModelAndView(workShop);
 
 		return result;
 	}
@@ -65,12 +65,12 @@ public class WorkShopBossController extends AbstractController {
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
 	public ModelAndView details(@RequestParam int workshopId) {
 		ModelAndView result;
-		WorkShop workshop;
+		WorkShop workShop;
 		
-		workshop = workshopService.findOne(workshopId);
+		workShop = workshopService.findOne(workshopId);
 		
 		result = new ModelAndView("workshop/edit");
-		result.addObject("workshop", workshop);
+		result.addObject("workShop", workShop);
 		result.addObject("details", true);
 		
 		return result;
@@ -81,11 +81,11 @@ public class WorkShopBossController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int workshopId) {
 		ModelAndView result;
-		WorkShop workshop;
+		WorkShop workShop;
 		
-		workshop = workshopService.findOne(workshopId);
+		workShop = workshopService.findOne(workshopId);
 		
-		result = createEditModelAndView(workshop);
+		result = createEditModelAndView(workShop);
 		result.addObject("edit", true);
 		result.addObject("requestURI", "workshop/boss/edit.do");
 		
@@ -93,18 +93,18 @@ public class WorkShopBossController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid WorkShop workshop, BindingResult binding) {
+	public ModelAndView save(@Valid WorkShop workShop, BindingResult binding) {
 		ModelAndView result;
 		
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(workshop);
+			result = createEditModelAndView(workShop);
 			result.addObject("edit", true);
 		} else {
 			try {
-				workshopService.save(workshop);
+				workshopService.save(workShop);
 				result = new ModelAndView("redirect:/workshop/boss/list.do");
 			} catch (Throwable oops) {
-				result = createEditModelAndView(workshop, "commit.error");
+				result = createEditModelAndView(workShop, "commit.error");
 				result.addObject("edit", true);
 			}
 		}
@@ -112,19 +112,19 @@ public class WorkShopBossController extends AbstractController {
 		return result;
 	}
 	
-	public ModelAndView createEditModelAndView(WorkShop workshop){
+	public ModelAndView createEditModelAndView(WorkShop workShop){
 		ModelAndView result;
 		
-		result = createEditModelAndView(workshop, null);
+		result = createEditModelAndView(workShop, null);
 		
 		return result;
 	}
 
-	public ModelAndView createEditModelAndView(WorkShop workshop, String message){
+	public ModelAndView createEditModelAndView(WorkShop workShop, String message){
 		ModelAndView res;
 		
 		res = new ModelAndView("workshop/edit");
-		res.addObject("workshop", workshop);
+		res.addObject("workShop", workShop);
 		res.addObject("message", message);
 		res.addObject("requestURI", "workshop/boss/edit.do");	
 		res.addObject("edit", true);
