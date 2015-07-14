@@ -296,6 +296,7 @@
 			<br/>
 			<jstl:forEach var="product" items="${stockMinPizzas}" varStatus="rowIndex">
 				<br/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 				<acme:labelDetails code="name" value="${product.name}" />
 				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
 				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
@@ -309,6 +310,7 @@
 			<br/>
 			<jstl:forEach var="product" items="${stockMinComplements}" varStatus="rowIndex">
 				<br/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 				<acme:labelDetails code="name" value="${product.name}" />
 				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
 				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
@@ -322,6 +324,7 @@
 			<br/>
 			<jstl:forEach var="product" items="${stockMinDesserts}" varStatus="rowIndex">
 				<br/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 				<acme:labelDetails code="name" value="${product.name}" />
 				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
 				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
@@ -335,6 +338,7 @@
 			<br/>
 			<jstl:forEach var="product" items="${stockMinDrinks}" varStatus="rowIndex">
 				<br/>
+				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 				<acme:labelDetails code="name" value="${product.name}" />
 				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
 				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>

@@ -131,6 +131,18 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="boss3" />
+		<property name="password" value="14835ee888dc329b44a35eacca8ac80a" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BOSS" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- Other domain beans come here -->
 	<!-- DATATYPES -->
@@ -600,6 +612,33 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="boss3" class="domain.Boss">
+		<property name="userAccount" ref="userAccount11" />
+		<property name="name" value="boss3" />
+		<property name="surname" value="surboss3" />
+		<property name="email" value="boss3@gmail.com" />
+		<property name="dni" value="85214796A" />
+		<property name="ssNumber" value="WS-1270067890" />
+		<property name="phone" value="635999611" />
+		<property name="contractStartDate" value="2007/01/16 00:00" />
+		<property name="accountNumber" value="12349856113234567890" />
+		<property name="birthDate" value="1972/03/13 00:00" />
+		<property name="address" value="Calle Ruinera 43 (Zamora)" />
+
+		<property name="salesOrders">
+			<list>
+			</list>
+		</property>
+		<property name="repairs">
+			<list>
+			</list>
+		</property>
+		<property name="stuffs">
+			<list>
+			</list>
+		</property>
+	</bean>
 
 	<!-- DELIVERY MAN -->
 	<bean id="deliveryman1" class="domain.DeliveryMan">
@@ -664,7 +703,7 @@
 		<property name="endDate" value="2016/06/13 23:59:59" />
 		<property name="discount" value="30" />
 		<property name="rangee" value="SILVER" />
-		<property name="loopp" value="LMXJV" />
+		<property name="loopp" value="LMXJVSD" />
 	</bean>
 
 	<bean id="offer3" class="domain.Offer">
@@ -673,7 +712,15 @@
 		<property name="endDate" value="2015/07/07 23:59:59" />
 		<property name="discount" value="50" />
 		<property name="rangee" value="VIP" />
-		<property name="loopp" value="SD" />
+		<property name="loopp" value="LMXJVSD" />
+	</bean>
+	
+	<bean id="offer4" class="domain.Offer">
+		<property name="name" value="40% Descuento" />
+		<property name="startDate" value="2015/06/10 00:00" />
+		<property name="discount" value="40" />
+		<property name="rangee" value="GOLD" />
+		<property name="loopp" value="LMXJVSD" />
 	</bean>
 
 	<!-- PROVIDER -->
@@ -740,8 +787,8 @@
 		<property name="description" value="Salsa barbacoa, carne, pollo y bacon" />
 		<property name="stockPrice" value="7.50" />
 		<property name="salePrice" value="12" />
-		<property name="actualStock" value="6" />
-		<property name="minStock" value="6" />
+		<property name="actualStock" value="15" />
+		<property name="minStock" value="20" />
 		<property name="code" value="PZBBQ" />
 		<property name="provider" ref="provider3" />
 	</bean>
@@ -752,8 +799,8 @@
 		<property name="description" value="Salsa carbonara, bacon, champiñones y queso" />
 		<property name="stockPrice" value="7.50" />
 		<property name="salePrice" value="12" />
-		<property name="actualStock" value="20" />
-		<property name="minStock" value="6" />
+		<property name="actualStock" value="25" />
+		<property name="minStock" value="20" />
 		<property name="code" value="PZCB" />
 		<property name="provider" ref="provider3" />
 	</bean>
@@ -764,8 +811,8 @@
 		<property name="description" value="Alitas picantes con salsa barbacoa" />
 		<property name="stockPrice" value="1.50" />
 		<property name="salePrice" value="4" />
-		<property name="actualStock" value="10" />
-		<property name="minStock" value="10" />
+		<property name="actualStock" value="30" />
+		<property name="minStock" value="30" />
 		<property name="code" value="CMALT" />
 		<property name="provider" ref="provider4" />
 	</bean>
@@ -777,8 +824,8 @@
 			value="Delicias de pollo con salsa de miel y mostaza" />
 		<property name="stockPrice" value="1.50" />
 		<property name="salePrice" value="4" />
-		<property name="actualStock" value="30" />
-		<property name="minStock" value="10" />
+		<property name="actualStock" value="20" />
+		<property name="minStock" value="30" />
 		<property name="code" value="CMDEL" />
 		<property name="provider" ref="provider4" />
 	</bean>
@@ -789,8 +836,8 @@
 		<property name="description" value="Helado de fresa marca Kalisse" />
 		<property name="stockPrice" value="2.50" />
 		<property name="salePrice" value="5" />
-		<property name="actualStock" value="8" />
-		<property name="minStock" value="10" />
+		<property name="actualStock" value="10" />
+		<property name="minStock" value="30" />
 		<property name="code" value="DEHEF" />
 		<property name="provider" ref="provider1" />
 	</bean>
@@ -801,8 +848,8 @@
 		<property name="description" value="Helado de chocolate marca Kalisse" />
 		<property name="stockPrice" value="2.50" />
 		<property name="salePrice" value="5" />
-		<property name="actualStock" value="30" />
-		<property name="minStock" value="10" />
+		<property name="actualStock" value="10" />
+		<property name="minStock" value="30" />
 		<property name="code" value="DEHEC" />
 		<property name="provider" ref="provider1" />
 	</bean>
@@ -813,8 +860,8 @@
 		<property name="description" value="Lata de CocaCola de 33cl" />
 		<property name="stockPrice" value="0.50" />
 		<property name="salePrice" value="1.5" />
-		<property name="actualStock" value="15" />
-		<property name="minStock" value="20" />
+		<property name="actualStock" value="25" />
+		<property name="minStock" value="50" />
 		<property name="code" value="DRCOC" />
 		<property name="provider" ref="provider2" />
 	</bean>
@@ -826,7 +873,7 @@
 		<property name="stockPrice" value="0.50" />
 		<property name="salePrice" value="1.5" />
 		<property name="actualStock" value="60" />
-		<property name="minStock" value="20" />
+		<property name="minStock" value="50" />
 		<property name="code" value="DRFNA" />
 		<property name="provider" ref="provider2" />
 	</bean>
@@ -869,7 +916,6 @@
 		<property name="creationMoment" value="2015/06/06 10:12" />
 		<property name="state" value="OPEN" />
 		<property name="customer" ref="customer1" />
-		<property name="boss" ref="boss1" />
 
 		<property name="products">
 			<list>
@@ -944,7 +990,7 @@
 
 	<bean id="salesOrder5" class="domain.SalesOrder">
 		<property name="referenceNumber" value="GGG-15846595" />
-		<property name="totalCost" value="15.25" />
+		<property name="totalCost" value="12.75" />
 		<property name="creationMoment" value="2015/06/16 17:15" />
 		<property name="state" value="ONITSWAY" />
 		<property name="deliveryMan" ref="deliveryman1"></property>
@@ -1012,7 +1058,7 @@
 
 	<bean id="salesOrder8" class="domain.SalesOrder">
 		<property name="referenceNumber" value="ZZZ-11111555" />
-		<property name="totalCost" value="53.2" />
+		<property name="totalCost" value="45.2" />
 		<property name="creationMoment" value="2015/06/19 20:00" />
 		<property name="state" value="UNDELIVERED" />
 		<property name="deliveryMan" ref="deliveryman2"></property>

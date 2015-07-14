@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -219,6 +220,120 @@ public class OfferService {
 		
 		return offerForm;
 	}
+	
+	public Collection<Offer> findOffersVIP() {
+		Collection<Offer> result;
+		
+		result = offerRepository.findOffersVIP();
+		
+		Assert.notNull(result);
+		
+		result = filterOfferDays(result);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Offer> findOffersGOLD() {
+		Collection<Offer> result;
+		
+		result = offerRepository.findOffersGOLD();
+		
+		Assert.notNull(result);
+		
+		result = filterOfferDays(result);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Offer> findOffersSILVER() {
+		Collection<Offer> result;
+		
+		result = offerRepository.findOffersSILVER();
+		
+		Assert.notNull(result);
+		
+		result = filterOfferDays(result);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Offer> findOffersSTANDARD() {
+		Collection<Offer> result;
+		
+		result = offerRepository.findOffersSTANDARD();
+		
+		Assert.notNull(result);
+		
+		result = filterOfferDays(result);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	// Filtramos la coleccion segun los dias
+	private Collection<Offer> filterOfferDays(Collection<Offer> offersUnfilter) {
+		Collection<Offer> result;
+		Calendar actualDate = Calendar.getInstance();
+		actualDate.setTimeInMillis(System.currentTimeMillis());
+		int dayOfWeek;
+		
+		result = new HashSet<Offer>();
+		
+		for(Offer offer : offersUnfilter) {
+			dayOfWeek = actualDate.get(Calendar.DAY_OF_WEEK);
+			
+			// Domingo 0 Lunes 1 Martes 2
+			
+			// NOTA: El numero de dia va del Domingo al Sabado, por lo que va adelantado uno
+			switch(dayOfWeek) {
+				// Domingo
+				case 1:
+					if(offer.getLoopp().contains("D"))
+						result.add(offer);
+					break;
+				// Lunes
+				case 2:
+					if(offer.getLoopp().contains("L"))
+						result.add(offer);
+					break;
+				// Martes
+				case 3:
+					if(offer.getLoopp().contains("M"))
+						result.add(offer);
+					break;
+				// Miercoles
+				case 4:
+					if(offer.getLoopp().contains("X"))
+						result.add(offer);
+					break;
+				// Jueves
+				case 5:
+					if(offer.getLoopp().contains("J"))
+						result.add(offer);
+					break;
+				// Viernes
+				case 6:
+					if(offer.getLoopp().contains("V"))
+						result.add(offer);
+					break;
+				// Sabado
+				case 7:
+					if(offer.getLoopp().contains("S"))
+						result.add(offer);
+					break;
+			}
+		}
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

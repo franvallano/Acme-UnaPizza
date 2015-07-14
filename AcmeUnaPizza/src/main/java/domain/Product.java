@@ -101,7 +101,7 @@ public class Product extends DomainEntity{
 		this.actualStock = actualStock;
 	}
 
-	@Min(0)
+	@Min(10)
 	public int getMinStock() {
 		return minStock;
 	}

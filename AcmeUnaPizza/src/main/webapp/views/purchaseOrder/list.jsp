@@ -25,7 +25,7 @@
 			
 			<display:column>
 					<a href="purchaseOrder/administrator/details.do?purchaseOrderId=${purchaseOrdersRow.id}">
-						<spring:message code="motorbike.details" />
+						<spring:message code="purchaseOrder.details" />
 					</a>
 			</display:column>
 		

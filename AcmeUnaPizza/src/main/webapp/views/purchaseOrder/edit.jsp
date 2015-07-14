@@ -44,7 +44,7 @@
 		<jstl:if test="${details == true}">
 			<fieldset>
 				<acme:labelDetails code="purchaseOrder.referenceNumber" value="${purchaseOrder.referenceNumber}"/>
-				<acme:labelDetails code="purchaseOrder.totalCost" value="${purchaseOrder.totalCost}"/>
+				<acme:labelDetails code="purchaseOrder.totalCost" value="${purchaseOrder.totalCost}" eurCurrency="true"/>
 				<acme:dateLabelDetails code="purchaseOrder.creationMoment" value="${purchaseOrder.creationMoment}"/>
 				<br/>
 				<fieldset>
@@ -161,7 +161,7 @@
 					</jstl:forEach>
 				</fieldset>
 				<br />
-				<acme:submit name="save" code="offer.save"/>
+				<acme:submit name="save" code="purchaseOrder.save"/>
 				
 				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('purchaseOrder/administrator/list.do');" />
