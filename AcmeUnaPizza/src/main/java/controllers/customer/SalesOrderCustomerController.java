@@ -13,13 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CustomerService;
+import services.OfferService;
 import services.ProductService;
-import services.PurchaseOrderService;
+import services.SalesOrderService;
 import controllers.AbstractController;
 import domain.Offer;
 import domain.Product;
 import domain.PurchaseOrder;
+import domain.SalesOrder;
 import forms.PurchaseOrderForm;
+import forms.SalesOrderForm;
 
 
 @Controller
@@ -27,9 +31,13 @@ import forms.PurchaseOrderForm;
 public class SalesOrderCustomerController extends AbstractController{
 	//Services--------------------------------------------------------
 	@Autowired
-	private PurchaseOrderService purchaseOrderService;
+	private SalesOrderService salesOrderService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private CustomerService customerService;
+	@Autowired
+	private OfferService offerService;
 	
 	//Constructor------------------------------------------------------
 	public SalesOrderCustomerController(){
@@ -38,29 +46,29 @@ public class SalesOrderCustomerController extends AbstractController{
 	
 	//Listing----------------------------------------------------------
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView listPurchaseOrders(){
+	public ModelAndView listSalesOrders(){
 		ModelAndView result;
 		
-		Collection<PurchaseOrder> purchaseOrders;
+		Collection<SalesOrder> salesOrders;
 		
-		purchaseOrders = purchaseOrderService.findAll();
+		salesOrders = salesOrderService.findAllByCustomerId();
 		
-		result = new ModelAndView("purchaseOrder/list");
-		result.addObject("purchaseOrders", purchaseOrders);
-		result.addObject("requestURI", "purchaseOrder/administrator/list.do");
+		result = new ModelAndView("salesOrder/list");
+		result.addObject("salesOrders", salesOrders);
+		result.addObject("requestURI", "salesOrder/customer/list.do");
 		
 		return result;
 	}
 	
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
-	public ModelAndView details(@RequestParam int purchaseOrderId) {
+	public ModelAndView details(@RequestParam int salesOrderId) {
 		ModelAndView result;
-		PurchaseOrder purchaseOrder;
+		SalesOrder salesOrder;
 		
-		purchaseOrder = purchaseOrderService.findOne(purchaseOrderId);
+		salesOrder = salesOrderService.findOne(salesOrderId);
 		
-		result = new ModelAndView("purchaseOrder/edit");
-		result.addObject("purchaseOrder", purchaseOrder);
+		result = new ModelAndView("salesOrder/edit");
+		result.addObject("salesOrder", salesOrder);
 		result.addObject("details", true);
 		
 		return result;
@@ -69,44 +77,45 @@ public class SalesOrderCustomerController extends AbstractController{
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		PurchaseOrderForm purchaseOrderForm;
+		SalesOrderForm salesOrderForm;
 
-		purchaseOrderForm = purchaseOrderService.createForm();
-		
-		result = createEditModelAndView(purchaseOrderForm);
+		salesOrderForm = salesOrderService.createForm();
+
+		result = createEditModelAndView(salesOrderForm);
 
 		return result;
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid PurchaseOrderForm purchaseOrderForm, BindingResult binding){
+	public ModelAndView save(@Valid SalesOrderForm salesOrderForm, BindingResult binding){
 		ModelAndView result;
-		PurchaseOrder purchaseOrder;
+		SalesOrder salesOrder;
 
 		if(binding.hasErrors()){
-			result = createEditModelAndView(purchaseOrderForm);
+			result = createEditModelAndView(salesOrderForm);
 		}else{
 			try{
-				purchaseOrder = purchaseOrderService.reconstruct(purchaseOrderForm);
-				purchaseOrderService.save(purchaseOrder);
-				result = new ModelAndView("redirect:/purchaseOrder/administrator/list.do");
+				salesOrder = salesOrderService.reconstruct(salesOrderForm);
+				salesOrderService.save(salesOrder);
+				result = new ModelAndView("redirect:/salesOrder/customer/list.do");
 			}catch (Throwable oops){
-				result = createEditModelAndView(purchaseOrderForm, "purchaseOrder.commit.error");
+				salesOrderForm.setTotalCost(0.0);
+				result = createEditModelAndView(salesOrderForm, "salesOrder.commit.error");
 			}
 		}
 		
 		return result;
 	}
 	
-	public ModelAndView createEditModelAndView(PurchaseOrderForm purchaseOrder){
+	public ModelAndView createEditModelAndView(SalesOrderForm salesOrderForm){
 		ModelAndView result;
 		
-		result = createEditModelAndView(purchaseOrder, null);
+		result = createEditModelAndView(salesOrderForm, null);
 		
 		return result;
 	}
 
-	public ModelAndView createEditModelAndView(PurchaseOrderForm purchaseOrderForm, String message){
+	public ModelAndView createEditModelAndView(SalesOrderForm salesOrderForm, String message){
 		ModelAndView res;
 		Collection<Product> pizzas;
 		Collection<Product> complements;
@@ -117,12 +126,26 @@ public class SalesOrderCustomerController extends AbstractController{
 		Collection<Integer> idComplements;
 		Collection<Integer> idDesserts;
 		Collection<Integer> idDrinks;
+		Collection<Offer> availableOffers;
+		String range;
 		
+		range = customerService.findByPrincipal().getRangee();
 		
-		pizzas = productService.findAllPizzas();
-		complements = productService.findAllComplements();
-		desserts = productService.findAllDesserts();
-		drinks = productService.findAllDrinks();
+		if(range.equals("STANDARD"))
+			availableOffers = offerService.findOffersSTANDARD();
+		else if(range.equals("SILVER"))
+			availableOffers = offerService.findOffersSILVER();
+		else if(range.equals("GOLD"))
+			availableOffers = offerService.findOffersGOLD();
+		else if(range.equals("VIP"))
+			availableOffers = offerService.findOffersVIP();
+		else
+			availableOffers = new ArrayList<Offer>();
+		
+		pizzas = productService.findAllPizzasMin(5);
+		complements = productService.findAllComplementsMin(5);
+		desserts = productService.findAllDessertsMin(5);
+		drinks = productService.findAllDrinksMin(5);
 		
 		totalAmount = new ArrayList<Integer>();
 		idPizzas = new ArrayList<Integer>();
@@ -130,23 +153,23 @@ public class SalesOrderCustomerController extends AbstractController{
 		idDesserts = new ArrayList<Integer>();
 		idDrinks = new ArrayList<Integer>();
 		
-		for(int i=1;i<=51;i++)
+		for(int i=1;i<=6;i++)
 			totalAmount.add(i);
 		
-		idPizzas = productService.findAllIdsPizzas();
-		idComplements = productService.findAllIdsComplements();
-		idDesserts = productService.findAllIdsDesserts();
-		idDrinks = productService.findAllIdsDrinks();
+		idPizzas = productService.findAllIdsPizzasMin(5);
+		idComplements = productService.findAllIdsComplementsMin(5);
+		idDesserts = productService.findAllIdsDessertsMin(5);
+		idDrinks = productService.findAllIdsDrinksMin(5);
 		
-		purchaseOrderForm.setIdPizzas(idPizzas);
-		purchaseOrderForm.setIdComplements(idComplements);
-		purchaseOrderForm.setIdDesserts(idDesserts);
-		purchaseOrderForm.setIdDrinks(idDrinks);
+		salesOrderForm.setIdPizzas(idPizzas);
+		salesOrderForm.setIdComplements(idComplements);
+		salesOrderForm.setIdDesserts(idDesserts);
+		salesOrderForm.setIdDrinks(idDrinks);
 
-		res = new ModelAndView("purchaseOrder/edit");
-		res.addObject("purchaseOrderForm", purchaseOrderForm);
+		res = new ModelAndView("salesOrder/edit");
+		res.addObject("salesOrderForm", salesOrderForm);
 		res.addObject("message", message);
-		res.addObject("requestURI", "purchaseOrder/administrator/edit.do");	
+		res.addObject("requestURI", "salesOrder/customer/edit.do");	
 		res.addObject("edit", true);
 		res.addObject("pizzas", pizzas);
 		res.addObject("pizzas", pizzas);
@@ -154,6 +177,7 @@ public class SalesOrderCustomerController extends AbstractController{
 		res.addObject("desserts", desserts);
 		res.addObject("drinks", drinks);
 		res.addObject("totalAmount", totalAmount);
+		res.addObject("availableOffers", availableOffers);
 	
 		return res;
 	}

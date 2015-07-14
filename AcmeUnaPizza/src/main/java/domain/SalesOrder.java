@@ -123,8 +123,7 @@ public class SalesOrder extends DomainEntity{
 	}
 
 	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Boss getBoss() {
 		return boss;
 	}

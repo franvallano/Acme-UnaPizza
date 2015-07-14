@@ -121,7 +121,7 @@ public class BossService {
 	 	Assert.notNull(boss);
 	 	
 	 	return boss;
-	 }
+	}
 	
 	// Ancillary methods ------------------------------------------------------
 

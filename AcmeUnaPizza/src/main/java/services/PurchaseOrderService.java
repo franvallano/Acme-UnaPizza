@@ -215,7 +215,7 @@ public class PurchaseOrderService {
 	
 	public void save(PurchaseOrder purchaseOrder) {
 		Assert.notNull(purchaseOrder);
-		Assert.isTrue(purchaseOrder.getAdministrator() == administratorService.findByPrincipal());
+		Assert.isTrue(purchaseOrder.getAdministrator().getId() == administratorService.findByPrincipal().getId());
 		
 		Date date;
 		

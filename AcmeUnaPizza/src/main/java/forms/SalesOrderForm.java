@@ -64,7 +64,6 @@ public class SalesOrderForm {
 		this.creationMoment = creationMoment;
 	}
 	
-	@NotEmpty
 	public List<Double> getAmountPizzas() {
 		return amountPizzas;
 	}
@@ -72,7 +71,6 @@ public class SalesOrderForm {
 		this.amountPizzas = amountPizzas;
 	}
 	
-	@NotEmpty
 	public Collection<Integer> getIdPizzas() {
 		return idPizzas;
 	}
@@ -80,7 +78,6 @@ public class SalesOrderForm {
 		this.idPizzas = idPizzas;
 	}
 	
-	@NotEmpty
 	public Collection<Integer> getIdComplements() {
 		return idComplements;
 	}
@@ -88,7 +85,6 @@ public class SalesOrderForm {
 		this.idComplements = idComplements;
 	}
 	
-	@NotEmpty
 	public List<Double> getAmountComplements() {
 		return amountComplements;
 	}
@@ -96,15 +92,13 @@ public class SalesOrderForm {
 		this.amountComplements = amountComplements;
 	}
 	
-	@NotEmpty
 	public Collection<Integer> getIdDesserts() {
 		return idDesserts;
 	}
 	public void setIdDesserts(Collection<Integer> idDesserts) {
 		this.idDesserts = idDesserts;
 	}
-	
-	@NotEmpty
+
 	public List<Double> getAmountDesserts() {
 		return amountDesserts;
 	}
@@ -112,7 +106,6 @@ public class SalesOrderForm {
 		this.amountDesserts = amountDesserts;
 	}
 	
-	@NotEmpty
 	public Collection<Integer> getIdDrinks() {
 		return idDrinks;
 	}
@@ -120,7 +113,6 @@ public class SalesOrderForm {
 		this.idDrinks = idDrinks;
 	}
 	
-	@NotEmpty
 	public List<Double> getAmountDrinks() {
 		return amountDrinks;
 	}

@@ -24,6 +24,9 @@ public class ProductService {
 	@Autowired
 	private AdministratorService administratorService;
 	
+	@Autowired
+	private CustomerService customerService;
+	
 	// Constructor ------------------------------------------------------------
 	public ProductService(){
 		super();
@@ -46,6 +49,16 @@ public class ProductService {
 	public void save(Product product){
 		Assert.notNull(product);
 		administratorService.findByPrincipal();
+		
+		Assert.isTrue(product.getSalePrice() > 0.0 && product.getStockPrice() > 0.0);
+		Assert.isTrue(product.getSalePrice() >= product.getStockPrice());
+		
+		this.productRepository.save(product);
+	}
+	
+	public void saveProductByCustomer(Product product){
+		Assert.notNull(product);
+		customerService.findByPrincipal();
 		
 		Assert.isTrue(product.getSalePrice() > 0.0 && product.getStockPrice() > 0.0);
 		Assert.isTrue(product.getSalePrice() >= product.getStockPrice());
@@ -262,6 +275,86 @@ public class ProductService {
 		Collection<Integer> result;
 		
 		result = productRepository.findAllIdsDrinks();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Product> findAllPizzasMin(int amountMin) {
+		Collection<Product> result;
+		
+		result = productRepository.findAllPizzasMin(amountMin);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Product> findAllComplementsMin(int amountMin) {
+		Collection<Product> result;
+		
+		result = productRepository.findAllComplementsMin(amountMin);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Product> findAllDessertsMin(int amountMin) {
+		Collection<Product> result;
+		
+		result = productRepository.findAllDessertsMin(amountMin);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Product> findAllDrinksMin(int amountMin) {
+		Collection<Product> result;
+		
+		result = productRepository.findAllDrinksMin(amountMin);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Integer> findAllIdsPizzasMin(int amountMin) {
+		Collection<Integer> result;
+		
+		result = productRepository.findAllIdsPizzasMin(amountMin);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Integer> findAllIdsComplementsMin(int amountMin) {
+		Collection<Integer> result;
+		
+		result = productRepository.findAllIdsComplementsMin(amountMin);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Integer> findAllIdsDessertsMin(int amountMin) {
+		Collection<Integer> result;
+		
+		result = productRepository.findAllIdsDessertsMin(amountMin);
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
+	public Collection<Integer> findAllIdsDrinksMin(int amountMin) {
+		Collection<Integer> result;
+		
+		result = productRepository.findAllIdsDrinksMin(amountMin);
 		
 		Assert.notNull(result);
 		

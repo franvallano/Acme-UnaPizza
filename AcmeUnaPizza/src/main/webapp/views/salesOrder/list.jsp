@@ -10,22 +10,25 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="purchaseOrders" pagesize="10" class="displaytag" requestURI="${requestURI}" id="purchaseOrdersRow">
+<display:table name="salesOrders" pagesize="10" class="displaytag" requestURI="${requestURI}" id="salesOrdersRow">
 
-	<security:authorize access="hasRole('ADMINISTRATOR')">
+	<security:authorize access="hasRole('CUSTOMER')">
 	
-			<spring:message code="purchaseOrder.referenceNumber" var="referenceNumberHeader" />
+			<spring:message code="salesOrder.referenceNumber" var="referenceNumberHeader" />
 			<display:column property="referenceNumber" title="${referenceNumberHeader}" sortable="true"/>
 			
-			<spring:message code="purchaseOrder.totalCost" var="totalCostHeader" />
+			<spring:message code="salesOrder.totalCost" var="totalCostHeader" />
 			<display:column property="totalCost" title="${totalCostHeader}" sortable="true"/>
 			
-			<spring:message code="purchaseOrder.creationMoment" var="creationMomentHeader" />
+			<spring:message code="salesOrder.creationMoment" var="creationMomentHeader" />
 			<display:column property="creationMoment" title="${creationMomentHeader}" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
 			
+			<spring:message code="salesOrder.totalCost" var="totalCostHeader" />
+			<display:column property="totalCost" title="${totalCostHeader}" sortable="true"/>
+			
 			<display:column>
-					<a href="purchaseOrder/administrator/details.do?purchaseOrderId=${purchaseOrdersRow.id}">
-						<spring:message code="motorbike.details" />
+					<a href="salesOrder/customer/details.do?salesOrderId=${salesOrdersRow.id}">
+						<spring:message code="salesOrder.details" />
 					</a>
 			</display:column>
 		

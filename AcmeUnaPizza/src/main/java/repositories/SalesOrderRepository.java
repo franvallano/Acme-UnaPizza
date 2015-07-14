@@ -80,4 +80,7 @@ public interface SalesOrderRepository extends JpaRepository<SalesOrder, Integer>
 	//Pedido que menos se ha tardado en repartir
 	@Query("select sO from SalesOrder sO where sO.drivingTime=(select min(s.drivingTime) from SalesOrder s where s.drivingTime>0)")
 	Collection<SalesOrder> findSalesOrderMinDrinvingTime();
-}
+	
+	@Query("select sO from SalesOrder sO where sO.customer.id = ?1")
+	Collection<SalesOrder> findAllByCustomerId(int customerId);
+} 

@@ -91,6 +91,7 @@ public class PurchaseOrderAdministratorController extends AbstractController{
 				purchaseOrderService.save(purchaseOrder);
 				result = new ModelAndView("redirect:/purchaseOrder/administrator/list.do");
 			}catch (Throwable oops){
+				purchaseOrderForm.setTotalCost(0.0);
 				result = createEditModelAndView(purchaseOrderForm, "purchaseOrder.commit.error");
 			}
 		}
