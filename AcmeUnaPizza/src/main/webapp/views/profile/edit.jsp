@@ -105,3 +105,20 @@
 		</form:form>
 		
 	</security:authorize>
+	
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<form:form action="${url}" modelAttribute="${userForm}" >
+			<acme:textbox code="customer.username" path="username" readonly="true"/>
+			<br/>
+				
+			<acme:textbox code="customer.name" path="name"/>
+			<br/>
+			<acme:textbox code="customer.surname" path="surname"/>
+			<br/>
+			<acme:textbox code="customer.email" path="email"/>
+			<br/>
+			<acme:submit name="save" code="customer.save"/>
+			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				onclick="javascript: window.history.back();" />
+		</form:form>
+	</security:authorize>

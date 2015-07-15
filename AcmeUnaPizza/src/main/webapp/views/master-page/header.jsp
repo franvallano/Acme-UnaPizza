@@ -139,6 +139,10 @@
 							<li><a href="profile/customer/edit.do"><spring:message code="master.page.viewProfile" /></a></li>
 							<li><a href="profile/customer/changePassword.do"><spring:message code="master.page.changePassword" /></a></li>
 						</security:authorize>
+						<security:authorize access="hasRole('ADMINISTRATOR')">
+							<li><a href="profile/administrator/edit.do"><spring:message code="master.page.viewProfile" /></a></li>
+							<li><a href="profile/administrator/changePassword.do"><spring:message code="master.page.changePassword" /></a></li>
+						</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

@@ -1,4 +1,4 @@
-package controllers.customer;
+package controllers.administrator;
 
 import javax.validation.Valid;
 
@@ -10,59 +10,59 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.CustomerService;
+import services.AdministratorService;
 import controllers.AbstractController;
+import domain.Administrator;
 import domain.Customer;
+import forms.AdministratorProfileForm;
 import forms.CustomerProfileForm;
 import forms.PasswordForm;
  
 @Controller
-@RequestMapping("/profile/customer")
-public class ProfileCustomerController extends AbstractController{
+@RequestMapping("/profile/administrator")
+public class ProfileAdministratorController extends AbstractController{
 	
 	@Autowired
-	private CustomerService customerService;
+	private AdministratorService administratorService;
 	
-	public ProfileCustomerController(){
+	public ProfileAdministratorController(){
 		super();
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView editProfile() {
 		ModelAndView result;
-		CustomerProfileForm customerProfileForm;
-		Customer customer;
+		AdministratorProfileForm administratorProfileForm;
+		Administrator administrator;
 		
-		customer = customerService.findByPrincipal();
+		administrator = administratorService.findByPrincipal();
 
-		customerProfileForm = customerService.desreconstructProfile(customer);
+		administratorProfileForm = administratorService.desreconstructProfile(administrator);
 		
-		result = createEditModelAndView(customerProfileForm);
+		result = createEditModelAndView(administratorProfileForm);
 		
 		return result;
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid CustomerProfileForm customerProfileForm, BindingResult binding){
+	public ModelAndView save(@Valid AdministratorProfileForm administratorProfileForm, BindingResult binding){
 		ModelAndView result;
-		Customer customer;
+		Administrator administrator;
 		
 		if(binding.hasErrors()){
-			result = createEditModelAndView(customerProfileForm);
+			result = createEditModelAndView(administratorProfileForm);
 		}else{
 			try{
-				customer = customerService.reconstructProfile(customerProfileForm);
-				customerService.saveProfile(customer);
+				administrator = administratorService.reconstructProfile(administratorProfileForm);
+				administratorService.saveProfile(administrator);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			}catch (Throwable oops){
 				
 				
 				if(oops instanceof DataIntegrityViolationException)
-					result = createEditModelAndView(customerProfileForm, "commit.duplicatedUser");
+					result = createEditModelAndView(administratorProfileForm, "commit.duplicatedUser");
 				else
-					result = createEditModelAndView(customerProfileForm, "commit.error");
-				
-				result.addObject("checkBoxCreditCard", customerProfileForm.isCheckBoxCreditCard());
+					result = createEditModelAndView(administratorProfileForm, "commit.error");
 			}
 		}
 		
@@ -84,14 +84,14 @@ public class ProfileCustomerController extends AbstractController{
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid PasswordForm passwordForm, BindingResult binding){
 		ModelAndView result;
-		Customer customer;
+		Administrator administrator;
 		
 		if(binding.hasErrors()){
 			result = createEditModelAndView(passwordForm);
 		}else{
 			try{
-				customer = customerService.reconstructPassword(passwordForm);
-				customerService.saveProfile(customer);
+				administrator = administratorService.reconstructPassword(passwordForm);
+				administratorService.saveProfile(administrator);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			}catch (Throwable oops){
 				result = createEditModelAndView(passwordForm, "password.commit.error");
@@ -103,23 +103,22 @@ public class ProfileCustomerController extends AbstractController{
 	
 	//Ancillary methods
 	
-	protected ModelAndView createEditModelAndView(CustomerProfileForm customerProfileForm){
+	protected ModelAndView createEditModelAndView(AdministratorProfileForm administratorProfileForm){
 		ModelAndView result;
 		
-		result = createEditModelAndView(customerProfileForm, null);
-		result.addObject("checkBoxCreditCard", customerProfileForm.isCheckBoxCreditCard());
+		result = createEditModelAndView(administratorProfileForm, null);
 		
 		return result;
 	}
 	
-	protected ModelAndView createEditModelAndView(CustomerProfileForm customerProfileForm, String message){
+	protected ModelAndView createEditModelAndView(AdministratorProfileForm administratorProfileForm, String message){
 		ModelAndView result;
 		
 		result = new ModelAndView("profile/edit");
-		result.addObject("customerProfileForm", customerProfileForm);
-		result.addObject("userForm", "customerProfileForm");
+		result.addObject("administratorProfileForm", administratorProfileForm);
+		result.addObject("userForm", "administratorProfileForm");
 		result.addObject("message", message);
-		result.addObject("url", "profile/customer/edit.do");
+		result.addObject("url", "profile/administrator/edit.do");
 		
 		return result;
 	}
@@ -139,7 +138,7 @@ public class ProfileCustomerController extends AbstractController{
 		result.addObject("passwordForm", passwordForm);
 		result.addObject("passForm", "passwordForm");
 		result.addObject("message", message);
-		result.addObject("url", "profile/customer/changePassword.do");
+		result.addObject("url", "profile/administrator/changePassword.do");
 		
 		return result;
 	}

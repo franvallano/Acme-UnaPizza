@@ -63,8 +63,9 @@ public class CustomerService {
 		customerRepository.save(customer);
 	}
 	
-	public void save(Customer customer){
+	public void saveProfile(Customer customer){
 		Assert.notNull(customer);
+		Assert.isTrue(customer.getId() == findByPrincipal().getId());
 	
 		customerRepository.save(customer);
 	}
