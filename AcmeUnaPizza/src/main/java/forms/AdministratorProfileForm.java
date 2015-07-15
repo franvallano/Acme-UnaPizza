@@ -7,14 +7,12 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
-public class AdministratorForm {
+public class AdministratorProfileForm {
 	// Attributes -----------------------------------------------------
 	private String username;
-	private String password;
 	private String name;
 	private String surname;
 	private String email;
-	private String repeatedPass;
 
 	// Methods ---------------------------------------------------------
 
@@ -59,26 +57,4 @@ public class AdministratorForm {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	@Size(min=5, max=32)
-	@SafeHtml(whitelistType=WhiteListType.SIMPLE_TEXT)
-	@NotBlank
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	@SafeHtml(whitelistType=WhiteListType.SIMPLE_TEXT)
-	@NotBlank
-	@Size(min=5, max=32)
-	public String getRepeatedPass() {
-		return repeatedPass;
-	}
-	public void setRepeatedPass(String repeatedPass) {
-		this.repeatedPass = repeatedPass;
-	}
-
 }

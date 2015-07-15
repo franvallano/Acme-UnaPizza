@@ -30,14 +30,6 @@
 				<a href="user/administrator/detailsAdministrator.do?administratorId=${administratorsRow.id}" ><spring:message code="details"/></a>
 			</display:column>
 			
-			<display:column>
-				<jstl:if test="${administratorsRow.id == adminId}">
-					<a href="user/administrator/administrator/edit.do?administratorId=${administratorsRow.id}" ><spring:message code="edit"/></a>
-				</jstl:if>
-			</display:column>
-		
-			
-			
 		</security:authorize>
 		
 		

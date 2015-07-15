@@ -13,14 +13,15 @@ import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import utilities.PasswordCode;
 import domain.Administrator;
 import domain.Complaint;
+import domain.Customer;
 import domain.DiscussionMessage;
 import domain.PurchaseOrder;
-import domain.SalesOrder;
 import forms.AdministratorForm;
-import forms.CustomerForm;
+import forms.AdministratorProfileForm;
+import forms.CustomerProfileForm;
+import forms.PasswordForm;
 
 @Service
 @Transactional
@@ -62,7 +63,6 @@ public class AdministratorService {
 		
 		Assert.notNull(administrator);
 		Assert.isTrue(administrator.getUserAccount().getPassword().equals(rPass));
-		findByPrincipal();
 		
 		pass = administrator.getUserAccount().getPassword();
 		pass = encoder.encodePassword(pass, null);
@@ -70,15 +70,12 @@ public class AdministratorService {
 		
 		administratorRepository.save(administrator);
 	}
-
-	public void delete( Administrator entity ){
-		Assert.notNull(entity);
-		Assert.isTrue( entity.getId()!=0 );
-		Assert.isTrue( this.administratorRepository.exists(entity.getId() ));
-		
-		this.administratorRepository.delete( entity );
-		
-		Assert.isTrue( !this.administratorRepository.exists(entity.getId() ));
+	
+	public void saveProfile(Administrator administrator){
+		Assert.notNull(administrator);
+		Assert.isTrue(administrator.getId() == findByPrincipal().getId());
+	
+		administratorRepository.save(administrator);
 	}
 	
 	public Administrator findOne( int id ){
@@ -159,6 +156,36 @@ public class AdministratorService {
 		
 	}
 	
+	public Administrator reconstructProfile(AdministratorProfileForm administratorProfileForm) {
+		Assert.notNull(administratorProfileForm);
+		Administrator administrator;
+		
+		administrator = findByPrincipal();
+		
+		Assert.isTrue(administrator.getUserAccount().getUsername().equals(administratorProfileForm.getUsername()));
+		
+		administrator.setName(administratorProfileForm.getName());
+		administrator.setSurname(administratorProfileForm.getSurname());
+		administrator.setEmail(administratorProfileForm.getEmail());
+		
+		return administrator;
+		
+	}
+	
+	public AdministratorProfileForm desreconstructProfile(Administrator administrator) {
+		Assert.notNull(administrator);
+		AdministratorProfileForm administratorProfileForm;
+		
+		administratorProfileForm = new AdministratorProfileForm();
+		
+		administratorProfileForm.setUsername(administrator.getUserAccount().getUsername());
+		administratorProfileForm.setName(administrator.getName());
+		administratorProfileForm.setSurname(administrator.getSurname());
+		administratorProfileForm.setEmail(administrator.getEmail());
+		
+		return administratorProfileForm;
+	}
+	
 	public AdministratorForm desreconstruct(Administrator administrator){
 		Assert.notNull(administrator);
 		
@@ -187,6 +214,23 @@ public class AdministratorService {
 		result = pass.equals(rpass);
 		
 		return result;
+	}
+	
+	public Administrator reconstructPassword(PasswordForm passwordForm) {
+		Assert.notNull(passwordForm);
+		Assert.isTrue(passwordForm.getNewPassword().equals(passwordForm.getRepeatNewPassword()));
+		Administrator administrator;
+		Md5PasswordEncoder encoder;
+
+		administrator = findByPrincipal();
+		
+		encoder = new Md5PasswordEncoder();
+		
+		Assert.isTrue(administrator.getUserAccount().getPassword().equals(encoder.encodePassword(passwordForm.getActualPassword(), null)));
+		
+		administrator.getUserAccount().setPassword(encoder.encodePassword(passwordForm.getNewPassword(), null));
+		
+		return administrator;
 	}
 	
 	// Ancillary methods ------------------------------------------------------
