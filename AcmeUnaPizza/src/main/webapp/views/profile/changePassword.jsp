@@ -15,5 +15,20 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<p><spring:message code="profile.action.2" /></p>
+	
+	<security:authorize access="hasAnyRole('CUSTOMER', 'ADMINISTRATOR', 'BOSS', 'DELIVERY_MAN', 'COOK')">
+		<form:form action="${url}" modelAttribute="${passForm}" >
+			<acme:password code="profile.actualPassword" path="actualPassword"/>
+				<br/>
+			<acme:password code="profile.newPassword" path="newPassword"/>
+				<br/>
+			<acme:password code="profile.repeatNewPassword" path="repeatNewPassword"/>
+				<br/>
+			<acme:submit name="save" code="profile.save"/>
+			<input type="button" name="profile.back" value="<spring:message code="cancel" />" 
+				onclick="javascript: window.history.back();" />
+		</form:form>
+		
+	</security:authorize>
