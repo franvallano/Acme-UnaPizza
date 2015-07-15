@@ -19,18 +19,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 import domain.CreditCard;
 
 
-public class CustomerForm {
+public class CustomerProfileForm {
 	private String username;
-	private String password;
 	private String name;
 	private String surname;
-	private String repeatedPass;
 	private String email;
 	private CreditCard creditCard;
 	private String phone;
 	private Date birthDate;
 	private String address;
-	private boolean agree;
 	private boolean checkBoxCreditCard;
 	
 	@Size(min=5, max=32)
@@ -59,26 +56,6 @@ public class CustomerForm {
 	}
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-	
-	@Size(min=5, max=32)
-	@SafeHtml(whitelistType=WhiteListType.SIMPLE_TEXT)
-	@NotBlank
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	@Size(min=5, max=32)
-	@SafeHtml(whitelistType=WhiteListType.SIMPLE_TEXT)
-	@NotBlank
-	public String getRepeatedPass() {
-		return repeatedPass;
-	}
-	public void setRepeatedPass(String repeatedPass) {
-		this.repeatedPass = repeatedPass;
 	}
 	
 	@SafeHtml(whitelistType=WhiteListType.SIMPLE_TEXT)
@@ -128,12 +105,6 @@ public class CustomerForm {
 		this.address = address;
 	}
 	
-	public boolean isAgree() {
-		return agree;
-	}
-	public void setAgree(boolean agree) {
-		this.agree = agree;
-	}
 	public boolean isCheckBoxCreditCard() {
 		return checkBoxCreditCard;
 	}

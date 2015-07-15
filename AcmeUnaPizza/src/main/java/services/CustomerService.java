@@ -1,8 +1,9 @@
 package services;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -18,6 +19,8 @@ import domain.Complaint;
 import domain.Customer;
 import domain.SalesOrder;
 import forms.CustomerForm;
+import forms.CustomerProfileForm;
+import forms.PasswordForm;
 
 @Service
 @Transactional
@@ -57,6 +60,12 @@ public class CustomerService {
 		pass = encoder.encodePassword(pass, null);
 		customer.getUserAccount().setPassword(pass);
 		
+		customerRepository.save(customer);
+	}
+	
+	public void save(Customer customer){
+		Assert.notNull(customer);
+	
 		customerRepository.save(customer);
 	}
 
@@ -127,11 +136,13 @@ public class CustomerService {
 		Customer customer;
 		Collection<SalesOrder> salesOrders;
 		Collection<Complaint> complaints;
+		Calendar calendar = Calendar.getInstance();
 		
 		customer = create();
 
 		salesOrders = new ArrayList<SalesOrder>();
 		complaints = new ArrayList<Complaint>();
+		calendar.setTimeInMillis(System.currentTimeMillis());
 		
 		customer.getUserAccount().setUsername(customerForm.getUsername());
 		customer.getUserAccount().setPassword(customerForm.getPassword());
@@ -139,7 +150,14 @@ public class CustomerService {
 		customer.setName(customerForm.getName());
 		customer.setSurname(customerForm.getSurname());
 		customer.setEmail(customerForm.getEmail());
-		customer.setCreditCard(null);
+		if(customerForm.getCreditCard() != null) {
+			customer.setCreditCard(customerForm.getCreditCard());
+			
+			Assert.isTrue(customerForm.getCreditCard().getExpirationYear() >= calendar.get(Calendar.YEAR));
+			
+			if(customerForm.getCreditCard().getExpirationYear() == calendar.get(Calendar.YEAR))
+				Assert.isTrue(customerForm.getCreditCard().getExpirationMonth() >= (calendar.get(Calendar.MONTH) + 1));
+		}
 		customer.setPhone(customerForm.getPhone());
 		customer.setBirthDate(customerForm.getBirthDate());
 		customer.setAddress(customerForm.getAddress());
@@ -148,6 +166,104 @@ public class CustomerService {
 		customer.setRangee("STANDARD");
 		
 		return customer;
+	}
+	
+	public Customer reconstructProfile(CustomerProfileForm customerProfileForm) {
+		Assert.notNull(customerProfileForm);
+		Customer customer;
+		Calendar calendar = Calendar.getInstance();
+		
+		customer = findByPrincipal();
+		
+		Assert.isTrue(customer.getUserAccount().getUsername().equals(customerProfileForm.getUsername()));
+		
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		
+		customer.setName(customerProfileForm.getName());
+		customer.setSurname(customerProfileForm.getSurname());
+		customer.setEmail(customerProfileForm.getEmail());
+		if(customerProfileForm.getCreditCard() != null) {
+			Assert.isTrue(customerProfileForm.getCreditCard().getExpirationYear() >= calendar.get(Calendar.YEAR));
+			
+			if(customerProfileForm.getCreditCard().getExpirationYear() == calendar.get(Calendar.YEAR))
+				Assert.isTrue(customerProfileForm.getCreditCard().getExpirationMonth() >= (calendar.get(Calendar.MONTH) + 1));
+			
+			customer.setCreditCard(customerProfileForm.getCreditCard());
+		} else
+			customer.setCreditCard(null);
+		customer.setPhone(customerProfileForm.getPhone());
+		customer.setBirthDate(customerProfileForm.getBirthDate());
+		customer.setAddress(customerProfileForm.getAddress());
+		
+		return customer;
+	}
+	
+	public Customer reconstructPassword(PasswordForm passwordForm) {
+		Assert.notNull(passwordForm);
+		Assert.isTrue(passwordForm.getNewPassword().equals(passwordForm.getRepeatNewPassword()));
+		Customer customer;
+		Md5PasswordEncoder encoder;
+
+		customer = findByPrincipal();
+		
+		encoder = new Md5PasswordEncoder();
+		
+		Assert.isTrue(customer.getUserAccount().getPassword().equals(encoder.encodePassword(passwordForm.getActualPassword(), null)));
+		
+		customer.getUserAccount().setPassword(encoder.encodePassword(passwordForm.getNewPassword(), null));
+		
+		return customer;
+	}
+	
+	public CustomerForm desreconstruct(Customer customer) {
+		Assert.notNull(customer);
+		CustomerForm customerForm;
+		
+		customerForm = new CustomerForm();
+		
+		customerForm.setUsername(customer.getUserAccount().getUsername());
+		customerForm.setPassword(customer.getUserAccount().getPassword());
+		customerForm.setRepeatedPass(customer.getUserAccount().getPassword());
+		customerForm.setName(customer.getName());
+		customerForm.setSurname(customer.getSurname());
+		customerForm.setEmail(customer.getEmail());
+		customerForm.setPhone(customer.getPhone());
+		customerForm.setBirthDate(customer.getBirthDate());
+		customerForm.setAddress(customer.getAddress());
+		customerForm.setAgree(true);
+		
+		if(customer.getCreditCard() != null) {
+			customerForm.setCheckBoxCreditCard(true);
+			customerForm.setCreditCard(customer.getCreditCard());
+		} else {
+			customerForm.setCheckBoxCreditCard(false);
+		}
+		
+		return customerForm;
+	}
+	
+	public CustomerProfileForm desreconstructProfile(Customer customer) {
+		Assert.notNull(customer);
+		CustomerProfileForm customerProfileForm;
+		
+		customerProfileForm = new CustomerProfileForm();
+		
+		customerProfileForm.setUsername(customer.getUserAccount().getUsername());
+		customerProfileForm.setName(customer.getName());
+		customerProfileForm.setSurname(customer.getSurname());
+		customerProfileForm.setEmail(customer.getEmail());
+		customerProfileForm.setPhone(customer.getPhone());
+		customerProfileForm.setBirthDate(customer.getBirthDate());
+		customerProfileForm.setAddress(customer.getAddress());
+		
+		if(customer.getCreditCard() != null) {
+			customerProfileForm.setCheckBoxCreditCard(true);
+			customerProfileForm.setCreditCard(customer.getCreditCard());
+		} else {
+			customerProfileForm.setCheckBoxCreditCard(false);
+		}
+		
+		return customerProfileForm;
 	}
 	
 	public boolean rPassword(CustomerForm customerForm) {

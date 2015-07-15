@@ -17,6 +17,25 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<script>	
+
+	<!-- Esto es para llamar a la funcion cada vez que se cargue la web -->
+	$(document).ready(function () {
+		checkCreditCard();
+	});
+	
+	function checkCreditCard(){
+		var checked = $("#checkBoxCreditCard");
+		if(checked.is(':checked')) {
+			$("#enableCreditCard").attr("disabled", false);
+			$("#enableCreditCard").attr("enabled", true);
+		} else {
+			$("#enableCreditCard").attr("disabled", true);
+		}
+	}
+		
+</script>
+
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 
@@ -32,10 +51,8 @@
 				<acme:labelDetails code="customer.range" value="${customer.rangee}"/>
 			</fieldset>
 		</jstl:if>
+		<br /> 
+		<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+		onclick="javascript: window.history.back();" />
 	</security:authorize>
 	
-		
-	<br />
-	<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-		onclick="javascript: window.history.back();" />
-	<br />

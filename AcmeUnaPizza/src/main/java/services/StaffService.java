@@ -46,7 +46,7 @@ public class StaffService {
 	
 	// Simple CRUD methods ----------------------------------------------------
 
-	public Staff create(String staffType){
+	public Staff create(){
 		Staff newbye;
 		Administrator administrator;
 			
@@ -55,7 +55,6 @@ public class StaffService {
 		Assert.notNull(administrator);
 			
 		newbye = new Staff();
-		newbye.setUserAccount(createUserAccount(staffType));
 			
 		return newbye;
 	}
@@ -151,12 +150,12 @@ public class StaffService {
 		
 		repairs = new ArrayList<Repair>();
 		salesOrders = new ArrayList<SalesOrder>();
-			
+		
+		staffProvisional = create();
+		Assert.notNull(staffProvisional);
 
 		if(staffType.equals("boss")) {
-			staffProvisional = create(Authority.BOSS);
-			Assert.notNull(staffProvisional);
-			
+			staffProvisional.setUserAccount(createUserAccount(Authority.BOSS));
 			staffProvisional.getUserAccount().setUsername(staffForm.getUsername());
 			staffProvisional.getUserAccount().setPassword(staffForm.getPassword());
 			
@@ -188,9 +187,7 @@ public class StaffService {
 			return boss;
 			
 		} else if(staffType.equals("deliveryMan")) {
-			staffProvisional = create(Authority.DELIVERY_MAN);
-			Assert.notNull(staffProvisional);
-			
+			staffProvisional.setUserAccount(createUserAccount(Authority.DELIVERY_MAN));
 			staffProvisional.getUserAccount().setUsername(staffForm.getUsername());
 			staffProvisional.getUserAccount().setPassword(staffForm.getPassword());
 
@@ -218,9 +215,7 @@ public class StaffService {
 			return deliveryMan;
 
 		} else if(staffType.equals("cook")) {
-			staffProvisional = create(Authority.COOK);
-			Assert.notNull(staffProvisional);
-			
+			staffProvisional.setUserAccount(createUserAccount(Authority.COOK));
 			staffProvisional.getUserAccount().setUsername(staffForm.getUsername());
 			staffProvisional.getUserAccount().setPassword(staffForm.getPassword());
 			

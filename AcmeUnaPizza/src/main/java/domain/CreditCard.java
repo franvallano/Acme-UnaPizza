@@ -64,7 +64,7 @@ public class CreditCard {
 		this.expirationMonth = expirationMonth;
 	}
 	
-	@Min(2000)
+	@Min(2015)
 	@NotNull
 	public Integer getExpirationYear() {
 		return expirationYear;
