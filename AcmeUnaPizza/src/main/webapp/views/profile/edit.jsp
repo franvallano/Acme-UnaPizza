@@ -108,16 +108,50 @@
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<form:form action="${url}" modelAttribute="${userForm}" >
-			<acme:textbox code="customer.username" path="username" readonly="true"/>
+			<acme:textbox code="administrator.username" path="username" readonly="true"/>
 			<br/>
 				
-			<acme:textbox code="customer.name" path="name"/>
+			<acme:textbox code="administrator.name" path="name"/>
 			<br/>
-			<acme:textbox code="customer.surname" path="surname"/>
+			<acme:textbox code="administrator.surname" path="surname"/>
 			<br/>
-			<acme:textbox code="customer.email" path="email"/>
+			<acme:textbox code="administrator.email" path="email"/>
 			<br/>
-			<acme:submit name="save" code="customer.save"/>
+			<acme:submit name="save" code="administrator.save"/>
+			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				onclick="javascript: window.history.back();" />
+		</form:form>
+	</security:authorize>
+	
+	<security:authorize access="hasAnyRole('BOSS', 'DELIVERY_MAN', 'COOK')">
+		<form:form action="${url}" modelAttribute="${userForm}" >
+			<acme:textbox code="staff.username" path="username" readonly="true"/>
+			<br/>
+				
+			<acme:textbox code="staff.name" path="name"/>
+			<br/>
+			<acme:textbox code="staff.surname" path="surname"/>
+			<br/>
+			<acme:textbox code="staff.email" path="email"/>
+			<br/>
+			<acme:textbox code="staff.dni" path="dni"/>
+			<br/>
+			<acme:textbox code="staff.accountNumber" path="accountNumber"/>
+			<br/>
+			<acme:textbox code="staff.ssNumber" path="ssNumber"/>
+			<br/>
+			<acme:textbox code="staff.phone" path="phone"/>
+			<br/>
+			<acme:textbox code="staff.address" path="address"/>
+			<br/>
+			<acme:textbox code="staff.birthDate" path="birthDate"/>
+			<br/>
+			
+			<jstl:if test="${isDeliveryMan == true}">
+				<acme:textbox code="staff.drivingLicenseNumber" path="drivingLicenseNumber"/>
+				<br/>
+			</jstl:if>
+			<acme:submit name="save" code="staff.save"/>
 			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
 				onclick="javascript: window.history.back();" />
 		</form:form>

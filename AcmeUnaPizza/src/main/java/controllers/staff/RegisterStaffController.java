@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.Authority;
 import services.StaffService;
 import controllers.AbstractController;
 import domain.Boss;
@@ -96,7 +97,7 @@ public class RegisterStaffController extends AbstractController{
 		} else { 
 			try {
 				
-				boss = (Boss) staffService.reconstruct(staffForm, "boss");
+				boss = (Boss) staffService.reconstruct(staffForm, Authority.BOSS);
 				staffService.save(boss, repeatedPass);
 				
 				result = new ModelAndView("redirect:/welcome/index.do");
@@ -132,7 +133,7 @@ public class RegisterStaffController extends AbstractController{
 		} else { 
 			try {
 				
-				deliveryMan = (DeliveryMan) staffService.reconstruct(staffForm, "deliveryMan");
+				deliveryMan = (DeliveryMan) staffService.reconstruct(staffForm, Authority.DELIVERY_MAN);
 				staffService.save(deliveryMan, repeatedPass);
 				
 				result = new ModelAndView("redirect:/welcome/index.do");
@@ -167,7 +168,7 @@ public class RegisterStaffController extends AbstractController{
 		} else { 
 			try {
 				
-				cook = (Cook) staffService.reconstruct(staffForm, "cook");
+				cook = (Cook) staffService.reconstruct(staffForm, Authority.COOK);
 				staffService.save(cook, repeatedPass);
 				
 				result = new ModelAndView("redirect:/welcome/index.do");

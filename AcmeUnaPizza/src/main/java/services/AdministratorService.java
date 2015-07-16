@@ -32,12 +32,6 @@ public class AdministratorService {
 	private AdministratorRepository administratorRepository;
 
 	// Ancillary services -----------------------------------------------------
-
-	@Autowired
-	private ActorService actorService;
-	
-	@Autowired
-	private SalesOrderService salesOrderService;
 	
 	// Constructor ------------------------------------------------------------
 	public AdministratorService(){
@@ -73,7 +67,7 @@ public class AdministratorService {
 	
 	public void saveProfile(Administrator administrator){
 		Assert.notNull(administrator);
-		Assert.isTrue(administrator.getId() == findByPrincipal().getId());
+		Assert.isTrue(administrator.getUserAccount().getUsername().equals(findByPrincipal().getUserAccount().getUsername()));
 	
 		administratorRepository.save(administrator);
 	}

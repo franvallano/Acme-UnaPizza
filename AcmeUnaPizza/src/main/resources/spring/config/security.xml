@@ -100,6 +100,7 @@
 		<!-- PROFILE -->
 		<security:intercept-url pattern="/profile/customer/**" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/profile/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/profile/staff/**" access="hasAnyRole('BOSS', 'DELIVERY_MAN', 'COOK')" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

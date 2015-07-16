@@ -2,6 +2,7 @@ package services;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
@@ -18,12 +19,16 @@ import security.UserAccount;
 import domain.Administrator;
 import domain.Boss;
 import domain.Cook;
+import domain.Customer;
 import domain.DeliveryMan;
 import domain.Repair;
 import domain.SalesOrder;
 import domain.Staff;
 import domain.Stuff;
+import forms.CustomerProfileForm;
+import forms.PasswordForm;
 import forms.StaffForm;
+import forms.StaffProfileForm;
 
 @Service
 @Transactional
@@ -37,6 +42,15 @@ public class StaffService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private AdministratorService administratorService;
+	
+	@Autowired
+	private DeliveryManService deliveryManService;
+	
+	@Autowired
+	private BossService bossService;
+	
+	@Autowired
+	private CookService cookService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -154,7 +168,7 @@ public class StaffService {
 		staffProvisional = create();
 		Assert.notNull(staffProvisional);
 
-		if(staffType.equals("boss")) {
+		if(staffType.equals(Authority.BOSS)) {
 			staffProvisional.setUserAccount(createUserAccount(Authority.BOSS));
 			staffProvisional.getUserAccount().setUsername(staffForm.getUsername());
 			staffProvisional.getUserAccount().setPassword(staffForm.getPassword());
@@ -186,7 +200,7 @@ public class StaffService {
 			
 			return boss;
 			
-		} else if(staffType.equals("deliveryMan")) {
+		} else if(staffType.equals(Authority.DELIVERY_MAN)) {
 			staffProvisional.setUserAccount(createUserAccount(Authority.DELIVERY_MAN));
 			staffProvisional.getUserAccount().setUsername(staffForm.getUsername());
 			staffProvisional.getUserAccount().setPassword(staffForm.getPassword());
@@ -214,7 +228,7 @@ public class StaffService {
 			
 			return deliveryMan;
 
-		} else if(staffType.equals("cook")) {
+		} else if(staffType.equals(Authority.COOK)) {
 			staffProvisional.setUserAccount(createUserAccount(Authority.COOK));
 			staffProvisional.getUserAccount().setUsername(staffForm.getUsername());
 			staffProvisional.getUserAccount().setPassword(staffForm.getPassword());
@@ -245,6 +259,75 @@ public class StaffService {
 		}
 		
 		return staffProvisional;			
+	}
+	
+	public Staff reconstructProfile(StaffProfileForm staffProfileForm, String staffType) {
+		Assert.notNull(staffProfileForm);
+		Staff staffProvisional = null;
+		
+		if(staffType.equals(Authority.BOSS)) {
+			Boss boss;
+			
+			boss = bossService.findByPrincipal();
+			
+			Assert.isTrue(boss.getUserAccount().getUsername().equals(staffProfileForm.getUsername()));
+			
+			boss.setName(staffProfileForm.getName());
+			boss.setSurname(staffProfileForm.getSurname());
+			boss.setEmail(staffProfileForm.getEmail());
+			
+			boss.setDni(staffProfileForm.getDni());
+			boss.setSsNumber(staffProfileForm.getSsNumber());
+			boss.setPhone(staffProfileForm.getPhone());
+			boss.setBirthDate(staffProfileForm.getBirthDate());
+			boss.setAddress(staffProfileForm.getAddress());
+			boss.setAccountNumber(staffProfileForm.getAccountNumber());
+			
+			return boss;
+		} else if(staffType.equals(Authority.DELIVERY_MAN)) {
+			DeliveryMan deliveryMan;
+			
+			deliveryMan = deliveryManService.findByPrincipal();
+			
+			Assert.isTrue(deliveryMan.getUserAccount().getUsername().equals(staffProfileForm.getUsername()));
+			
+			deliveryMan.setName(staffProfileForm.getName());
+			deliveryMan.setSurname(staffProfileForm.getSurname());
+			deliveryMan.setEmail(staffProfileForm.getEmail());
+			
+			deliveryMan.setDni(staffProfileForm.getDni());
+			deliveryMan.setSsNumber(staffProfileForm.getSsNumber());
+			deliveryMan.setPhone(staffProfileForm.getPhone());
+			deliveryMan.setBirthDate(staffProfileForm.getBirthDate());
+			deliveryMan.setAddress(staffProfileForm.getAddress());
+			deliveryMan.setAccountNumber(staffProfileForm.getAccountNumber());
+			deliveryMan.setDrivingLicenseNumber(staffProfileForm.getDrivingLicenseNumber());
+			
+			return deliveryMan;
+		} else if(staffType.equals(Authority.COOK)) {
+			Cook cook;
+			
+			cook = cookService.findByPrincipal();
+
+			Assert.isTrue(cook.getUserAccount().getUsername().equals(staffProfileForm.getUsername()));
+			
+			cook.setName(staffProfileForm.getName());
+			cook.setSurname(staffProfileForm.getSurname());
+			cook.setEmail(staffProfileForm.getEmail());
+			
+			cook.setDni(staffProfileForm.getDni());
+			cook.setSsNumber(staffProfileForm.getSsNumber());
+			cook.setPhone(staffProfileForm.getPhone());
+			cook.setBirthDate(staffProfileForm.getBirthDate());
+			cook.setAddress(staffProfileForm.getAddress());
+			cook.setAccountNumber(staffProfileForm.getAccountNumber());
+			
+			return cook;
+		} else {
+			Assert.notNull(staffProvisional);
+		}
+		
+		return staffProvisional;
 	}
 	
 	public Staff findByPrincipal() {
@@ -297,5 +380,52 @@ public class StaffService {
 		result.setAuthorities(authorities);
 		
 		return result;
+	}
+	
+	public Staff reconstructPassword(PasswordForm passwordForm) {
+		Assert.notNull(passwordForm);
+		Assert.isTrue(passwordForm.getNewPassword().equals(passwordForm.getRepeatNewPassword()));
+		Staff staff;
+		Md5PasswordEncoder encoder;
+
+		staff = findByPrincipal();
+		
+		encoder = new Md5PasswordEncoder();
+		
+		Assert.isTrue(staff.getUserAccount().getPassword().equals(encoder.encodePassword(passwordForm.getActualPassword(), null)));
+		
+		staff.getUserAccount().setPassword(encoder.encodePassword(passwordForm.getNewPassword(), null));
+		
+		return staff;
+	}
+	
+	public void saveProfile(Staff staff){
+		Assert.notNull(staff);
+		Assert.isTrue(staff.getUserAccount().getUsername().equals(findByPrincipal().getUserAccount().getUsername()));
+	
+		staffRepository.save(staff);
+	}
+	
+	public StaffProfileForm desreconstructProfile(Staff staff, String authority) {
+		Assert.notNull(staff);
+		StaffProfileForm staffProfileForm;
+		
+		staffProfileForm = new StaffProfileForm();
+		
+		staffProfileForm.setUsername(staff.getUserAccount().getUsername());
+		staffProfileForm.setName(staff.getName());
+		staffProfileForm.setSurname(staff.getSurname());
+		staffProfileForm.setEmail(staff.getEmail());
+		staffProfileForm.setPhone(staff.getPhone());
+		staffProfileForm.setBirthDate(staff.getBirthDate());
+		staffProfileForm.setAddress(staff.getAddress());
+		staffProfileForm.setDni(staff.getDni());
+		staffProfileForm.setSsNumber(staff.getSsNumber());
+		staffProfileForm.setAccountNumber(staff.getAccountNumber());
+		
+		if(authority.equals(Authority.DELIVERY_MAN))
+			staffProfileForm.setDrivingLicenseNumber(deliveryManService.findByPrincipal().getDrivingLicenseNumber());
+		
+		return staffProfileForm;
 	}
 }
