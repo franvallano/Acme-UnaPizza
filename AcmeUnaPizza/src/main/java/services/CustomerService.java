@@ -65,7 +65,7 @@ public class CustomerService {
 	
 	public void saveProfile(Customer customer){
 		Assert.notNull(customer);
-		Assert.isTrue(customer.getId() == findByPrincipal().getId());
+		Assert.isTrue(customer.getUserAccount().getUsername().equals(findByPrincipal().getUserAccount().getUsername()));
 	
 		customerRepository.save(customer);
 	}

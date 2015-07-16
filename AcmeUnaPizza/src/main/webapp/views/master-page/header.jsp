@@ -143,6 +143,18 @@
 							<li><a href="profile/administrator/edit.do"><spring:message code="master.page.viewProfile" /></a></li>
 							<li><a href="profile/administrator/changePassword.do"><spring:message code="master.page.changePassword" /></a></li>
 						</security:authorize>
+						<security:authorize access="hasRole('BOSS')">
+							<li><a href="profile/staff/editBoss.do"><spring:message code="master.page.viewProfile" /></a></li>
+							<li><a href="profile/staff/changePassword.do"><spring:message code="master.page.changePassword" /></a></li>
+						</security:authorize>
+						<security:authorize access="hasRole('COOK')">
+							<li><a href="profile/staff/editCook.do"><spring:message code="master.page.viewProfile" /></a></li>
+							<li><a href="profile/staff/changePassword.do"><spring:message code="master.page.changePassword" /></a></li>
+						</security:authorize>
+						<security:authorize access="hasRole('DELIVERY_MAN')">
+							<li><a href="profile/staff/editDeliveryMan.do"><spring:message code="master.page.viewProfile" /></a></li>
+							<li><a href="profile/staff/changePassword.do"><spring:message code="master.page.changePassword" /></a></li>
+						</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>
