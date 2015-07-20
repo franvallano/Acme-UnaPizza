@@ -25,6 +25,7 @@ import domain.Repair;
 import domain.SalesOrder;
 import domain.Staff;
 import domain.Stuff;
+import forms.ChangeDateContractForm;
 import forms.CustomerProfileForm;
 import forms.PasswordForm;
 import forms.StaffForm;
@@ -161,6 +162,7 @@ public class StaffService {
 		Date contractStartDate;
 		Collection<Repair> repairs;
 		Collection<SalesOrder> salesOrders;
+		Calendar lastHourMinute = Calendar.getInstance();
 		
 		repairs = new ArrayList<Repair>();
 		salesOrders = new ArrayList<SalesOrder>();
@@ -172,6 +174,7 @@ public class StaffService {
 			staffProvisional.setUserAccount(createUserAccount(Authority.BOSS));
 			staffProvisional.getUserAccount().setUsername(staffForm.getUsername());
 			staffProvisional.getUserAccount().setPassword(staffForm.getPassword());
+			staffProvisional.getUserAccount().setActive(true);
 			
 			Collection<Stuff> stuffs;
 			
@@ -191,6 +194,13 @@ public class StaffService {
 			boss.setBirthDate(staffForm.getBirthDate());
 			boss.setAddress(staffForm.getAddress());
 			
+			lastHourMinute.setTimeInMillis(staffForm.getContractEndDate().getTime());
+			lastHourMinute.set(Calendar.HOUR_OF_DAY, 23);
+			lastHourMinute.set(Calendar.MINUTE, 59);
+			lastHourMinute.set(Calendar.SECOND, 59);
+			
+			boss.setContractEndDate(new Date(lastHourMinute.getTimeInMillis()));
+			
 			milliseconds = System.currentTimeMillis();
 			contractStartDate = new Date(milliseconds - 1);
 			boss.setContractStartDate(contractStartDate);
@@ -198,12 +208,15 @@ public class StaffService {
 			boss.setSalesOrders(salesOrders);
 			boss.setStuffs(stuffs);
 			
+			Assert.isTrue(boss.getContractStartDate().before(boss.getContractEndDate()));
+			
 			return boss;
 			
 		} else if(staffType.equals(Authority.DELIVERY_MAN)) {
 			staffProvisional.setUserAccount(createUserAccount(Authority.DELIVERY_MAN));
 			staffProvisional.getUserAccount().setUsername(staffForm.getUsername());
 			staffProvisional.getUserAccount().setPassword(staffForm.getPassword());
+			staffProvisional.getUserAccount().setActive(true);
 
 			DeliveryMan deliveryMan = new DeliveryMan();
 			
@@ -220,11 +233,20 @@ public class StaffService {
 			deliveryMan.setAddress(staffForm.getAddress());
 			deliveryMan.setDrivingLicenseNumber(staffForm.getDrivingLicenseNumber());
 			
+			lastHourMinute.setTimeInMillis(staffForm.getContractEndDate().getTime());
+			lastHourMinute.set(Calendar.HOUR_OF_DAY, 23);
+			lastHourMinute.set(Calendar.MINUTE, 59);
+			lastHourMinute.set(Calendar.SECOND, 59);
+			
+			deliveryMan.setContractEndDate(new Date(lastHourMinute.getTimeInMillis()));
+			
 			milliseconds = System.currentTimeMillis();
 			contractStartDate = new Date(milliseconds - 1);
 			deliveryMan.setContractStartDate(contractStartDate);
 			deliveryMan.setMotorbike(staffForm.getMotorbike());
 			deliveryMan.setSalesOrders(salesOrders);
+			
+			Assert.isTrue(deliveryMan.getContractStartDate().before(deliveryMan.getContractEndDate()));
 			
 			return deliveryMan;
 
@@ -232,6 +254,7 @@ public class StaffService {
 			staffProvisional.setUserAccount(createUserAccount(Authority.COOK));
 			staffProvisional.getUserAccount().setUsername(staffForm.getUsername());
 			staffProvisional.getUserAccount().setPassword(staffForm.getPassword());
+			staffProvisional.getUserAccount().setActive(true);
 			
 			Cook cook = new Cook();
 			
@@ -247,10 +270,19 @@ public class StaffService {
 			cook.setBirthDate(staffForm.getBirthDate());
 			cook.setAddress(staffForm.getAddress());
 			
+			lastHourMinute.setTimeInMillis(staffForm.getContractEndDate().getTime());
+			lastHourMinute.set(Calendar.HOUR_OF_DAY, 23);
+			lastHourMinute.set(Calendar.MINUTE, 59);
+			lastHourMinute.set(Calendar.SECOND, 59);
+			
+			cook.setContractEndDate(new Date(lastHourMinute.getTimeInMillis()));
+			
 			milliseconds = System.currentTimeMillis();
 			contractStartDate = new Date(milliseconds - 1);
 			cook.setContractStartDate(contractStartDate);
 			cook.setSalesOrders(salesOrders);
+			
+			Assert.isTrue(cook.getContractStartDate().before(cook.getContractEndDate()));
 			
 			return cook;
 			
@@ -427,5 +459,82 @@ public class StaffService {
 			staffProfileForm.setDrivingLicenseNumber(deliveryManService.findByPrincipal().getDrivingLicenseNumber());
 		
 		return staffProfileForm;
+	}
+	
+	public void checkHasContract(int userAccountId) {
+		Staff staff;
+		
+		// Busco el staff con contrato en vigor
+		staff = staffRepository.checkHasContract(userAccountId);
+		
+		if(staff == null) {
+			// Si no tiene contrato en vigor buscamos para cancelarlo si no esta cancelado ya
+			staff = staffRepository.findOneByUserAccount(userAccountId);
+			Assert.notNull(staff);
+			
+			if(staff.getUserAccount().getActive()) {
+				staff.getUserAccount().setActive(false);
+				
+				staffRepository.save(staff);
+			}
+		}
+	}
+	
+	public Staff findOneByUserAccount(int userAccountId) {
+		Staff result;
+		
+		result = staffRepository.findOneByUserAccount(userAccountId);
+		
+		return result;
+	}
+	
+	public ChangeDateContractForm desreconstructChangeDateContract(int staffId) {
+		ChangeDateContractForm changeDateContractForm;
+		Staff staff;
+		administratorService.findByPrincipal();
+		
+		staff = staffRepository.findOne(staffId);
+		
+		changeDateContractForm = new ChangeDateContractForm();
+		
+		changeDateContractForm.setContractStartDate(staff.getContractStartDate());
+		changeDateContractForm.setContractEndDate(staff.getContractEndDate());
+		
+		return changeDateContractForm;
+	}
+	
+	public Staff reconstructChangeDateContract(ChangeDateContractForm changeDateContractForm) {
+		Assert.notNull(changeDateContractForm);
+		Staff staff;
+		Calendar endContract = Calendar.getInstance();
+		
+		endContract.setTimeInMillis(changeDateContractForm.getContractEndDate().getTime());
+		endContract.set(Calendar.HOUR_OF_DAY, 23);
+		endContract.set(Calendar.MINUTE, 59);
+		endContract.set(Calendar.SECOND, 59);
+		
+		changeDateContractForm.setContractEndDate(new Date(endContract.getTimeInMillis()));
+		
+		Assert.isTrue(changeDateContractForm.getContractStartDate().before(changeDateContractForm.getContractEndDate()));
+		Assert.isTrue(changeDateContractForm.getContractEndDate().after(new Date(System.currentTimeMillis())));
+		
+		administratorService.findByPrincipal();
+		
+		staff = staffRepository.findOne(changeDateContractForm.getIdStaff());
+		
+		Assert.notNull(staff);
+		
+		staff.setContractStartDate(changeDateContractForm.getContractStartDate());
+		staff.setContractEndDate(changeDateContractForm.getContractEndDate());
+		
+		return staff;
+	}
+	
+	public void saveChangeContractDate(Staff staff){
+		Assert.notNull(staff);
+		
+		administratorService.findByPrincipal();
+	
+		staffRepository.save(staff);
 	}
 }

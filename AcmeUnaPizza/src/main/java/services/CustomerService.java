@@ -15,9 +15,12 @@ import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Boss;
 import domain.Complaint;
 import domain.Customer;
 import domain.SalesOrder;
+import domain.Staff;
+import forms.ChangeDateContractForm;
 import forms.CustomerForm;
 import forms.CustomerProfileForm;
 import forms.PasswordForm;
@@ -31,6 +34,10 @@ public class CustomerService {
 	private CustomerRepository customerRepository;
 
 	// Ancillary services -----------------------------------------------------
+	@Autowired
+	private AdministratorService administratorService;
+	@Autowired
+	private StaffService staffService;
 
 	// Constructor ------------------------------------------------------------
 	public CustomerService(){
@@ -59,6 +66,32 @@ public class CustomerService {
 		pass = customer.getUserAccount().getPassword();
 		pass = encoder.encodePassword(pass, null);
 		customer.getUserAccount().setPassword(pass);
+		
+		customerRepository.save(customer);
+	}
+	
+	public void save(Customer customer){
+		Assert.notNull(customer);
+		
+		customerRepository.save(customer);
+	}
+	
+	public void deactivate(Customer customer){
+		Assert.notNull(customer);
+		
+		administratorService.findByPrincipal();
+		
+		customer.getUserAccount().setActive(false);
+		
+		customerRepository.save(customer);
+	}
+	
+	public void activate(Customer customer){
+		Assert.notNull(customer);
+		
+		administratorService.findByPrincipal();
+		
+		customer.getUserAccount().setActive(true);
 		
 		customerRepository.save(customer);
 	}
@@ -115,6 +148,7 @@ public class CustomerService {
 		
 		result = new UserAccount();
 		result.setAuthorities(authorities);
+		result.setActive(true);
 		
 		return result;
 	}
@@ -329,6 +363,44 @@ public class CustomerService {
 		result = customerRepository.findDateLastOrder(customer.getId());
 		
 		return result;
+	}
+	
+	public Customer findCustomerBySalesOrder(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+		Customer result;
+		
+		result = customerRepository.findCustomerBySalesOrder(salesOrderId);
+		
+		return result;
+	}
+	
+	public void checkRangeCustomer(Customer customer, boolean newSalesOrder) {
+		Assert.notNull(customer);
+		// El +1 es por el nuevo pedido que vamo
+		int totalSalesOrder = customer.getSalesOrders().size();
+		String range = "";
+		
+		// Si es nuevo pedido sumamos 1 y si no lo restamos
+		if(newSalesOrder)
+			totalSalesOrder += 1;
+		else
+			totalSalesOrder -= 1;
+		
+		if(totalSalesOrder >= 0 && totalSalesOrder <= 3)
+			range = "STANDARD";
+		else if(totalSalesOrder >= 4 && totalSalesOrder <= 7)
+			range = "SILVER";
+		else if(totalSalesOrder >= 8 && totalSalesOrder <= 12)
+			range = "GOLD";
+		else 
+			range = "VIP";
+			
+		// Si tiene un nuevo rango lo asignamos y guardamos
+		if(!customer.getRangee().equals(range)) {
+			customer.setRangee(range);
+			
+			customerRepository.save(customer);
+		}
 	}
 	
 	// Ancillary methods ------------------------------------------------------

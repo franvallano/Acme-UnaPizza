@@ -103,5 +103,4 @@ public class Customer extends Actor {
 	public void setComplaints(Collection<Complaint> complaints) {
 		this.complaints = complaints;
 	}
-	
 }

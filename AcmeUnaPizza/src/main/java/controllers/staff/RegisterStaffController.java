@@ -107,7 +107,7 @@ public class RegisterStaffController extends AbstractController{
 				if(oops instanceof DataIntegrityViolationException)
 					result = createEditModelAndView(staffForm, "duplicatedUser", false);
 				else
-					result = createEditModelAndView(staffForm, "commit.error", false);
+					result = createEditModelAndView(staffForm, "staff.commit.error", false);
 
 				
 				duplicate = staffService.rPassword(staffForm);

@@ -56,6 +56,12 @@ public class ProductService {
 		this.productRepository.save(product);
 	}
 	
+	public void saveCancelProduct(Product product){
+		Assert.notNull(product);
+		
+		this.productRepository.save(product);
+	}
+	
 	public void saveProductByCustomer(Product product){
 		Assert.notNull(product);
 		customerService.findByPrincipal();

@@ -105,6 +105,7 @@ public class AdministratorService {
 		
 		result = new UserAccount();
 		result.setAuthorities(authorities);
+		result.setActive(true);
 		
 		return result;
 	}

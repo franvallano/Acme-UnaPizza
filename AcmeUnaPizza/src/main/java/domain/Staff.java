@@ -63,7 +63,7 @@ public class Staff extends Actor{
 	@Past
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getContractStartDate() {
 		return contractStartDate;
 	}
@@ -72,9 +72,8 @@ public class Staff extends Actor{
 		this.contractStartDate = contractStartDate;
 	}
 
-	@Past
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getContractEndDate() {
 		return contractEndDate;
 	}

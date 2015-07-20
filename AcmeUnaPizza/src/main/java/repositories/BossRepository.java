@@ -14,4 +14,6 @@ public interface BossRepository
 	@Query("select b from Boss b where b.userAccount.id = ?1")
 	Boss findByPrincipal(int userAccountId);
 	
+	@Query("select b from Boss b join b.salesOrders sO where sO.id = ?1")
+	Boss findBossBySalesOrder(int salesOrderId);
 }

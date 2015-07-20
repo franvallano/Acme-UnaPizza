@@ -14,6 +14,7 @@ import security.LoginService;
 import security.UserAccount;
 import utilities.PasswordCode;
 import domain.Boss;
+import domain.SalesOrder;
 
 @Service
 @Transactional
@@ -29,6 +30,9 @@ public class BossService {
 	
 	@Autowired
 	private AdministratorService administratorService;
+	
+	@Autowired
+	private SalesOrderService salesOrderService;
 	
 	// Constructor ------------------------------------------------------------
 	public BossService(){
@@ -47,19 +51,10 @@ public class BossService {
 		return newbye;
 	}
 
-	public void save( Boss boss ){
+	public void save(Boss boss){
 		Assert.notNull(boss);
-		Assert.isTrue(actorService.isBoss());
-		administratorService.findByPrincipal();
 		
-		if(boss.getId()==0){
-			String passwordCoded;
-			
-			passwordCoded = PasswordCode.encode(boss.getUserAccount().getPassword());
-			boss.getUserAccount().setPassword(passwordCoded);
-		}
-		
-		this.bossRepository.save( boss );
+		this.bossRepository.save(boss);
 	}
 
 	public void delete( Boss entity ){
@@ -100,13 +95,14 @@ public class BossService {
 		Authority authority;
 		
 		authority = new Authority();
-		authority.setAuthority("BOSS");
+		authority.setAuthority(Authority.BOSS);
 		
 		authorities = new ArrayList<Authority>();
 		authorities.add(authority);
 		
 		result = new UserAccount();
 		result.setAuthorities(authorities);
+		result.setActive(true);
 		
 		return result;
 	}
@@ -121,6 +117,30 @@ public class BossService {
 	 	Assert.notNull(boss);
 	 	
 	 	return boss;
+	}
+	
+	public void assignBoss(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+		SalesOrder salesOrder;
+		
+		salesOrder = salesOrderService.findOneCheckBoss(salesOrderId);
+		Assert.notNull(salesOrder);
+		Assert.isNull(salesOrder.getBoss());
+		Assert.isTrue(salesOrder.getId() == salesOrderId);
+		Assert.isTrue(salesOrder.getState().equals("OPEN"));
+		
+		salesOrder.setBoss(findByPrincipal());
+		
+		salesOrderService.saveAssignBoss(salesOrder);
+	}
+	
+	public Boss findBossBySalesOrder(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+		Boss result;
+		
+		result = bossRepository.findBossBySalesOrder(salesOrderId);
+		
+		return result;
 	}
 	
 	// Ancillary methods ------------------------------------------------------

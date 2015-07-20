@@ -16,12 +16,5 @@ public interface AdministratorRepository
 	
 	@Query("select a from Administrator a where a.userAccount.id = ?1")
 	Administrator findByPrincipal(int userAccountId);
-	
-	//Pizza más y menos vendida.
-	//Bebida más y menos vendida.
-	//Postre más y menos vendido.
-	//Complemento más y menos vendido.
-	
-	
 
 }

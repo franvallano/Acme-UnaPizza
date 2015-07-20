@@ -2,8 +2,11 @@ package controllers.administrator;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +26,8 @@ import domain.Customer;
 import domain.DeliveryMan;
 import domain.Staff;
 import forms.AdministratorForm;
+import forms.ChangeDateContractForm;
+import forms.PasswordForm;
 
 
 @Controller
@@ -144,6 +149,34 @@ public class UsersAdministratorController extends AbstractController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/customer/deactivate", method = RequestMethod.GET)
+	public ModelAndView deactivateCustomer(@RequestParam int customerId){
+		ModelAndView result;
+		Customer customer;
+		
+		customer = customerService.findOne(customerId);
+		
+		customerService.deactivate(customer);
+		
+		result = new ModelAndView("redirect:/user/administrator/listCustomers.do");
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/customer/activate", method = RequestMethod.GET)
+	public ModelAndView activateCustomer(@RequestParam int customerId){
+		ModelAndView result;
+		Customer customer;
+		
+		customer = customerService.findOne(customerId);
+		
+		customerService.activate(customer);
+		
+		result = new ModelAndView("redirect:/user/administrator/listCustomers.do");
+		
+		return result;
+	}
+	
 	@RequestMapping(value = "/staff/detailsStaff", method = RequestMethod.GET)
 	public ModelAndView detailsStaff(@RequestParam int staffId){
 		ModelAndView result;
@@ -194,6 +227,40 @@ public class UsersAdministratorController extends AbstractController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/staff/changeDateContract", method = RequestMethod.GET)
+	public ModelAndView changeDateContract(@RequestParam int staffId) {
+		ModelAndView result;
+		ChangeDateContractForm changeDateContractForm;
+		
+		changeDateContractForm = staffService.desreconstructChangeDateContract(staffId);
+		
+		changeDateContractForm.setIdStaff(staffId);
+		
+		result = createEditModelAndView(changeDateContractForm);
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/staff/changeDateContract", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid ChangeDateContractForm changeDateContractForm, BindingResult binding){
+		ModelAndView result;
+		Staff staff;
+		
+		if(binding.hasErrors()){
+			result = createEditModelAndView(changeDateContractForm);
+		}else{
+			try{
+				staff = staffService.reconstructChangeDateContract(changeDateContractForm);
+				staffService.saveChangeContractDate(staff);
+				result = new ModelAndView("redirect:/welcome/index.do");
+			}catch (Throwable oops){
+				result = createEditModelAndView(changeDateContractForm, "changeContract.commit.error");
+			}
+		}
+		
+		return result;
+	}
+	
 	protected ModelAndView createEditModelAndView(AdministratorForm administratorForm){
 		ModelAndView result;
 		
@@ -210,6 +277,26 @@ public class UsersAdministratorController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("administratorForm", administratorForm);
 		result.addObject("url","user/administrator/edit.do");
+		
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndView(ChangeDateContractForm changeDateContractForm){
+		ModelAndView result;
+		
+		result = createEditModelAndView(changeDateContractForm, null);
+		
+		return result;
+	}
+	
+	protected ModelAndView createEditModelAndView(ChangeDateContractForm changeDateContractForm, String message){
+		ModelAndView result;
+
+		result = new ModelAndView("staff/changeDateContract");
+		result.addObject("message", message);
+		result.addObject("changeDateContractForm", changeDateContractForm);
+		result.addObject("changeDateForm", "changeDateContractForm");
+		result.addObject("url","user/administrator/staff/changeDateContract.do");
 		
 		return result;
 	}

@@ -65,7 +65,7 @@ public class SalesOrderCustomerController extends AbstractController{
 		ModelAndView result;
 		SalesOrder salesOrder;
 		
-		salesOrder = salesOrderService.findOne(salesOrderId);
+		salesOrder = salesOrderService.findOneByCustomer(salesOrderId);
 		
 		result = new ModelAndView("salesOrder/edit");
 		result.addObject("salesOrder", salesOrder);
@@ -96,7 +96,7 @@ public class SalesOrderCustomerController extends AbstractController{
 		}else{
 			try{
 				salesOrder = salesOrderService.reconstruct(salesOrderForm);
-				salesOrderService.save(salesOrder);
+				salesOrderService.save(salesOrder, true);
 				result = new ModelAndView("redirect:/salesOrder/customer/list.do");
 			}catch (Throwable oops){
 				salesOrderForm.setTotalCost(0.0);
