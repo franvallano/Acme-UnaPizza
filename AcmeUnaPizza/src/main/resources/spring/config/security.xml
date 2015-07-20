@@ -60,9 +60,11 @@
 		<security:intercept-url pattern="/motorbike/administrator/**" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- COMPLAINT -->
-		<security:intercept-url pattern="/complaint/customer/**" access="hasRole('CUSTOMER')" /> 
-		<security:intercept-url pattern="/complaint/actor/**" access="hasAnyRole('CUSTOMER', 'ADMINISTRATOR')" /> 
-		<security:intercept-url pattern="/complaint/administrator/**" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/complaint/actor/list.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/complaint/customer/create.do" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/complaint/actor/view.do" access="hasAnyRole('CUSTOMER', 'ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/complaint/administrator/listAvailables.do" access="hasRole('ADMINISTRATOR')" />
+		
 		
 		<!-- DASHBOARD -->
 		<security:intercept-url pattern="/dashboard/customer/list.do" access="hasRole('CUSTOMER')" /> 
@@ -94,11 +96,17 @@
 		
 		<!-- SALES ORDER -->
 		<security:intercept-url pattern="/salesOrder/customer/**" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/salesOrder/boss/**" access="hasRole('BOSS')" /> 
+		<security:intercept-url pattern="/salesOrder/cook/**" access="hasRole('COOK')" /> 
+		<security:intercept-url pattern="/salesOrder/deliveryMan/**" access="hasRole('DELIVERY_MAN')" /> 
 		
 		<!-- PROFILE -->
 		<security:intercept-url pattern="/profile/customer/**" access="hasRole('CUSTOMER')" /> 
 		<security:intercept-url pattern="/profile/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/profile/staff/**" access="hasAnyRole('BOSS', 'DELIVERY_MAN', 'COOK')" /> 
+		
+		<!-- NOTE -->
+		<security:intercept-url pattern="/note/boss/**" access="hasRole('BOSS')" /> 
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

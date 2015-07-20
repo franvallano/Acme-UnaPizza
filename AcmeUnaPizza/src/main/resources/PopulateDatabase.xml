@@ -15,6 +15,7 @@
 	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin1" />
 		<property name="password" value="e00cf25ad42683b3df678c61f42c6bda" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -27,6 +28,7 @@
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="admin2" />
 		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -39,6 +41,7 @@
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="customer1" />
 		<property name="password" value="ffbc4675f864e0e9aab8bdf7a0437010" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -51,6 +54,7 @@
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="customer2" />
 		<property name="password" value="5ce4d191fd14ac85a1469fb8c29b7a7b" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -63,6 +67,7 @@
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="boss1" />
 		<property name="password" value="c333ba0d6e308bdb32ce3f2785301ae8" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -75,6 +80,7 @@
 	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="boss2" />
 		<property name="password" value="3b7c32a613d841c8ee7694d36f083858" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -87,6 +93,7 @@
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="deliveryman1" />
 		<property name="password" value="63d56e324906ac53ebc755b072310cc3" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -99,6 +106,7 @@
 	<bean id="userAccount8" class="security.UserAccount">
 		<property name="username" value="deliveryman2" />
 		<property name="password" value="d7ab2cd0450328d98db0e24c266208f5" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -111,6 +119,7 @@
 	<bean id="userAccount9" class="security.UserAccount">
 		<property name="username" value="cook1" />
 		<property name="password" value="21c4ffc0cb0f29298351f18b3e468c6a" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -123,6 +132,7 @@
 	<bean id="userAccount10" class="security.UserAccount">
 		<property name="username" value="cook2" />
 		<property name="password" value="b9f1f95dc95b07665bef30ea7cc9c1fd" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -135,6 +145,7 @@
 	<bean id="userAccount11" class="security.UserAccount">
 		<property name="username" value="boss3" />
 		<property name="password" value="14835ee888dc329b44a35eacca8ac80a" />
+		<property name="active" value="true" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -422,7 +433,7 @@
 		<property name="phone" value="631229611" />
 		<property name="birthDate" value="1992/05/20 00:00" />
 		<property name="address" value="Calle Bezoya 33 (Málaga)" />
-		<property name="rangee" value="VIP" />
+		<property name="rangee" value="SILVER" />
 
 		<property name="complaints">
 			<list>
@@ -525,6 +536,7 @@
 		<property name="ssNumber" value="AB-1234567891" />
 		<property name="phone" value="631239211" />
 		<property name="contractStartDate" value="2015/04/10 00:00" />
+		<property name="contractEndDate" value="2016/06/10 23:59" />
 		<property name="accountNumber" value="12345678901234567891" />
 		<property name="birthDate" value="1992/08/23 00:00" />
 		<property name="address" value="Calle Jacinta 23 (Segovia)" />
@@ -549,6 +561,7 @@
 		<property name="ssNumber" value="AB-1232267890" />
 		<property name="phone" value="631129611" />
 		<property name="contractStartDate" value="2010/02/10 00:00" />
+		<property name="contractEndDate" value="2016/02/10 23:59" />
 		<property name="accountNumber" value="12345678933234567890" />
 		<property name="birthDate" value="1980/07/23 00:00" />
 		<property name="address" value="Calle Juana 33 (Cádiz)" />
@@ -650,6 +663,7 @@
 		<property name="ssNumber" value="AB-1000567891" />
 		<property name="phone" value="631277700" />
 		<property name="contractStartDate" value="2012/01/10 00:00" />
+		<property name="contractEndDate" value="2017/02/10 23:59" />
 		<property name="accountNumber" value="12345678000045678919" />
 		<property name="birthDate" value="1990/01/23 00:00" />
 		<property name="address" value="Calle Guantánamo 132 (Sevilla)" />
@@ -659,7 +673,6 @@
 		<property name="salesOrders">
 			<list>
 				<ref bean="salesOrder4" />
-				<ref bean="salesOrder5" />
 				<ref bean="salesOrder6" />
 			</list>
 		</property>
@@ -683,6 +696,7 @@
 		<property name="salesOrders">
 			<list>
 				<ref bean="salesOrder7" />
+				<ref bean="salesOrder5" />
 				<ref bean="salesOrder8" />
 			</list>
 		</property>
@@ -993,7 +1007,7 @@
 		<property name="totalCost" value="12.75" />
 		<property name="creationMoment" value="2015/06/16 17:15" />
 		<property name="state" value="ONITSWAY" />
-		<property name="deliveryMan" ref="deliveryman1"></property>
+		<property name="deliveryMan" ref="deliveryman2"></property>
 		<property name="customer" ref="customer2" />
 		<property name="cook" ref="cook1" />
 		<property name="boss" ref="boss1" />
