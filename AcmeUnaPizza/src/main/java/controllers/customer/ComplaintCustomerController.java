@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ComplaintService;
@@ -41,47 +42,62 @@ public class ComplaintCustomerController extends AbstractController {
 		
 		complaint = complaintService.create();
 		
-		result = createModelAndView(complaint);
-		
+		result = createEditModelAndView(complaint);
 		return result;
 	}
 	
 	// Edition ----------------------------------------------------------------
 	
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int complaintId) {
+		ModelAndView result;
+		Complaint complaint;
+		
+		complaint = complaintService.findOne(complaintId);
+		
+		result = createEditModelAndView(complaint);
+		result.addObject("edit", true);		
+		return result;
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Complaint complaint, BindingResult binding) {
 		ModelAndView result;
 		
 		if (binding.hasErrors()) {
-			result = createModelAndView(complaint);
+			result = createEditModelAndView(complaint);
+			result.addObject("edit", true);
 		} else {
 			try {
 				complaintService.save(complaint);
-				result = new ModelAndView("redirect:../actor/list.do");
+				result = new ModelAndView("redirect:/complaint/actor/list.do");
 			} catch (Throwable oops) {
-				result = createModelAndView(complaint, "complaint.commit.error");
+				result = createEditModelAndView(complaint, "commit.error");
+				result.addObject("edit", true);
 			}
 		}
-		
+
 		return result;
 	}
 	
 	// Ancillary methods ------------------------------------------------------
 	
-	protected ModelAndView createModelAndView(Complaint complaint) {
+	protected ModelAndView createEditModelAndView(Complaint complaint) {
 		ModelAndView result;
 		
-		result = createModelAndView(complaint, null);
+		result = createEditModelAndView(complaint, null);
 		
 		return result;
 	}
 	
-	protected ModelAndView createModelAndView(Complaint complaint, String msg) {
+	protected ModelAndView createEditModelAndView(Complaint complaint, String message) {
 		ModelAndView result;
 		
-		result = new ModelAndView("complaint/create");
+		result = new ModelAndView("complaint/edit");
 		result.addObject("complaint", complaint);
-		result.addObject("message", msg);
+		result.addObject("message", message);
+		result.addObject("requestURI", "complaint/customer/edit.do");	
+		result.addObject("edit", true);
 		
 		return result;
 	}
