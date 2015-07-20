@@ -30,10 +30,18 @@
 	</jstl:if>
 	
 	<display:column>
-		<a href="complaint/actor/view.do?complaintId=${row.id}">
+		<a href="complaint/actor/details.do?complaintId=${row.id}">
 			<spring:message code="complaint.view" />
 		</a>
 	</display:column>
+	
+	<security:authorize access="hasRole('CUSTOMER')">
+		<display:column>
+			<a href="complaint/customer/edit.do?complaintId=${complaintRow.id}">
+				<spring:message code="complaint.edit" />
+			</a>
+		</display:column>
+	</security:authorize>
 	<!-- 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<jstl:choose>

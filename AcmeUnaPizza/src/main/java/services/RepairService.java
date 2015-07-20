@@ -12,6 +12,7 @@ import repositories.RepairRepository;
 import security.Authority;
 import security.UserAccount;
 import domain.Actor;
+import domain.Motorbike;
 import domain.Repair;
 
 @Service
@@ -55,7 +56,31 @@ public class RepairService {
 		
 		this.repairRepository.save(entity);
 	}
+	
+	public Repair findOne( int id ){
+		Assert.isTrue( id != 0);
+		
+		Repair res;
+		
+		res = this.repairRepository.findOne( id );
+		
+		Assert.notNull(res);
+		
+		return res;
+	}
+
+	public Collection<Repair> findAll() {
+		Collection<Repair> result;
+		
+		result = repairRepository.findAll();
+		
+		Assert.notNull(result);
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
+	
 	private Boolean checkPpalAuthorities(){
 		Boolean res;
 		Actor ppal;

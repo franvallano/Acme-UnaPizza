@@ -82,12 +82,13 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a></li>
+			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.customer.complaints" /></a>
 				<ul>
-					<li><a href="complaint/actor/list.do"><spring:message code="master.page.complaint" /></a></li>
+					<li><a href="complaint/actor/list.do"><spring:message code="master.page.customer.viewComplaint" /></a></li>
 				</ul>
 			</li>
-			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.customer.salesOrders" /></a>
 				<ul>
 					<li><a href="salesOrder/customer/list.do"><spring:message code="master.page.customer.salesOrders.list" /></a></li>
