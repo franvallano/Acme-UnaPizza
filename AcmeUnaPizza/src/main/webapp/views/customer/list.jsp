@@ -29,6 +29,20 @@
 			<display:column>
 				<a href="user/administrator/customer/detailsCustomer.do?customerId=${customersRow.id}" ><spring:message code="details"/></a>
 			</display:column>
+			
+			<jstl:if test="${customersRow.userAccount.active == true}">
+				<display:column>
+					<a href="user/administrator/customer/deactivate.do?customerId=${customersRow.id}" onclick="return confirm('<spring:message code="customer.confirm.deactivate" />')">
+						<spring:message code="customer.deactivate"/> </a>
+				</display:column>
+			</jstl:if>
+			
+			<jstl:if test="${customersRow.userAccount.active == false}">
+				<display:column>
+					<a href="user/administrator/customer/activate.do?customerId=${customersRow.id}" onclick="return confirm('<spring:message code="customer.confirm.activate" />')">
+						<spring:message code="customer.activate"/> </a>
+				</display:column>
+			</jstl:if>
 
 		</security:authorize>
 	

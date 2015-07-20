@@ -39,6 +39,8 @@
 	<security:authorize access="hasRole('CUSTOMER')">
 		<form:form action="${url}" modelAttribute="${userForm}" >
 			<jstl:if test="${edit == true}">
+				<acme:labelDetails code="customer.range" value="${range}"/>
+				<br/>
 				<acme:textbox code="customer.username" path="username" readonly="true"/>
 				<br/>
 				

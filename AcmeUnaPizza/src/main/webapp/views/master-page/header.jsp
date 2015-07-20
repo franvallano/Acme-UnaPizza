@@ -82,19 +82,19 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+				<ul>
+					<li><a href="complaint/actor/list.do"><spring:message code="master.page.complaint" /></a></li>
+				</ul>
+			</li>
 			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a></li>
-			<li><a class="fNiv"><spring:message	code="master.page.customer.complaints" /></a>
+			<li><a class="fNiv"><spring:message	code="master.page.salesOrders" /></a>
 				<ul>
-					<li><a href="complaint/actor/list.do"><spring:message code="master.page.customer.viewComplaint" /></a></li>
+					<li><a href="salesOrder/customer/list.do"><spring:message code="master.page.salesOrders.list" /></a></li>
+					<li><a href="salesOrder/customer/create.do"><spring:message code="master.page.salesOrders.create" /></a></li>
 				</ul>
 			</li>
-			<li><a class="fNiv"><spring:message	code="master.page.customer.salesOrders" /></a>
-				<ul>
-					<li><a href="salesOrder/customer/list.do"><spring:message code="master.page.customer.salesOrders.list" /></a></li>
-					<li><a href="salesOrder/customer/create.do"><spring:message code="master.page.customer.salesOrders.create" /></a></li>
-				</ul>
-			</li>
+			
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BOSS')">
@@ -105,19 +105,35 @@
 				</ul>
 			</li>
 			<li><a class="fNiv" href="dashboard/boss/list.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.salesOrders" /></a>
+				<ul>
+					<li><a href="salesOrder/boss/listOpened.do"><spring:message code="master.page.salesOrders.listOpened" /></a></li>
+					<li><a href="salesOrder/boss/listInProcess.do"><spring:message code="master.page.salesOrders.listInProcess" /></a></li>
+					<li><a href="salesOrder/boss/listCompleted.do"><spring:message code="master.page.salesOrders.listCompleted" /></a></li>
+					<li><a href="salesOrder/boss/listUndelivered.do"><spring:message code="master.page.salesOrders.listUndelivered" /></a></li>
+					<li><a href="salesOrder/boss/listAll.do"><spring:message code="master.page.salesOrders.listAll" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('COOK')">
-			<li><a class="fNiv"><spring:message	code="master.page.cook" /></a>
-				
-			</li>
 			<li><a class="fNiv" href="dashboard/cook/list.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.salesOrders" /></a>
+				<ul>
+					<li><a href="salesOrder/cook/forCooking.do"><spring:message code="master.page.salesOrders.forCooking" /></a></li>
+					<li><a href="salesOrder/cook/forPrepared.do"><spring:message code="master.page.salesOrders.forPrepared" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('DELIVERY_MAN')">
-			<li><a class="fNiv"><spring:message	code="master.page.deliveryMan" /></a>
-			</li>
 			<li><a class="fNiv" href="dashboard/deliveryMan/list.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.salesOrders" /></a>
+				<ul>
+					<li><a href="salesOrder/deliveryMan/listOnItsWay.do"><spring:message code="master.page.salesOrders.onItsWay" /></a></li>
+					<li><a href="salesOrder/deliveryMan/finish.do"><spring:message code="master.page.salesOrders.finish" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">

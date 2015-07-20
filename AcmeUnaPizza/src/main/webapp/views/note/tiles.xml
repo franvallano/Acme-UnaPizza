@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles_es.xml
+ * tiles.xml
  *
  * Copyright (C) 2013 Universidad de Sevilla
  * 
@@ -13,17 +13,12 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-      
+       
 <tiles-definitions>
-
-	<definition name="profile/edit" extends="master.page">	
-		<put-attribute name="title" value="Editar Perfil" />
-		<put-attribute name="body" value="/views/profile/edit.jsp" />
-	</definition>
 	
-	<definition name="profile/changePassword" extends="master.page">	
-		<put-attribute name="title" value="Cambiar Clave" />
-		<put-attribute name="body" value="/views/profile/changePassword.jsp" />
+	<definition name="note/edit" extends="master.page">	
+		<put-attribute name="title" value="Note" />
+		<put-attribute name="body" value="/views/note/edit.jsp" />
 	</definition>
 	
 </tiles-definitions>

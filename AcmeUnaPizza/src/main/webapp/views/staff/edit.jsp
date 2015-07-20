@@ -29,6 +29,7 @@
 				<acme:labelDetails code="staff.dni" value="${staff.dni}"/>
 				<acme:labelDetails code="staff.ssNumber" value="${staff.ssNumber}"/>
 				<acme:dateLabelDetails code="staff.contractStartDate" value="${staff.contractStartDate}" time="false"/>
+				<acme:dateLabelDetails code="staff.contractEndDate" value="${staff.contractEndDate}" time="false"/>
 				<acme:labelDetails code="staff.phone" value="${staff.phone}"/>
 				<acme:labelDetails code="staff.address" value="${staff.address}"/>
 				<acme:dateLabelDetails code="staff.birthDate" value="${staff.birthDate}" time="false"/>
