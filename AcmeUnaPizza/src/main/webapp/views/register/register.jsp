@@ -81,6 +81,9 @@
 			<acme:textbox code="staff.birthDate" path="birthDate"/>
 			<br/>
 			
+			<acme:textbox code="staff.contractEndDate" path="contractEndDate"/>
+			<br/>
+			
 			<jstl:if test="${isDeliveryMan == true}">
 				<acme:textbox code="staff.drivingLicenseNumber" path="drivingLicenseNumber"/>
 				<br/>

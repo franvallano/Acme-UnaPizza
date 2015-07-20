@@ -17,22 +17,18 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-
+	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<form:form action="${url}" modelAttribute="${changeDateForm}" >
+			<form:hidden path="idStaff"/>
+			<acme:textbox code="staff.contractStartDate" path="contractStartDate"/>
+				<br/>
+			<acme:textbox code="staff.contractEndDate" path="contractEndDate"/>
+				<br/>
 
-		<jstl:if test="${details == true}">
-			<fieldset>
-				<acme:labelDetails code="administrator.username" value="${administrator.userAccount.username}"/>
-				<acme:labelDetails code="administrator.name" value="${administrator.name}"/>
-				<acme:labelDetails code="administrator.surname" value="${administrator.surname}"/>
-				<acme:labelDetails code="administrator.email" value="${administrator.email}"/>
-			</fieldset>
-		</jstl:if>
+			<acme:submit name="save" code="staff.save"/>
+			<input type="button" name="back" value="<spring:message code="cancel" />" 
+				onclick="javascript: window.history.back();" />
+		</form:form>
 		
 	</security:authorize>
-	
-	
-	<br />
-	<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-		onclick="javascript: window.history.back();" />
-	<br />

@@ -25,9 +25,16 @@
 			
 			<spring:message code="staff.email" var="emailHeader" />
 			<display:column property="email" title="${emailHeader}" sortable="true" />
+			
+			<spring:message code="staff.contractEndDate" var="contractEndDateHeader" />
+			<display:column property="contractEndDate" title="${contractEndDateHeader}" sortable="true" format="{0,date,dd/MM/yyyy}"/>
 
 			<display:column>
 				<a href="user/administrator/staff/detailsStaff.do?staffId=${staffsRow.id}" ><spring:message code="details"/></a>
+			</display:column>
+			
+			<display:column>
+				<a href="user/administrator/staff/changeDateContract.do?staffId=${staffsRow.id}" ><spring:message code="staff.changeDateContract"/></a>
 			</display:column>
 
 		</security:authorize>
