@@ -49,6 +49,7 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	private String username;
 	private String password;
 	private Collection<Authority> authorities;
+	private boolean active;
 
 	@Size(min = 5, max = 32)
 	@Column(unique = true)
@@ -119,7 +120,14 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	@Transient
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return getActive();
 	}
 
+	public boolean getActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

@@ -25,11 +25,7 @@ public class ViewsTool implements Tool{
 			else if(command.equals("-config")) configurate(folderName);
 			else if(command.equals("-check")){
 				if(parameters.length == 3) checkInternationalization(folderName, true);
-				else{
-					if (parameters[1].contains("-i"))
-						throw new IllegalArgumentException("No se ha indicado la carpeta de vistas a revisar");
-					checkInternationalization(folderName, false);
-				}
+				else checkInternationalization(folderName, false);
 			}
 			else{ //-add command
 				viewType = parameters[2];

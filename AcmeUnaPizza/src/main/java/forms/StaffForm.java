@@ -35,6 +35,7 @@ public class StaffForm {
 	private String address;
 	private String drivingLicenseNumber;
 	private Motorbike motorbike;
+	private Date contractEndDate;
 
 	// Methods ---------------------------------------------------------
 
@@ -187,5 +188,16 @@ public class StaffForm {
 	public void setMotorbike(Motorbike motorbike) {
 		this.motorbike = motorbike;
 	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	public Date getContractEndDate() {
+		return contractEndDate;
+	}
+
+	public void setContractEndDate(Date contractEndDate) {
+		this.contractEndDate = contractEndDate;
+	}
+	
 	
 }

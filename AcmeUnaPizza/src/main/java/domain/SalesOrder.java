@@ -92,7 +92,7 @@ public class SalesOrder extends DomainEntity{
 	}
 	
 	
-	@Min(0)
+	@Min(1)
 	public Integer getDrivingTime() {
 		return drivingTime;
 	}

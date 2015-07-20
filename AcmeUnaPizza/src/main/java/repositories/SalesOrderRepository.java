@@ -83,4 +83,37 @@ public interface SalesOrderRepository extends JpaRepository<SalesOrder, Integer>
 	
 	@Query("select sO from SalesOrder sO where sO.customer.id = ?1")
 	Collection<SalesOrder> findAllByCustomerId(int customerId);
+	
+	@Query("select sO from SalesOrder sO where sO.state = 'UNDELIVERED'")
+	Collection<SalesOrder> findAllSalesOrderUndelivered();
+	
+	@Query("select sO from SalesOrder sO where sO.state = 'DELIVERED'")
+	Collection<SalesOrder> findAllSalesOrderDelivered();
+	
+	@Query("select sO from SalesOrder sO where sO.state = 'OPEN'")
+	Collection<SalesOrder> findAllSalesOrderOpened();
+	
+	@Query("select sO from SalesOrder sO where sO.boss.id = ?1")
+	Collection<SalesOrder> findMySalesOrdersBoss(int bossId);
+	
+	@Query("select sO from SalesOrder sO where sO.deliveryMan.id = ?1")
+	Collection<SalesOrder> findMySalesOrdersDeliveryMan(int deliveryManId);
+	
+	@Query("select sO from SalesOrder sO where sO.cook.id = ?1")
+	Collection<SalesOrder> findMySalesOrdersCook(int cookId);
+	
+	@Query("select sO from SalesOrder sO where sO.state = 'COOKING' OR sO.state = 'PREPARED' OR sO.state = 'ONITSWAY'")
+	Collection<SalesOrder> findAllSalesOrderInProcess();
+	
+	@Query("select sO from SalesOrder sO where sO.state = 'OPEN' and sO.boss is not null")
+	Collection<SalesOrder> findAllForCooking();
+	
+	@Query("select sO from SalesOrder sO where sO.state = 'COOKING' and sO.cook.id = ?1")
+	Collection<SalesOrder> findAllForPrepared(int cookId);
+	
+	@Query("select sO from SalesOrder sO where sO.state = 'PREPARED' and sO.deliveryMan is null")
+	Collection<SalesOrder> findAllOnItsWay();
+	
+	@Query("select sO from SalesOrder sO where sO.state = 'ONITSWAY' and sO.deliveryMan.id = ?1")
+	Collection<SalesOrder> findOneToFinish(int deliveryManId);
 } 

@@ -39,6 +39,8 @@ public class ProfileCustomerController extends AbstractController{
 		
 		result = createEditModelAndView(customerProfileForm);
 		
+		result.addObject("range", customer.getRangee());
+		
 		return result;
 	}
 	
@@ -119,6 +121,7 @@ public class ProfileCustomerController extends AbstractController{
 		result.addObject("customerProfileForm", customerProfileForm);
 		result.addObject("userForm", "customerProfileForm");
 		result.addObject("message", message);
+		result.addObject("edit", true);
 		result.addObject("url", "profile/customer/edit.do");
 		
 		return result;

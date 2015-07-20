@@ -14,6 +14,7 @@ import security.LoginService;
 import security.UserAccount;
 import utilities.PasswordCode;
 import domain.Cook;
+import domain.SalesOrder;
 
 @Service
 @Transactional
@@ -26,6 +27,9 @@ public class CookService {
 	// Ancillary services -----------------------------------------------------
 	@Autowired
 	private AdministratorService administratorService;
+	
+	@Autowired
+	private SalesOrderService salesOrderService;
 
 	@Autowired
 	private ActorService actorService;
@@ -100,13 +104,14 @@ public class CookService {
 		Authority authority;
 		
 		authority = new Authority();
-		authority.setAuthority("COOK");
+		authority.setAuthority(Authority.COOK);
 		
 		authorities = new ArrayList<Authority>();
 		authorities.add(authority);
 		
 		result = new UserAccount();
 		result.setAuthorities(authorities);
+		result.setActive(true);
 		
 		return result;
 	}
@@ -133,7 +138,36 @@ public class CookService {
 		return result;
 	}
 	
+	public void assignAndCooking(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+		SalesOrder salesOrder;
+		
+		salesOrder = salesOrderService.findOneCheckCook(salesOrderId);
+		Assert.notNull(salesOrder);
+		Assert.isNull(salesOrder.getCook());
+		Assert.isTrue(salesOrder.getId() == salesOrderId);
+		Assert.isTrue(salesOrder.getState().equals("OPEN"));
+		
+		salesOrder.setCook(findByPrincipal());
+		salesOrder.setState("COOKING");
+		
+		salesOrderService.saveByCook(salesOrder);
+	}
 	
+	public void prepared(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+		SalesOrder salesOrder;
+		
+		salesOrder = salesOrderService.findOneCheckCook(salesOrderId);
+		Assert.notNull(salesOrder);
+		Assert.isTrue(salesOrder.getCook().getId() == findByPrincipal().getId());
+		Assert.isTrue(salesOrder.getId() == salesOrderId);
+		Assert.isTrue(salesOrder.getState().equals("COOKING"));
+		
+		salesOrder.setState("PREPARED");
+		
+		salesOrderService.saveByCook(salesOrder);
+	}
 	
 	// Ancillary methods ------------------------------------------------------
 

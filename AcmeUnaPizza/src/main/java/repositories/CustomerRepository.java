@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Boss;
 import domain.Customer;
 
 @Repository
@@ -34,4 +35,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 	// Fecha último pedido realizado
 	@Query("select sO.creationMoment from SalesOrder sO where sO.customer.id = ?1 ORDER BY sO.creationMoment DESC")
 	Collection<Date> findDateLastOrder(int customerId);
+	
+	@Query("select c from Customer c join c.salesOrders sO where sO.id = ?1")
+	Customer findCustomerBySalesOrder(int salesOrderId);
 }

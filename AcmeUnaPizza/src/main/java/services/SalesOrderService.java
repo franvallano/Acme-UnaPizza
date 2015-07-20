@@ -1,5 +1,6 @@
 package services;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -11,13 +12,16 @@ import org.springframework.util.Assert;
 
 import repositories.SalesOrderRepository;
 import utilities.PatternGenerator;
-import domain.Administrator;
+import domain.Boss;
+import domain.Cook;
 import domain.Customer;
+import domain.DeliveryMan;
+import domain.Note;
 import domain.Product;
-import domain.PurchaseOrder;
 import domain.SalesOrder;
 import domain.Staff;
-import forms.PurchaseOrderForm;
+import forms.DrivingTimeForm;
+import forms.NoteDrivingTimeForm;
 import forms.SalesOrderForm;
 
 @Service
@@ -36,7 +40,16 @@ public class SalesOrderService {
 	private CustomerService customerService;
 	
 	@Autowired
+	private DeliveryManService deliveryManService;
+	
+	@Autowired
+	private CookService cookService;
+	
+	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private BossService bossService;
 	
 	// Constructor ------------------------------------------------------------
 	public SalesOrderService(){
@@ -83,6 +96,64 @@ public class SalesOrderService {
 		Collection<SalesOrder> res;
 		
 		res = salesOrderRepository.findAll();
+		
+		return res;
+	}
+	
+	public Collection<SalesOrder> findAllForCooking(){
+		Collection<SalesOrder> res;
+		
+		cookService.findByPrincipal();
+		
+		res = salesOrderRepository.findAllForCooking();
+		
+		return res;
+	}
+	
+	public Collection<SalesOrder> findAllOnItsWay(){
+		Collection<SalesOrder> res;
+		DeliveryMan deliveryMan; 
+		boolean isOnItsWay = false;
+		
+		deliveryMan = deliveryManService.findByPrincipal();
+		
+		// Comprobamos que NO tenga ningun pedido en reparto
+		for(SalesOrder salesOrder : deliveryMan.getSalesOrders()) {
+			if(salesOrder.getState().equals("ONITSWAY")) {
+				isOnItsWay = true;
+				break;
+			}
+		}
+		
+		if(!isOnItsWay)
+			res = salesOrderRepository.findAllOnItsWay();
+		else
+			res = new ArrayList<SalesOrder>();
+
+		return res;
+	}
+	
+	public Collection<SalesOrder> findOneToFinish() {
+		Collection<SalesOrder> res;
+		DeliveryMan deliveryMan;
+		
+		deliveryMan = deliveryManService.findByPrincipal();
+		
+		res = salesOrderRepository.findOneToFinish(deliveryMan.getId());
+		
+		// Comprobamos que no venga mas de un pedido en estado ONITSWAY
+		Assert.isTrue(res.size() <= 1);
+		
+		return res;
+	}
+	
+	public Collection<SalesOrder> findAllForPrepared(){
+		Collection<SalesOrder> res;
+		Cook cook;
+		
+		cook = cookService.findByPrincipal();
+		
+		res = salesOrderRepository.findAllForPrepared(cook.getId());
 		
 		return res;
 	}
@@ -265,7 +336,49 @@ public class SalesOrderService {
 		return s;
 	}
 	
-	public SalesOrder findOne(int id) {
+	public SalesOrder findOneCheckBoss(int id) {
+		Assert.isTrue(id != 0);
+		
+		SalesOrder res;
+		
+		res = this.salesOrderRepository.findOne(id);
+		
+		bossService.findByPrincipal();
+		
+		Assert.notNull(res);
+		
+		return res;
+	}
+	
+	public SalesOrder findOneCheckCook(int id) {
+		Assert.isTrue(id != 0);
+		
+		SalesOrder res;
+		
+		res = this.salesOrderRepository.findOne(id);
+		
+		cookService.findByPrincipal();
+		
+		Assert.notNull(res);
+		
+		return res;
+	}
+	
+	public SalesOrder findOneCheckDeliveryMan(int id) {
+		Assert.isTrue(id != 0);
+		
+		SalesOrder res;
+		
+		res = this.salesOrderRepository.findOne(id);
+		
+		deliveryManService.findByPrincipal();
+		
+		Assert.notNull(res);
+		
+		return res;
+	}
+	
+	public SalesOrder findOneByCustomer(int id) {
 		Assert.isTrue(id != 0);
 		
 		SalesOrder res;
@@ -406,17 +519,25 @@ public class SalesOrderService {
 		}
 
 		if(salesOrderForm.getOffer() != null) {
-			salesOrder.setTotalCost(salesOrder.getTotalCost() * ((100-salesOrderForm.getOffer().getDiscount())/100));
-			salesOrder.setOffer(salesOrderForm.getOffer());
+			Double totalCostOffer = (salesOrder.getTotalCost() * ((100-salesOrderForm.getOffer().getDiscount())/100.0));
+			DecimalFormat df = new DecimalFormat("#.##");      
+			totalCostOffer = Double.valueOf(df.format(totalCostOffer));
+			salesOrder.setTotalCost(totalCostOffer);
+			salesOrder.setOffer(salesOrderForm.getOffer()); 
 		} else
 			Assert.isTrue(salesOrder.getTotalCost() == totalCost);
 
 		return salesOrder;
 	}
 	
-	public void save(SalesOrder saleseOrder) {
+	public void save(SalesOrder saleseOrder, boolean newSalesOrder) {
 		Assert.notNull(saleseOrder);
-		Assert.isTrue(saleseOrder.getCustomer().getId() == customerService.findByPrincipal().getId());
+		Assert.isTrue(saleseOrder.getTotalCost() > 0.0);
+		Customer customer;
+		customer = customerService.findByPrincipal();
+		Assert.isTrue(saleseOrder.getCustomer().getId() == customer.getId());
+		
+		customerService.checkRangeCustomer(customer, newSalesOrder);
 		
 		Date date;
 		
@@ -425,6 +546,199 @@ public class SalesOrderService {
 		saleseOrder.setCreationMoment(date);
 		
 		salesOrderRepository.save(saleseOrder);
+	}
+	
+	public void saveAssignBoss(SalesOrder saleseOrder) {
+		Assert.notNull(saleseOrder);
+		
+		salesOrderRepository.save(saleseOrder);
+	}
+
+	public Collection<SalesOrder> findAllSalesOrderUndelivered() {
+		Collection<SalesOrder> res;
+		
+		bossService.findByPrincipal();
+		
+		res = salesOrderRepository.findAllSalesOrderUndelivered();
+		
+		return res;
+	}
+	
+	public Collection<SalesOrder> findAllSalesOrderDelivered() {
+		Collection<SalesOrder> res;
+		
+		bossService.findByPrincipal();
+		
+		res = salesOrderRepository.findAllSalesOrderDelivered();
+		
+		return res;
+	}
+	
+	public Collection<SalesOrder> findAllSalesOrderOpened() {
+		Collection<SalesOrder> res;
+		
+		bossService.findByPrincipal();
+		
+		res = salesOrderRepository.findAllSalesOrderOpened();
+		
+		return res;
+	}
+	
+	public Collection<SalesOrder> findAllSalesOrderInProcess() {
+		Collection<SalesOrder> res;
+		
+		bossService.findByPrincipal();
+		
+		res = salesOrderRepository.findAllSalesOrderInProcess();
+		
+		return res;
+	}
+	
+	public void saveByCook(SalesOrder saleseOrder) {
+		Assert.notNull(saleseOrder);
+		
+		salesOrderRepository.save(saleseOrder);
+	}
+	
+	public void saveByDeliveryMan(SalesOrder saleseOrder) {
+		Assert.notNull(saleseOrder);
+		
+		salesOrderRepository.save(saleseOrder);
+	}
+	
+	public Collection<SalesOrder> findMySalesOrders() {
+		Collection<SalesOrder> res = null;
+		Staff staff;
+		
+		staff = staffService.findByPrincipal();
+		
+		Assert.notNull(staff);
+		
+		if(staffService.isBoss())
+			res = salesOrderRepository.findMySalesOrdersBoss(staff.getId());
+		else if(staffService.isDeliveryMan())
+			res = salesOrderRepository.findMySalesOrdersDeliveryMan(staff.getId());
+		else if(staffService.isCook())
+			res = salesOrderRepository.findMySalesOrdersCook(staff.getId());
+		
+		Assert.notNull(res);
+		
+		return res;
+	}
+	
+	public void cancelSalesOrder(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+
+		SalesOrder salesOrder;
+		Boss boss;
+		Customer customer;
+		
+		salesOrder = findOneCheckBoss(salesOrderId);
+		
+		Assert.notNull(salesOrder);
+		Assert.isTrue(salesOrder.getState().equals("OPEN") || salesOrder.getState().equals("COOKING") || salesOrder.getState().equals("PREPARED"));
+		Assert.isTrue(salesOrder.getId() == salesOrderId);
+		
+		// Comprobamos si tiene algun Boss asociado
+		boss = bossService.findBossBySalesOrder(salesOrderId);
+				
+		if(boss != null) {
+			boss.getSalesOrders().remove(salesOrder);
+			bossService.save(boss);
+		}
+		
+		// Customer asociada tendra siempre
+		customer = customerService.findCustomerBySalesOrder(salesOrderId);
+		Assert.notNull(customer);
+		
+		customerService.checkRangeCustomer(customer, false);
+		
+		customer.getSalesOrders().remove(salesOrder);
+		customerService.save(customer);
+		
+		// Si esta en estado OPEN volveremos a sumar los productos del pedido
+		// Si esta en estado COOKING o PREPARED solo añadiremos helados y bebidas
+		if(salesOrder.getState().equals("OPEN")) {
+			for(Product product : salesOrder.getProducts()) {
+				product.setActualStock(product.getActualStock() + 1);
+				
+				productService.saveCancelProduct(product);
+			}
+		} else {
+			for(Product product : salesOrder.getProducts()) {
+				if(product.getType().equals("DESSERT") || product.getType().equals("DRINK")) {
+					product.setActualStock(product.getActualStock() + 1);
+					
+					productService.saveCancelProduct(product);
+				}
+			}
+		}
+		
+		// Por ultimo, eliminamos todas las relaciones de Sales Order
+		salesOrder.setBoss(null);
+		salesOrder.setCustomer(null);
+				
+		salesOrderRepository.delete(salesOrder);
+	}
+	
+	public SalesOrder reconstructDrivingTime(DrivingTimeForm drivingTimeForm) {
+		Assert.notNull(drivingTimeForm);
+		SalesOrder result;
+		
+		result = findOneCheckDeliveryMan(drivingTimeForm.getSalesOrderId());
+		
+		Assert.isTrue(result.getDeliveryMan().getId() == deliveryManService.findByPrincipal().getId());
+		Assert.isTrue(result.getId() == drivingTimeForm.getSalesOrderId());
+		Assert.isTrue(result.getState().equals("ONITSWAY"));
+		
+		
+		result.setDrivingTime(drivingTimeForm.getDrivingTime());
+		
+		result.setState("DELIVERED");
+		
+		return result;
+	}
+	
+	public SalesOrder reconstructNoteDrivingTime(NoteDrivingTimeForm noteDrivingTimeForm) {
+		Assert.notNull(noteDrivingTimeForm);
+		SalesOrder result;
+		Note note;
+		
+		result = findOneCheckDeliveryMan(noteDrivingTimeForm.getSalesOrderId());
+		
+		Assert.isTrue(result.getDeliveryMan().getId() == deliveryManService.findByPrincipal().getId());
+		Assert.isTrue(result.getId() == noteDrivingTimeForm.getSalesOrderId());
+		Assert.isTrue(result.getState().equals("ONITSWAY"));
+		
+		note = new Note();
+		result.setDrivingTime(noteDrivingTimeForm.getDrivingTime());
+		note.setCause(noteDrivingTimeForm.getCause());
+		note.setDescription(noteDrivingTimeForm.getDescription());
+		
+		result.setNote(note);
+		result.setState("UNDELIVERED");
+		
+		return result;
+	}
+	
+	public Note note(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+		Note result;
+		SalesOrder salesOrder;
+		
+		salesOrder = findOneCheckBoss(salesOrderId);
+		
+		Assert.notNull(salesOrder);
+		Assert.isTrue(salesOrder.getId() == salesOrderId);
+		Assert.isTrue(salesOrder.getState().equals("UNDELIVERED"));
+		Assert.notNull(salesOrder.getNote());
+		
+		result = new Note();
+		
+		result.setCause(salesOrder.getNote().getCause());
+		result.setDescription(salesOrder.getNote().getDescription());
+		
+		return result;
 	}
 	
 	// Ancillary methods ------------------------------------------------------

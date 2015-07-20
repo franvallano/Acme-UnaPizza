@@ -16,6 +16,7 @@ import utilities.PasswordCode;
 import domain.DeliveryMan;
 import domain.Garage;
 import domain.Motorbike;
+import domain.SalesOrder;
 
 @Service
 @Transactional
@@ -24,11 +25,14 @@ public class DeliveryManService {
 	// Managed repository -----------------------------------------------------
 	@Autowired
 	private DeliveryManRepository deliveryManRepository;
-	@Autowired
-	private AdministratorService administratorService;
+	
 
 	// Ancillary services -----------------------------------------------------
-
+	@Autowired
+	private AdministratorService administratorService;
+	@Autowired
+	private SalesOrderService salesOrderService;
+	
 	@Autowired
 	private ActorService actorService;
 	
@@ -98,13 +102,14 @@ public class DeliveryManService {
 		Authority authority;
 		
 		authority = new Authority();
-		authority.setAuthority("DELIVERYMAN");
+		authority.setAuthority(Authority.DELIVERY_MAN);
 		
 		authorities = new ArrayList<Authority>();
 		authorities.add(authority);
 		
 		result = new UserAccount();
 		result.setAuthorities(authorities);
+		result.setActive(true);
 		
 		return result;
 	}
@@ -137,6 +142,46 @@ public class DeliveryManService {
 		result = deliveryManRepository.findDeliveryManByMotorbike(motorbikeId);
 		
 		return result;
+	}
+	
+	public void finishSalesOrder(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+		SalesOrder salesOrder;
+		
+		salesOrder = salesOrderService.findOneCheckDeliveryMan(salesOrderId);
+		
+		Assert.notNull(salesOrder);
+		Assert.isTrue(salesOrder.getDeliveryMan().getId() == findByPrincipal().getId());
+		
+		salesOrder.setState("DELIVERED");
+		
+		salesOrderService.saveByDeliveryMan(salesOrder);
+	}
+	
+	public void prepared(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+		SalesOrder salesOrder;
+		
+		salesOrder = salesOrderService.findOneCheckCook(salesOrderId);
+		Assert.notNull(salesOrder);
+		Assert.isTrue(salesOrder.getCook().getId() == findByPrincipal().getId());
+		
+		salesOrder.setState("PREPARED");
+		
+		salesOrderService.saveByCook(salesOrder);
+	}
+	
+	public void onItsWay(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+		SalesOrder salesOrder;
+		
+		salesOrder = salesOrderService.findOneCheckDeliveryMan(salesOrderId);
+		Assert.notNull(salesOrder);
+		Assert.isNull(salesOrder.getDeliveryMan());
+		
+		salesOrder.setState("ONITSWAY");
+		salesOrder.setDeliveryMan(findByPrincipal());
+		salesOrderService.saveByDeliveryMan(salesOrder);
 	}
 	
 	// Ancillary methods ------------------------------------------------------
