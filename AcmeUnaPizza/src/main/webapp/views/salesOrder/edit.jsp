@@ -17,61 +17,47 @@
 		resetSalesOrder();
 	});
 	
-	var discountOfferApplied = 0.0;
-	var priceNoOffer = 0.0;
-	
 	function resetSalesOrder() {
 		var totalCost = $("#totalCost");
 		sum = 0.0;
-		priceNoOffer = 0.0;
 		totalCost.val(sum);
 	}
-
+	
 	function updatePrice(updatePriceNoOffer) {
 		var totalCost = $("#totalCost");
+		// Con esta variable evitamos que el primer select cuente como un valor
+		var jumpSelectOffer = true; 
 
 		sum = 0.0;
 
 		$("select option").each(function(){
 			if($(this).is(':checked')) {
-				sum += parseFloat($(this).val());
+				if(!jumpSelectOffer)
+					sum += parseFloat($(this).val());
+				else
+					jumpSelectOffer = false;
 			}
 		});
 		
 		totalCost.val(sum);
-		
-		if(updatePriceNoOffer == 1)
-			priceNoOffer = sum;
-		
-		$("#offerApplied option:first").attr('selected','selected');
-			
-	}
-	
-	function applyOffer() {
-		var offerApplied = $("#offerApplied");
-		var totalCost = $("#totalCost");
-		
-		if(offerApplied.val() != 0) {
-			if(discountOfferApplied != offerApplied.val()) {
-				discountOfferApplied = offerApplied.val();
-				totalCost.val(priceNoOffer * ((100-offerApplied.val())/100));
-			}
-			
-		} else {
-			discountOfferApplied = 0.0;
-			updatePrice(1);
-		}
 	}
 
 </script>
 
-	<security:authorize access="hasRole('CUSTOMER')">
+	<security:authorize access="hasAnyRole('CUSTOMER, BOSS')">
 
 		<jstl:if test="${details == true}">
 			<fieldset>
 				<acme:labelDetails code="salesOrder.referenceNumber" value="${salesOrder.referenceNumber}"/>
 				<acme:labelDetails code="salesOrder.totalCost" value="${salesOrder.totalCost}" eurCurrency="true"/>
 				<acme:dateLabelDetails code="salesOrder.creationMoment" value="${salesOrder.creationMoment}"/>
+				
+				<security:authorize access="hasRole('BOSS')">
+					<acme:labelDetails code="salesOrder.boss" value="${salesOrder.boss.name}"/>
+					<acme:labelDetails code="salesOrder.cook" value="${salesOrder.cook.name}"/>
+					<acme:labelDetails code="salesOrder.deliveryMan" value="${salesOrder.deliveryMan.name}"/>
+				</security:authorize>
+				
 				<br/>
 				<fieldset>
 					<legend><h3><spring:message code="salesOrder.offer" /></h3></legend>
@@ -101,10 +87,18 @@
 			</fieldset>
 			
 			<br />
-			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-					onclick="javascript: window.location.replace('salesOrder/customer/list.do');" />
+			<security:authorize access="hasRole('BOSS')">
+				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+					onclick="javascript: window.history.back();" />
+			</security:authorize>
+			<security:authorize access="hasRole('CUSTOMER')">
+				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+						onclick="javascript: window.location.replace('salesOrder/customer/list.do');" />
+			</security:authorize>
 		</jstl:if>
+	</security:authorize>
 		
+	<security:authorize access="hasRole('CUSTOMER')">
 		<jstl:if test="${edit == true}">
 			<form:form action="${requestURI}" modelAttribute="salesOrderForm">
 				<form:hidden path="idPizzas" />
@@ -122,10 +116,7 @@
 				<jstl:if test="${!availableOffers.isEmpty()}">
 					<fieldset>
 						<legend><h3><spring:message code="salesOrder.availableOffers" /></h3></legend>
-						<form:select path="offer" size="2" onclick="applyOffer()" onchange="applyOffer()" id="offerApplied">
-							<form:option label="---" value="0" selected="selected"/>
-							<form:options items="${availableOffers}" itemLabel="name" itemValue="discount"/>
-						</form:select>
+						<acme:select id="offerApplied" items="${availableOffers}" itemLabel="name" code="salesOrder.offerApplied" path="offer"/>
 					</fieldset>
 				</jstl:if>
 
@@ -138,7 +129,7 @@
 						<acme:labelDetails code="product.name" value="${product.name}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.stockPrice" value="${product.stockPrice}" eurCurrency="true" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<spring:message code="product.amount" />
-							<form:select path="amountPizzas" size="2" onclick="updatePrice(1)" onchange="updatePrice(1)">
+							<form:select path="amountPizzas" size="2" onclick="updatePrice()" onchange="updatePrice()">
 								<form:option label="0" value="0.0" selected="selected"/>
 									<jstl:forEach items="${totalAmount}" varStatus="amountIndex">
 										<jstl:if test="${amountIndex.index > 0}">
@@ -159,7 +150,7 @@
 						<acme:labelDetails code="product.name" value="${product.name}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.stockPrice" value="${product.stockPrice}" eurCurrency="true" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<spring:message code="product.amount" />
-							<form:select path="amountComplements" size="2" onclick="updatePrice(1)" onchange="updatePrice(1)">
+							<form:select path="amountComplements" size="2" onclick="updatePrice()" onchange="updatePrice()">
 								<form:option label="0" value="0.0" selected="selected"/>
 									<jstl:forEach items="${totalAmount}" varStatus="amountIndex">
 										<jstl:if test="${amountIndex.index > 0}">
@@ -180,7 +171,7 @@
 						<acme:labelDetails code="product.name" value="${product.name}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.stockPrice" value="${product.stockPrice}" eurCurrency="true" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<spring:message code="product.amount" />
-							<form:select path="amountDesserts" size="2" onclick="updatePrice(1)" onchange="updatePrice(1)">
+							<form:select path="amountDesserts" size="2" onclick="updatePrice()" onchange="updatePrice()">
 								<form:option label="0" value="0.0" selected="selected"/>
 									<jstl:forEach items="${totalAmount}" varStatus="amountIndex">
 										<jstl:if test="${amountIndex.index > 0}">
@@ -201,7 +192,7 @@
 						<acme:labelDetails code="product.name" value="${product.name}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.stockPrice" value="${product.stockPrice}" eurCurrency="true" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<spring:message code="product.amount" />
-							<form:select path="amountDrinks" size="2" onclick="updatePrice(1)" onchange="updatePrice(1)">
+							<form:select path="amountDrinks" size="2" onclick="updatePrice()" onchange="updatePrice()">
 								<form:option label="0" value="0.0" selected="selected"/>
 									<jstl:forEach items="${totalAmount}" varStatus="amountIndex">
 										<jstl:if test="${amountIndex.index > 0}">

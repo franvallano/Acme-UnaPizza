@@ -522,13 +522,13 @@
 		
 		<fieldset>
 			<b><spring:message code="dashboard.boss.orderMoreSlow"/></b>
-			<br/>
+			<br/><br/>
 			
 			<jstl:forEach var="salesOrder" items="${salesOrderMaxDrivingTime}" varStatus="rowIndex">
 				<acme:labelDetails code="referenceNumber" value="${salesOrder.referenceNumber}" />
 				<acme:labelDetails code="state" value="${salesOrder.state}" />
 				<acme:labelDetails code="drivingTime" value="${salesOrder.drivingTime}" timeMinutes="true"/>
-				<acme:dateLabelDetails code="creationMoment" value="${salesOrder.creationMoment}" time="false" />
+				<acme:dateLabelDetails code="creationMoment" value="${salesOrder.creationMoment}"/>
 			</jstl:forEach>
 
 		</fieldset>
@@ -536,13 +536,13 @@
 		
 		<fieldset>
 			<b><spring:message code="dashboard.boss.orderMoreFast"/></b>
-			<br/>
+			<br/><br/>
 			
 			<jstl:forEach var="salesOrder" items="${salesOrderMinDrivingTime}" varStatus="rowIndex">
 				<acme:labelDetails code="referenceNumber" value="${salesOrder.referenceNumber}" />
 				<acme:labelDetails code="state" value="${salesOrder.state}" />
 				<acme:labelDetails code="drivingTime" value="${salesOrder.drivingTime}"  timeMinutes="true"/>
-				<acme:dateLabelDetails code="creationMoment" value="${salesOrder.creationMoment}" time="false" />
+				<acme:dateLabelDetails code="creationMoment" value="${salesOrder.creationMoment}" />
 			</jstl:forEach>
 			
 		</fieldset>
