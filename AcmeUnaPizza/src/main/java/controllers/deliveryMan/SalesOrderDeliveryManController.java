@@ -49,6 +49,7 @@ public class SalesOrderDeliveryManController extends AbstractController{
 		result = new ModelAndView("salesOrder/list");
 		result.addObject("salesOrders", salesOrders);
 		result.addObject("requestURI", "salesOrder/deliveryMan/listOnItsWay.do");
+		result.addObject("onitsway", true);
 		
 		return result;
 	}
@@ -77,6 +78,7 @@ public class SalesOrderDeliveryManController extends AbstractController{
 		result = new ModelAndView("salesOrder/list");
 		result.addObject("salesOrders", salesOrders);
 		result.addObject("requestURI", "salesOrder/deliveryMan/finish.do");
+		result.addObject("finish", true);
 		
 		return result;
 	}
@@ -190,6 +192,7 @@ public class SalesOrderDeliveryManController extends AbstractController{
 		
 		result = new ModelAndView("salesOrder/finish");
 		result.addObject("noteDrivingTimeForm", noteDrivingTimeForm);
+		result.addObject("noteDrivingForm", "noteDrivingTimeForm");
 		result.addObject("requestURI", "salesOrder/deliveryMan/notFinish.do");
 		result.addObject("message", message);
 		result.addObject("causes", causes);
@@ -203,6 +206,7 @@ public class SalesOrderDeliveryManController extends AbstractController{
 		
 		result = new ModelAndView("salesOrder/finish");
 		result.addObject("drivingTimeForm", drivingTimeForm);
+		result.addObject("drivingForm", "drivingTimeForm");
 		result.addObject("requestURI", "salesOrder/deliveryMan/toFinish.do");
 		result.addObject("message", message);
 		result.addObject("delivered", true);

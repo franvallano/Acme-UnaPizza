@@ -42,6 +42,7 @@ public class SalesOrderCookController extends AbstractController{
 		result = new ModelAndView("salesOrder/list");
 		result.addObject("salesOrders", salesOrders);
 		result.addObject("requestURI", "salesOrder/cook/forCooking.do");
+		result.addObject("assign", true);
 		
 		return result;
 	}
@@ -55,6 +56,7 @@ public class SalesOrderCookController extends AbstractController{
 		salesOrders = salesOrderService.findAllForPrepared();
 		
 		result = new ModelAndView("salesOrder/list");
+		result.addObject("prepared", true);
 		result.addObject("salesOrders", salesOrders);
 		result.addObject("requestURI", "salesOrder/cook/forPrepared.do");
 		
