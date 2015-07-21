@@ -46,18 +46,16 @@ public class ComplaintController extends AbstractController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public ModelAndView view(@RequestParam int complaintId) {
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public ModelAndView details(@RequestParam int complaintId) {
 		ModelAndView result;
 		Complaint complaint;
-		String uri;
 		
-		complaint = complaintService.findOneIfOwner(complaintId);
+		complaint = complaintService.findOne(complaintId);
 		
-		uri = "complaint/actor/view.do";
-		result = new ModelAndView("complaint/view");
-		result.addObject("requestURI", uri);
+		result = new ModelAndView("complaint/edit");
 		result.addObject("complaint", complaint);
+		result.addObject("details", true);
 		
 		return result;
 	}
