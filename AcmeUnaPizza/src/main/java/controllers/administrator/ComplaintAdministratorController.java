@@ -2,11 +2,15 @@ package controllers.administrator;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ComplaintService;
@@ -58,7 +62,56 @@ public class ComplaintAdministratorController extends AbstractController{
 		return result;
 	}
 	// Edition ----------------------------------------------------------------
+	@RequestMapping(value = "/addResolution", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int complaintId) {
+		ModelAndView result;
+		Complaint complaint;
+		
+		complaint = complaintService.findOne(complaintId);	
+		
+		Assert.notNull(complaint);
+		result = addResolutionModelAndView(complaint);
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/addResolution", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Complaint complaint, BindingResult binding) {
+		ModelAndView result;
+		
+		if (binding.hasErrors()) {
+			result = addResolutionModelAndView(complaint);
+		} else {
+			try {
+				complaintService.addResolution(complaint);
+				complaintService.save(complaint);
+				result = new ModelAndView("redirect:/complaint/administrator/listAvailables.do");
+			} catch (Throwable oops) {
+				result = addResolutionModelAndView(complaint, "commit.error");
+			}
+		}
+		
+		return result;
+	}
 	
 	
+	protected ModelAndView addResolutionModelAndView(Complaint complaint) {
+		ModelAndView result;
+
+		result = addResolutionModelAndView(complaint, null);
+
+		return result;
+	}
+	
+	protected ModelAndView addResolutionModelAndView(Complaint complaint, String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("complaint/edit");
+		result.addObject("complaint", complaint);
+		result.addObject("message", message);
+		result.addObject("addResolution", true);
+
+		return result;
+	}
 
 }
