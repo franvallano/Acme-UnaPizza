@@ -5,7 +5,7 @@
 <tiles-definitions>
 
 	<definition name="complaint/edit" extends="master.page">	
-		<put-attribute name="title" value="Crear Queja" />
+		<put-attribute name="title" value="Queja" />
 		<put-attribute name="body" value="/views/complaint/edit.jsp" />
 	</definition>
 	

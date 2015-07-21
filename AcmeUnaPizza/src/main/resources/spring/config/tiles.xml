@@ -40,6 +40,7 @@
 		<value>/views/repair/tiles.xml</value>
 		<value>/views/salesOrder/tiles.xml</value>
 		<value>/views/note/tiles.xml</value>
+		<value>/views/discussionMessage/tiles.xml</value>
 		
 	</util:list>
 
