@@ -53,6 +53,7 @@
 					<form:hidden path="version" />
 					<form:hidden path="discussionMessages" />
 					<form:hidden path="customer"/>
+					<form:hidden path="administrator"/>
 					<security:authorize access="hasRole('CUSTOMER')">
 						<form:hidden path="result"/>
 					</security:authorize>

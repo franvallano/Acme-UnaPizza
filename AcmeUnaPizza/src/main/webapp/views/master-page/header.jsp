@@ -40,6 +40,14 @@
 				</ul>
 			</li>
 			
+			<li><a class="fNiv"><spring:message	code="master.page.complaints" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="complaint/administrator/listAvailables.do"><spring:message code="master.page.administrator.complaint.listAvailables" /></a></li>
+					<li><a href="complaint/administrator/listAll.do"><spring:message code="master.page.administrator.complaint.listAll" /></a></li>
+				</ul> 
+			</li>
+			
 			<li><a class="fNiv"><spring:message	code="master.page.administrator.usersManagement" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -88,6 +96,11 @@
 				</ul>
 			</li>
 			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.complaints" /></a>
+				<ul>
+					<li><a href="complaint/actor/list.do"><spring:message code="master.page.customer.viewComplaint"/></a></li>
+				</ul>
+			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.salesOrders" /></a>
 				<ul>
 					<li><a href="salesOrder/customer/list.do"><spring:message code="master.page.salesOrders.list" /></a></li>
