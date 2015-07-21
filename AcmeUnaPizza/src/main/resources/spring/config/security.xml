@@ -60,10 +60,9 @@
 		<security:intercept-url pattern="/motorbike/administrator/**" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- COMPLAINT -->
-		<security:intercept-url pattern="/complaint/actor/list.do" access="hasRole('CUSTOMER')" /> 
-		<security:intercept-url pattern="/complaint/customer/create.do" access="hasRole('CUSTOMER')" /> 
-		<security:intercept-url pattern="/complaint/actor/view.do" access="hasAnyRole('CUSTOMER', 'ADMINISTRATOR')" /> 
-		<security:intercept-url pattern="/complaint/administrator/listAvailables.do" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/complaint/customer/**" access="hasRole('CUSTOMER')" /> 
+		<security:intercept-url pattern="/complaint/actor/**" access="hasAnyRole('CUSTOMER', 'ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/complaint/administrator/**" access="hasRole('ADMINISTRATOR')" />
 		
 		
 		<!-- DASHBOARD -->
