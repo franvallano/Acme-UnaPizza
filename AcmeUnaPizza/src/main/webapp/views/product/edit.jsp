@@ -68,7 +68,7 @@
 				<acme:submit name="save" code="product.save"/>
 
 			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-					onclick="javascript: window.location.replace('product/administrator/${backURI}');" />
+					onclick="javascript: window.history.back();" />
 			</form:form>
 		</jstl:if>
 		
@@ -108,7 +108,7 @@
 				
 				<acme:submit name="update" code="product.save"/>&nbsp;
 				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-					onclick="javascript: window.location.replace('product/administrator/${backURI}');" />
+					onclick="javascript: window.history.back();" />
 			</form:form>
 		</jstl:if>
 
