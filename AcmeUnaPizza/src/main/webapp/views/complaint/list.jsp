@@ -44,27 +44,15 @@
 			</display:column>
 		</jstl:if>
 	</security:authorize>
-	<security:authorize access="hasRole('ADMINISTRATOR')">
 	
-			<display:column>
-				<jstl:if test="${row.state == 'open'}">
-						<a href="complaint/administrator/modifyStateCancelled.do?complaintId=${row.id}">
-							<spring:message code="complaint.cancel" />
-						</a>
-						</jstl:if>
-						
+	<security:authorize access="hasRole('ADMINISTRATOR')">
+		<jstl:if test="${complaintRow.state == 'OPEN'}">	
+			<display:column>	
+					<a href="complaint/administrator/addResolution.do?complaintId=${complaintRow.id}">
+						<spring:message code="complaint.addResolution" />
+					</a>
 			</display:column>
-			
-			<jstl:if test="${requestURI == 'complaint/actor/list.do'}">
-				<display:column>
-					<jstl:if test="${row.state ne 'closed' && row.state ne 'cancelled'}">
-						<a href="complaint/administrator/addResolution.do?complaintId=${row.id}">
-							<spring:message code="complaint.addResolution" />
-						</a>
-					</jstl:if>
-				</display:column>
-			</jstl:if>
-		
+		</jstl:if>
 	</security:authorize>
 
 </display:table>

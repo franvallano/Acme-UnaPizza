@@ -83,6 +83,33 @@
 					onclick="javascript: window.location.replace('complaint/actor/list.do');" />
 			</form:form>
 		</jstl:if>
+		
+		<security:authorize access="hasRole('ADMINISTRATOR')">
+			<jstl:if test="${addResolution == true}">
+				<form:form action="${requestURI}" modelAttribute="complaint">
 	
-
+						<form:hidden path="id" />
+						<form:hidden path="version" />
+						<form:hidden path="discussionMessages" />
+						<form:hidden path="customer"/>
+						<form:hidden path="administrator"/>
+						
+						<acme:labelDetails code="complaint.title" value="${complaint.title}"/>
+						<br />
+						<acme:labelDetails code="complaint.creationMoment" value="${complaint.creationMoment}"/>
+						<br />
+						<acme:labelDetails code="complaint.description" value="${complaint.description}"/>
+						<br />
+						<acme:textbox code="complaint.result" path="result"/>
+						<br />
+						<acme:textbox code="complaint.state" path="state"/>
+						<br />
+					
+					<acme:submit name="save" code="complaint.save"/>&nbsp;
+					<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+						onclick="javascript: window.location.replace('complaint/administrator/listAvailables.do');" />
+				</form:form>
+			
+			</jstl:if>
+		</security:authorize>	
 </security:authorize>
