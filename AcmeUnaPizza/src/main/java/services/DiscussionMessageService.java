@@ -43,10 +43,11 @@ public class DiscussionMessageService {
 	public DiscussionMessage create(Complaint complaint){
 		DiscussionMessage newbye;
 		Date moment;
-		Actor actor;
+		Customer customer;
 		long miliseconds;
 		
-		//FALTA AÑADIR AL ACTOR
+		//FALTA AÑADIR AL ADMIN
+		customer = customerService.findByPrincipal();
 		
 		checkPrincipal(complaint);
 		
@@ -55,10 +56,13 @@ public class DiscussionMessageService {
 		
 		newbye = new DiscussionMessage();
 		newbye.setMoment(moment);
+		newbye.setCustomer(customer);
+		newbye.setComplaint(complaint);
 		return newbye;
 	}
 
 	public void save( DiscussionMessage entity ){
+		Assert.notNull(entity);
 		
 		this.discussionMessageRepository.save( entity );
 	}
@@ -71,6 +75,7 @@ public class DiscussionMessageService {
 		
 		Assert.isTrue( !this.discussionMessageRepository.exists(entity.getId() ));
 	}
+	
 	public DiscussionMessage findOne( int id ){
 		Assert.isTrue( id != 0);
 		
@@ -100,12 +105,12 @@ public class DiscussionMessageService {
 		if (actorService.isCustomer()) {
 			customer = customerService.findByPrincipal();
 			Assert.isTrue(customer.getId() == complaint.getCustomer().getId());
-			Assert.isTrue(complaint.getState().compareTo("open") == 0);
+			Assert.isTrue(complaint.getState().compareTo("OPEN") == 0);
 		} else if (actorService.isAdministrator()) {
 			administrator = administratorService.findByPrincipal();
 			Assert.isTrue(complaint.getAdministrator() != null);
 			Assert.isTrue(administrator.getId() == complaint.getAdministrator().getId());
-			Assert.isTrue(complaint.getState().compareTo("open") == 0);
+			Assert.isTrue(complaint.getState().compareTo("OPEN") == 0);
 		}
 
 	}
