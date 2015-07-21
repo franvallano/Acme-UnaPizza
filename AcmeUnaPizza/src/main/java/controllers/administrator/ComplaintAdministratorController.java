@@ -44,6 +44,19 @@ public class ComplaintAdministratorController extends AbstractController{
 		return result;
 	}
 	
+	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Complaint> complaints;
+		
+		complaints = complaintService.findAll();
+		
+		result = new ModelAndView("complaint/list");
+		result.addObject("requestURI", "complaint/administrator/listAll.do");
+		result.addObject("complaints", complaints);
+		
+		return result;
+	}
 	// Edition ----------------------------------------------------------------
 	
 	
