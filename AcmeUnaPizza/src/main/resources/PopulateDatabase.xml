@@ -455,8 +455,7 @@
 	<bean id="complaint1" class="domain.Complaint">
 		<property name="title" value="Pizzas con pocos ingredientes" />
 		<property name="creationMoment" value="2015/06/05 16:04" />
-		<property name="description"
-			value="Me parece de vergüenza los pocos ingredientes que le echáis a las pizzas. Exijo compensación. Gracias" />
+		<property name="description" value="Me parece de vergüenza los pocos ingredientes que le echáis a las pizzas. Exijo compensación. Gracias" />
 		<property name="customer" ref="customer1" />
 		<property name="state" value="CLOSED" />
 		<property name="result" value="Pizza de regalo a elegir" />
