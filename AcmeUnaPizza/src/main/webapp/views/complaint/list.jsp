@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="complaints" pagesize="10" class="displaytag" requestURI="${requestURI}" id="row">
+<display:table name="complaints" pagesize="10" class="displaytag" requestURI="${requestURI}" id="complaintRow">
 	
 	<spring:message code="complaint.state" var="stateHeader" />
 	<display:column property="state" title="${stateHeader}" />
@@ -30,45 +30,34 @@
 	</jstl:if>
 	
 	<display:column>
-		<a href="complaint/actor/view.do?complaintId=${row.id}">
+		<a href="complaint/actor/details.do?complaintId=${complaintRow.id}">
 			<spring:message code="complaint.view" />
 		</a>
 	</display:column>
-	<!-- 	
+
 	<security:authorize access="hasRole('ADMINISTRATOR')">
-		<jstl:choose>
-			<jstl:when test="${requestURI == 'complaint/administrator/listAvailables.do'}">
-				<display:column>
-					<a href="complaint/administrator/assign.do?complaintId=${row.id}" onclick="return confirm('<spring:message code="complaint.alert" />')">
-						<spring:message code="complaint.assign" />
-					</a>
-				</display:column>
-			</jstl:when>
-			<jstl:otherwise>
-				<display:column>
-					
-					<jstl:if test="${row.state == 'open'}">
+	
+			<display:column>
+				<jstl:if test="${row.state == 'open'}">
 						<a href="complaint/administrator/modifyStateCancelled.do?complaintId=${row.id}">
 							<spring:message code="complaint.cancel" />
 						</a>
-					</jstl:if>
-					
-				</display:column>
-			</jstl:otherwise>
-		</jstl:choose>
-		
-		<jstl:if test="${requestURI == 'complaint/actor/list.do'}">
-			<display:column>
-				<jstl:if test="${row.state ne 'closed' && row.state ne 'cancelled'}">
-					<a href="complaint/administrator/addResolution.do?complaintId=${row.id}">
-						<spring:message code="complaint.addResolution" />
-					</a>
-				</jstl:if>
+						</jstl:if>
+						
 			</display:column>
-		</jstl:if>
+			
+			<jstl:if test="${requestURI == 'complaint/actor/list.do'}">
+				<display:column>
+					<jstl:if test="${row.state ne 'closed' && row.state ne 'cancelled'}">
+						<a href="complaint/administrator/addResolution.do?complaintId=${row.id}">
+							<spring:message code="complaint.addResolution" />
+						</a>
+					</jstl:if>
+				</display:column>
+			</jstl:if>
 		
 	</security:authorize>
-	-->
+
 </display:table>
 
 <div>

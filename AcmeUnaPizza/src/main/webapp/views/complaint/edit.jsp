@@ -34,8 +34,16 @@
 			<input type="button" name="new" value="<spring:message code="newDiscussionMessage" />" 
 					onclick="javascript: window.location.replace('discussionMessage/actor/create.do');" />
 			<br />
-			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
-					onclick="javascript: window.location.replace('complaint/actor/list.do');" />
+			
+			<security:authorize access="hasRole('CUSTOMER')">
+				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+						onclick="javascript: window.location.replace('complaint/actor/list.do');" />
+			</security:authorize>
+			
+			<security:authorize access="hasRole('ADMINISTRATOR')">		
+					<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+						onclick="javascript:history.back();" />
+			</security:authorize>
 		</jstl:if>
 		
 	<jstl:if test="${edit == true}">
@@ -44,18 +52,29 @@
 					<form:hidden path="id" />
 					<form:hidden path="version" />
 					<form:hidden path="discussionMessages" />
-				
+					<form:hidden path="customer"/>
+					<security:authorize access="hasRole('CUSTOMER')">
+						<form:hidden path="result"/>
+					</security:authorize>
+					
 					<acme:textbox code="complaint.title" path="title"/>
 					<br />
 					<acme:textbox code="complaint.creationMoment" path="creationMoment"/>
 					<br />
 					<acme:textbox code="complaint.description" path="description"/>
 					<br />
-					<acme:textbox code="complaint.result" path="result"/>
-					<br />
-					<acme:textbox code="complaint.state" path="state"/>
-					<br />
-			
+					
+					<security:authorize access="hasRole('ADMINISTRATOR')">
+						<acme:textbox code="complaint.result" path="result"/>
+						<br />
+						<acme:textbox code="complaint.state" path="state"/>
+						<br />
+					</security:authorize>
+					
+					<security:authorize access="hasRole('CUSTOMER')">
+						<acme:labelDetails code="complaint.state" value="${complaint.state}"/>
+						<br />
+					</security:authorize>
 				<br />
 				
 				<acme:submit name="save" code="complaint.save"/>&nbsp;
