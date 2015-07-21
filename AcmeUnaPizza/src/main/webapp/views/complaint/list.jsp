@@ -34,7 +34,16 @@
 			<spring:message code="complaint.view" />
 		</a>
 	</display:column>
-
+	
+	<security:authorize access="hasRole('CUSTOMER')">
+		<jstl:if test="${complaintRow.state == 'OPEN'}">
+			<display:column>
+				<a href="complaint/customer/edit.do?complaintId=${complaintRow.id}">
+					<spring:message code="complaint.edit" />
+				</a>
+			</display:column>
+		</jstl:if>
+	</security:authorize>
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 	
 			<display:column>
