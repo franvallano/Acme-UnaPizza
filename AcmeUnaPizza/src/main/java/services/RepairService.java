@@ -13,6 +13,7 @@ import security.Authority;
 import security.UserAccount;
 import domain.Actor;
 import domain.Repair;
+import domain.Staff;
 
 @Service
 @Transactional
@@ -25,6 +26,9 @@ public class RepairService {
 	// Ancillary services -----------------------------------------------------
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private StaffService staffService;
 	
 	// Constructor ------------------------------------------------------------
 	public RepairService(){
@@ -44,10 +48,14 @@ public class RepairService {
 	public Repair create(){
 		Repair newbye;
 		checkPpalAuthorities();
+		Staff ppal;
 		
+		ppal = staffService.findByPrincipal();
+		
+		Assert.notNull(ppal, "Repairs cannot be created without being loged in");
 		
 		newbye = new Repair();
-		
+		newbye.setStaff(ppal);
 		
 		return newbye;
 	}

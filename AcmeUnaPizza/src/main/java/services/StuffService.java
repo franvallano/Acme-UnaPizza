@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.StuffRepository;
-import domain.Repair;
 import domain.Stuff;
 import domain.WorkShop;
 
@@ -31,6 +30,10 @@ public class StuffService {
 	}
 	
 	// Simple CRUD methods ----------------------------------------------------
+	
+	public void save(Stuff stuff){
+		stuffRepository.save(stuff);
+	}
 
 	public Collection<Stuff> findStuffMoreRepaired() {
 		Collection<Stuff> result;
@@ -44,17 +47,14 @@ public class StuffService {
 	
 	// Busines logic methods --------------------------------------------------
 	/**
-	 * Finds all stuff with status MALFUNCTION that can be repaired at the repair workshop.
-	 * This method get the repair workshop and find all stuff that can be repaired at the found workshop.
+	 * Finds all stuff with status MALFUNCTION that can be repaired at the specified workshop.
 	 * 
-	 * @param repair - new repair to be done at a specified workshop.
+	 * @param workshop - workshop where the found stuff can be repaired.
 	 * @return list of malfunctioning stuff that can be repaired at the new repair workshop.
 	 * */
-	public Collection<Stuff> getMalfunctioningStuff(Repair repair){
+	public Collection<Stuff> findMalfunctioningStuff(WorkShop repairWorkshop){
 		Collection<Stuff> res;
-		WorkShop repairWorkshop;
 		
-		repairWorkshop = repair.getWorkShop();
 		res = stuffRepository.findAllMalfunctionStuffByWorkshopId(repairWorkshop.getId());
 		
 		return res;

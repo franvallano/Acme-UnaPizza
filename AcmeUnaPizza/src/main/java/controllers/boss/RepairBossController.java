@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.RepairService;
+import services.StuffService;
 import services.WorkShopService;
 import controllers.AbstractController;
 import domain.Repair;
+import domain.Stuff;
 import domain.WorkShop;
 
 @Controller
@@ -29,6 +31,9 @@ public class RepairBossController extends AbstractController {
 	
 	@Autowired
 	private WorkShopService workShopService;
+
+	@Autowired
+	private StuffService stuffService;
 	
 	// Constructors -----------------------------------------------------------
 	
@@ -105,12 +110,18 @@ public class RepairBossController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Repair repair, BindingResult binding) {
 		ModelAndView result;
+		Stuff stuff;
 		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(repair);
 			result.addObject("edit", true);
 		} else {
 			try {
+				//Set stuff status to OK
+				stuff = repair.getStuff();
+				stuff.setStatus("OK");
+				stuffService.save(stuff);
+				
 				repairService.save(repair);
 				result = new ModelAndView("redirect:/repair/boss/list.do");
 			} catch (Throwable oops) {
@@ -132,10 +143,16 @@ public class RepairBossController extends AbstractController {
 
 	public ModelAndView createEditModelAndView(Repair repair, String message){
 		ModelAndView res;
+		Collection<Stuff> reparableStuff;
+		WorkShop repairWorkshop;
+		
+		repairWorkshop = repair.getWorkShop();
+		reparableStuff = stuffService.findMalfunctioningStuff(repairWorkshop);
 		
 		res = new ModelAndView("repair/edit");
 		res.addObject("repair", repair);
 		res.addObject("message", message);
+		res.addObject("reparableStuff", reparableStuff);
 		res.addObject("requestURI", "repair/boss/edit.do");	
 		res.addObject("edit", true);
 	
