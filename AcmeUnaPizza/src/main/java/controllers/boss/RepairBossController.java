@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.RepairService;
+import services.WorkShopService;
 import controllers.AbstractController;
 import domain.Repair;
+import domain.WorkShop;
 
 @Controller
 @RequestMapping("/repair/boss")
@@ -25,6 +27,9 @@ public class RepairBossController extends AbstractController {
 	@Autowired
 	private RepairService repairService;
 	
+	@Autowired
+	private WorkShopService workShopService;
+	
 	// Constructors -----------------------------------------------------------
 	
 	public RepairBossController() {
@@ -34,11 +39,15 @@ public class RepairBossController extends AbstractController {
 	// Creation ----------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int workshopId) {
 		ModelAndView result;
 		Repair repair;
+		WorkShop repairWorkshop;
 		
 		repair = repairService.create();
+		
+		repairWorkshop = workShopService.findOne(workshopId);
+		repair.setWorkShop(repairWorkshop);
 
 		result = createEditModelAndView(repair);
 
@@ -124,7 +133,7 @@ public class RepairBossController extends AbstractController {
 	public ModelAndView createEditModelAndView(Repair repair, String message){
 		ModelAndView res;
 		
-		res = new ModelAndView("workshop/edit");
+		res = new ModelAndView("repair/edit");
 		res.addObject("repair", repair);
 		res.addObject("message", message);
 		res.addObject("requestURI", "repair/boss/edit.do");	

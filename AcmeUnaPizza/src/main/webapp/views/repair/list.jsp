@@ -36,6 +36,4 @@
 		
 	</display:table>
 
-<input type="button" name="new" value="<spring:message code="repair.new" />" 
-		onclick="javascript: window.location.replace('repair/boss/create.do');" />
 
