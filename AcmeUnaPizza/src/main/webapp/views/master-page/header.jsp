@@ -43,7 +43,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="complaint/administrator/listAvailables.do"><spring:message code="master.page.administrator.complaint.listAvailables" /></a></li>
-					<li><a href="complaint/administrator/listAll.do"><spring:message code="master.page.administrator.complaint.listAll" /></a></li>
+					<li><a href="complaint/actor/list.do"><spring:message code="master.page.administrator.complaint.listAll" /></a></li>
 				</ul> 
 			</li>
 			
@@ -89,11 +89,7 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CUSTOMER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li><a href="complaint/actor/list.do"><spring:message code="master.page.complaint" /></a></li>
-				</ul>
-			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a></li>
 			<li><a class="fNiv" href="dashboard/customer/list.do"><spring:message code="master.page.dashboard" /></a></li>
 			<li><a class="fNiv"><spring:message	code="master.page.complaints" /></a>
 				<ul>

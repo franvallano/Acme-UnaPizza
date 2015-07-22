@@ -34,6 +34,9 @@ public class DiscussionMessageService {
 	@Autowired
 	private AdministratorService administratorService;
 	
+	@Autowired
+	private ComplaintService complaintService;
+	
 	// Constructor ------------------------------------------------------------
 	public DiscussionMessageService(){
 		super();
@@ -46,7 +49,6 @@ public class DiscussionMessageService {
 		Customer customer;
 		long miliseconds;
 		
-		//FALTA AÑADIR AL ADMIN
 		customer = customerService.findByPrincipal();
 		
 		checkPrincipal(complaint);
@@ -58,6 +60,7 @@ public class DiscussionMessageService {
 		newbye.setMoment(moment);
 		newbye.setCustomer(customer);
 		newbye.setComplaint(complaint);
+		
 		return newbye;
 	}
 

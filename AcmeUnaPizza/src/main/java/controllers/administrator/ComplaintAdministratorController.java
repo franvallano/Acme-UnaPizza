@@ -47,7 +47,7 @@ public class ComplaintAdministratorController extends AbstractController{
 		
 		return result;
 	}
-	
+	/*
 	@RequestMapping(value = "/listAll", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -60,8 +60,40 @@ public class ComplaintAdministratorController extends AbstractController{
 		result.addObject("complaints", complaints);
 		
 		return result;
-	}
+	}*/
 	// Edition ----------------------------------------------------------------
+	
+	@RequestMapping(value = "/assign", method = RequestMethod.GET)
+	public ModelAndView assignSave(@RequestParam int complaintId) {
+		ModelAndView result;
+		Complaint complaint;
+		
+		complaint = complaintService.findOneIfAvailable(complaintId);
+		
+		complaintService.assignComplaint(complaint);
+		
+		result = new ModelAndView("redirect:/complaint/administrator/listAvailables.do");
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/modifyStateCancelled", method = RequestMethod.GET)
+	public ModelAndView modifyStateCancelled(@RequestParam int complaintId) {
+		ModelAndView result;
+		Complaint complaint;
+
+		complaint = complaintService.findOneIfAdministratorOwner(complaintId);
+		
+		complaintService.modifyStateCancelled(complaint);
+		
+		complaintService.save(complaint);
+		
+		result = new ModelAndView("redirect:/complaint/actor/list.do");
+
+		return result;
+	}
+	
+	
 	@RequestMapping(value = "/addResolution", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int complaintId) {
 		ModelAndView result;

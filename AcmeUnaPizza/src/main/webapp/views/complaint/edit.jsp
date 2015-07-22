@@ -30,10 +30,8 @@
 				</fieldset>
 			</fieldset>
 			
-			<br />
 			<input type="button" name="new" value="<spring:message code="newDiscussionMessage" />" 
-					onclick="javascript: window.location.replace('discussionMessage/actor/create.do');" />
-			<br />
+						onclick="javascript: window.location.replace('discussionMessage/actor/create.do?complaintId=${complaintRow.id}');" />
 			
 			<security:authorize access="hasRole('CUSTOMER')">
 				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
@@ -53,29 +51,34 @@
 					<form:hidden path="version" />
 					<form:hidden path="discussionMessages" />
 					<form:hidden path="customer"/>
-					<form:hidden path="administrator"/>
 					<security:authorize access="hasRole('CUSTOMER')">
 						<form:hidden path="result"/>
-					</security:authorize>
-					
-					<acme:textbox code="complaint.title" path="title"/>
+						<form:hidden path="state"/>
+						
+					<acme:textarea code="complaint.title" path="title"/>
 					<br />
 					<acme:textbox code="complaint.creationMoment" path="creationMoment"/>
 					<br />
-					<acme:textbox code="complaint.description" path="description"/>
+					<acme:textarea code="complaint.description" path="description"/>
 					<br />
 					
+					</security:authorize>
+					
 					<security:authorize access="hasRole('ADMINISTRATOR')">
-						<acme:textbox code="complaint.result" path="result"/>
+						<form:hidden path="administrator"/>
+						
+						<acme:textarea code="complaint.title" path="title" readonly="true"/>
+						<br />
+						<acme:textbox code="complaint.creationMoment" path="creationMoment" readonly="true"/>
+						<br />
+						<acme:textarea code="complaint.description" path="description" readonly="true"/>
+						<br />		
+						<acme:textarea code="complaint.result" path="result"/>
 						<br />
 						<acme:textbox code="complaint.state" path="state"/>
 						<br />
 					</security:authorize>
-					
-					<security:authorize access="hasRole('CUSTOMER')">
-						<acme:labelDetails code="complaint.state" value="${complaint.state}"/>
-						<br />
-					</security:authorize>
+				
 				<br />
 				
 				<acme:submit name="save" code="complaint.save"/>&nbsp;
@@ -94,16 +97,17 @@
 						<form:hidden path="customer"/>
 						<form:hidden path="administrator"/>
 						
-						<acme:labelDetails code="complaint.title" value="${complaint.title}"/>
+						<acme:textarea code="complaint.title" path="title" readonly="true"/>
 						<br />
-						<acme:labelDetails code="complaint.creationMoment" value="${complaint.creationMoment}"/>
+						<acme:textbox code="complaint.creationMoment" path="creationMoment" readonly="true"/>
 						<br />
-						<acme:labelDetails code="complaint.description" value="${complaint.description}"/>
+						<acme:textarea code="complaint.description" path="description" readonly="true"/>
 						<br />
-						<acme:textbox code="complaint.result" path="result"/>
+						<acme:textbox code="complaint.state" path="state" readonly="true"/>
 						<br />
-						<acme:textbox code="complaint.state" path="state"/>
+						<acme:textarea code="complaint.result" path="result"/>
 						<br />
+						
 					
 					<acme:submit name="save" code="complaint.save"/>&nbsp;
 					<input type="button" name="cancel" value="<spring:message code="cancel" />" 
