@@ -26,9 +26,6 @@ public class MotorbikeService {
 	@Autowired
 	private DeliveryManService deliveryManService;
 	
-	@Autowired
-	private GarageService garageService;
-	
 	// Constructor ------------------------------------------------------------
 	public MotorbikeService(){
 		super();

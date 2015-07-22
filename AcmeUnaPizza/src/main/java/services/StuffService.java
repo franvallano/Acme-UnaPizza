@@ -2,7 +2,6 @@ package services;
 
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +23,6 @@ public class StuffService {
 	private StuffRepository stuffRepository;
 	
 	// Supporting services ----------------------------------------------------
-	@Autowired
-	private AdministratorService administratorService;
 	
 	// Constructors -----------------------------------------------------------
 	

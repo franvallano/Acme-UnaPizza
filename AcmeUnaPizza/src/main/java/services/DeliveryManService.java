@@ -12,9 +12,7 @@ import repositories.DeliveryManRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import utilities.PasswordCode;
 import domain.DeliveryMan;
-import domain.Garage;
 import domain.Motorbike;
 import domain.SalesOrder;
 
@@ -32,9 +30,6 @@ public class DeliveryManService {
 	private AdministratorService administratorService;
 	@Autowired
 	private SalesOrderService salesOrderService;
-	
-	@Autowired
-	private ActorService actorService;
 	
 	// Constructor ------------------------------------------------------------
 	public DeliveryManService(){

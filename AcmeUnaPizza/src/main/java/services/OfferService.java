@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -12,10 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.OfferRepository;
-import domain.Complaint;
-import domain.Customer;
 import domain.Offer;
-import domain.SalesOrder;
 import forms.OfferForm;
 
 @Service
