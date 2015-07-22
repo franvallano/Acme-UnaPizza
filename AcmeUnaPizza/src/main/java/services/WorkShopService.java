@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.WorkShopRepository;
+import domain.Stuff;
 import domain.Repair;
 import domain.WorkShop;
 
@@ -37,13 +38,11 @@ public class WorkShopService {
 	// Simple CRUD methods ----------------------------------------------------
 	public WorkShop create(){
 		WorkShop newbye;
-		Collection<Repair> repairs;
+		Collection<Repair> repairs = new ArrayList<Repair> ();
 		
 		bossService.findByPrincipal();
 		
 		newbye = new WorkShop();
-		repairs = new ArrayList<Repair>();
-		
 		newbye.setRepairs(repairs);
 		
 		return newbye;
@@ -73,8 +72,6 @@ public class WorkShopService {
 		
 		res = this.workshopRepository.findOne( id );
 		
-		Assert.notNull(res);
-		
 		return res;
 	}
 
@@ -87,7 +84,7 @@ public class WorkShopService {
 	}
 
 	// Other business methods -------------------------------------------------
-
+	
 	// Ancillary methods ------------------------------------------------------
 
 }
