@@ -17,16 +17,10 @@
 		<jstl:if test="${details == true}">
 			<fieldset>
 				<acme:labelDetails code="repair.moment" value="${repair.moment}"/>
+				<br/>
 				<acme:labelDetails code="repair.cost" value="${repair.cost}" eurCurrency="true"/>
 				<br/>
-				<fieldset>
-					<legend><h3><spring:message code="repair.stuff" /></h3></legend>
-					<jstl:forEach var="stuff" items="${repair.stuff}" varStatus="rowIndex">
-						<acme:labelDetails code="repair.stuff.name" value="${stuff.name}"/>
-						<acme:dateLabelDetails code="repair.stuff.referenceCode" value="${stuff.referenceCode}" />
-						<br/>
-					</jstl:forEach>
-				</fieldset>
+				<acme:labelDetails code="repair.stuff" value="${repair.stuff.name}" eurCurrency="true"/>
 			</fieldset>
 			
 			<br />
