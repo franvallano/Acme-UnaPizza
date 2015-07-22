@@ -8,6 +8,7 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -99,6 +100,7 @@ public class CustomerForm {
 		this.creditCard = creditCard;
 	}
 	
+	@Pattern(regexp = "(((\\+34)? ?(\\(0\\))? ?)|(0))( ?[0-9]{3,4}){3}")
 	@SafeHtml(whitelistType=WhiteListType.SIMPLE_TEXT)
 	@NotBlank
 	public String getPhone() {
