@@ -15,12 +15,10 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Complaint;
-import domain.Customer;
 import domain.DiscussionMessage;
 import domain.PurchaseOrder;
 import forms.AdministratorForm;
 import forms.AdministratorProfileForm;
-import forms.CustomerProfileForm;
 import forms.PasswordForm;
 
 @Service

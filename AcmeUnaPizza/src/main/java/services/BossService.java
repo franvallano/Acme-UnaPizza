@@ -12,7 +12,6 @@ import repositories.BossRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import utilities.PasswordCode;
 import domain.Boss;
 import domain.SalesOrder;
 
@@ -25,8 +24,6 @@ public class BossService {
 	private BossRepository bossRepository;
 
 	// Ancillary services -----------------------------------------------------
-	@Autowired
-	private ActorService actorService;
 	
 	@Autowired
 	private AdministratorService administratorService;

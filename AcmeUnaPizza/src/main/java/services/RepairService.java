@@ -12,7 +12,6 @@ import repositories.RepairRepository;
 import security.Authority;
 import security.UserAccount;
 import domain.Actor;
-import domain.Motorbike;
 import domain.Repair;
 
 @Service

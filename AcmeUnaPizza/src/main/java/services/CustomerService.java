@@ -15,12 +15,9 @@ import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import domain.Boss;
 import domain.Complaint;
 import domain.Customer;
 import domain.SalesOrder;
-import domain.Staff;
-import forms.ChangeDateContractForm;
 import forms.CustomerForm;
 import forms.CustomerProfileForm;
 import forms.PasswordForm;
@@ -36,8 +33,6 @@ public class CustomerService {
 	// Ancillary services -----------------------------------------------------
 	@Autowired
 	private AdministratorService administratorService;
-	@Autowired
-	private StaffService staffService;
 
 	// Constructor ------------------------------------------------------------
 	public CustomerService(){
