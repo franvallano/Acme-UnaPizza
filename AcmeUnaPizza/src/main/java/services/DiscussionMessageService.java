@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.DiscussionMessageRepository;
-import domain.Actor;
 import domain.Administrator;
 import domain.Complaint;
 import domain.Customer;
@@ -34,9 +33,6 @@ public class DiscussionMessageService {
 	@Autowired
 	private AdministratorService administratorService;
 	
-	@Autowired
-	private ComplaintService complaintService;
-	
 	// Constructor ------------------------------------------------------------
 	public DiscussionMessageService(){
 		super();
@@ -46,10 +42,10 @@ public class DiscussionMessageService {
 	public DiscussionMessage create(Complaint complaint){
 		DiscussionMessage newbye;
 		Date moment;
-		Customer customer;
+		//Customer customer;
 		long miliseconds;
 		
-		customer = customerService.findByPrincipal();
+		//customer = customerService.findByPrincipal();
 		
 		checkPrincipal(complaint);
 		
@@ -58,7 +54,8 @@ public class DiscussionMessageService {
 		
 		newbye = new DiscussionMessage();
 		newbye.setMoment(moment);
-		newbye.setCustomer(customer);
+		newbye.setCustomer(complaint.getCustomer());
+		newbye.setAdministrator(complaint.getAdministrator());
 		newbye.setComplaint(complaint);
 		
 		return newbye;

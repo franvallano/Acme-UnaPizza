@@ -40,13 +40,13 @@ public class DiscussionMessageController extends AbstractController {
 	public ModelAndView create(@RequestParam int complaintId) {
 		ModelAndView result;
 		Complaint complaint;
-		DiscussionMessage complaintMessage;
+		DiscussionMessage discussionMessage;
 		
 		complaint = complaintService.findOneIfOwner(complaintId);
 		
-		complaintMessage = discussionMessageService.create(complaint);
+		discussionMessage = discussionMessageService.create(complaint);
 		
-		result = createModelAndView(complaintMessage);
+		result = createModelAndView(discussionMessage);
 		
 		return result;
 	}
@@ -62,7 +62,7 @@ public class DiscussionMessageController extends AbstractController {
 		} else {
 			try {
 				discussionMessageService.save(discussionMessage);
-				result = new ModelAndView("redirect:/complaint/actor/details.do");
+				result = new ModelAndView("redirect:/complaint/actor/details.do?complaintId=" + discussionMessage.getComplaint().getId());
 			} catch (Throwable oops) {
 				result = createModelAndView(discussionMessage, "commit.error");
 			}
@@ -84,7 +84,7 @@ public class DiscussionMessageController extends AbstractController {
 	protected ModelAndView createModelAndView(DiscussionMessage discussionMessage, String message) {
 		ModelAndView result;
 		
-		result = new ModelAndView("complaintMessage/create");
+		result = new ModelAndView("discussionMessage/edit");
 		result.addObject("discussionMessage", discussionMessage);
 		result.addObject("message", message);
 		
