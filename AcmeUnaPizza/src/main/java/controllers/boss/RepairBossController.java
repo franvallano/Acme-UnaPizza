@@ -72,7 +72,7 @@ public class RepairBossController extends AbstractController {
 		uri = "repair/boss/list.do";
 		result = new ModelAndView("repair/list");
 		result.addObject("requestURI", uri);
-		result.addObject("repair", repairs);
+		result.addObject("repairs", repairs);
 		
 		return result;
 	}
