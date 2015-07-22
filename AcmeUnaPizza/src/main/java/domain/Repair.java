@@ -27,8 +27,8 @@ public class Repair extends DomainEntity{
 	//Getters and setter ------------------------------------------------------------------------
 	@Past
 	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getMoment() {
 		return moment;
 	}

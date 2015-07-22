@@ -1097,7 +1097,7 @@
 
 	<!-- REPAIR -->
 	<bean id="repair1" class="domain.Repair">
-		<property name="moment" value="2015/06/19 20:00" />
+		<property name="moment" value="2015/06/19" />
 		<property name="cost" value="20.50" />
 		<property name="staff" ref="boss1" />
 		<property name="workShop" ref="workshop1" />
@@ -1105,7 +1105,7 @@
 	</bean>
 
 	<bean id="repair2" class="domain.Repair">
-		<property name="moment" value="2015/06/16 17:00" />
+		<property name="moment" value="2015/06/16" />
 		<property name="cost" value="30.50" />
 		<property name="staff" ref="boss1" />
 		<property name="workShop" ref="workshop2" />
@@ -1113,7 +1113,7 @@
 	</bean>
 
 	<bean id="repair3" class="domain.Repair">
-		<property name="moment" value="2015/06/28 16:30" />
+		<property name="moment" value="2015/06/28" />
 		<property name="cost" value="50.50" />
 		<property name="staff" ref="boss2" />
 		<property name="workShop" ref="workshop1" />

@@ -40,13 +40,23 @@
 					<form:hidden path="id" />
 					<form:hidden path="version" />
 					<form:hidden path="workShop" />
-					<form:hidden path="stuff" />
+					<form:hidden path="staff" />
 				
 					<acme:textbox code="repair.moment" path="moment"/>
 					<br />
 					<acme:textbox code="repair.cost" path="cost"/>
 					<br />
 			
+					<form:label path="stuff">
+						<spring:message code="repair.stuff"/>
+					</form:label>
+					 <form:select path="stuff">
+					 	<jstl:forEach var="var" items="${reparableStuff}">
+					 		<form:option label="${var.name}" value="${var.id}"/>
+					 	</jstl:forEach>
+					 </form:select>
+					 <br />
+					 
 				<br />
 				
 				<acme:submit name="save" code="repair.save"/>&nbsp;
