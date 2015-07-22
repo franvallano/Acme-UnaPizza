@@ -1120,4 +1120,18 @@
 		<property name="stuff" ref="stuff1" />
 	</bean>
 
+	<bean id="stuff6" class="domain.Stuff">
+		<property name="name" value="Congelador" />
+		<property name="status" value="MALFUNCTION" />
+		<property name="referenceCode" value="ZXC12321" />
+		<property name="powerConsumption" value="6500" />
+		<property name="workShop" ref="workshop1" />
+		<property name="repairs">
+			<list>
+				<ref bean="repair1" />
+				<ref bean="repair3" />
+			</list>
+		</property>
+	</bean>
+
 </beans>
