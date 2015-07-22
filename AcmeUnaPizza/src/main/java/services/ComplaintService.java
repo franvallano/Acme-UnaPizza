@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ComplaintRepository;
+import domain.Administrator;
 import domain.Complaint;
 import domain.DiscussionMessage;
 
@@ -105,6 +106,36 @@ public class ComplaintService {
 		return availables;
 	}
 	
+	public Complaint findOneIfAvailable(int complaintId) {
+		Complaint complaint;
+		
+		Assert.isTrue(actorService.isAdministrator());
+		
+		complaint = findOne(complaintId);
+		
+		Assert.isTrue(complaint.getAdministrator() == null);
+		
+		return complaint;
+	}
+	
+	public Complaint findOneIfAdministratorOwner(int complaintId) {
+		Complaint result;
+		
+		result = findOne(complaintId);
+		
+		Assert.isTrue(result.getAdministrator() != null && actorService.findByPrincipal().getId() == result.getAdministrator().getId());
+		
+		return result;
+	}
+	
+	public void assignComplaint(Complaint complaint) {
+		Assert.notNull(complaint);
+		Assert.isTrue(actorService.isAdministrator());
+		Assert.isTrue(findOneIfAvailable(complaint.getId()) != null);
+		
+		complaint.setAdministrator((Administrator) actorService.findByPrincipal());
+	}
+	
 	public Collection<Complaint> findByPrincipal() {
 		Collection<Complaint> result;
 		
@@ -125,30 +156,30 @@ public class ComplaintService {
 	
 	public void modifyStateOpen(Complaint complaint) {
 		Assert.notNull(complaint);
-		Assert.isTrue(!complaint.getState().equals("closed"));
+		Assert.isTrue(!complaint.getState().equals("CLOSED"));
 		
-		modifyState(complaint, "open");
+		modifyState(complaint, "OPEN");
 	}
 	
 	public void modifyStateCancelled(Complaint complaint) {
 		Assert.notNull(complaint);
-		Assert.isTrue(complaint.getState().equals("open"));
+		Assert.isTrue(complaint.getState().equals("OPEN"));
 		
-		modifyState(complaint, "cancelled");
+		modifyState(complaint, "CANCELLED");
 	}
 	
 	public void modifyStateClosed(Complaint complaint) {
 		Assert.notNull(complaint);
-		modifyState(complaint, "closed");
+		modifyState(complaint, "CLOSED");
 	}
 	
 	public void addResolution(Complaint complaint) {
 		Assert.notNull(complaint);
 		Assert.isTrue(actorService.isAdministrator());
 		Assert.isTrue(actorService.findByPrincipal() == complaint.getAdministrator());
-		Assert.isTrue(complaint.getState().equals("open"));
+		Assert.isTrue(complaint.getState().equals("OPEN"));
 		
-		complaint.setState("closed");
+		complaint.setState("CLOSED");
 	}
 	
 	public Complaint findOneIfOwner(int complaintId) {

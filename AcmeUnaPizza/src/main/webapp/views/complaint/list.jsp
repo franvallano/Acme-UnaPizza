@@ -46,13 +46,34 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
-		<jstl:if test="${complaintRow.state == 'OPEN'}">	
-			<display:column>	
-					<a href="complaint/administrator/addResolution.do?complaintId=${complaintRow.id}">
-						<spring:message code="complaint.addResolution" />
+		<jstl:choose>
+			<jstl:when test="${requestURI == 'complaint/administrator/listAvailables.do'}">
+				<display:column>
+					<a href="complaint/administrator/assign.do?complaintId=${complaintRow.id}" onclick="return confirm('<spring:message code="complaint.alert" />')">
+						<spring:message code="complaint.assign" />
 					</a>
-			</display:column>
-		</jstl:if>
+				</display:column>
+			</jstl:when>
+			<jstl:when test="${requestURI == 'complaint/actor/list.do'}">
+				<display:column>
+					<jstl:if test="${complaintRow.state ne 'CLOSED' || complaintRow.state ne 'CANCELLED'}">
+						<a href="complaint/administrator/addResolution.do?complaintId=${complaintRow.id}">
+							<spring:message code="complaint.addResolution" />
+						</a>
+					</jstl:if>
+				</display:column>
+			</jstl:when>
+			<jstl:otherwise>
+				<jstl:if test="${complaintRow.state == 'OPEN'}">	
+					<display:column>	
+							<a href="complaint/administrator/modifyStateCancelled.do?complaintId=${complaintRow.id}">
+								<spring:message code="complaint.cancel" />
+							</a>
+					</display:column>
+				</jstl:if>
+			</jstl:otherwise>
+		</jstl:choose>
+		
 	</security:authorize>
 
 </display:table>

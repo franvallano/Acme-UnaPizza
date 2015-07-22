@@ -62,9 +62,9 @@ public class DiscussionMessageController extends AbstractController {
 		} else {
 			try {
 				discussionMessageService.save(discussionMessage);
-				result = new ModelAndView("redirect:/complaint/actor/list.do");
+				result = new ModelAndView("redirect:/complaint/actor/details.do");
 			} catch (Throwable oops) {
-				result = createModelAndView(discussionMessage, "discussionMessage.commit.error");
+				result = createModelAndView(discussionMessage, "commit.error");
 			}
 		}
 		
