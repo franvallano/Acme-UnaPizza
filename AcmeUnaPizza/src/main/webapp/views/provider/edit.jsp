@@ -33,7 +33,7 @@
 			</fieldset>
 			
 			<br />
-			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+			<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('provider/administrator/list.do');" />
 		</jstl:if>
 		
@@ -52,7 +52,7 @@
 					<br />					
 
 				<acme:submit name="save" code="provider.save"/>&nbsp;
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('provider/administrator/list.do');" />
 			</form:form>
 		</jstl:if>

@@ -22,30 +22,35 @@
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<jstl:if test="${dashboard == true}">
-		<fieldset>	
+		<fieldset class="panel panel-default">	
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.investedMoneyProducts"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${investedMoney}" eurCurrency="true"/>
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.salesMoney"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${salesMoney}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.netSalesMoney"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${netSalesMoney}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.customerMoreComplaints"/></b>
 			<br/>
 			<jstl:forEach var="customer" items="${customerMoreComplaints}" varStatus="rowIndex">
@@ -56,11 +61,12 @@
 				<acme:dateLabelDetails code="birthDate" value="${customer.birthDate}" time="false" />
 				<acme:labelDetails code="range" value="${customer.rangee}" />
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.customerMoreOrders"/></b>
 			<br/>
 			<jstl:forEach var="customer" items="${customerMoreOrders}" varStatus="rowIndex">
@@ -71,10 +77,12 @@
 				<acme:dateLabelDetails code="birthDate" value="${customer.birthDate}" time="false" />
 				<acme:labelDetails code="range" value="${customer.rangee}" />
 			</jstl:forEach>
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.customerMoreMoneySpent"/></b>
 			<br/>
 			<jstl:forEach var="customer" items="${customerMoreMoneySpent}" varStatus="rowIndex">
@@ -85,19 +93,21 @@
 				<acme:dateLabelDetails code="birthDate" value="${customer.birthDate}" time="false" />
 				<acme:labelDetails code="range" value="${customer.rangee}" />
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.avgOrders"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.average" value="${avgOrders}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.deliveryManMoreOrders"/></b>
 			<br/>
 			<jstl:forEach var="deliveryMan" items="${deliveryManMoreOrders}" varStatus="rowIndex">
@@ -109,11 +119,12 @@
 				<acme:dateLabelDetails code="birthDate" value="${deliveryMan.birthDate}" time="false" />
 				<acme:dateLabelDetails code="contractStartDate" value="${deliveryMan.contractStartDate}" time="false" />
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.cookMoreOrders"/></b>
 			<br/>
 			<jstl:forEach var="cook" items="${cookMoreOrders}" varStatus="rowIndex">
@@ -125,10 +136,12 @@
 				<acme:dateLabelDetails code="birthDate" value="${cook.birthDate}" time="false" />
 				<acme:dateLabelDetails code="contractStartDate" value="${cook.contractStartDate}" time="false" />
 			</jstl:forEach>
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.pizzaMoreSold"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${moreSoldPizza}" varStatus="rowIndex">
@@ -140,11 +153,12 @@
 				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
 				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 			</jstl:forEach>
-			
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.pizzaLessSold"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${lessSoldPizza}" varStatus="rowIndex">
@@ -156,11 +170,12 @@
 				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
 				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.drinkMoreSold"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${moreSoldDrink}" varStatus="rowIndex">
@@ -172,11 +187,12 @@
 				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
 				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.drinkLessSold"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${lessSoldDrink}" varStatus="rowIndex">
@@ -188,11 +204,12 @@
 				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
 				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.complementMoreSold"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${moreSoldDessert}" varStatus="rowIndex">
@@ -204,11 +221,12 @@
 				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
 				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 			</jstl:forEach>
-
-		</fieldset>
+			</div>
+		</fieldset>	
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.complementLessSold"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${lessSoldComplement}" varStatus="rowIndex">
@@ -220,11 +238,12 @@
 				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
 				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.dessertMoreSold"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${moreSoldDessert}" varStatus="rowIndex">
@@ -236,11 +255,12 @@
 				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
 				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.dessertLessSold"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${lessSoldDessert}" varStatus="rowIndex">
@@ -252,11 +272,12 @@
 				<acme:labelDetails code="dashboard.product.salePrice" value="${product.salePrice}" eurCurrency="true"/>
 				<acme:labelDetails code="dashboard.product.code" value="${product.code}" />
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.purchaseOrdersMoreExpensive"/></b>
 			<br/>
 			<jstl:forEach var="purchaseOrder" items="${purchaseOrdersMoreExpensive}" varStatus="rowIndex">
@@ -265,18 +286,21 @@
 				<acme:labelDetails code="totalCost" value="${purchaseOrder.totalCost}" eurCurrency="true"/>
 				<acme:dateLabelDetails code="creationMoment" value="${purchaseOrder.creationMoment}"/>
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.administrator.moneyUndeliveredOrders"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${totalMoneyUndeliveredOrders}" eurCurrency="true"/>
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.stuff.stuffMoreRepaired"/></b>
 			<br/>
 			<jstl:forEach var="stuff" items="${stuffMoreRepaired}" varStatus="rowIndex">
@@ -286,12 +310,13 @@
 				<acme:labelDetails code="dashboard.stuff.referenceCode" value="${stuff.referenceCode}"/>
 				<acme:labelDetails code="dashboard.stuff.powerConsumption" value="${stuff.powerConsumption}"/>
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		
 	</jstl:if>
 	<jstl:if test="${dashboard == false}">
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.ordersSuggestion.pizzas"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${stockMinPizzas}" varStatus="rowIndex">
@@ -301,11 +326,12 @@
 				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
 				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.ordersSuggestion.complements"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${stockMinComplements}" varStatus="rowIndex">
@@ -315,11 +341,12 @@
 				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
 				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default" >
+			<div class="panel-body">
 			<b><spring:message code="dashboard.ordersSuggestion.desserts"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${stockMinDesserts}" varStatus="rowIndex">
@@ -329,11 +356,12 @@
 				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
 				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.ordersSuggestion.drinks"/></b>
 			<br/>
 			<jstl:forEach var="product" items="${stockMinDrinks}" varStatus="rowIndex">
@@ -343,7 +371,7 @@
 				<acme:labelDetails code="dashboard.product.actualStock" value="${product.actualStock}"/>
 				<acme:labelDetails code="dashboard.product.minStock" value="${product.minStock}"/>
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
@@ -354,19 +382,21 @@
 
 <security:authorize access="hasRole('CUSTOMER')">
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.customer.totalOrders"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${totalNumberOrders}"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.customer.dateLastOrder"/></b>
 			<br/><br/>
 			<acme:dateLabelDetails code="date" value="${dateLastOrder}"/>
-
+			<div class="panel-body">
 		</fieldset>
 		<br/>
 
@@ -374,39 +404,44 @@
 
 <security:authorize access="hasRole('BOSS')">
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.boss.totalOrders"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${totalSalesOrder}"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.boss.orderMoreExpensive"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${totalMoreExpensiveSalesOrder}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.boss.orderMoreCheap"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${totalLessExpensiveSalesOrder}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.boss.avgOrders"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${avgSalesOrder}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.boss.orderMoreSlow"/></b>
 			<br/>
 			
@@ -417,11 +452,12 @@
 				<acme:labelDetails code="drivingTime" value="${salesOrder.drivingTime}" />
 				<acme:dateLabelDetails code="creationMoment" value="${salesOrder.creationMoment}" time="false" />
 			</jstl:forEach>
-			
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.boss.orderMoreFast"/></b>
 			<br/>
 			
@@ -432,11 +468,12 @@
 				<acme:labelDetails code="drivingTime" value="${salesOrder.drivingTime}" />
 				<acme:dateLabelDetails code="creationMoment" value="${salesOrder.creationMoment}" time="false" />
 			</jstl:forEach>
-			
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.boss.drivingTimeByMotorbike"/></b>
 			<br/>
 			<jstl:forEach var="motorbike" items="${drivingTimeByMotorbike}" varStatus="rowIndex">
@@ -445,7 +482,7 @@
 				<acme:labelDetails code="dashboard.motorbike.licensePlate" value="${motorbike.licensePlate}" />
 				<acme:labelDetails code="dashboard.motorbike.drivingTime" value="${motorbike.drivingTime}" timeMinutes="true"/>
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
@@ -453,34 +490,39 @@
 
 <security:authorize access="hasRole('COOK')">
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.cook.totalOrders"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${totalSalesOrdersByStaff}"/>
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.cook.orderMoreExpensive"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${moreExpensiveSalesOrderByStaff}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.cook.orderMoreCheap"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${lessExpensiveSalesOrderByStaff}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.cook.avgOrders"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${avgSalesOrderByStaff}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
@@ -488,39 +530,44 @@
 
 <security:authorize access="hasRole('DELIVERY_MAN')">
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.deliveryMan.totalOrders"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${totalSalesOrdersByStaff}"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.deliveryMan.orderMoreExpensive"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${moreExpensiveSalesOrderByStaff}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.deliveryMan.orderMoreCheap"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${lessExpensiveSalesOrderByStaff}" eurCurrency="true"/>
-
-		</fieldset>
+			</div>
+		</fieldset>	
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.deliveryMan.avgOrders"/></b>
 			<br/><br/>
 			<acme:labelDetails code="dashboard.total" value="${avgSalesOrderByStaff}" eurCurrency="true"/>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.boss.orderMoreSlow"/></b>
 			<br/><br/>
 			
@@ -530,11 +577,12 @@
 				<acme:labelDetails code="drivingTime" value="${salesOrder.drivingTime}" timeMinutes="true"/>
 				<acme:dateLabelDetails code="creationMoment" value="${salesOrder.creationMoment}"/>
 			</jstl:forEach>
-
+			</div>
 		</fieldset>
 		<br/>
 		
-		<fieldset>
+		<fieldset class="panel panel-default">
+			<div class="panel-body">
 			<b><spring:message code="dashboard.boss.orderMoreFast"/></b>
 			<br/><br/>
 			
@@ -544,7 +592,7 @@
 				<acme:labelDetails code="drivingTime" value="${salesOrder.drivingTime}"  timeMinutes="true"/>
 				<acme:dateLabelDetails code="creationMoment" value="${salesOrder.creationMoment}" />
 			</jstl:forEach>
-			
+			</div>
 		</fieldset>
 		<br/>
 

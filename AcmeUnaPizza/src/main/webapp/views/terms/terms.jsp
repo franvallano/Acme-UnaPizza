@@ -8,7 +8,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<fieldset>
+<fieldset class="well">
 	<legend><spring:message code="terms.title" /></legend>
 		<p>	
 			<spring:message code="terms.a" />

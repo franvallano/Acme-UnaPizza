@@ -17,7 +17,7 @@
 	<img src="images/logo.png" alt="AcmeUnaPizza Co., Inc." />
 </div>
 
-<div>
+<div >
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<li><a class="fNiv" href="welcome/index.do"><spring:message code="master.page.index" /></a></li>

@@ -88,11 +88,11 @@
 			
 			<br />
 			<security:authorize access="hasRole('BOSS')">
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.history.back();" />
 			</security:authorize>
 			<security:authorize access="hasRole('CUSTOMER')">
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 						onclick="javascript: window.location.replace('salesOrder/customer/list.do');" />
 			</security:authorize>
 		</jstl:if>
@@ -207,7 +207,7 @@
 				
 				<acme:submit name="save" code="salesOrder.save"/>
 				
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('salesOrder/customer/list.do');" />
 			</form:form>
 		</jstl:if>

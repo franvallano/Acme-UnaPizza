@@ -24,7 +24,7 @@
 			</fieldset>
 			
 			<br />
-			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+			<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('motorbike/administrator/list.do');" />
 		</jstl:if>
 		
@@ -57,7 +57,7 @@
 				</jstl:if>
 
 				
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('motorbike/administrator/list.do');" />
 			</form:form>
 		</jstl:if>
@@ -83,7 +83,7 @@
 				<input type="submit" name="delete"
 						value="<spring:message code="motorbike.delete" />"
 						onclick="return confirm('<spring:message code="motorbike.confirm.delete" />')" />&nbsp;
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('motorbike/administrator/list.do');" />
 			</form:form>
 		</jstl:if>
@@ -116,7 +116,7 @@
 							</fieldset>
 							<br />
 					<acme:submit name="save" code="motorbike.save" />
-					<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+					<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 						onclick="javascript: window.location.replace('motorbike/administrator/list.do');" />
 					
 				</form:form>
@@ -125,7 +125,7 @@
 			<jstl:if test="${availableGarages.isEmpty()}">
 				<spring:message code="NotAvailableGaragesEdit" />
 				<br /><br />
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				<input type="button" name="cancel"class="btn btn-primary" value="<spring:message code="cancel" />" 
 						onclick="javascript: window.location.replace('motorbike/administrator/list.do');" />
 			</jstl:if>
 			

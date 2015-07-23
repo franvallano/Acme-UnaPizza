@@ -28,7 +28,7 @@
 			</fieldset>
 			
 			<br />
-			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+			<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 				onclick="javascript: window.history.back();" />
 		</jstl:if>
 		
@@ -67,7 +67,7 @@
 					
 				<acme:submit name="save" code="product.save"/>
 
-			<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+			<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.history.back();" />
 			</form:form>
 		</jstl:if>
@@ -107,7 +107,7 @@
 				<br /><br />
 				
 				<acme:submit name="update" code="product.save"/>&nbsp;
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.history.back();" />
 			</form:form>
 		</jstl:if>
