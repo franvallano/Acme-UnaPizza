@@ -27,7 +27,7 @@
 				<br/>
 
 			<acme:submit name="save" code="staff.save"/>
-			<input type="button" name="back" value="<spring:message code="cancel" />" 
+			<input type="button" name="back" class="btn btn-primary" value="<spring:message code="cancel" />" 
 				onclick="javascript: window.history.back();" />
 		</form:form>
 		

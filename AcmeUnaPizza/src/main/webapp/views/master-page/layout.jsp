@@ -30,7 +30,7 @@
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
 <script type="text/javascript" src="scripts/jmenu.js"></script>
 
-<link rel="stylesheet" href="styles/common.css" type="text/css">
+<link rel="stylesheet" href="styles/bootstrap.css" type="text/css">
 <link rel="stylesheet" href="styles/jmenu.css" media="screen"
 	type="text/css" />
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
@@ -51,6 +51,7 @@
 </head>
 
 <body>
+	<div class="container case-showcase">
 
 	<div>
 		<tiles:insertAttribute name="header" />
@@ -69,9 +70,9 @@
 		<tiles:insertAttribute name="footer" />
 	</div>
 	
-	<div id="cookies_warning">
-		<spring:message code="master.page.cookies" /> [<a id="cookie_link" href="law/info.do"><spring:message code="master.page.cookies.link" /></a>]
+	<div id="cookies_warning" class="alert alert-info">
+		<spring:message code="master.page.cookies" /> <a id="cookie_link" href="law/info.do" class="btn btn-xs btn-primary"><spring:message code="master.page.cookies.link" /></a>
 	</div>
-	
+</div>
 </body>
 </html>

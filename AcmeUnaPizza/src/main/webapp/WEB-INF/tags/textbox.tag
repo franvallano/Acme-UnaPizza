@@ -35,17 +35,24 @@
 <%-- Definition --%>
 
 <div>
-	<form:label path="${path}">
-		<spring:message code="${code}" />
+	<div class="form-group">
+	<form:label path="${path}" class =" col-lg-2 control-label">
+		<spring:message code="${code}" />:
 	</form:label>	
 	<jstl:choose>
 		<jstl:when test="${id == null}">
-			<form:input path="${path}" readonly="${readonly}" />	
+			<div class="col-lg-4">
+			<form:input path="${path}" readonly="${readonly}" class="form-control"/>	
+			</div>
 		</jstl:when>
 		<jstl:when test="${id != null}">
-			<form:input path="${path}" readonly="${readonly}" id="${id}"/>		
+			<div class="col-lg-4">
+			<form:input path="${path}" readonly="${readonly}" id="${id}" class="form-control"/>		
+			</div>
 		</jstl:when>
 	</jstl:choose>
 	
-	<form:errors path="${path}" cssClass="error" />
+	<form:errors path="${path}" class="alert alert-danger" />
+	</br>
 </div>	
+</div>

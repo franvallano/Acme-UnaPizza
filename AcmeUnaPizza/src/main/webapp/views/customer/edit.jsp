@@ -52,7 +52,7 @@
 			</fieldset>
 		</jstl:if>
 		<br /> 
-		<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+		<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 		onclick="javascript: window.history.back();" />
 	</security:authorize>
 	

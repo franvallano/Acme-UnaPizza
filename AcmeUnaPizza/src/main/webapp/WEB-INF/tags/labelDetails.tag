@@ -32,7 +32,7 @@
 
 <%-- Definition --%>
 
-<spring:message code="${code}"/>:
+<b><spring:message code="${code}"/>:</b>
 <jstl:out value="${value}" /> 
 
 <jstl:if test="${percentage == true}">

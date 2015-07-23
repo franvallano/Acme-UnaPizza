@@ -26,7 +26,7 @@
 				<br/>
 				
 				<acme:submit name="save" code="salesOrder.save"/>
-				<input type="button" name="profile.back" value="<spring:message code="cancel" />" 
+				<input type="button" name="profile.back" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.history.back();" />
 			</form:form>
 		</jstl:if>
@@ -48,7 +48,7 @@
 			</fieldset>
 			<br/>
 			<acme:submit name="save" code="salesOrder.save"/>
-			<input type="button" name="profile.back" value="<spring:message code="cancel" />" 
+			<input type="button" name="profile.back" class="btn btn-primary" value="<spring:message code="cancel" />" 
 				onclick="javascript: window.history.back();" />
 			</form:form>
 			

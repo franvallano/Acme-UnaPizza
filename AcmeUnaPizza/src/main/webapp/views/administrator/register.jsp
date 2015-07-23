@@ -47,7 +47,7 @@
 	
 	<acme:submit name="save" code="administrator.save"/>&nbsp; &nbsp; &nbsp; &nbsp;
 
-	<input type="button" name="cancel" onclick="javascript: window.location.replace('/AcmeUnaPizza/')" value="<spring:message code='cancel' />" />
+	<input type="button" name="cancel"  class="btn btn-primary" onclick="javascript: window.location.replace('/AcmeUnaPizza/')" value="<spring:message code='cancel' />" />
 	<br />
 	
 </form:form>

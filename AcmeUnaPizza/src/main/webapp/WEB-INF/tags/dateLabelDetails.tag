@@ -29,7 +29,7 @@
 
 <%-- Definition --%>
 
-<spring:message code="${code}"/>:
+<b><spring:message code="${code}"/>:</b>
 
 <jstl:choose>
 	<jstl:when test="${time == null || time == true}">

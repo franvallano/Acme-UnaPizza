@@ -19,7 +19,7 @@ info.jsp
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<table id="cookie_table">
+<table id="cookie_table" class="well">
 	<tr>
 		<td>
 			<p class="mini_title"><spring:message code="cookies.title" /></p>
@@ -42,5 +42,5 @@ info.jsp
 	</tr>
 </table>
 
-<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 		onclick="javascript: window.history.back();" />

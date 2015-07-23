@@ -36,7 +36,7 @@
 		
 </script>
 
-<form:form action="${url}" modelAttribute="${userForm}" >
+<form:form action="${url}" modelAttribute="${userForm}" class="form-horizontal">
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<acme:textbox code="register.username" path="username"/>
@@ -125,16 +125,29 @@
 		<acme:textbox code="register.birthDate" path="birthDate"/>
 		<br/>
 		
-		<spring:message code="useCreditCard" />
+		
 	
 		<jstl:choose>
 			<jstl:when test="${checkBoxCreditCard == null || checkBoxCreditCard == true}">
-				<form:checkbox id="checkBoxCreditCard" path="checkBoxCreditCard" onclick="checkCreditCard()"/> 
-				
+				<div class="row">
+				  <div class="col-lg-6">
+				    <div class="input-group">
+				    <span class="input-group-addon">
+				    
+					<form:checkbox  class="checkbox" id="checkBoxCreditCard" path="checkBoxCreditCard" onclick="checkCreditCard()"/> 
+					</span>
+					</div>
+				  </div>
+				</div>
+			
 			</jstl:when>
 			<jstl:when test="${checkBoxCreditCard == false}">
-				<form:checkbox id="checkBoxCreditCard" path="checkBoxCreditCard" onclick="checkCreditCard()"/> 
-				
+			<div class="row">
+				<div  class="checkbox col-lg-2">
+				<spring:message code="useCreditCard" />
+				<form:checkbox class="col-lg-5"  id="checkBoxCreditCard" path="checkBoxCreditCard" onclick="checkCreditCard()"/> 
+				</div>
+			</div>
 			</jstl:when>
 		</jstl:choose>
 		
@@ -142,27 +155,28 @@
 	
 		<br/>
 		
-		<div class="showCreditCard">
+		<div class="panel panel-primary">
 			<fieldset id="enableCreditCard">
-			<legend><h3><spring:message code="creditCard" /></h3></legend>
-				<acme:textbox code="register.holdername" path="creditCard.holderName"/>
-				<br/>
-				
-				<acme:textbox code="register.brandname" path="creditCard.brandName"/>
-				<br/>
-				
-				<acme:textbox code="register.number" path="creditCard.number"/>
-				<br/>
-				
-				<acme:textbox code="register.expirationmonth" path="creditCard.expirationMonth"/>
-				<br/>
-				
-				<acme:textbox code="register.expirationyear" path="creditCard.expirationYear"/>
-				<br/>
-				
-				<acme:textbox code="register.cvvcode" path="creditCard.CVV"/>
-				<br/>
-				
+			<div class="panel-heading"><legend><h3><spring:message code="creditCard" /></h3></legend></div>
+				<div class="panel-body">
+					<acme:textbox code="register.holdername" path="creditCard.holderName"/>
+					<br/>
+					
+					<acme:textbox code="register.brandname" path="creditCard.brandName"/>
+					<br/>
+					
+					<acme:textbox code="register.number" path="creditCard.number"/>
+					<br/>
+					
+					<acme:textbox code="register.expirationmonth" path="creditCard.expirationMonth"/>
+					<br/>
+					
+					<acme:textbox code="register.expirationyear" path="creditCard.expirationYear"/>
+					<br/>
+					
+					<acme:textbox code="register.cvvcode" path="creditCard.CVV"/>
+					<br/>
+				</div>
 			</fieldset>
 		</div>
 		<br/>
@@ -191,7 +205,7 @@
 	
 	<acme:submit name="save" code="register.save" />&nbsp; &nbsp; &nbsp; &nbsp; 
 	
-	<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+	<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 		onclick="javascript: window.history.back();" />
 	
 </form:form>

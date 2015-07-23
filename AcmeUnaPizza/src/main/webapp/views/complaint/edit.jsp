@@ -14,17 +14,23 @@
 
 	<jstl:if test="${details == true}">
 			<fieldset>
+				<div class="panel panel-default">
 				<acme:labelDetails code="complaint.title" value="${complaint.title}"/>
 				<acme:labelDetails code="complaint.creationMoment" value="${complaint.creationMoment}"/>
 				<acme:labelDetails code="complaint.description" value="${complaint.description}"/>
 				<acme:labelDetails code="complaint.result" value="${complaint.result}"/>
 				<acme:labelDetails code="complaint.state" value="${complaint.state}"/>
+				</div>
+				
 				<br/>
+				
 				<fieldset>
 					<legend><h3><spring:message code="complaint.discussionMessages" /></h3></legend>
-					<jstl:forEach var="discussionMessage" items="${complaint.discussionMessages}" varStatus="rowIndex">
+					<jstl:forEach var="discussionMessage" items="${complaint.discussionMessages}">
+						<div  class="panel panel-default">
 						<acme:dateLabelDetails code="complaint.discussionMessages.moment" value="${discussionMessage.moment}"/>
 						<acme:labelDetails code="complaint.discussionMessages.message" value="${discussionMessage.message}" />
+						</div>
 						<br/>
 					</jstl:forEach>
 				</fieldset>
@@ -36,12 +42,12 @@
 			</jstl:if>
 			
 			<security:authorize access="hasRole('CUSTOMER')">
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 						onclick="javascript: window.location.replace('complaint/actor/list.do');" />
 			</security:authorize>
 			
 			<security:authorize access="hasRole('ADMINISTRATOR')">		
-					<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+					<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 						onclick="javascript:history.back();" />
 			</security:authorize>
 		</jstl:if>
@@ -84,7 +90,7 @@
 				<br />
 				
 				<acme:submit name="save" code="complaint.save"/>&nbsp;
-				<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('complaint/actor/list.do');" />
 			</form:form>
 		</jstl:if>
@@ -112,7 +118,7 @@
 						
 					
 					<acme:submit name="save" code="complaint.save"/>&nbsp;
-					<input type="button" name="cancel" value="<spring:message code="cancel" />" 
+					<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 						onclick="javascript: window.location.replace('complaint/administrator/listAvailables.do');" />
 				</form:form>
 			
