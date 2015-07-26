@@ -33,7 +33,7 @@
 		
 	<spring:message code="details.details" var="detailsHeader" />
 	<display:column title="${detailsHeader}" sortable="true">
-		<a href="URLedicion Id=${row.id}"> <spring:message
+		<a href="stuff/boss/edit.do?stuffId=${row.id}"> <spring:message
 			code="details.details" />
 		</a>
 	</display:column>
@@ -41,7 +41,7 @@
 </display:table>
 
 <security:authorize access="hasRole('BOSS')">
-	<a href="/stuff/boss/create.do">
+	<a href="stuff/boss/create.do">
 		<spring:message code="details.createNew" />
 	</a>
 </security:authorize>
