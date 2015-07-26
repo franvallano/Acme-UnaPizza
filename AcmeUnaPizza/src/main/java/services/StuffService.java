@@ -165,10 +165,14 @@ public class StuffService {
 		if(oldVersion != null){
 			res = stuff.getId() != oldVersion.getId();
 			res = res || stuff.getVersion() != oldVersion.getVersion();
-			res = res || !stuff.getRepairs().equals(oldVersion.getRepairs());
+			res = res || (stuff.getRepairs().size() != oldVersion.getRepairs().size());
+			res = res || !oldVersion.getRepairs().containsAll(stuff.getRepairs());
 		}
 		else
 			res = true;
+		
+		if (stuff.getId() == 0)
+			res = false;
 		
 		return res;
 	}
