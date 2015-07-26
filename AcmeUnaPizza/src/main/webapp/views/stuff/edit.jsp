@@ -42,8 +42,18 @@
 		<form:option value="REPAIRING"><spring:message code="stuff.status.REPAIRING"/></form:option>
 	</form:select>
 	<br />
+	
+	<form:label path="workShop">
+		<spring:message code="stuff.workshop"/>
+	</form:label>
+	 <form:select path="workShop">
+	 	<form:option value="0">----</form:option>
+	 	<jstl:forEach var="var" items="${workshops}">
+	 		<form:option label="${var.company}" value="${var.id}"/>
+	 	</jstl:forEach>
+	</form:select>
+	<br />
 		
-	<!-- <jstl:if test="${editable}"> </jstl:if> -->
 	<acme:submit name="save" code="details.save" />
 
 	<acme:submit name="delete" code="details.delete" />
