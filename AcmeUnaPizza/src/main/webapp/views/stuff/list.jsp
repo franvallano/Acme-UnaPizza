@@ -11,6 +11,8 @@
 		String requestURI 			-- URI a la que hacer la petición para recargar la lista cuando sea necesario
 		Collection<Object> entities	-- Lista de entidades que debemos listar
  -->
+ 
+ HOLA CARACOLA
 
 <display:table pagesize="5" class="displaytag" keepStatus="true"
 	name="entities" requestURI="${requestURI}" id="row">
