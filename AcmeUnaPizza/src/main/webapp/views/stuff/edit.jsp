@@ -17,8 +17,7 @@
 	- Object Entity		-- Entidad con la que se va a trabajar en el formulario
 	-->
 
-<form:form action="${requestURI}" modelAttribute="entity"
-	enctype="multipart/form-data">
+<form:form action="${requestURI}" modelAttribute="entity">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
