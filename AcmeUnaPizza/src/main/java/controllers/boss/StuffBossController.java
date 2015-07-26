@@ -6,7 +6,7 @@
  *
  */
 
-package controllers.cook;
+package controllers.boss;
 
 import java.util.Collection;
 
