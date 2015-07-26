@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.StuffRepository;
+import security.Authority;
+import security.UserAccount;
 import utilities.EntityHackingException;
 import domain.Stuff;
 import domain.WorkShop;
@@ -24,6 +26,9 @@ public class StuffService {
 	
 	// Supporting services ----------------------------------------------------
 	
+	@Autowired
+	private BossService bossService;
+	
 	// Constructors -----------------------------------------------------------
 	
 	public StuffService() {
@@ -34,6 +39,8 @@ public class StuffService {
 	public Stuff create(){
 		Stuff newbye;
 		
+		Assert.isTrue(ppalIsABoss(), "user that isn't a boss tried to create a new stuff");
+		
 		newbye = new Stuff();
 		
 		return newbye;
@@ -42,6 +49,8 @@ public class StuffService {
 	public void save(Stuff stuff){
 		if(isHacked(stuff))
 			throw new EntityHackingException("Stuff: tried to save a hacked entity");
+		
+		Assert.isTrue(ppalIsABoss(), "user that isn't a boss tried to modify a stuff");
 		
 		stuffRepository.save(stuff);
 	}
@@ -151,5 +160,22 @@ public class StuffService {
 			res = true;
 		
 		return res;
+	}
+	
+	/**
+	 * Checks if principal has a Boss authority.
+	 * 
+	 * @return true if principal is a boss, false otherwise.
+	 * */
+	private Boolean ppalIsABoss(){
+		UserAccount ppal;
+		Authority bossAuthority;
+		
+		bossAuthority = new Authority();
+		bossAuthority.setAuthority("BOSS");
+		
+		ppal = bossService.findByPrincipal().getUserAccount();
+		
+		return ppal.getAuthorities().contains(bossAuthority);
 	}
 }
