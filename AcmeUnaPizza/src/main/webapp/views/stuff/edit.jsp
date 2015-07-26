@@ -49,6 +49,7 @@
 
 	<acme:submit name="delete" code="details.delete" />
 	
-	<acme:cancel url="stuff/boss/list.do" code="details.cancel" />
+	<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="details.cancel" />" 
+					onclick="javascript: window.location.replace('stuff/boss/list.do');" />
 
 </form:form>
