@@ -27,7 +27,7 @@ import controllers.AbstractController;
 import domain.Stuff;
 
 @Controller
-@RequestMapping("/boss/stuff")
+@RequestMapping("/stuff/boss")
 public class StuffBossController extends AbstractController {
 		
 	// Supporting services ----------------------------------------------------
@@ -71,7 +71,7 @@ public class StuffBossController extends AbstractController {
 		
 		res = new ModelAndView("stuff/list");
 		res.addObject("entities", stuffs);
-		res.addObject("requestURI", "/boss/stuff/list.do");
+		res.addObject("requestURI", "/stuff/boss/list.do");
 
 		return res;
 	}
@@ -113,7 +113,7 @@ public class StuffBossController extends AbstractController {
 		else {
 			try {
 				stuffService.save(entity);
-				result = new ModelAndView("redirect:/boss/stuff/list.do");
+				result = new ModelAndView("redirect:/stuff/boss/list.do");
 			} catch (Throwable oops) {
 				if (oops instanceof EntityHackingException)
 					errorMsg = "stuff.hacking.error";
@@ -133,7 +133,7 @@ public class StuffBossController extends AbstractController {
 		
 		try{
 			stuffService.delete(entity);
-			res = new ModelAndView("redirect:/boss/stuff/list.do");
+			res = new ModelAndView("redirect:/stuff/boss/list.do");
 		}catch(Throwable oops){
 			res = createEditionModelAndView(entity, "stuff.commit.error");
 		}
@@ -152,7 +152,7 @@ public class StuffBossController extends AbstractController {
 		res = new ModelAndView("stuff/edit");
 		res.addObject("entity", entity);
 		res.addObject("message", message);
-		res.addObject("requestURI", "/boss/stuff/edit.do");		
+		res.addObject("requestURI", "/stuff/boss/edit.do");		
 
 		return res;
 	}
