@@ -46,6 +46,7 @@
 		<value>/views/salesOrder/messages</value>	
 		<value>/views/note/messages</value>
 		<value>/views/discussionMessage/messages</value>
+<value>/views/stuff/messages</value>
 		
 	</util:list>
 

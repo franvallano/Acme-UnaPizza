@@ -41,6 +41,7 @@
 		<value>/views/salesOrder/tiles.xml</value>
 		<value>/views/note/tiles.xml</value>
 		<value>/views/discussionMessage/tiles.xml</value>
+<value>/views/stuff/tiles.xml</value>
 		
 	</util:list>
 
