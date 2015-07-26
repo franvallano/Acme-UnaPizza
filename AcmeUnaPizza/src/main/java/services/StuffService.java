@@ -57,6 +57,14 @@ public class StuffService {
 		return res;
 	}
 
+	public Collection<Stuff> findAll(){
+		Collection<Stuff> allStuff;
+		
+		allStuff = stuffRepository.findAll();
+		
+		return allStuff;
+	}
+	
 	public Collection<Stuff> findStuffMoreRepaired() {
 		Collection<Stuff> result;
 		
