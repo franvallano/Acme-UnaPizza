@@ -26,4 +26,8 @@ public interface StuffRepository extends JpaRepository<Stuff, Integer>{
 	//Finds all stuff being repaired 
 	@Query("select s from Stuff s where s.status='REPAIRING'")
 	Collection<Stuff> findAllRepairingStuff();
+	
+	//Finds all OK stuff 
+	@Query("select s from Stuff s where s.status='OK'")
+	Collection<Stuff> findAllOkStuff();
 }

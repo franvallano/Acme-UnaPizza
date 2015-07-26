@@ -94,7 +94,7 @@ public class StuffService {
 	 * 
 	 * @return all stuff with MALFUNCTION status.
 	 * */
-	public Collection<Stuff> findMalfunctioningStuff(){
+	public Collection<Stuff> findAllMalfunctioningStuff(){
 		Collection<Stuff> res;
 		
 		res = stuffRepository.findAllMalfunctionStuff();
@@ -107,10 +107,23 @@ public class StuffService {
 	 * 
 	 * @return all stuff with REPAIRING status.
 	 * */
-	public Collection<Stuff> findRepairingStuff(){
+	public Collection<Stuff> findAllRepairingStuff(){
 		Collection<Stuff> res;
 		
 		res = stuffRepository.findAllRepairingStuff();
+		
+		return res;
+	}
+	
+	/**
+	 * Finds all stuff with OK status.
+	 * 
+	 * @return all stuff with OK status.
+	 * */
+	public Collection<Stuff> findAllOkStuff(){
+		Collection<Stuff> res;
+		
+		res = stuffRepository.findAllOkStuff();
 		
 		return res;
 	}
