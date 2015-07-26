@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.StuffService;
+import services.WorkShopService;
 import utilities.EntityHackingException;
 import controllers.AbstractController;
 import domain.Stuff;
+import domain.WorkShop;
 
 @Controller
 @RequestMapping("/stuff/boss")
@@ -35,6 +37,8 @@ public class StuffBossController extends AbstractController {
 	@Autowired
 	private StuffService stuffService;
 	
+	@Autowired
+	private WorkShopService workshopService;
 	// Constructors -----------------------------------------------------------
 	
 	public StuffBossController() {
@@ -148,11 +152,15 @@ public class StuffBossController extends AbstractController {
 	
 	public ModelAndView createEditionModelAndView(Stuff entity, String message){
 		ModelAndView res;
+		Collection<WorkShop> workshops;
+		
+		workshops = workshopService.findAll();
 		
 		res = new ModelAndView("stuff/edit");
 		res.addObject("entity", entity);
 		res.addObject("message", message);
-		res.addObject("requestURI", "/stuff/boss/edit.do");		
+		res.addObject("requestURI", "stuff/boss/edit.do");	
+		res.addObject("workshops", workshops);
 
 		return res;
 	}
