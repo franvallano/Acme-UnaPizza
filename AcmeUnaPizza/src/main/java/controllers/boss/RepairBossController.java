@@ -117,9 +117,9 @@ public class RepairBossController extends AbstractController {
 			result.addObject("edit", true);
 		} else {
 			try {
-				//Set stuff status to OK
+				//Set stuff status to REPAIRING
 				stuff = repair.getStuff();
-				stuff.setStatus("OK");
+				stuff.setStatus("REPAIRING");
 				stuffService.save(stuff);
 				
 				repairService.save(repair);
