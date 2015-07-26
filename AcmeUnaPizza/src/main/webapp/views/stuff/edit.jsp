@@ -22,37 +22,33 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<!-- TODO: Añadir el resto de atributos ocultos -->
+	<form:hidden path="repairs" />
 
-	<!--
-	<acme:textbox code="codigoDeInternacionalizacion" path="nombreAtributo" readonly="true"/>
+	<acme:textbox code="stuff.name" path="name"/>
 	<br />
-	-->
 	
-	<!--
-	<acme:textarea code="codigoDeInternacionalizacion" path="nombreAtributo"/>
+	<acme:textbox code="stuff.refCode" path="referenceCode"/>
 	<br />
-	-->
 	
-	<!--
-	<form:label path="nombreAtributo">
-		<spring:message code="codigoDeInternacionalizacion"/>
+	<acme:textbox code="stuff.powConsumption" path="powerConsumption"/>
+	<br />
+	
+	<form:label path="status">
+		<spring:message code="stuff.status"/>
 	</form:label>
-	<form:select path="nombrePropiedad">
+	<form:select path="status">
 		<form:option value="0">----</form:option>
-		<form:option value="CREATED">CREATED</form:option>
-		<form:option value="REGISTERED">REGISTERED</form:option>
-		<form:option value="SOLVED">SOLVED</form:option>
+		<form:option value="OK"><spring:message code="stuff.status.OK"/></form:option>
+		<form:option value="MALFUNCTION"><spring:message code="stuff.status.MALFUNCTION"/></form:option>
+		<form:option value="REPAIRING"><spring:message code="stuff.status.REPAIRING"/></form:option>
 	</form:select>
 	<br />
-	-->	
 		
 	<!-- <jstl:if test="${editable}"> </jstl:if> -->
 	<acme:submit name="save" code="details.save" />
 
 	<acme:submit name="delete" code="details.delete" />
 	
-	
-	<acme:cancel url="urlDeListado" code="details.cancel" />
+	<acme:cancel url="stuff/boss/list.do" code="details.cancel" />
 
 </form:form>
