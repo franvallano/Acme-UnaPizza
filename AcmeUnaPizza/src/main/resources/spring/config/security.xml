@@ -109,6 +109,9 @@
 		
 		<!-- NOTE -->
 		<security:intercept-url pattern="/note/boss/**" access="hasRole('BOSS')" /> 
+		
+		<!-- STUFF -->
+		<security:intercept-url pattern="/stuff/boss/**" access="hasRole('BOSS')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
