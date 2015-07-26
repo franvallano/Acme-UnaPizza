@@ -55,6 +55,17 @@ public class StuffService {
 		stuffRepository.save(stuff);
 	}
 	
+	public void delete(Stuff entity) {
+		Assert.isTrue(ppalIsABoss(), "user that isn't a boss tried to delete a stuff");
+		Assert.notNull(entity, "tried to delete a null stuff");
+		Assert.isTrue(entity.getId()!=0, "tried to delete a stuff with id zero");
+		Assert.isTrue(stuffRepository.exists(entity.getId()), "tried to delete a stuff that doesn't exist");
+	
+		stuffRepository.delete(entity.getId());
+		
+		Assert.isNull(stuffRepository.findOne(entity.getId()), "entity hasn't been removed after delete() call");
+	}
+	
 	public Stuff findOne(int id){
 		Stuff res;
 		
@@ -178,4 +189,5 @@ public class StuffService {
 		
 		return ppal.getAuthorities().contains(bossAuthority);
 	}
+	
 }
