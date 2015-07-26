@@ -147,7 +147,7 @@ public class RepairBossController extends AbstractController {
 		WorkShop repairWorkshop;
 		
 		repairWorkshop = repair.getWorkShop();
-		reparableStuff = stuffService.findMalfunctioningStuff(repairWorkshop);
+		reparableStuff = stuffService.findMalfunctioningStuffByWorkshop(repairWorkshop);
 		
 		res = new ModelAndView("repair/edit");
 		res.addObject("repair", repair);
