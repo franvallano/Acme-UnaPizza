@@ -111,6 +111,9 @@
 					<li><a href="repair/boss/list.do"><spring:message code="master.page.boss.repair" /></a></li>
 					<li><a href="workshop/boss/list.do"><spring:message code="master.page.boss.workshop" /></a></li>
 					<li><a href="stuff/boss/list.do"><spring:message code="master.page.boss.stuff" /></a></li>
+					<li><a href="stuff/boss/list.do?status=OK"><spring:message code="master.page.boss.stuff.ok" /></a></li>
+					<li><a href="stuff/boss/list.do?status=REPAIRING"><spring:message code="master.page.boss.stuff.repairing" /></a></li>
+					<li><a href="stuff/boss/list.do?status=MALFUNCTION"><spring:message code="master.page.boss.stuff.malfunction" /></a></li>
 				</ul>
 			</li>
 			<li><a class="fNiv" href="dashboard/boss/list.do"><spring:message code="master.page.dashboard" /></a></li>
