@@ -85,7 +85,7 @@
 						<acme:labelDetails code="product.code" value="${product.code}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.name" value="${product.name}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.stockPrice" value="${product.stockPrice}" eurCurrency="true" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<spring:message code="product.amount" />
+						<b><spring:message code="product.amount" /></b>
 							<form:select path="amountPizzas" size="2" onclick="updatePrice()" onchange="updatePrice()">
 								<form:option label="0" value="0.0" selected="selected"/>
 									<jstl:forEach items="${totalAmount}" varStatus="amountIndex">
@@ -106,7 +106,7 @@
 						<acme:labelDetails code="product.code" value="${product.code}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.name" value="${product.name}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.stockPrice" value="${product.stockPrice}" eurCurrency="true" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<spring:message code="product.amount" />
+						<b><spring:message code="product.amount" /></b>
 							<form:select path="amountComplements" size="2" onclick="updatePrice()" onchange="updatePrice()">
 								<form:option label="0" value="0.0" selected="selected"/>
 									<jstl:forEach items="${totalAmount}" varStatus="amountIndex">
@@ -127,7 +127,7 @@
 						<acme:labelDetails code="product.code" value="${product.code}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.name" value="${product.name}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.stockPrice" value="${product.stockPrice}" eurCurrency="true" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<spring:message code="product.amount" />
+						<b><spring:message code="product.amount" /></b>
 							<form:select path="amountDesserts" size="2" onclick="updatePrice()" onchange="updatePrice()">
 								<form:option label="0" value="0.0" selected="selected"/>
 									<jstl:forEach items="${totalAmount}" varStatus="amountIndex">
@@ -148,7 +148,7 @@
 						<acme:labelDetails code="product.code" value="${product.code}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.name" value="${product.name}" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<acme:labelDetails code="product.stockPrice" value="${product.stockPrice}" eurCurrency="true" noLineBreaks="true"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<spring:message code="product.amount" />
+						<b><spring:message code="product.amount" /></b>
 							<form:select path="amountDrinks" size="2" onclick="updatePrice()" onchange="updatePrice()">
 								<form:option label="0" value="0.0" selected="selected"/>
 									<jstl:forEach items="${totalAmount}" varStatus="amountIndex">
