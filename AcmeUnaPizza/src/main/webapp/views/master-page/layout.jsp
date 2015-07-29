@@ -30,8 +30,8 @@
 <script type="text/javascript" src="scripts/jquery-ui.js"></script>
 <script type="text/javascript" src="scripts/jmenu.js"></script>
 
-<link rel="stylesheet" href="styles/bootstrap.css" type="text/css">
-<link rel="stylesheet" href="styles/jmenu.css" media="screen"
+<link rel="stylesheet" href="styles/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="styles/bootstrap.min.css" media="screen"
 	type="text/css" />
 <link rel="stylesheet" href="styles/displaytag.css" type="text/css">
 
@@ -45,6 +45,17 @@
 	function askSubmission(msg, form) {
 		if (confirm(msg))
 			form.submit();
+	}
+</script>
+
+<!-- SCRIPT CONTROL DE COOKIES -->
+<script type="text/javascript">
+function controlcookies() {
+         // si variable no existe se crea (al clicar en Aceptar)
+    localStorage.controlcookie = (localStorage.controlcookie || 0);
+ 
+    localStorage.controlcookie++; // incrementamos cuenta de la cookie
+    cookies_warning.style.display='none'; // Esconde la política de cookies
 	}
 </script>
 
@@ -71,8 +82,20 @@
 	</div>
 	
 	<div id="cookies_warning" class="alert alert-info">
-		<spring:message code="master.page.cookies" /> <a id="cookie_link" href="law/info.do" class="btn btn-xs btn-primary"><spring:message code="master.page.cookies.link" /></a>
+		<spring:message code="master.page.cookies" /> 
+		<a id="cookie_link" href="law/info.do" class="btn btn-xs btn-primary">
+		<spring:message code="master.page.cookies.link" /></a>
+		<button class="btn btn-primary" onclick="controlcookies()">Aceptar</button>
 	</div>
+	<script type="text/javascript">
+	if (!localStorage.controlcookie>0){ 
+	cookies_warning.setAttribute("style","animation: desaparecer 5s;-webkit-animation: desaparecer 5s;");
+	}
+	</script>
+	
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="scripts/bootstrap.min.js"></script>
 </body>
 </html>

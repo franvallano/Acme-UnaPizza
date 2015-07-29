@@ -63,7 +63,7 @@
 			</form:form>
 		</jstl:if>
 	
-	<input type="button" name="new" value="<spring:message code="repair.new" />" 
+	<input type="button" class="btn btn-primary" name="new" value="<spring:message code="repair.new" />" 
 		onclick="javascript: window.location.replace('repair/boss/create.do?workshopId=${workShop.id}');" />
 		
 	</security:authorize>

@@ -24,7 +24,7 @@
 
 </script>
 
-<display:table name="motorbikes" pagesize="10" class="displaytag" requestURI="${requestURI}" id="motorbikesRow">
+<display:table name="motorbikes" pagesize="10" class="table table-striped" requestURI="${requestURI}" id="motorbikesRow">
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 	
@@ -62,6 +62,6 @@
 		
 	</display:table>
 
-<input type="button" name="new" value="<spring:message code="motorbike.new" />" 
+<input type="button" class="btn btn-primary" name="new" value="<spring:message code="motorbike.new" />" 
 		onclick="javascript: window.location.replace('motorbike/administrator/create.do');" />
 

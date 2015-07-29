@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="garages" pagesize="10" class="displaytag" requestURI="${requestURI}" id="garagesRow">
+<display:table name="garages" pagesize="10" class="table table-striped" requestURI="${requestURI}" id="garagesRow">
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 	
@@ -40,7 +40,7 @@
 		
 </display:table>
 
-	<input type="button" name="new" value="<spring:message code="new" />" 
+	<input type="button" class="btn btn-primary" name="new" value="<spring:message code="new" />" 
 		onclick="javascript: window.location.replace('garage/administrator/create.do');" />
 	
 

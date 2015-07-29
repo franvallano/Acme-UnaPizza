@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="providers" pagesize="5" class="displaytag" requestURI="${requestURI}" id="providersRow">
+<display:table name="providers" pagesize="5" class="table table-striped" requestURI="${requestURI}" id="providersRow">
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 	
@@ -39,6 +39,6 @@
 		
 	</display:table>
 
-<input type="button" name="new" value="<spring:message code="provider.new" />" 
+<input type="button" class="btn btn-primary" name="new" value="<spring:message code="provider.new" />" 
 		onclick="javascript: window.location.replace('provider/administrator/create.do');" />
 

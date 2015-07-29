@@ -37,7 +37,7 @@
 			</fieldset>
 			
 			<jstl:if test="${(complaint.administrator != null) && (complaint.state == 'OPEN')}">
-			<input type="button" name="new" value="<spring:message code="newDiscussionMessage" />" 
+			<input type="button" class="btn btn-primary" name="new" value="<spring:message code="newDiscussionMessage" />" 
 						onclick="javascript: window.location.replace('discussionMessage/actor/create.do?complaintId=${complaint.id}');" />
 			</jstl:if>
 			

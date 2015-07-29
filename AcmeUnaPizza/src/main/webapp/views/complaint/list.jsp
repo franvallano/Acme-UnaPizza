@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="complaints" pagesize="10" class="displaytag" requestURI="${requestURI}" id="complaintRow">
+<display:table name="complaints" pagesize="10" class="table table-striped" requestURI="${requestURI}" id="complaintRow">
 	
 	<spring:message code="complaint.state" var="stateHeader" />
 	<display:column property="state" title="${stateHeader}" />

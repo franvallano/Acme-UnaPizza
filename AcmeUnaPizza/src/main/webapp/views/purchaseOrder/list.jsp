@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="purchaseOrders" pagesize="10" class="displaytag" requestURI="${requestURI}" id="purchaseOrdersRow">
+<display:table name="purchaseOrders" pagesize="10" class="table table-striped" requestURI="${requestURI}" id="purchaseOrdersRow">
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 	
