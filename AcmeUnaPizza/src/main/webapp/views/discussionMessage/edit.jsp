@@ -23,7 +23,7 @@
 	
 	<acme:submit name="save" code="discussionMessage.send"/>
 	
-	<input type="button" onclick="javascript:history.back();" value="<spring:message code='discussionMessage.cancel' />" />
+	<input type="button" class="btn btn-primary" onclick="javascript:history.back();" value="<spring:message code='discussionMessage.cancel' />" />
 	<br />
 	
 </form:form>

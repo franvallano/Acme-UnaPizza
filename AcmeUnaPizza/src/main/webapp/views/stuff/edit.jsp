@@ -32,26 +32,27 @@
 	<acme:textbox code="stuff.powConsumption" path="powerConsumption"/>
 	<br />
 	
-	<form:label path="status">
+	<form:label path="status" class =" col-lg-2 control-label">
 		<spring:message code="stuff.status"/>
 	</form:label>
-	<form:select path="status">
+	<form:select path="status" class="col-lg-4">
 		<form:option value="0">----</form:option>
 		<form:option value="OK"><spring:message code="stuff.status.OK"/></form:option>
 		<form:option value="MALFUNCTION"><spring:message code="stuff.status.MALFUNCTION"/></form:option>
 		<form:option value="REPAIRING"><spring:message code="stuff.status.REPAIRING"/></form:option>
 	</form:select>
 	<br />
-	
-	<form:label path="workShop">
+	<br />
+	<form:label path="workShop" class =" col-lg-2 control-label">
 		<spring:message code="stuff.workshop"/>
 	</form:label>
-	 <form:select path="workShop">
+	 <form:select path="workShop" class="col-lg-4">
 	 	<form:option value="0">----</form:option>
 	 	<jstl:forEach var="var" items="${workshops}">
 	 		<form:option label="${var.company}" value="${var.id}"/>
 	 	</jstl:forEach>
 	</form:select>
+	<br />
 	<br />
 		
 	<acme:submit name="save" code="details.save" />

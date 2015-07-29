@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<display:table name="workshops" pagesize="5" class="displaytag" requestURI="${requestURI}" id="workshopsRow">
+<display:table name="workshops" pagesize="5" class="table table-striped" requestURI="${requestURI}" id="workshopsRow">
 
 	<security:authorize access="hasRole('BOSS')">
 	
@@ -45,6 +45,6 @@
 		
 	</display:table>
 
-<input type="button" name="new" value="<spring:message code="workshop.new" />" 
+<input type="button" class="btn btn-primary" name="new" value="<spring:message code="workshop.new" />" 
 		onclick="javascript: window.location.replace('workshop/boss/create.do');" />
 

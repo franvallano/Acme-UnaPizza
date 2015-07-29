@@ -51,19 +51,19 @@
 
 <%-- Definition --%>
 
-<div>
-	<form:label path="${path}">
+<div class="form-group">
+	<form:label path="${path}" class =" col-lg-2 control-label">
 		<spring:message code="${code}" />
 	</form:label>	
 	<jstl:if test="${itemValue == null}">
-		<form:select id="${id}" path="${path}" onchange="${onchange}" onclick="${onclick}" onsubmit="${onsubmit}">
+		<form:select class="col-lg-4" id="${id}" path="${path}" onchange="${onchange}" onclick="${onclick}" onsubmit="${onsubmit}">
 			<form:option value="0" label="----" />		
 			<form:options items="${items}" itemValue="id" itemLabel="${itemLabel}" />
 		</form:select>
 	</jstl:if>
 	
 	<jstl:if test="${itemValue != null}">
-		<form:select id="${id}" path="${path}" onchange="${onchange}" onclick="${onclick}" onsubmit="${onsubmit}">
+		<form:select id="${id}" path="${path}" class="col-lg-4" onchange="${onchange}" onclick="${onclick}" onsubmit="${onsubmit}">
 			<form:option value="0" label="----" />		
 			<form:options items="${items}" itemValue="${itemValue}" itemLabel="${itemLabel}" />
 		</form:select>

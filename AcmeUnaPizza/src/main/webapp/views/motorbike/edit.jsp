@@ -80,7 +80,7 @@
 				<br />
 				
 				<acme:submit name="update" code="motorbike.save"/>&nbsp;
-				<input type="submit" name="delete"
+				<input type="submit" name="delete" class="btn btn-primary"
 						value="<spring:message code="motorbike.delete" />"
 						onclick="return confirm('<spring:message code="motorbike.confirm.delete" />')" />&nbsp;
 				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 

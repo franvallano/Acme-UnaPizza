@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 	<display:table name="administrators" id="administratorsRow" requestURI="${requestURI}"
-	pagesize="10" class="displaytag">
+	pagesize="10" class="table table-striped">
 	
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 		
@@ -36,5 +36,5 @@
 	
 	</display:table>
 	
-	<input type="button" name="new" value="<spring:message code="new" />" 
+	<input type="button" class="btn btn-primary" name="new" value="<spring:message code="new" />" 
 		onclick="javascript: window.location.replace('register/administrator/register.do');" />

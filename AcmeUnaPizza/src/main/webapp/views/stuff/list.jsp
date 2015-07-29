@@ -12,7 +12,7 @@
 		Collection<Object> entities	-- Lista de entidades que debemos listar
  -->
  
-<display:table pagesize="5" class="displaytag" keepStatus="true"
+<display:table pagesize="5" class="table table-striped" keepStatus="true"
 	name="entities" requestURI="${requestURI}" id="row">
 
 	<spring:message code="stuff.name" var="nameHeader" />
@@ -41,7 +41,7 @@
 </display:table>
 
 <security:authorize access="hasRole('BOSS')">
-	<a href="stuff/boss/create.do">
+	<a class="btn btn-primary" href="stuff/boss/create.do">
 		<spring:message code="details.createNew" />
 	</a>
 </security:authorize>

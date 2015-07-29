@@ -12,7 +12,7 @@
 		Collection<Object> entities	-- Lista de entidades que debemos listar
  -->
 
-<display:table pagesize="5" class="displaytag" keepStatus="true"
+<display:table pagesize="5" class="table table-striped" keepStatus="true"
 	name="entities" requestURI="${requestURI}" id="row">
 
 	<!-- 
