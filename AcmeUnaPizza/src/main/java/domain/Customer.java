@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -72,6 +73,7 @@ public class Customer extends Actor {
 	}
 	
 	@Valid
+	@Column(unique = true)
 	public CreditCard getCreditCard() {
 		return creditCard;
 	}
