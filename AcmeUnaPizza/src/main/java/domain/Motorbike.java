@@ -2,9 +2,10 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,6 +18,10 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(uniqueConstraints = {
+	@UniqueConstraint(columnNames={"number"}), 
+	@UniqueConstraint(columnNames={"licensePlate"})})
+
 public class Motorbike extends DomainEntity{
 
 	// Attributes
@@ -29,7 +34,6 @@ public class Motorbike extends DomainEntity{
 	// ------------------------------------------------------------------------
 
 	@Min(1)
-	@Column(unique = true)
 	public int getNumber() {
 		return number;
 	}

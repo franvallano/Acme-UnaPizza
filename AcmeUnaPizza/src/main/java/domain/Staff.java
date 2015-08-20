@@ -1,16 +1,15 @@
 package domain;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.Valid;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -22,6 +21,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(uniqueConstraints = {
+		@UniqueConstraint(columnNames={"dni"}), 
+		@UniqueConstraint(columnNames={"ssNumber"}), 
+		@UniqueConstraint(columnNames={"accountNumber"})},
+		indexes = {
+			@Index(columnList = "contractStartDate"), 
+			@Index(columnList = "contractEndDate")})
+
+
 public class Staff extends Actor{
 
 	//Attributes --------------------------------------------------------------------------------
@@ -38,7 +46,6 @@ public class Staff extends Actor{
 	
 	@NotBlank
 	@Pattern(regexp = "[0-9]{8}[A-Z]")
-	@Column(unique = true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getDni() {
 		return dni;
@@ -50,7 +57,6 @@ public class Staff extends Actor{
 	
 	@NotBlank
 	@Pattern(regexp = "[A-Z]{2}-[0-9]{10}")
-	@Column(unique = true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getSsNumber() {
 		return ssNumber;
@@ -85,7 +91,6 @@ public class Staff extends Actor{
 	
 	@NotBlank
 	@Pattern(regexp = "[0-9]{20}")
-	@Column(unique = true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getAccountNumber() {
 		return accountNumber;

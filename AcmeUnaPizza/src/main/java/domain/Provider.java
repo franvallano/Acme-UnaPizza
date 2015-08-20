@@ -4,9 +4,10 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -17,6 +18,8 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(uniqueConstraints = 
+	@UniqueConstraint(columnNames={"cif"}))
 public class Provider extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
@@ -48,7 +51,6 @@ public class Provider extends DomainEntity{
 
 	@NotBlank
 	@Pattern(regexp="[A-Z][0-9]{8}")
-	@Column(unique = true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCif() {
 		return cif;

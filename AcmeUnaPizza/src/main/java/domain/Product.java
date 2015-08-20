@@ -4,7 +4,10 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
@@ -18,6 +21,14 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(uniqueConstraints = {
+		@UniqueConstraint(columnNames={"name"}), 
+		@UniqueConstraint(columnNames={"code"})}, 
+		indexes = {
+			@Index(columnList = "type"),
+			@Index(columnList = "actualStock"),
+			@Index(columnList = "minStock")})
+
 public class Product extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
@@ -43,7 +54,6 @@ public class Product extends DomainEntity{
 	}
 
 	@NotBlank
-	@Column(unique=true)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getName() {
 		return name;
@@ -65,7 +75,6 @@ public class Product extends DomainEntity{
 	@NotBlank
 	@Pattern(regexp="[a-zA-Z]{2,5}")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
-	@Column(unique = true)
 	public String getCode() {
 		return code;
 	}

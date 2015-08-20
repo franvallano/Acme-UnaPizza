@@ -4,10 +4,12 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -20,6 +22,11 @@ import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(uniqueConstraints = {
+	@UniqueConstraint(columnNames={"referenceCode"})},
+	indexes = {
+		@Index(columnList = "status")})
+
 public class Stuff extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
@@ -54,7 +61,6 @@ public class Stuff extends DomainEntity{
 	}
 
 
-	@Column(unique=true)
 	@NotBlank
 	@Pattern(regexp="[a-zA-Z]{3}[0-9]{5}")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
