@@ -29,7 +29,6 @@ public class RegistrationAdministratorForm {
 		// Methods ---------------------------------------------------------
 		
 		@Size(min = 5, max = 32)
-		@Column(unique=true)
 		public String getUsername() {
 			return username;
 		}

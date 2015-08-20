@@ -8,11 +8,14 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
@@ -27,6 +30,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
+@Table(uniqueConstraints = {
+		@UniqueConstraint(columnNames={"referenceNumber"})},
+		indexes = {
+			@Index(columnList = "state"),
+			@Index(columnList = "drivingTime")})
 public class SalesOrder extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
@@ -39,7 +47,6 @@ public class SalesOrder extends DomainEntity{
 	
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
-	@Column(unique=true)
 	@Pattern(regexp="[A-Z]{3}-[0-9]{8}")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getReferenceNumber() {
