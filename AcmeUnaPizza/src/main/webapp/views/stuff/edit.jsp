@@ -36,7 +36,6 @@
 		<spring:message code="stuff.status"/>
 	</form:label>
 	<form:select path="status" class="col-lg-4">
-		<form:option value="0">----</form:option>
 		<form:option value="OK"><spring:message code="stuff.status.OK"/></form:option>
 		<form:option value="MALFUNCTION"><spring:message code="stuff.status.MALFUNCTION"/></form:option>
 		<form:option value="REPAIRING"><spring:message code="stuff.status.REPAIRING"/></form:option>
@@ -47,7 +46,6 @@
 		<spring:message code="stuff.workshop"/>
 	</form:label>
 	 <form:select path="workShop" class="col-lg-4">
-	 	<form:option value="0">----</form:option>
 	 	<jstl:forEach var="var" items="${workshops}">
 	 		<form:option label="${var.company}" value="${var.id}"/>
 	 	</jstl:forEach>

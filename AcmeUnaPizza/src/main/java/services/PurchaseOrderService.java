@@ -3,6 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -237,6 +238,29 @@ public class PurchaseOrderService {
 		return result;
 	}
 	
+	// Cantidad total de productos a pedir para rellenar el almacen
+	public List<Integer> getTotalAmount() {
+		List<Integer> res;
+		
+		res = new ArrayList<Integer>();
+		
+		for(int i=1;i<=51;i++)
+			res.add(i);
+		
+		return res;
+	}
+	
+	public PurchaseOrderForm setAllIdProducts(PurchaseOrderForm purchaseOrderForm, Collection<Integer> idPizzas,
+			Collection<Integer> idComplements, Collection<Integer> idDesserts, Collection<Integer> idDrinks) {
+		
+		purchaseOrderForm.setIdPizzas(idPizzas);
+		purchaseOrderForm.setIdComplements(idComplements);
+		purchaseOrderForm.setIdDesserts(idDesserts);
+		purchaseOrderForm.setIdDrinks(idDrinks);
+		
+		return purchaseOrderForm;
+
+	}
 	// Ancillary methods ------------------------------------------------------
 
 }

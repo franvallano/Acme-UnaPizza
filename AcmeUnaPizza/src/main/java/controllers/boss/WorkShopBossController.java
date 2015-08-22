@@ -70,7 +70,7 @@ public class WorkShopBossController extends AbstractController {
 		workShop = workshopService.findOne(workshopId);
 		
 		result = new ModelAndView("workshop/edit");
-		result.addObject("workShop", workShop);
+		result.addObject("workshop", workShop);
 		result.addObject("details", true);
 		
 		return result;

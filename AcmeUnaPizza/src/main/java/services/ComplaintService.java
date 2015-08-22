@@ -14,6 +14,7 @@ import repositories.ComplaintRepository;
 import domain.Administrator;
 import domain.Complaint;
 import domain.DiscussionMessage;
+import domain.SalesOrder;
 
 @Service
 @Transactional
@@ -29,6 +30,9 @@ public class ComplaintService {
 	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private AdministratorService administratorService;
 	
 	// Constructor ------------------------------------------------------------
 	public ComplaintService(){
@@ -180,6 +184,21 @@ public class ComplaintService {
 		Assert.isTrue(complaint.getState().equals("OPEN"));
 		
 		complaint.setState("CLOSED");
+	}
+	
+	public Complaint findOneByAdministrator(int id) {
+		Assert.isTrue(id != 0);
+		
+		Complaint res;
+		
+		res = this.complaintRepository.findOne(id);
+		
+		Assert.notNull(res);
+		
+		if(res.getAdministrator() != null)
+			Assert.isTrue(res.getAdministrator().getId() == administratorService.findByPrincipal().getId());
+		
+		return res;
 	}
 	
 	public Complaint findOneIfOwner(int complaintId) {

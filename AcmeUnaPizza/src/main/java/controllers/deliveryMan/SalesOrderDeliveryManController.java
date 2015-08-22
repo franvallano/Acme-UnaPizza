@@ -61,8 +61,6 @@ public class SalesOrderDeliveryManController extends AbstractController{
 		deliveryManService.onItsWay(salesOrderId);
 		
 		result = new ModelAndView("redirect:/salesOrder/deliveryMan/listOnItsWay.do");
-
-		result.addObject("requestURI", "salesOrder/deliveryMan/listOnItsWay.do");
 		
 		return result;
 	}
@@ -90,10 +88,7 @@ public class SalesOrderDeliveryManController extends AbstractController{
 		SalesOrder salesOrder;
 		
 		drivingTimeForm = new DrivingTimeForm();
-		salesOrder = salesOrderService.findOneCheckDeliveryMan(salesOrderId);
-		Assert.isTrue(salesOrder.getDeliveryMan().getId() == deliveryManService.findByPrincipal().getId());
-		Assert.isTrue(salesOrder.getId() == salesOrderId);
-		Assert.isTrue(salesOrder.getState().equals("ONITSWAY"));
+		salesOrder = salesOrderService.findOneCheckDeliveryMan(salesOrderId, "ONITSWAY");
 		
 		drivingTimeForm.setSalesOrderId(salesOrderId);
 		
@@ -112,10 +107,7 @@ public class SalesOrderDeliveryManController extends AbstractController{
 		
 		noteDrivingTimeForm = new NoteDrivingTimeForm();
 		
-		salesOrder = salesOrderService.findOneCheckDeliveryMan(salesOrderId);
-		Assert.isTrue(salesOrder.getDeliveryMan().getId() == deliveryManService.findByPrincipal().getId());
-		Assert.isTrue(salesOrder.getId() == salesOrderId);
-		Assert.isTrue(salesOrder.getState().equals("ONITSWAY"));
+		salesOrder = salesOrderService.findOneCheckDeliveryMan(salesOrderId, "ONITSWAY");
 		
 		noteDrivingTimeForm.setSalesOrderId(salesOrderId);
 
@@ -184,11 +176,7 @@ public class SalesOrderDeliveryManController extends AbstractController{
 		ModelAndView result;
 		Collection<String> causes;
 		
-		causes = new ArrayList<String>();
-		
-		causes.add("CANCELLED");
-		causes.add("JOKE");
-		causes.add("OTHER");
+		causes = salesOrderService.findCauses();
 		
 		result = new ModelAndView("salesOrder/finish");
 		result.addObject("noteDrivingTimeForm", noteDrivingTimeForm);

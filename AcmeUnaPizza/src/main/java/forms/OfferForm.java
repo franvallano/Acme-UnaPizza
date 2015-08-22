@@ -31,6 +31,17 @@ public class OfferForm {
 	private boolean sunday;
 	private boolean allDays;
 	
+	public OfferForm() {
+		// Todos los dias activados por defecto
+		setMonday(true);
+		setTuesday(true);
+		setWednesday(true);
+		setThursday(true);
+		setFriday(true);
+		setSaturday(true);
+		setSunday(true);
+	}
+	
 	public Integer getId() {
 		return id;
 	}

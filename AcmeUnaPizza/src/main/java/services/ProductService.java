@@ -1,6 +1,8 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -364,6 +366,19 @@ public class ProductService {
 		Assert.notNull(result);
 		
 		return result;
+	}
+	
+	public List<String> getAllProductTypes() {
+		List<String> res;
+		
+		res = new ArrayList<String>();
+		
+		res.add("PIZZA");
+		res.add("COMPLEMENT");
+		res.add("DESSERT");
+		res.add("DRINK");
+		
+		return res;
 	}
 	// Ancillary methods ------------------------------------------------------
 

@@ -47,12 +47,7 @@ public class ProductAdministratorController extends AbstractController{
 		product = productService.create();
 		availableProviders = providerService.findAll();
 		
-		productsType = new ArrayList<String>();
-		
-		productsType.add("PIZZA");
-		productsType.add("COMPLEMENT");
-		productsType.add("DESSERT");
-		productsType.add("DRINK");
+		productsType = productService.getAllProductTypes();
 
 		result = createEditModelAndView(product);
 		result.addObject("register", true);
@@ -175,10 +170,7 @@ public class ProductAdministratorController extends AbstractController{
 		availableProviders = providerService.findAll();
 		productsType = new ArrayList<String>();
 		
-		productsType.add("PIZZA");
-		productsType.add("COMPLEMENT");
-		productsType.add("DESSERT");
-		productsType.add("DRINK");
+		productsType = productService.getAllProductTypes();
 		
 		result = createEditModelAndView(product);
 		
@@ -198,13 +190,10 @@ public class ProductAdministratorController extends AbstractController{
 		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(product);
-			productsType = new ArrayList<String>();
 			availableProviders = providerService.findAll();
 			
-			productsType.add("PIZZA");
-			productsType.add("COMPLEMENT");
-			productsType.add("DESSERT");
-			productsType.add("DRINK");
+			productsType = productService.getAllProductTypes();
+			
 			result.addObject("edit", true);
 			result.addObject("register", true);
 			result.addObject("productsType", productsType);
@@ -226,11 +215,8 @@ public class ProductAdministratorController extends AbstractController{
 				
 			} catch (Throwable oops) {
 				result = createEditModelAndView(product, "product.commit.error");
-				productsType = new ArrayList<String>();
-				productsType.add("PIZZA");
-				productsType.add("COMPLEMENT");
-				productsType.add("DESSERT");
-				productsType.add("DRINK");
+				productsType = productService.getAllProductTypes();
+				
 				result.addObject("edit", true);
 				result.addObject("register", true);
 				availableProviders = providerService.findAll();
@@ -250,12 +236,8 @@ public class ProductAdministratorController extends AbstractController{
 		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(product);
-			productsType = new ArrayList<String>();
-			productsType.add("PIZZA");
-			productsType.add("COMPLEMENT");
-			productsType.add("DESSERT");
-			productsType.add("DRINK");
-			result.addObject("edit", true);
+			productsType = productService.getAllProductTypes();
+			
 			result.addObject("edit", true);
 			availableProviders = providerService.findAll();
 			result.addObject("availableProviders", availableProviders);
@@ -275,11 +257,8 @@ public class ProductAdministratorController extends AbstractController{
 					result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(product, "product.commit.error");
-				productsType = new ArrayList<String>();
-				productsType.add("PIZZA");
-				productsType.add("COMPLEMENT");
-				productsType.add("DESSERT");
-				productsType.add("DRINK");
+				productsType = productService.getAllProductTypes();
+				
 				result.addObject("edit", true);
 				availableProviders = providerService.findAll();
 				result.addObject("availableProviders", availableProviders);

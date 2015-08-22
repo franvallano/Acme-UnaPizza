@@ -44,22 +44,9 @@ public class OfferAdministratorController extends AbstractController{
 		OfferForm offerForm;
 		Collection<String> ranges;
 
-		ranges = new ArrayList<String>();
 		offerForm = new OfferForm();
 		
-		ranges.add("STANDARD");
-		ranges.add("SILVER");
-		ranges.add("GOLD");
-		ranges.add("VIP");
-		
-		// Todos los dias activados por defecto
-		offerForm.setMonday(true);
-		offerForm.setTuesday(true);
-		offerForm.setWednesday(true);
-		offerForm.setThursday(true);
-		offerForm.setFriday(true);
-		offerForm.setSaturday(true);
-		offerForm.setSunday(true);
+		ranges = offerService.getAllRanges();
 
 		result = createEditModelAndView(offerForm);
 		result.addObject("register", true);
@@ -123,8 +110,6 @@ public class OfferAdministratorController extends AbstractController{
 		offer = offerService.findOne(offerId);
 		
 		offerForm = offerService.desreconstruct(offer);
-		
-		Assert.notNull(offerForm);
 		
 		result = createEditModelAndView(offerForm);
 		
@@ -199,12 +184,7 @@ public class OfferAdministratorController extends AbstractController{
 		ModelAndView res;
 		Collection<String> ranges;
 		
-		ranges = new ArrayList<String>();
-		
-		ranges.add("STANDARD");
-		ranges.add("SILVER");
-		ranges.add("GOLD");
-		ranges.add("VIP");
+		ranges = offerService.getAllRanges();
 		
 		res = new ModelAndView("offer/edit");
 		res.addObject("offerForm", offerForm);

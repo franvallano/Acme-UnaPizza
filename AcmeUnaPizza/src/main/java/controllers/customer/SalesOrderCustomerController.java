@@ -131,40 +131,22 @@ public class SalesOrderCustomerController extends AbstractController{
 		
 		range = customerService.findByPrincipal().getRangee();
 		
-		if(range.equals("STANDARD"))
-			availableOffers = offerService.findOffersSTANDARD();
-		else if(range.equals("SILVER"))
-			availableOffers = offerService.findOffersSILVER();
-		else if(range.equals("GOLD"))
-			availableOffers = offerService.findOffersGOLD();
-		else if(range.equals("VIP"))
-			availableOffers = offerService.findOffersVIP();
-		else
-			availableOffers = new ArrayList<Offer>();
-		
+		availableOffers = offerService.findOffersByRange(range);
+
 		pizzas = productService.findAllPizzasMin(5);
 		complements = productService.findAllComplementsMin(5);
 		desserts = productService.findAllDessertsMin(5);
 		drinks = productService.findAllDrinksMin(5);
 		
-		totalAmount = new ArrayList<Integer>();
-		idPizzas = new ArrayList<Integer>();
-		idComplements = new ArrayList<Integer>();
-		idDesserts = new ArrayList<Integer>();
-		idDrinks = new ArrayList<Integer>();
-		
-		for(int i=1;i<=6;i++)
-			totalAmount.add(i);
-		
+		totalAmount = salesOrderService.getTotalAmount();
+
 		idPizzas = productService.findAllIdsPizzasMin(5);
 		idComplements = productService.findAllIdsComplementsMin(5);
 		idDesserts = productService.findAllIdsDessertsMin(5);
 		idDrinks = productService.findAllIdsDrinksMin(5);
 		
-		salesOrderForm.setIdPizzas(idPizzas);
-		salesOrderForm.setIdComplements(idComplements);
-		salesOrderForm.setIdDesserts(idDesserts);
-		salesOrderForm.setIdDrinks(idDrinks);
+		salesOrderForm = salesOrderService.setAllIdProducts(
+				salesOrderForm, idPizzas, idComplements, idDesserts, idDrinks);
 
 		res = new ModelAndView("salesOrder/edit");
 		res.addObject("salesOrderForm", salesOrderForm);
