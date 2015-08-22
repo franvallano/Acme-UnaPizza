@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import domain.SalesOrder;
 import domain.Staff;
 import forms.DrivingTimeForm;
 import forms.NoteDrivingTimeForm;
+import forms.PurchaseOrderForm;
 import forms.SalesOrderForm;
 
 @Service
@@ -364,7 +366,7 @@ public class SalesOrderService {
 		return res;
 	}
 	
-	public SalesOrder findOneCheckDeliveryMan(int id) {
+	public SalesOrder findOneCheckDeliveryMan(int id, String state) {
 		Assert.isTrue(id != 0);
 		
 		SalesOrder res;
@@ -374,6 +376,13 @@ public class SalesOrderService {
 		deliveryManService.findByPrincipal();
 		
 		Assert.notNull(res);
+		
+		if(res.getDeliveryMan() != null)
+			Assert.isTrue(res.getDeliveryMan().getId() == deliveryManService.findByPrincipal().getId());
+		Assert.isTrue(res.getId() == id);
+		
+		if(!state.equals(""))
+			Assert.isTrue(res.getState().equals(state));
 		
 		return res;
 	}
@@ -685,7 +694,7 @@ public class SalesOrderService {
 		Assert.notNull(drivingTimeForm);
 		SalesOrder result;
 		
-		result = findOneCheckDeliveryMan(drivingTimeForm.getSalesOrderId());
+		result = findOneCheckDeliveryMan(drivingTimeForm.getSalesOrderId(), "");
 		
 		Assert.isTrue(result.getDeliveryMan().getId() == deliveryManService.findByPrincipal().getId());
 		Assert.isTrue(result.getId() == drivingTimeForm.getSalesOrderId());
@@ -704,7 +713,7 @@ public class SalesOrderService {
 		SalesOrder result;
 		Note note;
 		
-		result = findOneCheckDeliveryMan(noteDrivingTimeForm.getSalesOrderId());
+		result = findOneCheckDeliveryMan(noteDrivingTimeForm.getSalesOrderId(), "");
 		
 		Assert.isTrue(result.getDeliveryMan().getId() == deliveryManService.findByPrincipal().getId());
 		Assert.isTrue(result.getId() == noteDrivingTimeForm.getSalesOrderId());
@@ -741,6 +750,54 @@ public class SalesOrderService {
 		return result;
 	}
 	
+	// Cantidad total de productos a pedir por el cliente de cada producto
+	public List<Integer> getTotalAmount() {
+		List<Integer> res;
+			
+		res = new ArrayList<Integer>();
+				
+		for(int i=1;i<=6;i++)
+			res.add(i);
+				
+		return res;
+	}
+	
+	public SalesOrderForm setAllIdProducts(SalesOrderForm salesOrderForm, Collection<Integer> idPizzas,
+			Collection<Integer> idComplements, Collection<Integer> idDesserts, Collection<Integer> idDrinks) {
+		
+		salesOrderForm.setIdPizzas(idPizzas);
+		salesOrderForm.setIdComplements(idComplements);
+		salesOrderForm.setIdDesserts(idDesserts);
+		salesOrderForm.setIdDrinks(idDrinks);
+		
+		return salesOrderForm;
+
+	}
+	
+	public List<String> findCauses() {
+		List<String> res;
+		
+		res = new ArrayList<String>();
+		
+		res.add("CANCELLED");
+		res.add("JOKE");
+		res.add("OTHER");
+		
+		return res;
+	}
+	
+	public Integer findTotalOnItsWayByDeliveryMan(int deliveryManId) {
+		Assert.isTrue(deliveryManId != 0);
+		
+		Integer res;
+		
+		res = salesOrderRepository.findTotalOnItsWayByDeliveryMan(deliveryManId);
+		
+		if(res == null)
+			res = 0;
+		
+		return res;
+	}
 	// Ancillary methods ------------------------------------------------------
 
 }

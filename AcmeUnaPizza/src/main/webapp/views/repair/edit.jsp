@@ -20,7 +20,7 @@
 				<br/>
 				<acme:labelDetails code="repair.cost" value="${repair.cost}" eurCurrency="true"/>
 				<br/>
-				<acme:labelDetails code="repair.stuff" value="${repair.stuff.name}" eurCurrency="true"/>
+				<acme:labelDetails code="repair.stuff" value="${repair.stuff.name}"/>
 			</fieldset>
 			
 			<br />

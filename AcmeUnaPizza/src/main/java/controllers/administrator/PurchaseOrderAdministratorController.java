@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ProductService;
 import services.PurchaseOrderService;
 import controllers.AbstractController;
-import domain.Offer;
 import domain.Product;
 import domain.PurchaseOrder;
 import forms.PurchaseOrderForm;
@@ -125,25 +124,16 @@ public class PurchaseOrderAdministratorController extends AbstractController{
 		desserts = productService.findAllDesserts();
 		drinks = productService.findAllDrinks();
 		
-		totalAmount = new ArrayList<Integer>();
-		idPizzas = new ArrayList<Integer>();
-		idComplements = new ArrayList<Integer>();
-		idDesserts = new ArrayList<Integer>();
-		idDrinks = new ArrayList<Integer>();
-		
-		for(int i=1;i<=51;i++)
-			totalAmount.add(i);
+		totalAmount = purchaseOrderService.getTotalAmount();
 		
 		idPizzas = productService.findAllIdsPizzas();
 		idComplements = productService.findAllIdsComplements();
 		idDesserts = productService.findAllIdsDesserts();
 		idDrinks = productService.findAllIdsDrinks();
 		
-		purchaseOrderForm.setIdPizzas(idPizzas);
-		purchaseOrderForm.setIdComplements(idComplements);
-		purchaseOrderForm.setIdDesserts(idDesserts);
-		purchaseOrderForm.setIdDrinks(idDrinks);
-
+		purchaseOrderForm = purchaseOrderService.setAllIdProducts(
+				purchaseOrderForm, idPizzas, idComplements, idDesserts, idDrinks);
+		
 		res = new ModelAndView("purchaseOrder/edit");
 		res.addObject("purchaseOrderForm", purchaseOrderForm);
 		res.addObject("message", message);

@@ -116,4 +116,7 @@ public interface SalesOrderRepository extends JpaRepository<SalesOrder, Integer>
 	
 	@Query("select sO from SalesOrder sO where sO.state = 'ONITSWAY' and sO.deliveryMan.id = ?1")
 	Collection<SalesOrder> findOneToFinish(int deliveryManId);
+	
+	@Query("select count(sO) from SalesOrder sO where sO.deliveryMan.id = ?1 AND sO.state = 'ONITSWAY'")
+	Integer findTotalOnItsWayByDeliveryMan(int deliveryManId);
 } 

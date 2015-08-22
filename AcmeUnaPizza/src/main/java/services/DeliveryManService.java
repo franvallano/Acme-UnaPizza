@@ -143,7 +143,7 @@ public class DeliveryManService {
 		Assert.isTrue(salesOrderId != 0);
 		SalesOrder salesOrder;
 		
-		salesOrder = salesOrderService.findOneCheckDeliveryMan(salesOrderId);
+		salesOrder = salesOrderService.findOneCheckDeliveryMan(salesOrderId, "ONITSWAY");
 		
 		Assert.notNull(salesOrder);
 		Assert.isTrue(salesOrder.getDeliveryMan().getId() == findByPrincipal().getId());
@@ -170,9 +170,12 @@ public class DeliveryManService {
 		Assert.isTrue(salesOrderId != 0);
 		SalesOrder salesOrder;
 		
-		salesOrder = salesOrderService.findOneCheckDeliveryMan(salesOrderId);
+		salesOrder = salesOrderService.findOneCheckDeliveryMan(salesOrderId, "PREPARED");
 		Assert.notNull(salesOrder);
 		Assert.isNull(salesOrder.getDeliveryMan());
+		
+		// Comprobamos no tenga pedidos asignados en estado de ONITSWAY
+		Assert.isTrue(salesOrderService.findTotalOnItsWayByDeliveryMan(findByPrincipal().getId()) == 0);
 		
 		salesOrder.setState("ONITSWAY");
 		salesOrder.setDeliveryMan(findByPrincipal());

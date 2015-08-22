@@ -45,12 +45,8 @@ public class GarageAdministratorController extends AbstractController {
 		String uri;
 		
 		garages = garageService.findAll();
-		freeParkings = new ArrayList<Integer>();
 		
-		for(Garage garage : garages)
-			freeParkings.add(garage.getSize() - garage.getMotorbikes().size());
-		
-		
+		freeParkings = garageService.findFreeParkings(garages);
 		
 		uri = "garage/administrator/list.do";
 		result = new ModelAndView("garage/list");

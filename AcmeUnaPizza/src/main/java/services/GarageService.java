@@ -7,6 +7,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,6 +88,17 @@ public class GarageService {
 		result = garageRepository.findFreeGarages();
 		
 		return result;
+	}
+	
+	public List<Integer> findFreeParkings(Collection<Garage> garages) {
+		List<Integer> res;
+		
+		res = new ArrayList<Integer>();
+		
+		for(Garage garage : garages)
+			res.add(garage.getSize() - garage.getMotorbikes().size());
+		
+		return res;
 	}
 
 	// Other business methods -------------------------------------------------

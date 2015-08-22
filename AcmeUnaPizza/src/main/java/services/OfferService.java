@@ -1,9 +1,11 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -214,6 +216,8 @@ public class OfferService {
 		else
 			offerForm.setSunday(false);
 		
+		Assert.notNull(offerForm);
+		
 		return offerForm;
 	}
 	
@@ -328,6 +332,36 @@ public class OfferService {
 		}
 		
 		return result;
+	}
+	
+	public List<String> getAllRanges() {
+		List<String> res;
+		
+		res = new ArrayList<String>();
+		
+		res.add("STANDARD");
+		res.add("SILVER");
+		res.add("GOLD");
+		res.add("VIP");
+		
+		return res;
+	}
+	
+	public Collection<Offer> findOffersByRange(String range) {
+		Collection<Offer> res;
+		
+		if(range.equals("STANDARD"))
+			res = findOffersSTANDARD();
+		else if(range.equals("SILVER"))
+			res = findOffersSILVER();
+		else if(range.equals("GOLD"))
+			res = findOffersGOLD();
+		else if(range.equals("VIP"))
+			res = findOffersVIP();
+		else
+			res = new ArrayList<Offer>();
+		
+		return res;
 	}
 	
 	// Ancillary methods ------------------------------------------------------
