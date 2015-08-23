@@ -78,6 +78,7 @@
 							<li><a href="product/administrator/listDesserts.do"><spring:message code="master.page.administrator.productsDesserts" /></a></li>
 							<li><a href="product/administrator/listDrinks.do"><spring:message code="master.page.administrator.productsDrinks" /></a></li>
 							<li><a href="product/administrator/listAll.do"><spring:message code="master.page.administrator.productsAll" /></a></li>
+							<li><a href="product/administrator/create.do?productType=PIZZA"><spring:message code="master.page.administrator.newProduct" /></a></li>
 						</ul>
 					</li>
 					

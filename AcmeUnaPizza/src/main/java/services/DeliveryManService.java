@@ -150,7 +150,7 @@ public class DeliveryManService {
 		
 		salesOrder.setState("DELIVERED");
 		
-		salesOrderService.saveByDeliveryMan(salesOrder);
+		salesOrderService.saveByDeliveryMan(salesOrder, true);
 	}
 	
 	public void prepared(int salesOrderId) {
@@ -179,7 +179,7 @@ public class DeliveryManService {
 		
 		salesOrder.setState("ONITSWAY");
 		salesOrder.setDeliveryMan(findByPrincipal());
-		salesOrderService.saveByDeliveryMan(salesOrder);
+		salesOrderService.saveByDeliveryMan(salesOrder, false);
 	}
 	
 	// Ancillary methods ------------------------------------------------------

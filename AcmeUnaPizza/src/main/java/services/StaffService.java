@@ -215,6 +215,8 @@ public class StaffService {
 			staffProvisional.getUserAccount().setUsername(staffForm.getUsername());
 			staffProvisional.getUserAccount().setPassword(staffForm.getPassword());
 			staffProvisional.getUserAccount().setActive(true);
+			
+			Assert.notNull(staffForm.getMotorbike());
 
 			DeliveryMan deliveryMan = new DeliveryMan();
 			
@@ -230,6 +232,7 @@ public class StaffService {
 			deliveryMan.setBirthDate(staffForm.getBirthDate());
 			deliveryMan.setAddress(staffForm.getAddress());
 			deliveryMan.setDrivingLicenseNumber(staffForm.getDrivingLicenseNumber());
+			deliveryMan.setMotorbike(staffForm.getMotorbike());
 			
 			lastHourMinute.setTimeInMillis(staffForm.getContractEndDate().getTime());
 			lastHourMinute.set(Calendar.HOUR_OF_DAY, 23);

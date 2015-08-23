@@ -126,7 +126,7 @@ public class SalesOrderDeliveryManController extends AbstractController{
 		}else{
 			try{
 				salesOrder = salesOrderService.reconstructDrivingTime(drivingTimeForm);
-				salesOrderService.saveByDeliveryMan(salesOrder);
+				salesOrderService.saveByDeliveryMan(salesOrder, true);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			}catch (Throwable oops){
 				result = createEditModelAndView(drivingTimeForm, "commit.error");
@@ -146,7 +146,7 @@ public class SalesOrderDeliveryManController extends AbstractController{
 		}else{
 			try{
 				salesOrder = salesOrderService.reconstructNoteDrivingTime(noteDrivingTimeForm);
-				salesOrderService.saveByDeliveryMan(salesOrder);
+				salesOrderService.saveByDeliveryMan(salesOrder, true);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			}catch (Throwable oops){
 				result = createEditModelAndView(noteDrivingTimeForm, "commit.error");
