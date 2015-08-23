@@ -52,21 +52,22 @@ public class MotorbikeService {
 		this.motorbikeRepository.save(motorbike);
 	}
 
+	public void saveByDeliveryMan(Motorbike motorbike){
+		Assert.notNull(motorbike);
+		Assert.isTrue(motorbike.getId() == deliveryManService.findByPrincipal().getMotorbike().getId());
 
+		this.motorbikeRepository.save(motorbike);
+	}
 
 	public void delete(Motorbike motorbike){
 		Assert.notNull(motorbike);
 		Assert.isTrue(motorbike.getId() != 0);
 		
-		DeliveryMan deliveryMan;
+		boolean canDelete;
 		
-		// Comprobamos si tiene algun DeliveryMan asociado
-		deliveryMan = deliveryManService.findDeliveryManByMotorbike(motorbike.getId());
+		canDelete = canDeleteMotorbike(motorbike.getId());
 		
-		if(deliveryMan != null) {
-			deliveryMan.setMotorbike(null);
-			deliveryManService.save(deliveryMan);
-		}
+		Assert.isTrue(canDelete);
 		
 		motorbikeRepository.delete(motorbike);
 	}
@@ -121,7 +122,19 @@ public class MotorbikeService {
 		
 		Assert.notNull(result);
 		
-		return null;
+		return result;
+	}
+	
+	public boolean canDeleteMotorbike(int motorbikeId) {
+		Motorbike motorbike;
+		boolean res = true;
+		
+		motorbike = motorbikeRepository.findMotorbikeInDeliveryMan(motorbikeId);
+		
+		if(motorbike != null)
+			res = false;
+		
+		return res;
 	}
 	// Ancillary methods ------------------------------------------------------
 

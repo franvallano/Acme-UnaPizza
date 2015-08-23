@@ -33,19 +33,6 @@ public class ProviderAdministratorController extends AbstractController {
 	}
 	
 	// Creation ----------------------------------------------------------------
-
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-		Provider provider;
-		
-		provider = providerService.create();
-
-		result = createEditModelAndView(provider);
-		result.addObject("edit", true);
-
-		return result;
-	}
 	
 	// Listing ----------------------------------------------------------------
 	

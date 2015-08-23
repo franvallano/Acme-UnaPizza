@@ -117,13 +117,15 @@ public class MotorbikeAdministratorController extends AbstractController {
 	public ModelAndView edit(@RequestParam int motorbikeId) {
 		ModelAndView result;
 		Motorbike motorbike;
+		boolean canDelete;
 		
 		motorbike = motorbikeService.findOne(motorbikeId);
+		canDelete = motorbikeService.canDeleteMotorbike(motorbikeId);
 		
 		result = createEditModelAndView(motorbike);
 		result.addObject("requestURI", "motorbike/administrator/edit.do");
 		result.addObject("edit", true);
-
+		result.addObject("canDelete", canDelete);
 		
 		return result;
 	}

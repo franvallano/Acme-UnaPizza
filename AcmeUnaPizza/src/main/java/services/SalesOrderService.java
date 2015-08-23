@@ -17,13 +17,13 @@ import domain.Boss;
 import domain.Cook;
 import domain.Customer;
 import domain.DeliveryMan;
+import domain.Motorbike;
 import domain.Note;
 import domain.Product;
 import domain.SalesOrder;
 import domain.Staff;
 import forms.DrivingTimeForm;
 import forms.NoteDrivingTimeForm;
-import forms.PurchaseOrderForm;
 import forms.SalesOrderForm;
 
 @Service
@@ -52,6 +52,9 @@ public class SalesOrderService {
 	
 	@Autowired
 	private BossService bossService;
+	
+	@Autowired
+	private MotorbikeService motorbikeService;
 	
 	// Constructor ------------------------------------------------------------
 	public SalesOrderService(){
@@ -609,10 +612,23 @@ public class SalesOrderService {
 		salesOrderRepository.save(saleseOrder);
 	}
 	
-	public void saveByDeliveryMan(SalesOrder saleseOrder) {
-		Assert.notNull(saleseOrder);
+	public void saveByDeliveryMan(SalesOrder salesOrder, boolean finish) {
+		Assert.notNull(salesOrder);
 		
-		salesOrderRepository.save(saleseOrder);
+		if(finish) {
+			// Actualizamos los tiempos de la moto
+			Motorbike motorbike;
+			
+			motorbike = motorbikeService.findOne(salesOrder.getDeliveryMan().getMotorbike().getId());
+			
+			Assert.notNull(motorbike);
+			
+			motorbike.setDrivingTime(motorbike.getDrivingTime() + salesOrder.getDrivingTime());
+			
+			motorbikeService.saveByDeliveryMan(motorbike);
+		}
+		
+		salesOrderRepository.save(salesOrder);
 	}
 	
 	public Collection<SalesOrder> findMySalesOrders() {

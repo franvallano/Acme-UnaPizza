@@ -57,7 +57,8 @@ public class DeliveryMan extends Staff {
 	}
 	
 	@Valid
-	@OneToOne(optional = true)
+	@NotNull
+	@OneToOne(optional = false)
 	public Motorbike getMotorbike() {
 		return motorbike;
 	}

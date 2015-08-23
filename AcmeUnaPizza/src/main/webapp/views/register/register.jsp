@@ -17,15 +17,19 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<script>	
+<script type="text/javascript">	
 
 	<!-- Esto es para llamar a la funcion cada vez que se cargue la web -->
-	$(document).ready(function () {
-		checkCreditCard();
-	});
+	//$(document).ready(function () {
+		//checkCreditCard();
+	//});
+
+	// Asi cargamos la funcion, ya que despues de las CSS lo de arriba no va bien
+	window.onload = function(){checkCreditCard();};
 	
 	function checkCreditCard(){
 		var checked = $("#checkBoxCreditCard");
+
 		if(checked.is(':checked')) {
 			$("#enableCreditCard").attr("disabled", false);
 			$("#enableCreditCard").attr("enabled", true);
@@ -87,6 +91,12 @@
 			<jstl:if test="${isDeliveryMan == true}">
 				<acme:textbox code="staff.drivingLicenseNumber" path="drivingLicenseNumber"/>
 				<br/>
+				<spring:message code="motorbike.availableMotos" />
+					<form:select path="motorbike">
+						<form:options items="${motorbikes}" itemLabel="number"/>
+					</form:select>
+				<br/><br/>
+				
 			</jstl:if>
 
 		</jstl:if>

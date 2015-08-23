@@ -1,5 +1,7 @@
 package controllers.staff;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.Authority;
+import services.MotorbikeService;
 import services.StaffService;
 import controllers.AbstractController;
 import domain.Boss;
 import domain.Cook;
 import domain.DeliveryMan;
+import domain.Motorbike;
 import forms.StaffForm;
 
 @Controller
@@ -23,7 +27,8 @@ import forms.StaffForm;
 public class RegisterStaffController extends AbstractController{
 	
 	// Services ---------------------------------------------------------------
-	
+	@Autowired
+	private MotorbikeService motorbikeService;
 	@Autowired
 	private StaffService staffService;
 	
@@ -59,12 +64,15 @@ public class RegisterStaffController extends AbstractController{
 	public ModelAndView registerDeliveryMan() {
 		ModelAndView result;
 		StaffForm staffForm;
+		Collection<Motorbike> motorbikes;
 		
+		motorbikes = motorbikeService.findFreeMotorbikes();
 		staffForm = new StaffForm();
 
 		result = createEditModelAndView(staffForm, true);
 		result.addObject("action", "register/staff/register.do");
 		result.addObject("isDeliveryMan", true);
+		result.addObject("motorbikes", motorbikes);
 
 		return result;
 	}
@@ -206,7 +214,12 @@ public class RegisterStaffController extends AbstractController{
 		result.addObject("userForm", "staffForm");
 		result.addObject("message", message);
 		result.addObject("isDeliveryMan", isDeliveryMan);
-
+		
+		if(isDeliveryMan) {
+			Collection<Motorbike> motorbikes;
+			motorbikes = motorbikeService.findFreeMotorbikes();
+			result.addObject("motorbikes", motorbikes);
+		}
 		return result;
 	}
 

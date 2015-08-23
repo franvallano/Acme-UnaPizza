@@ -39,6 +39,3 @@
 		
 	</display:table>
 
-<input type="button" class="btn btn-primary" name="new" value="<spring:message code="provider.new" />" 
-		onclick="javascript: window.location.replace('provider/administrator/create.do');" />
-

@@ -80,9 +80,13 @@
 				<br />
 				
 				<acme:submit name="update" code="motorbike.save"/>&nbsp;
-				<input type="submit" name="delete" class="btn btn-primary"
+				
+				<jstl:if test="${canDelete == true}">
+					<input type="submit" name="delete" class="btn btn-primary"
 						value="<spring:message code="motorbike.delete" />"
 						onclick="return confirm('<spring:message code="motorbike.confirm.delete" />')" />&nbsp;
+				</jstl:if>
+				
 				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 					onclick="javascript: window.location.replace('motorbike/administrator/list.do');" />
 			</form:form>
