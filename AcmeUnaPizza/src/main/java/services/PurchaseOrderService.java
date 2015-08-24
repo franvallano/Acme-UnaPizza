@@ -73,6 +73,8 @@ public class PurchaseOrderService {
 	public Collection<PurchaseOrder> findAll() {
 		Collection<PurchaseOrder> result;
 		
+		administratorService.findByPrincipal();
+		
 		result = purchaseOrderRepository.findAll();
 		
 		Assert.notNull(result);
@@ -209,6 +211,7 @@ public class PurchaseOrderService {
 			index++;
 		}
 		
+		Assert.isTrue(totalCost > 0.0);
 		Assert.isTrue(purchaseOrder.getTotalCost() == totalCost);
 		
 		return purchaseOrder;

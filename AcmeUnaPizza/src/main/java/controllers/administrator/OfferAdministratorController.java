@@ -1,14 +1,11 @@
 package controllers.administrator;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,11 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.OfferService;
 import controllers.AbstractController;
-import domain.Customer;
 import domain.Offer;
-import domain.Product;
-import domain.Provider;
-import forms.CustomerForm;
 import forms.OfferForm;
 
 

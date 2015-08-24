@@ -80,9 +80,21 @@ public class DeliveryManService {
 		
 		return res;
 	}
+	
+	public DeliveryMan findOneNotNull( int id ){
+		Assert.isTrue( id != 0);
+		
+		DeliveryMan res;
+		
+		res = this.deliveryManRepository.findOne( id );
+		
+		return res;
+	}
 
 	public Collection<DeliveryMan> findAll(){
 		Collection<DeliveryMan> res;
+		
+		administratorService.findByPrincipal();
 		
 		res = deliveryManRepository.findAll();
 		
