@@ -73,6 +73,7 @@ public class CustomerService {
 	
 	public void deactivate(Customer customer){
 		Assert.notNull(customer);
+		Assert.isTrue(customer.getUserAccount().getActive());
 		
 		administratorService.findByPrincipal();
 		
@@ -83,6 +84,7 @@ public class CustomerService {
 	
 	public void activate(Customer customer){
 		Assert.notNull(customer);
+		Assert.isTrue(!customer.getUserAccount().getActive());
 		
 		administratorService.findByPrincipal();
 		
@@ -121,6 +123,16 @@ public class CustomerService {
  }
 
 	public Collection<Customer> findAll(){
+		Collection<Customer> res;
+		
+		administratorService.findByPrincipal();
+		
+		res = customerRepository.findAll();
+		
+		return res;
+	}
+	
+	public Collection<Customer> findAllCustomers(){
 		Collection<Customer> res;
 		
 		res = customerRepository.findAll();
@@ -231,6 +243,8 @@ public class CustomerService {
 	public Customer reconstructPassword(PasswordForm passwordForm) {
 		Assert.notNull(passwordForm);
 		Assert.isTrue(passwordForm.getNewPassword().equals(passwordForm.getRepeatNewPassword()));
+		Assert.isTrue(!passwordForm.getNewPassword().equals("") && !passwordForm.getRepeatNewPassword().equals(""));
+		Assert.isTrue(passwordForm.getNewPassword().length() >= 5 && passwordForm.getRepeatNewPassword().length() >= 5);
 		Customer customer;
 		Md5PasswordEncoder encoder;
 

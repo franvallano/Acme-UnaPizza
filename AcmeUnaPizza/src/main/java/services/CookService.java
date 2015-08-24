@@ -87,9 +87,21 @@ public class CookService {
 		
 		return res;
 	}
+	
+	public Cook findOneNotNull( int id ){
+		Assert.isTrue( id != 0);
+		
+		Cook res;
+		
+		res = this.cookRepository.findOne( id );
+		
+		return res;
+	}
 
 	public Collection<Cook> findAll(){
 		Collection<Cook> res;
+		
+		administratorService.findByPrincipal();
 		
 		res = cookRepository.findAll();
 		

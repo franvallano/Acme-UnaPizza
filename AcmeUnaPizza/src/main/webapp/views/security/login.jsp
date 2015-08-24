@@ -45,7 +45,7 @@
 			</div>
 		</jstl:if>
 		
-		<input type="submit" value="<spring:message code="security.login" />" />
+		<input type="submit" class="btn btn-primary" value="<spring:message code="security.login" />" />
 	</div>
 </div>	
 	

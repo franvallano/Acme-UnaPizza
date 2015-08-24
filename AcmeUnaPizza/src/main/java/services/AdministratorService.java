@@ -83,6 +83,8 @@ public class AdministratorService {
 	public Collection<Administrator> findAll(){
 		Collection<Administrator> res;
 		
+		findByPrincipal();
+		
 		res = administratorRepository.findAll();
 		
 		return res;

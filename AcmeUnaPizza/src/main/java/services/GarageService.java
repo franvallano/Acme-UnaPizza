@@ -100,6 +100,14 @@ public class GarageService {
 		
 		return res;
 	}
+	
+	public Garage findFreeGarage(int garageId) {
+		Garage res;
+		
+		res = garageRepository.findFreeGarage(garageId);
+		
+		return res;
+	}
 
 	// Other business methods -------------------------------------------------
 

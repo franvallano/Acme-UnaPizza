@@ -23,7 +23,7 @@ public class SalesOrderCookController extends AbstractController{
 	private SalesOrderService salesOrderService;
 	
 	@Autowired
-	private CookService cossService;
+	private CookService cookService;
 	
 	//Constructor------------------------------------------------------
 	public SalesOrderCookController(){
@@ -67,7 +67,7 @@ public class SalesOrderCookController extends AbstractController{
 	public ModelAndView assignAndCooking(@RequestParam int salesOrderId){
 		ModelAndView result;
 		
-		cossService.assignAndCooking(salesOrderId);
+		cookService.assignAndCooking(salesOrderId);
 
 		result = new ModelAndView("redirect:/salesOrder/cook/forCooking.do");
 		
@@ -78,7 +78,7 @@ public class SalesOrderCookController extends AbstractController{
 	public ModelAndView prepared(@RequestParam int salesOrderId){
 		ModelAndView result;
 		
-		cossService.prepared(salesOrderId);
+		cookService.prepared(salesOrderId);
 
 		result = new ModelAndView("redirect:/salesOrder/cook/forPrepared.do");
 		

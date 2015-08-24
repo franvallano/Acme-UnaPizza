@@ -75,9 +75,21 @@ public class BossService {
 		
 		return res;
 	}
+	
+	public Boss findOneNotNull( int id ){
+		Assert.isTrue( id != 0);
+		
+		Boss res;
+		
+		res = this.bossRepository.findOne( id );
+		
+		return res;
+	}
 
 	public Collection<Boss> findAll(){
 		Collection<Boss> res;
+		
+		administratorService.findByPrincipal();
 		
 		res = bossRepository.findAll();
 		

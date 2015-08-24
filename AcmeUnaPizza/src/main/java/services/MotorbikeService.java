@@ -25,6 +25,8 @@ public class MotorbikeService {
 	private AdministratorService administratorService;
 	@Autowired
 	private DeliveryManService deliveryManService;
+	@Autowired
+	private GarageService garageService;
 	
 	// Constructor ------------------------------------------------------------
 	public MotorbikeService(){
@@ -48,6 +50,9 @@ public class MotorbikeService {
 	public void save(Motorbike motorbike){
 		Assert.notNull(motorbike);
 		administratorService.findByPrincipal();
+		
+		if(motorbike.getGarage() != null)
+			Assert.notNull(garageService.findFreeGarage(motorbike.getGarage().getId()));
 
 		this.motorbikeRepository.save(motorbike);
 	}
@@ -62,6 +67,7 @@ public class MotorbikeService {
 	public void delete(Motorbike motorbike){
 		Assert.notNull(motorbike);
 		Assert.isTrue(motorbike.getId() != 0);
+		administratorService.findByPrincipal();
 		
 		boolean canDelete;
 		

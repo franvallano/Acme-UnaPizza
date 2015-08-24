@@ -56,6 +56,9 @@ public class SalesOrderService {
 	@Autowired
 	private MotorbikeService motorbikeService;
 	
+	@Autowired
+	private OfferService offerService;
+	
 	// Constructor ------------------------------------------------------------
 	public SalesOrderService(){
 		super();
@@ -531,13 +534,20 @@ public class SalesOrderService {
 		}
 
 		if(salesOrderForm.getOffer() != null) {
+			// Comprobamos que la oferta elegida este disponible para el usuario logueado
+			Assert.isTrue(offerService.findOffersByRange(
+					customerService.findByPrincipal().getRangee()).contains(salesOrderForm.getOffer()));
+			
 			Double totalCostOffer = (salesOrder.getTotalCost() * ((100-salesOrderForm.getOffer().getDiscount())/100.0));
 			DecimalFormat df = new DecimalFormat("#.##");      
 			totalCostOffer = Double.valueOf(df.format(totalCostOffer));
+			Assert.isTrue(totalCostOffer > 0.0);
 			salesOrder.setTotalCost(totalCostOffer);
 			salesOrder.setOffer(salesOrderForm.getOffer()); 
-		} else
-			Assert.isTrue(salesOrder.getTotalCost() == totalCost);
+		} else {
+			Assert.isTrue(totalCost > 0.0);
+			salesOrder.setTotalCost(totalCost);
+		}
 
 		return salesOrder;
 	}
@@ -560,10 +570,10 @@ public class SalesOrderService {
 		salesOrderRepository.save(saleseOrder);
 	}
 	
-	public void saveAssignBoss(SalesOrder saleseOrder) {
-		Assert.notNull(saleseOrder);
+	public void saveAssignBoss(SalesOrder salesOrder) {
+		Assert.notNull(salesOrder);
 		
-		salesOrderRepository.save(saleseOrder);
+		salesOrderRepository.save(salesOrder);
 	}
 
 	public Collection<SalesOrder> findAllSalesOrderUndelivered() {
@@ -653,7 +663,9 @@ public class SalesOrderService {
 	
 	public void cancelSalesOrder(int salesOrderId) {
 		Assert.isTrue(salesOrderId != 0);
-
+		
+		bossService.findByPrincipal();
+		
 		SalesOrder salesOrder;
 		Boss boss;
 		Customer customer;
@@ -748,6 +760,9 @@ public class SalesOrderService {
 	
 	public Note note(int salesOrderId) {
 		Assert.isTrue(salesOrderId != 0);
+		
+		bossService.findByPrincipal();
+		
 		Note result;
 		SalesOrder salesOrder;
 		
@@ -812,6 +827,16 @@ public class SalesOrderService {
 		if(res == null)
 			res = 0;
 		
+		return res;
+	}
+	
+	public SalesOrder findOne(int salesOrderId) {
+		Assert.isTrue(salesOrderId != 0);
+		
+		SalesOrder res;
+		
+		res = salesOrderRepository.findOne(salesOrderId);
+
 		return res;
 	}
 	// Ancillary methods ------------------------------------------------------
