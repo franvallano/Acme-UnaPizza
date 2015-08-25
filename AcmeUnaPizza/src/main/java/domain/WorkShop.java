@@ -25,7 +25,6 @@ public class WorkShop extends DomainEntity{
 	//Attributes --------------------------------------------------------------------------------
 	private String company;
 	private String city;
-	private double taxes;
 	private String phoneNumber;
 	private String contact;
 	
@@ -49,16 +48,6 @@ public class WorkShop extends DomainEntity{
 	}
 	public void setCity(String city) {
 		this.city = city;
-	}
-
-
-	@Digits(fraction = 3, integer = 2)
-	@Min(0)
-	public double getTaxes() {
-		return taxes;
-	}
-	public void setTaxes(double taxes) {
-		this.taxes = taxes;
 	}
 	
 	@NotBlank

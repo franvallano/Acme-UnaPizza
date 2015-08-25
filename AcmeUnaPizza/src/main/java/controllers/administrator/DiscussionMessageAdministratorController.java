@@ -1,4 +1,4 @@
-package controllers;
+package controllers.administrator;
 
 import javax.validation.Valid;
 
@@ -12,12 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ComplaintService;
 import services.DiscussionMessageService;
+import controllers.AbstractController;
 import domain.Complaint;
 import domain.DiscussionMessage;
 
 @Controller
-@RequestMapping("/discussionMessage/actor")
-public class DiscussionMessageController extends AbstractController {
+@RequestMapping("/discussionMessage/administrator")
+public class DiscussionMessageAdministratorController extends AbstractController {
 	// Services ---------------------------------------------------------------
 	
 	@Autowired
@@ -28,7 +29,7 @@ public class DiscussionMessageController extends AbstractController {
 	
 	// Constructors -----------------------------------------------------------
 	
-	public DiscussionMessageController() {
+	public DiscussionMessageAdministratorController() {
 		super();
 	}
 	
@@ -42,11 +43,12 @@ public class DiscussionMessageController extends AbstractController {
 		Complaint complaint;
 		DiscussionMessage discussionMessage;
 		
-		complaint = complaintService.findOneIfOwner(complaintId);
+		complaint = complaintService.findOneByAdministrator(complaintId);
 		
 		discussionMessage = discussionMessageService.create(complaint);
 		
 		result = createModelAndView(discussionMessage);
+		result.addObject("requestURI", "discussionMessage/administrator/create.do");
 		
 		return result;
 	}
@@ -62,7 +64,7 @@ public class DiscussionMessageController extends AbstractController {
 		} else {
 			try {
 				discussionMessageService.save(discussionMessage);
-				result = new ModelAndView("redirect:/complaint/actor/details.do?complaintId=" + discussionMessage.getComplaint().getId());
+				result = new ModelAndView("redirect:/complaint/administrator/details.do?complaintId=" + discussionMessage.getComplaint().getId());
 			} catch (Throwable oops) {
 				result = createModelAndView(discussionMessage, "commit.error");
 			}

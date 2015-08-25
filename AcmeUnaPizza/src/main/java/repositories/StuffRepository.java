@@ -30,4 +30,7 @@ public interface StuffRepository extends JpaRepository<Stuff, Integer>{
 	//Finds all OK stuff 
 	@Query("select s from Stuff s where s.status='OK'")
 	Collection<Stuff> findAllOkStuff();
+	
+	@Query("select s from Stuff s where s.id = ?1 AND status = 'MALFUNCTION'")
+	Stuff findCheckMalfunction(int stuffId);
 }

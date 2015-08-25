@@ -69,6 +69,8 @@ public class GarageService {
 		
 		res = this.garageRepository.findOne( id );
 		
+		administratorService.findByPrincipal();
+		
 		Assert.notNull(res);
 		
 		return res;
@@ -76,6 +78,8 @@ public class GarageService {
 
 	public Collection<Garage> findAll(){
 		Collection<Garage> res;
+		
+		administratorService.findByPrincipal();
 		
 		res = garageRepository.findAll();
 		

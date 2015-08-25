@@ -44,15 +44,20 @@ public class RepairBossController extends AbstractController {
 	// Creation ----------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int workshopId) {
+	public ModelAndView create(@RequestParam int stuffId) {
 		ModelAndView result;
 		Repair repair;
 		WorkShop repairWorkshop;
+		Stuff stuff;
 		
 		repair = repairService.create();
 		
-		repairWorkshop = workShopService.findOne(workshopId);
+		stuff = stuffService.findCheckMalfunction(stuffId);
+		
+		repairWorkshop = workShopService.findOne(stuff.getWorkShop().getId());
+		
 		repair.setWorkShop(repairWorkshop);
+		repair.setStuff(stuff);
 
 		result = createEditModelAndView(repair);
 
@@ -96,13 +101,8 @@ public class RepairBossController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int repairId) {
 		ModelAndView result;
-		Repair repair;
 		
-		repair = repairService.findOne(repairId);
-		
-		result = createEditModelAndView(repair);
-		result.addObject("edit", true);
-		result.addObject("requestURI", "repair/boss/edit.do");
+		result = new ModelAndView("redirect:/welcome/index.do");
 		
 		return result;
 	}

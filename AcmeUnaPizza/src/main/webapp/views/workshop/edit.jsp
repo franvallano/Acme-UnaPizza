@@ -18,7 +18,6 @@
 			<fieldset>
 				<acme:labelDetails code="workshop.company" value="${workshop.company}"/>
 				<acme:labelDetails code="workshop.phoneNumber" value="${workshop.phoneNumber}"/>
-				<acme:labelDetails code="workshop.taxes" value="${workshop.taxes}" eurCurrency="true"/>
 				<acme:labelDetails code="workshop.city" value="${workshop.city}"/>
 				<acme:labelDetails code="workshop.contact" value="${workshop.contact}"/>
 				<br/>
@@ -26,7 +25,7 @@
 					<legend><h3><spring:message code="workshop.repairs" /></h3></legend>
 					<jstl:forEach var="repair" items="${workshop.repairs}" varStatus="rowIndex">
 						<acme:labelDetails code="workshop.repair.cost" value="${repair.cost}" eurCurrency="true" />
-						<acme:dateLabelDetails code="workshop.repair.moment" value="${repair.moment}" />
+						<acme:dateLabelDetails code="workshop.repair.moment" value="${repair.moment}" time="false"/>
 						<br/>
 					</jstl:forEach>
 				</fieldset>
@@ -48,8 +47,6 @@
 					<br />
 					<acme:textbox code="workshop.city" path="city"/>
 					<br />
-					<acme:textbox code="workshop.taxes" path="taxes"/>
-					<br />
 					<acme:textbox code="workshop.phoneNumber" path="phoneNumber"/>
 					<br />
 					<acme:textbox code="workshop.contact" path="contact"/>
@@ -62,8 +59,5 @@
 					onclick="javascript: window.location.replace('workshop/boss/list.do');" />
 			</form:form>
 		</jstl:if>
-	
-	<input type="button" class="btn btn-primary" name="new" value="<spring:message code="repair.new" />" 
-		onclick="javascript: window.location.replace('repair/boss/create.do?workshopId=${workShop.id}');" />
 		
 	</security:authorize>

@@ -262,7 +262,6 @@
 	<bean id="workshop1" class="domain.WorkShop">
 		<property name="company" value="ArreglaTodo SL" />
 		<property name="city" value="Sevilla" />
-		<property name="taxes" value="50.0" />
 		<property name="phoneNumber" value="954125566" />
 		<property name="contact" value="Alfonso Torrejón" />
 
@@ -277,7 +276,6 @@
 	<bean id="workshop2" class="domain.WorkShop">
 		<property name="company" value="El Arreglador Máximo SL" />
 		<property name="city" value="Sevilla" />
-		<property name="taxes" value="60.0" />
 		<property name="phoneNumber" value="955161166" />
 		<property name="contact" value="José Antonio Pérez" />
 
@@ -583,8 +581,6 @@
 			<list>
 				<ref bean="stuff1" />
 				<ref bean="stuff2" />
-				<ref bean="stuff3" />
-				<ref bean="stuff4" />
 			</list>
 		</property>
 	</bean>
@@ -617,8 +613,6 @@
 		</property>
 		<property name="stuffs">
 			<list>
-				<ref bean="stuff1" />
-				<ref bean="stuff2" />
 				<ref bean="stuff3" />
 				<ref bean="stuff4" />
 			</list>
@@ -1099,7 +1093,7 @@
 	<bean id="repair1" class="domain.Repair">
 		<property name="moment" value="2015/06/19" />
 		<property name="cost" value="20.50" />
-		<property name="staff" ref="boss1" />
+		<property name="boss" ref="boss1" />
 		<property name="workShop" ref="workshop1" />
 		<property name="stuff" ref="stuff1" />
 	</bean>
@@ -1107,7 +1101,7 @@
 	<bean id="repair2" class="domain.Repair">
 		<property name="moment" value="2015/06/16" />
 		<property name="cost" value="30.50" />
-		<property name="staff" ref="boss1" />
+		<property name="boss" ref="boss1" />
 		<property name="workShop" ref="workshop2" />
 		<property name="stuff" ref="stuff2" />
 	</bean>
@@ -1115,7 +1109,7 @@
 	<bean id="repair3" class="domain.Repair">
 		<property name="moment" value="2015/06/28" />
 		<property name="cost" value="50.50" />
-		<property name="staff" ref="boss2" />
+		<property name="boss" ref="boss2" />
 		<property name="workShop" ref="workshop1" />
 		<property name="stuff" ref="stuff1" />
 	</bean>

@@ -48,20 +48,6 @@ public class ComplaintCustomerController extends AbstractController {
 	
 	// Edition ----------------------------------------------------------------
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int complaintId) {
-		ModelAndView result;
-		Complaint complaint;
-		
-		complaint = complaintService.findOne(complaintId);
-		
-		result = createEditModelAndView(complaint);
-		result.addObject("edit", true);
-		result.addObject("requestURI", "complaint/customer/edit.do");
-		
-		return result;
-	}
-	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Complaint complaint, BindingResult binding) {
 		ModelAndView result;

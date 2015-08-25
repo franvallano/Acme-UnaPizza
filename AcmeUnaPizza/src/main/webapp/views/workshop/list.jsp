@@ -20,9 +20,6 @@
 			<spring:message code="workshop.city" var="cityHeader" />
 			<display:column property="city" title="${cityHeader}" sortable="true"/>
 			
-			<spring:message code="workshop.taxes" var="taxesHeader" />
-			<display:column property="taxes" title="${taxesHeader}" sortable="true"/>
-			
 			<spring:message code="workshop.phoneNumber" var="phoneNumberHeader" />
 			<display:column property="phoneNumber" title="${phoneNumberHeader}" sortable="true"/>
 			

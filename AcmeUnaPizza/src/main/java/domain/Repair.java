@@ -48,7 +48,7 @@ public class Repair extends DomainEntity{
 	}
 	
 	//Relationships -----------------------------------------------------------------------------
-	private Staff staff;
+	private Boss boss;
 	private WorkShop workShop;
 	private Stuff stuff;
 	
@@ -66,12 +66,12 @@ public class Repair extends DomainEntity{
 	@Valid
 	@NotNull
 	@ManyToOne(optional=false)
-	public Staff getStaff() {
-		return staff;
+	public Boss getBoss() {
+		return boss;
 	}
 
-	public void setStaff(Staff staff) {
-		this.staff = staff;
+	public void setBoss(Boss boss) {
+		this.boss = boss;
 	}
 
 	@Valid

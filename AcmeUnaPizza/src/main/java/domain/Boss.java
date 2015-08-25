@@ -36,7 +36,7 @@ public class Boss extends Staff{
 
 	@Valid
 	@NotNull
-	@ManyToMany
+	@OneToMany
 	public Collection<Stuff> getStuffs() {
 		return stuffs;
 	}
@@ -47,7 +47,7 @@ public class Boss extends Staff{
 
 	@Valid
 	@NotNull
-	@OneToMany(mappedBy = "staff")
+	@OneToMany(mappedBy = "boss")
 	public Collection<Repair> getRepairs() {
 		return repairs;
 	}

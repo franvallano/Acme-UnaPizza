@@ -12,8 +12,8 @@ import repositories.RepairRepository;
 import security.Authority;
 import security.UserAccount;
 import domain.Actor;
+import domain.Boss;
 import domain.Repair;
-import domain.Staff;
 
 @Service
 @Transactional
@@ -29,6 +29,9 @@ public class RepairService {
 	
 	@Autowired
 	private StaffService staffService;
+	
+	@Autowired
+	private BossService bossService;
 	
 	// Constructor ------------------------------------------------------------
 	public RepairService(){
@@ -48,14 +51,14 @@ public class RepairService {
 	public Repair create(){
 		Repair newbye;
 		checkPpalAuthorities();
-		Staff ppal;
+		Boss ppal;
 		
-		ppal = staffService.findByPrincipal();
+		ppal = bossService.findByPrincipal();
 		
 		Assert.notNull(ppal, "Repairs cannot be created without being loged in");
 		
 		newbye = new Repair();
-		newbye.setStaff(ppal);
+		newbye.setBoss(ppal);
 		
 		return newbye;
 	}
@@ -128,7 +131,7 @@ public class RepairService {
 		res = res && entity.getCost() > 0.0;
 		
 		// Principal must be a member of staff
-		if(entity.getStaff() != null)
+		if(entity.getBoss() != null)
 			res = checkPpalAuthorities();
 		
 		// modification must be donde at an workshop associated with the stuff
