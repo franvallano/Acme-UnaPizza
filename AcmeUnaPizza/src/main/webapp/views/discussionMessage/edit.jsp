@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form action="discussionMessage/actor/create.do" modelAttribute="discussionMessage">
+<form:form action="${requestURI}" modelAttribute="discussionMessage">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />

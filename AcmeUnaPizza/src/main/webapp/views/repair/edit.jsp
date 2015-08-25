@@ -16,11 +16,13 @@
 
 		<jstl:if test="${details == true}">
 			<fieldset>
-				<acme:labelDetails code="repair.moment" value="${repair.moment}"/>
+				<acme:dateLabelDetails code="repair.moment" value="${repair.moment}" time="false"/>
 				<br/>
 				<acme:labelDetails code="repair.cost" value="${repair.cost}" eurCurrency="true"/>
 				<br/>
 				<acme:labelDetails code="repair.stuff" value="${repair.stuff.name}"/>
+				<br/>
+				<acme:labelDetails code="workshop.company" value="${repair.workShop.company}"/>
 			</fieldset>
 			
 			<br />
@@ -34,22 +36,13 @@
 					<form:hidden path="id" />
 					<form:hidden path="version" />
 					<form:hidden path="workShop" />
-					<form:hidden path="staff" />
+					<form:hidden path="boss" />
+					<form:hidden path="stuff" />
 				
 					<acme:textbox code="repair.moment" path="moment"/>
 					<br />
 					<acme:textbox code="repair.cost" path="cost"/>
 					<br />
-			
-					<form:label path="stuff">
-						<spring:message code="repair.stuff"/>
-					</form:label>
-					 <form:select path="stuff">
-					 	<jstl:forEach var="var" items="${reparableStuff}">
-					 		<form:option label="${var.name}" value="${var.id}"/>
-					 	</jstl:forEach>
-					 </form:select>
-					 <br />
 					 
 				<br />
 				

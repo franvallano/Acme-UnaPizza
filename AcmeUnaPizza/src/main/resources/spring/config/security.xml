@@ -46,6 +46,7 @@
 		
 		<!-- DISCUSSIONMESSAGE -->
 		<security:intercept-url pattern="/discussionMessage/actor/**" access="hasAnyRole('ADMINISTRATOR','CUSTOMER')" />
+		<security:intercept-url pattern="/discussionMessage/administrator/**" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- REPAIR -->
 		<security:intercept-url pattern="/repair/boss/**" access="hasRole('BOSS')" />

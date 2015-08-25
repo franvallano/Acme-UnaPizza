@@ -194,4 +194,15 @@ public class StuffService {
 		return ppal.getAuthorities().contains(bossAuthority);
 	}
 	
+	public Stuff findCheckMalfunction(int stuffId) {
+		Assert.isTrue(stuffId != 0);
+		
+		Stuff res;
+		
+		res = stuffRepository.findCheckMalfunction(stuffId);
+		
+		Assert.notNull(res);
+		
+		return res;
+	}
 }

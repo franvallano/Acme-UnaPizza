@@ -16,7 +16,7 @@
 			<fieldset>
 				<div class="panel panel-default">
 				<acme:labelDetails code="complaint.title" value="${complaint.title}"/>
-				<acme:labelDetails code="complaint.creationMoment" value="${complaint.creationMoment}"/>
+				<acme:dateLabelDetails code="complaint.creationMoment" value="${complaint.creationMoment}"/>
 				<acme:labelDetails code="complaint.description" value="${complaint.description}"/>
 				<acme:labelDetails code="complaint.result" value="${complaint.result}"/>
 				<acme:labelDetails code="complaint.state" value="${complaint.state}"/>
@@ -36,19 +36,22 @@
 				</fieldset>
 			</fieldset>
 			
-			<jstl:if test="${(complaint.administrator != null) && (complaint.state == 'OPEN')}">
-			<input type="button" class="btn btn-primary" name="new" value="<spring:message code="newDiscussionMessage" />" 
-						onclick="javascript: window.location.replace('discussionMessage/actor/create.do?complaintId=${complaint.id}');" />
-			</jstl:if>
-			
 			<security:authorize access="hasRole('CUSTOMER')">
+				<jstl:if test="${(complaint.administrator != null) && (complaint.state == 'OPEN')}">
+					<input type="button" class="btn btn-primary" name="new" value="<spring:message code="newDiscussionMessage" />" 
+							onclick="javascript: window.location.replace('discussionMessage/actor/create.do?complaintId=${complaint.id}');" />
+				</jstl:if>
 				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
 						onclick="javascript: window.location.replace('complaint/actor/list.do');" />
 			</security:authorize>
 			
-			<security:authorize access="hasRole('ADMINISTRATOR')">		
-					<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
-						onclick="javascript:history.back();" />
+			<security:authorize access="hasRole('ADMINISTRATOR')">
+				<jstl:if test="${(complaint.administrator != null) && (complaint.state == 'OPEN')}">
+				<input type="button" class="btn btn-primary" name="new" value="<spring:message code="newDiscussionMessage" />" 
+						onclick="javascript: window.location.replace('discussionMessage/administrator/create.do?complaintId=${complaint.id}');" />
+				</jstl:if>		
+				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
+					onclick="javascript: window.location.replace('complaint/actor/list.do');" />
 			</security:authorize>
 		</jstl:if>
 		
@@ -63,10 +66,11 @@
 						<form:hidden path="result"/>
 						<form:hidden path="state"/>
 						
-					<acme:textarea code="complaint.title" path="title"/>
+					<acme:textbox code="complaint.creationMoment" path="creationMoment" readonly="true"/>
 					<br />
-					<acme:textbox code="complaint.creationMoment" path="creationMoment"/>
+					<acme:textbox code="complaint.title" path="title"/>
 					<br />
+					
 					<acme:textarea code="complaint.description" path="description"/>
 					<br />
 					

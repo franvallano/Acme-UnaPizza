@@ -65,6 +65,14 @@ public class ComplaintService {
 	public void save( Complaint entity ){
 		Assert.notNull( entity );
 		
+		Date creationMoment;
+		long milisecond;
+		
+		milisecond = System.currentTimeMillis() - 1000;
+		creationMoment = new Date(milisecond);
+		
+		entity.setCreationMoment(creationMoment);
+		
 		this.complaintRepository.save( entity );
 	}
 
@@ -88,7 +96,21 @@ public class ComplaintService {
 		Assert.notNull(res);
 		
 		return res;
- }
+	}
+	
+	public Complaint findOneByPrincipalCustomer( int id ){
+		Assert.isTrue( id != 0);
+		
+		Complaint res;
+		
+		res = this.complaintRepository.findOne( id );
+
+		Assert.notNull(res);
+		
+		Assert.isTrue(res.getCustomer().getId() == customerService.findByPrincipal().getId());
+		
+		return res;
+	}
 
 	public Collection<Complaint> findAll(){
 		Collection<Complaint> res;
@@ -165,13 +187,6 @@ public class ComplaintService {
 		modifyState(complaint, "OPEN");
 	}
 	
-	public void modifyStateCancelled(Complaint complaint) {
-		Assert.notNull(complaint);
-		Assert.isTrue(complaint.getState().equals("OPEN"));
-		
-		modifyState(complaint, "CANCELLED");
-	}
-	
 	public void modifyStateClosed(Complaint complaint) {
 		Assert.notNull(complaint);
 		modifyState(complaint, "CLOSED");
@@ -201,14 +216,30 @@ public class ComplaintService {
 		return res;
 	}
 	
+	public Complaint findOneAvailableToResolution(int id) {
+		Assert.isTrue(id != 0);
+		
+		Complaint res;
+		
+		res = this.complaintRepository.findOne(id);
+		
+		Assert.notNull(res);
+		Assert.notNull(res.getAdministrator());
+		Assert.isTrue(res.getAdministrator().getId() == administratorService.findByPrincipal().getId());
+		
+		Assert.isTrue(!res.getState().equals("CLOSED"));
+		
+		return res;
+	}
+	
 	public Complaint findOneIfOwner(int complaintId) {
 		Complaint result;
 		
 		result = findOne(complaintId);
 		
-		Assert.isTrue(actorService.findByPrincipal().getId() == result.getCustomer().getId()  
-				|| (actorService.isAdministrator() && result.getAdministrator() == null || actorService.findByPrincipal().getId() == result.getAdministrator().getId()));
-		
+		Assert.isTrue(actorService.findByPrincipal().getId() == result.getCustomer().getId() &&
+				result.getAdministrator() != null);
+				
 		return result;
 	}
 	

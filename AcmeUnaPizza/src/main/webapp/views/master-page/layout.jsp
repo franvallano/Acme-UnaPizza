@@ -85,7 +85,7 @@ function controlcookies() {
 		<spring:message code="master.page.cookies" /> 
 		<a id="cookie_link" href="law/info.do" class="btn btn-xs btn-primary">
 		<spring:message code="master.page.cookies.link" /></a>
-		<button class="btn btn-primary" onclick="controlcookies()">Aceptar</button>
+		<button class="btn btn-xs btn-primary" onclick="controlcookies()"><spring:message code="cookies.accept" /></button>
 	</div>
 	<script type="text/javascript">
 	if (!localStorage.controlcookie>0){ 

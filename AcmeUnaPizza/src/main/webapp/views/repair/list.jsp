@@ -13,18 +13,12 @@
 <display:table name="repairs" pagesize="5" class="table table-striped" requestURI="${requestURI}" id="repairsRow">
 
 	<security:authorize access="hasRole('BOSS')">
-	
+		
+			<spring:message code="repair.moment" var="momentHeader" />
+			<display:column property="moment" title="${momentHeader}" sortable="true" format="{0,date,dd/MM/yyyy}"/>
+			
 			<spring:message code="repair.cost" var="costHeader" />
 			<display:column property="cost" title="${costHeader}" sortable="true"/>
-			
-			<spring:message code="repair.moment" var="momentHeader" />
-			<display:column property="moment" title="${momentHeader}" sortable="true"/>
-			
-			<display:column>
-					<a href="repair/boss/edit.do?repairId=${repairsRow.id}">
-						<spring:message code="repair.edit" />
-					</a>
-			</display:column>
 			
 			<display:column>
 					<a href="repair/boss/details.do?repairId=${repairsRow.id}">

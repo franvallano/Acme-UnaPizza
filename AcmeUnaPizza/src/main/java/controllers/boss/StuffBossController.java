@@ -88,6 +88,7 @@ public class StuffBossController extends AbstractController {
 		
 		newbye = stuffService.create();
 		res = createEditionModelAndView(newbye);
+		res.addObject("register", true);
 		
 		return res;
 	}
@@ -106,17 +107,18 @@ public class StuffBossController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid @ModelAttribute Stuff entity, BindingResult bindingResult) {
+	public ModelAndView save(@Valid Stuff stuff, BindingResult bindingResult) {
 		ModelAndView result;
 		String errorMsg;
 		
 		if (bindingResult.hasErrors()){
-			result = createEditionModelAndView(entity, "details.edit.error");
-			System.out.println(bindingResult);
+			result = createEditionModelAndView(stuff);
+			if(stuff.getId() == 0)
+				result.addObject("register", true);
 		}
 		else {
 			try {
-				stuffService.save(entity);
+				stuffService.save(stuff);
 				result = new ModelAndView("redirect:/stuff/boss/list.do");
 			} catch (Throwable oops) {
 				if (oops instanceof EntityHackingException)
@@ -124,40 +126,30 @@ public class StuffBossController extends AbstractController {
 				else
 					errorMsg = "stuff.commit.error";
 				
-				result = createEditionModelAndView(entity, errorMsg);
+				result = createEditionModelAndView(stuff, errorMsg);
 			}
 		}
 
 		return result;
 	}
 	
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@ModelAttribute Stuff entity, BindingResult bindingResult) {
-		ModelAndView res;
-		
-		try{
-			stuffService.delete(entity);
-			res = new ModelAndView("redirect:/stuff/boss/list.do");
-		}catch(Throwable oops){
-			res = createEditionModelAndView(entity, "stuff.commit.error");
-		}
-		
-		return res;
-	}
-	
 	// Ancillary methods ------------------------------------------------------	
 	public ModelAndView createEditionModelAndView(Stuff entity){
-		return createEditionModelAndView(entity, null);
+		ModelAndView result;
+		
+		result = createEditionModelAndView(entity, null);
+		
+		return result;
 	}
 	
-	public ModelAndView createEditionModelAndView(Stuff entity, String message){
+	public ModelAndView createEditionModelAndView(Stuff stuff, String message){
 		ModelAndView res;
 		Collection<WorkShop> workshops;
 		
 		workshops = workshopService.findAll();
 		
 		res = new ModelAndView("stuff/edit");
-		res.addObject("entity", entity);
+		res.addObject("stuff", stuff);
 		res.addObject("message", message);
 		res.addObject("requestURI", "stuff/boss/edit.do");	
 		res.addObject("workshops", workshops);

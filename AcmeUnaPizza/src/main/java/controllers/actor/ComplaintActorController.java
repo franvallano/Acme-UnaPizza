@@ -15,7 +15,7 @@ import domain.Complaint;
 
 @Controller
 @RequestMapping("/complaint/actor")
-public class ComplaintController extends AbstractController {
+public class ComplaintActorController extends AbstractController {
 	
 	// Services ---------------------------------------------------------------
 	
@@ -24,7 +24,7 @@ public class ComplaintController extends AbstractController {
 	
 	// Constructors -----------------------------------------------------------
 	
-	public ComplaintController() {
+	public ComplaintActorController() {
 		super();
 	}
 	
@@ -51,7 +51,7 @@ public class ComplaintController extends AbstractController {
 		ModelAndView result;
 		Complaint complaint;
 		
-		complaint = complaintService.findOne(complaintId);
+		complaint = complaintService.findOneByPrincipalCustomer(complaintId);
 		
 		result = new ModelAndView("complaint/edit");
 		result.addObject("complaint", complaint);

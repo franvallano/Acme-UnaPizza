@@ -47,6 +47,20 @@ public class ComplaintAdministratorController extends AbstractController{
 		
 		return result;
 	}
+	
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	public ModelAndView details(@RequestParam int complaintId) {
+		ModelAndView result;
+		Complaint complaint;
+		
+		complaint = complaintService.findOneByAdministrator(complaintId);
+		
+		result = new ModelAndView("complaint/edit");
+		result.addObject("complaint", complaint);
+		result.addObject("details", true);
+		
+		return result;
+	}
 
 	// Edition ----------------------------------------------------------------
 	
@@ -64,29 +78,12 @@ public class ComplaintAdministratorController extends AbstractController{
 		return result;
 	}
 	
-	@RequestMapping(value = "/modifyStateCancelled", method = RequestMethod.GET)
-	public ModelAndView modifyStateCancelled(@RequestParam int complaintId) {
-		ModelAndView result;
-		Complaint complaint;
-
-		complaint = complaintService.findOneIfAdministratorOwner(complaintId);
-		
-		complaintService.modifyStateCancelled(complaint);
-		
-		complaintService.save(complaint);
-		
-		result = new ModelAndView("redirect:/complaint/actor/list.do");
-
-		return result;
-	}
-	
-	
 	@RequestMapping(value = "/addResolution", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int complaintId) {
 		ModelAndView result;
 		Complaint complaint;
 		
-		complaint = complaintService.findOne(complaintId);	
+		complaint = complaintService.findOneAvailableToResolution(complaintId);	
 		
 		Assert.notNull(complaint);
 		result = addResolutionModelAndView(complaint);

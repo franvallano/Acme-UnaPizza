@@ -108,7 +108,4 @@ public class Stuff extends DomainEntity{
 	public void setRepairs(Collection<Repair> repairs) {
 		this.repairs = repairs;
 	}
-	
-	
-	
 }

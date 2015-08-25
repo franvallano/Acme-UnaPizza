@@ -70,7 +70,7 @@ public class Complaint extends DomainEntity {
 	}
 	
 	@NotBlank
-	@Pattern(regexp = "^OPEN$|^CANCELLED$|^CLOSED$")
+	@Pattern(regexp = "^OPEN$|^CLOSED$")
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getState() {
 		return state;
