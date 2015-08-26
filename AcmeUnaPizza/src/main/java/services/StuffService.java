@@ -1,6 +1,7 @@
 package services;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import repositories.StuffRepository;
 import security.Authority;
 import security.UserAccount;
 import utilities.EntityHackingException;
+import domain.Repair;
 import domain.Stuff;
 import domain.WorkShop;
 
@@ -43,6 +45,8 @@ public class StuffService {
 		
 		newbye = new Stuff();
 		
+		newbye.setRepairs(new ArrayList<Repair>());
+		
 		return newbye;
 	}
 	
@@ -51,6 +55,8 @@ public class StuffService {
 			throw new EntityHackingException("Stuff: tried to save a hacked entity");
 		
 		Assert.isTrue(ppalIsABoss(), "user that isn't a boss tried to modify a stuff");
+		
+		bossService.findByPrincipal();
 		
 		stuffRepository.save(stuff);
 	}
@@ -70,6 +76,8 @@ public class StuffService {
 		Stuff res;
 		
 		Assert.isTrue(id!=0, "tried to find a stuff with id zero");
+		
+		bossService.findByPrincipal();
 		
 		res = stuffRepository.findOne(id);
 		Assert.notNull(res, "found stuff is null (id "+id+")");
