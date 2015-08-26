@@ -52,9 +52,9 @@ public class StuffServiceTestNegative extends AbstractTest {
 	
 	// Test editar articulo
 	// Error: No autenticado
-	@Test(expected = TransactionSystemException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testEditStuffNoAuth() {
-		authenticate("boss1");
+		authenticate(null);
 				
 		Stuff stuff;
 			

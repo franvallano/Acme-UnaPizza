@@ -17,7 +17,10 @@ import org.junit.runners.Suite.SuiteClasses;
 	PurcharseOrderServiceTestPositive.class, PurcharseOrderServiceTestNegative.class,
 	ComplaintServiceTestPositive.class, ComplaintServiceTestNegative.class,
 	DiscussionMessageServiceTestPositive.class, DiscussionMessageServiceTestNegative.class,
-	GarageServiceTestPositive.class, GarageServiceTestNegative.class})
+	GarageServiceTestPositive.class, GarageServiceTestNegative.class,
+	WorkShopServiceTestPositive.class, WorkShopServiceTestNegative.class,
+	RepairServiceTestPositive.class, RepairServiceTestNegative.class,
+	StuffServiceTestPositive.class, StuffServiceTestNegative.class})
 public class AllTests {
 
 }

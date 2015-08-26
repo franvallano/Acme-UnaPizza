@@ -86,6 +86,8 @@ public class RepairService {
 		
 		result = repairRepository.findAll();
 		
+		bossService.findByPrincipal();
+		
 		Assert.notNull(result);
 		
 		return result;
