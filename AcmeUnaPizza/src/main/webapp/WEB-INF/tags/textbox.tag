@@ -52,7 +52,7 @@
 		</jstl:when>
 	</jstl:choose>
 	
-	<form:errors path="${path}" class="alert alert-danger" />
-	</br>
+	<form:errors path="${path}" class="form-group has-error alert-danger" />
+	<br/>
 </div>	
 </div>

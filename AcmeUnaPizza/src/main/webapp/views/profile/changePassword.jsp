@@ -22,10 +22,16 @@
 		<form:form action="${url}" modelAttribute="${passForm}" >
 			<acme:password code="profile.actualPassword" path="actualPassword"/>
 				<br/>
+				<br/>
+				<br/>
 			<acme:password code="profile.newPassword" path="newPassword"/>
 				<br/>
+				<br/>
+				<br/>
 			<acme:password code="profile.repeatNewPassword" path="repeatNewPassword"/>
-				<br/><br/>
+				<br/>
+				<br/>
+				<br/><br/><br/>
 			<acme:submit name="save" code="profile.save"/>
 			<input type="button" name="profile.back" class="btn btn-primary" value="<spring:message code="cancel" />" 
 				onclick="javascript: window.history.back();" />

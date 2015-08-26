@@ -38,17 +38,24 @@
 				<form:hidden path="id" />
 				<form:hidden path="version" />
 				
-				<spring:message code="product.type" />
-				<form:select path="type">
+				<div class="form-group">
+				<form:label path="type" class =" col-lg-2 control-label">
+				<b><spring:message code="product.type"/>:</b>
+				</form:label>
+				<div class="col-lg-4">
+				<form:select path="type" >
 					<form:options items="${productsType}"/>
 				</form:select>
+				
+				</div>
+				</div>
 				<br /><br />
 				<acme:textbox code="product.code" path="code"/>
 				<br />
 				<acme:textbox code="product.name" path="name"/>
 				<br />
 				<acme:textarea code="product.description" path="description"/>
-				<br />
+				<br /><br/><br/>
 				<acme:textbox code="product.stockPrice" path="stockPrice"/>
 				<br />
 				<acme:textbox code="product.salePrice" path="salePrice"/>

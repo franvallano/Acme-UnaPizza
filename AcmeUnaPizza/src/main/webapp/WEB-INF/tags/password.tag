@@ -29,12 +29,13 @@
 
 <div>
 	<div class="form-group">
-	<form:label path="${path}" class =" col-lg-2 control-label">
-		<spring:message code="${code}" />:
-	</form:label>
-	<div class="col-lg-4">
-		<form:password path="${path}" class="form-control"/>
-		<form:errors path="${path}" class="alert alert-danger" />
-	</div>
-	</div>
+		<form:label path="${path}" class =" col-lg-2 control-label">
+			<spring:message code="${code}" />:
+		</form:label>
+		<div class="col-lg-4">
+			<form:password path="${path}" class="form-control"/>
+		</div>
+			<form:errors path="${path}" class="form-group has-error alert-danger" />
+			<br/>
+		</div>
 </div>

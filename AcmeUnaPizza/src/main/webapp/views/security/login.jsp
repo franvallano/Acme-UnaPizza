@@ -25,7 +25,7 @@
 			<spring:message code="security.username" />
 		</form:label>
 		<form:input path="username" class="form-control"/>	
-		<form:errors class="alert alert-danger" path="username" />
+		<form:errors class="form-group has-error alert-danger" path="username" />
 		</div>
 		<br />
 		
@@ -35,7 +35,7 @@
 			<spring:message code="security.password" />
 		</form:label>
 		<form:password path="password" class="form-control"/>	
-		<form:errors class="alert alert-danger" path="password" />
+		<form:errors class="form-group has-error alert-danger" path="password" />
 		</div>
 		<br />
 		
