@@ -31,14 +31,18 @@
 </jstl:if>
 
 <%-- Definition --%>
+<div>
 
-<div class="form-group">
-	<form:label path="${path}" class =" col-lg-2 control-label">
-		<spring:message code="${code}" />
+	<div class="form-group">
+		<form:label path="${path}" class =" col-lg-2 control-label">
+	<spring:message code="${code}" />
 	</form:label>
 	<div class="col-lg-4">
 	<form:textarea path="${path}" readonly="${readonly}" />
+	<form:errors path="${path}" class="form-group has-error alert-danger" />
+		<br/>
+		</div>
 	</div>
-	<form:errors path="${path}" class="alert alert-danger" />
-	</br>
+
 </div>
+	
