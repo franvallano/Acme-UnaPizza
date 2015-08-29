@@ -51,8 +51,7 @@ public class MotorbikeService {
 		Assert.notNull(motorbike);
 		administratorService.findByPrincipal();
 		
-		if(motorbike.getGarage() != null)
-			Assert.notNull(garageService.findFreeGarage(motorbike.getGarage().getId()));
+		Assert.notNull(garageService.findFreeGarage(motorbike.getGarage().getId()));
 
 		this.motorbikeRepository.save(motorbike);
 	}

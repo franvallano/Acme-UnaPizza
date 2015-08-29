@@ -16,6 +16,6 @@ public interface GarageRepository
 	@Query("select g from Garage g where g.size > g.motorbikes.size")
 	Collection<Garage> findFreeGarages();
 	
-	@Query("select g from Garage g where g.id = ?1 AND g.size > g.motorbikes.size")
+	@Query("select g from Garage g where g.id = ?1 AND g.size >= g.motorbikes.size")
 	Garage findFreeGarage(int garageId);
 }

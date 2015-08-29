@@ -160,10 +160,13 @@ public class MotorbikeAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
 	public ModelAndView update(@Valid Motorbike motorbike, BindingResult binding) {
 		ModelAndView result;
+		boolean canDelete;
 		
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(motorbike);
 			result.addObject("edit", true);
+			canDelete = motorbikeService.canDeleteMotorbike(motorbike.getId());
+			result.addObject("canDelete", canDelete);
 		} else {
 			try {
 				motorbikeService.save(motorbike);
@@ -171,6 +174,8 @@ public class MotorbikeAdministratorController extends AbstractController {
 			} catch (Throwable oops) {
 				result = createEditModelAndView(motorbike, "motorbike.commit.error");
 				result.addObject("edit", true);
+				canDelete = motorbikeService.canDeleteMotorbike(motorbike.getId());
+				result.addObject("canDelete", canDelete);
 			}
 		}
 
