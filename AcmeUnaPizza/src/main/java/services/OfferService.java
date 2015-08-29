@@ -48,48 +48,7 @@ public class OfferService {
 		
 		administratorService.findByPrincipal();
 		
-		Date startDate;
-		Date endDate;
 		
-		// Colocamos la fecha de inicio a las 00:00
-		Calendar calendar = Calendar.getInstance();
-		Calendar actualDate = Calendar.getInstance();
-		actualDate.setTimeInMillis(System.currentTimeMillis());
-		calendar.setTimeInMillis(offer.getStartDate().getTime());
-		
-		actualDate.set(Calendar.HOUR_OF_DAY, 0);
-		actualDate.set(Calendar.MINUTE, 0);
-		actualDate.set(Calendar.SECOND, 0);
-		
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		
-		
-		startDate = new Date(calendar.getTimeInMillis());
-		
-		offer.setStartDate(startDate);
-		
-		// Si la fecha es del mismo dia no hacemos nada porque sera valida
-		if((calendar.get(Calendar.YEAR) == actualDate.get(Calendar.YEAR)) && (calendar.get(Calendar.MONTH) == actualDate.get(Calendar.MONTH)) && 
-				(calendar.get(Calendar.DAY_OF_MONTH) == actualDate.get(Calendar.DAY_OF_MONTH))) {
-		// Si no coincide la fecha, la fecha de inicio debera ser posterior a la actual
-		} else {
-			Assert.isTrue(calendar.getTimeInMillis() > actualDate.getTimeInMillis());
-		}
-		
-		if(offer.getEndDate() != null) {
-			// Colocamos la fecha de fin a las 23:59
-			calendar.setTimeInMillis(offer.getEndDate().getTime());
-			calendar.set(Calendar.HOUR_OF_DAY, 23);
-			calendar.set(Calendar.MINUTE, 59);
-			calendar.set(Calendar.SECOND, 59);
-			endDate = new Date(calendar.getTimeInMillis());
-			
-			offer.setEndDate(endDate);
-			
-			Assert.isTrue(offer.getStartDate().before(offer.getEndDate()));
-		}
 
 		offerRepository.save(offer);
 	}
@@ -130,6 +89,8 @@ public class OfferService {
 	public Offer reconstruct(OfferForm offerForm) {
 		Assert.notNull(offerForm);
 		Offer offer;
+		Date startDate;
+		Date endDate;
 		String loop = "";
 		
 		if(offerForm.getId() != null)
@@ -138,12 +99,46 @@ public class OfferService {
 			offer = create();
 		
 		Assert.notNull(offer);
+		
+		
+		// Colocamos la fecha de inicio a las 00:00
+		Calendar calendar = Calendar.getInstance();
+		Calendar actualDate = Calendar.getInstance();
+		actualDate.setTimeInMillis(System.currentTimeMillis());
+		calendar.setTimeInMillis(offerForm.getStartDate().getTime());
+		
+		actualDate.set(Calendar.HOUR_OF_DAY, 0);
+		actualDate.set(Calendar.MINUTE, 0);
+		actualDate.set(Calendar.SECOND, 0);
+		
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		
+		startDate = new Date(calendar.getTimeInMillis());
+		
+		// Si la fecha es del mismo dia no hacemos nada porque sera valida
+		if((calendar.get(Calendar.YEAR) == actualDate.get(Calendar.YEAR)) && (calendar.get(Calendar.MONTH) == actualDate.get(Calendar.MONTH)) && 
+				(calendar.get(Calendar.DAY_OF_MONTH) == actualDate.get(Calendar.DAY_OF_MONTH))) {
+		// Si no coincide la fecha, la fecha de inicio debera ser posterior a la actual
+		} else {
+			Assert.isTrue(calendar.getTimeInMillis() > actualDate.getTimeInMillis());
+		}
+		
+		offer.setStartDate(startDate);
+		
+		if(offer.getEndDate() != null) {
+			// Colocamos la fecha de fin a las 23:59
+			calendar.setTimeInMillis(offer.getEndDate().getTime());
+			calendar.set(Calendar.HOUR_OF_DAY, 23);
+			calendar.set(Calendar.MINUTE, 59);
+			calendar.set(Calendar.SECOND, 59);
+			endDate = new Date(calendar.getTimeInMillis());
 			
-		offer.setName(offerForm.getName());
-		offer.setDiscount(offerForm.getDiscount());
-		offer.setStartDate(offerForm.getStartDate());
-		offer.setEndDate(offerForm.getEndDate());
-		offer.setRangee(offerForm.getRangee());
+			offer.setEndDate(endDate);
+			
+			Assert.isTrue(offer.getStartDate().before(offer.getEndDate()));
+		}
 		
 		// Al menos un dia debe ser seleccionado
 		Assert.isTrue(offerForm.isMonday() || offerForm.isTuesday() || offerForm.isWednesday() || offerForm.isThursday() || 
@@ -165,6 +160,12 @@ public class OfferService {
 			loop += "D";
 		
 		offer.setLoopp(loop);
+		
+		offer.setName(offerForm.getName());
+		offer.setDiscount(offerForm.getDiscount());
+		offer.setStartDate(offerForm.getStartDate());
+		offer.setEndDate(offerForm.getEndDate());
+		offer.setRangee(offerForm.getRangee());
 
 		return offer;
 	}

@@ -24,7 +24,7 @@
 			
 			<br />
 			<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
-				onclick="javascript: window.history.back();" />
+				onclick="javascript: window.location.replace('offer/administrator/list.do');" />
 		</jstl:if>
 		
 		<jstl:if test="${register == true && edit == true}">
@@ -67,7 +67,7 @@
 				<acme:submit name="save" code="offer.save"/>
 				
 				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
-				onclick="javascript: window.history.back();" />
+				onclick="javascript: window.location.replace('offer/administrator/list.do');" />
 			</form:form>
 		</jstl:if>
 		
@@ -111,7 +111,7 @@
 				<acme:submit name="update" code="offer.save" />
 				
 				<input type="button" name="cancel" class="btn btn-primary" value="<spring:message code="cancel" />" 
-				onclick="javascript: window.history.back();" />
+				onclick="javascript: window.location.replace('offer/administrator/list.do');" />
 			</form:form>
 		</jstl:if>
 		
