@@ -17,5 +17,5 @@
 
 <%-- Definition --%>
 
-<input type="button" name="return" value="<spring:message code="${code}" />" 
+<input type="button" name="return" class="btn btn-primary" value="<spring:message code="${code}" />" 
 					onclick="javascript: window.location.replace('${path}');" />
