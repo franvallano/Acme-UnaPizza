@@ -38,7 +38,7 @@ public class Stuff extends DomainEntity{
 	//Getters and setter ------------------------------------------------------------------------
 
 	@NotBlank
-	@Size(min = 5, max = 15)
+	@Size(min = 5, max = 32)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getName() {
 		return name;
