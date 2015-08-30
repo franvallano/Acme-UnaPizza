@@ -149,7 +149,7 @@ public class RegisterStaffController extends AbstractController{
 			} catch (Throwable oops) {
 
 				if(oops instanceof DataIntegrityViolationException)
-					result = createEditModelAndView(staffForm, "duplicatedUser", true);
+					result = createEditModelAndView(staffForm, "commit.duplicatedUser", true);
 				else
 					result = createEditModelAndView(staffForm, "commit.error", true);
 
@@ -184,7 +184,7 @@ public class RegisterStaffController extends AbstractController{
 			} catch (Throwable oops) {
 
 				if(oops instanceof DataIntegrityViolationException)
-					result = createEditModelAndView(staffForm, "duplicatedUser", false);
+					result = createEditModelAndView(staffForm, "commit.duplicatedUser", false);
 				else
 					result = createEditModelAndView(staffForm, "commit.error", false);
 				
