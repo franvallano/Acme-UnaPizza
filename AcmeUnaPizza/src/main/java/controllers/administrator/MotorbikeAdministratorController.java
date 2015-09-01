@@ -212,7 +212,7 @@ public class MotorbikeAdministratorController extends AbstractController {
 			result.addObject("changeGarage", true);
 		} else {
 			try {
-				motorbikeService.save(motorbike);
+				motorbikeService.changeGarage(motorbike);
 				result = new ModelAndView("redirect:/motorbike/administrator/list.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(motorbike, "commit.error");

@@ -105,9 +105,11 @@ public class MotorbikeServiceTestNegative extends AbstractTest {
 		motorbike = motorbikeService.findOne(16);
 		garage = garageService.findOne(13);
 		
+		
+		
 		motorbike.setGarage(garage);
 		
-		motorbikeService.save(motorbike);
+		motorbikeService.changeGarage(motorbike);
 		
 		motorbike = motorbikeService.findOne(16);
 		
