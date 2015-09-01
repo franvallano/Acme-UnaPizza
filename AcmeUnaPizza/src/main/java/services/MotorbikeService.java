@@ -50,6 +50,13 @@ public class MotorbikeService {
 	public void save(Motorbike motorbike){
 		Assert.notNull(motorbike);
 		administratorService.findByPrincipal();
+
+		this.motorbikeRepository.save(motorbike);
+	}
+	
+	public void changeGarage(Motorbike motorbike){
+		Assert.notNull(motorbike);
+		administratorService.findByPrincipal();
 		
 		Assert.notNull(garageService.findFreeGarage(motorbike.getGarage().getId()));
 
