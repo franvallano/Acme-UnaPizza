@@ -327,8 +327,6 @@ public class CustomerService {
 		
 		result = customerRepository.findCustomerMoreComplaints();
 		
-		Assert.notNull(result);
-		
 		return result;
 	}
 	

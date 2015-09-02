@@ -89,7 +89,8 @@ public class PurchaseOrderService {
 		
 		result = purchaseOrderRepository.findInvestedMoney();
 		
-		Assert.notNull(result);
+		if(result == null)
+			result = 0.0;
 		
 		return result;
 	}

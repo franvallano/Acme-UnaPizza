@@ -197,7 +197,8 @@ public class SalesOrderService {
 			res = null;
 		}
 		
-		Assert.notNull(res);
+		if(res == null)
+			res = 0;
 		
 		return res;
 	}
@@ -207,6 +208,9 @@ public class SalesOrderService {
 		
 		res = salesOrderRepository.findTotalSalesOrder();
 		
+		if(res == null)
+			res = 0;
+		
 		return res;
 	}
 
@@ -215,7 +219,8 @@ public class SalesOrderService {
 		
 		result = salesOrderRepository.findSalesMoney();
 		
-		Assert.notNull(result);
+		if(result == null)
+			result = 0.0;
 		
 		return result;
 	}
@@ -225,8 +230,6 @@ public class SalesOrderService {
 		
 		result = salesOrderRepository.findAvgOrders();
 		
-		Assert.notNull(result);
-		
 		return result;
 	}
 	
@@ -235,7 +238,8 @@ public class SalesOrderService {
 		
 		result = salesOrderRepository.findTotalMoneyUndeliveredOrders();
 		
-		Assert.notNull(result);
+		if(result == null)
+			result = 0.0;
 		
 		return result;
 	}
@@ -245,6 +249,9 @@ public class SalesOrderService {
 		
 		res = salesOrderRepository.findMoreExpensiveSalesOrder();
 		
+		if(res == null)
+			res = 0.0;
+		
 		return res;
 	}
 	
@@ -252,6 +259,9 @@ public class SalesOrderService {
 		Double res;
 		
 		res = salesOrderRepository.findLessExpensiveSalesOrder();
+		
+		if(res == null)
+			res = 0.0;
 		
 		return res;
 	}
@@ -266,13 +276,12 @@ public class SalesOrderService {
 			res = salesOrderRepository.findMoreExpensiveSalesOrderByCook(staff.getId());
 		} else if(staffService.isDeliveryMan()) {
 			res = salesOrderRepository.findMoreExpensiveSalesOrderByDeliveryMan(staff.getId());
-		} else if(staffService.isBoss()) {
-			res = findMoreExpensiveSalesOrder();
 		} else {
-			res = null;
-		}
+			res = findMoreExpensiveSalesOrder();
+		} 
 		
-		Assert.notNull(res);
+		if(res == null)
+			res = 0.0;
 		
 		return res;
 	}
@@ -287,14 +296,13 @@ public class SalesOrderService {
 			res = salesOrderRepository.findLessExpensiveSalesOrderByCook(staff.getId());
 		} else if(staffService.isDeliveryMan()) {
 			res = salesOrderRepository.findLessExpensiveSalesOrderByDeliveryMan(staff.getId());
-		} else if(staffService.isBoss()) {
-			res = findLessExpensiveSalesOrder();
 		} else {
-			res = null;
+			res = findLessExpensiveSalesOrder();
 		}
 		
-		Assert.notNull(res);
-		
+		if(res == null)
+			res = 0.0;
+			
 		return res;
 	}
 	
@@ -308,13 +316,12 @@ public class SalesOrderService {
 			res = salesOrderRepository.findAvgSalesOrderByCook(staff.getId());
 		} else if(staffService.isDeliveryMan()) {
 			res = salesOrderRepository.findAvgSalesOrderByDeliveryMan(staff.getId());
-		} else if(staffService.isBoss()) {
-			res = findAvgSalesOrder();
 		} else {
-			res = null;
-		}
+			res = findAvgSalesOrder();
+		} 
 		
-		Assert.notNull(res);
+		if(res == null)
+			res = 0.0;
 		
 		return res;
 	}
@@ -324,6 +331,9 @@ public class SalesOrderService {
 		
 		res = salesOrderRepository.findAvgSalesOrder();
 		
+		if(res == null)
+			res = 0.0;
+		
 		return res;
 	}
 	
@@ -332,8 +342,6 @@ public class SalesOrderService {
 		
 		s = salesOrderRepository.findSalesOrderMinDrinvingTime();
 		
-		Assert.notNull(s);
-		
 		return s;
 	}
 	
@@ -341,8 +349,6 @@ public class SalesOrderService {
 		Collection<SalesOrder> s;
 		
 		s = salesOrderRepository.findSalesOrderMaxDrivingTime();
-		
-		Assert.notNull(s);
 		
 		return s;
 	}
