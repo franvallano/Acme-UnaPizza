@@ -43,7 +43,8 @@ public class RepairService {
 		
 		result = repairRepository.findTotalCostRepairs();
 		
-		Assert.notNull(result);
+		if(result == null)
+			result = 0.0;
 		
 		return result;
 	}
