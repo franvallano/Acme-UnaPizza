@@ -71,9 +71,8 @@
 				<form:hidden path="idComplements" />
 				<form:hidden path="idDesserts" />
 				<form:hidden path="idDrinks" />
+				<form:hidden path="referenceNumber" />
 				
-				<acme:textbox code="purchaseOrder.referenceNumber" path="referenceNumber" readonly="true"/>
-				<br />
 				<acme:textbox code="purchaseOrder.creationMoment" path="creationMoment" readonly="true" />
 				<br />
 				<acme:textbox code="purchaseOrder.totalCost" path="totalCost" readonly="true" id="totalCost"/>

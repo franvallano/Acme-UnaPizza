@@ -67,13 +67,16 @@ public class SalesOrderService {
 	public SalesOrderForm createForm() {
 		SalesOrderForm salesOrderForm;
 		Date date;
+		String referenceNumber;
 		
 		customerService.findByPrincipal();
+		
+		referenceNumber = PatternGenerator.orderReferenceNumber();
 		
 		date = new Date(System.currentTimeMillis()-1);
 		salesOrderForm = new SalesOrderForm();
 		salesOrderForm.setCreationMoment(date);
-		salesOrderForm.setReferenceNumber(PatternGenerator.purchaseOrderReferenceNumber());
+		salesOrderForm.setReferenceNumber(referenceNumber);
 		salesOrderForm.setTotalCost(0.0);
 		
 		return salesOrderForm;
@@ -552,22 +555,26 @@ public class SalesOrderService {
 		return salesOrder;
 	}
 	
-	public void save(SalesOrder saleseOrder, boolean newSalesOrder) {
-		Assert.notNull(saleseOrder);
-		Assert.isTrue(saleseOrder.getTotalCost() > 0.0);
+	public void save(SalesOrder salesOrder, boolean newSalesOrder) {
+		Assert.notNull(salesOrder);
+		Assert.isTrue(salesOrder.getTotalCost() > 0.0);
 		Customer customer;
 		customer = customerService.findByPrincipal();
-		Assert.isTrue(saleseOrder.getCustomer().getId() == customer.getId());
+		Assert.isTrue(salesOrder.getCustomer().getId() == customer.getId());
 		
 		customerService.checkRangeCustomer(customer, newSalesOrder);
 		
 		Date date;
+		String referenceNumber;
+		
 		
 		date = new Date(System.currentTimeMillis()-1);
+		referenceNumber = PatternGenerator.orderReferenceNumber();
 		
-		saleseOrder.setCreationMoment(date);
+		salesOrder.setCreationMoment(date);
+		salesOrder.setReferenceNumber(referenceNumber);
 		
-		salesOrderRepository.save(saleseOrder);
+		salesOrderRepository.save(salesOrder);
 	}
 	
 	public void saveAssignBoss(SalesOrder salesOrder) {
