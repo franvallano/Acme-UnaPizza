@@ -3,7 +3,7 @@ package utilities;
 import org.apache.commons.lang.RandomStringUtils;
 
 public class PatternGenerator {
-	public static String purchaseOrderReferenceNumber() {
+	public static String orderReferenceNumber() {
 		String referenceNumber = "";
 		
 		referenceNumber = RandomStringUtils.randomAlphabetic(3).toUpperCase() + "-";

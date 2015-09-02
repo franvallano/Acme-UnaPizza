@@ -39,13 +39,15 @@ public class PurchaseOrderService {
 	public PurchaseOrderForm createForm() {
 		PurchaseOrderForm purchaseOrderForm;
 		Date date;
-
+		String referenceNumber;
+		
 		administratorService.findByPrincipal();
+		referenceNumber = PatternGenerator.orderReferenceNumber();
 		
 		date = new Date(System.currentTimeMillis()-1);
 		purchaseOrderForm = new PurchaseOrderForm();
 		purchaseOrderForm.setCreationMoment(date);
-		purchaseOrderForm.setReferenceNumber(PatternGenerator.purchaseOrderReferenceNumber());
+		purchaseOrderForm.setReferenceNumber(referenceNumber);
 		purchaseOrderForm.setTotalCost(0.0);
 		
 		return purchaseOrderForm;
@@ -223,10 +225,14 @@ public class PurchaseOrderService {
 		Assert.isTrue(purchaseOrder.getAdministrator().getId() == administratorService.findByPrincipal().getId());
 		
 		Date date;
+		String referenceNumber;
+		
+		referenceNumber = PatternGenerator.orderReferenceNumber();
 		
 		date = new Date(System.currentTimeMillis()-1);
 		
 		purchaseOrder.setCreationMoment(date);
+		purchaseOrder.setReferenceNumber(referenceNumber);
 		
 		purchaseOrderRepository.save(purchaseOrder);
 	}
